@@ -1613,70 +1613,78 @@ const Index = () => {
 
                     {/* Body — aligned to left's mt-6 spacing */}
                     <div className="relative mt-6">
-                      {trainingStage === "form" && (
-                        <div className="rounded-2xl border border-dashed border-border/60 bg-background/40 px-4 py-12 text-center">
-                          <div className="relative mx-auto h-16 w-16 opacity-90">
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-xl" />
-                            <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-primary/20 bg-card/80">
-                              <Sparkles className="h-7 w-7 text-primary" />
+                      {(trainingStage === "form" || trainingStage === "training") && (() => {
+                        const steps = [
+                          { label: "AI 理解业务文档", at: 30 },
+                          { label: "构建企业画像", at: 65 },
+                          { label: "明确跟进目标", at: 95 },
+                        ];
+                        const isForm = trainingStage === "form";
+                        return (
+                          <div className="space-y-3">
+                            <div
+                              className={cn(
+                                "rounded-2xl border px-4 py-3.5 transition-colors",
+                                isForm ? "border-border/40 bg-background/40" : "border-border/50 bg-background/70",
+                              )}
+                            >
+                              <div className="h-2 overflow-hidden rounded-full bg-muted">
+                                <div
+                                  className="h-full rounded-full bg-gradient-to-r from-primary to-[hsl(174,100%,45%)] transition-all duration-150 ease-out"
+                                  style={{ width: `${isForm ? 0 : trainingProgress}%` }}
+                                />
+                              </div>
                             </div>
-                          </div>
-                          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                            点击「开始训练」后，
-                            <br />
-                            学习过程与画像将逐步呈现在这里。
-                          </p>
-                        </div>
-                      )}
-
-                      {trainingStage === "training" && (
-                        <div className="space-y-3">
-                          <div className="rounded-2xl border border-border/50 bg-background/70 px-4 py-3.5">
-                            <div className="h-2 overflow-hidden rounded-full bg-muted">
-                              <div
-                                className="h-full rounded-full bg-gradient-to-r from-primary to-[hsl(174,100%,45%)] transition-all duration-150 ease-out"
-                                style={{ width: `${trainingProgress}%` }}
-                              />
-                            </div>
-                          </div>
-                          <ul className="space-y-2.5">
-                            {[
-                              { label: "解析主营产品与卖点结构", at: 30 },
-                              { label: "构建目标买家画像", at: 65 },
-                              { label: "生成 AI 团队跟进目标", at: 95 },
-                            ].map((step) => {
-                              const done = trainingProgress >= step.at;
-                              const active = !done && trainingProgress >= step.at - 30;
-                              return (
-                                <li
-                                  key={step.label}
-                                  className={cn(
-                                    "flex items-center gap-2.5 rounded-2xl border px-4 py-3 text-sm transition-colors",
-                                    done
-                                      ? "border-primary/20 bg-primary/5"
-                                      : active
-                                        ? "border-primary/30 bg-primary/5"
-                                        : "border-border/50 bg-background/60",
-                                  )}
-                                >
-                                  {done ? (
-                                    <Check className="h-4 w-4 text-primary shrink-0" />
-                                  ) : active ? (
-                                    <Loader2 className="h-4 w-4 animate-spin text-primary shrink-0" />
-                                  ) : (
-                                    <div className="h-4 w-4 rounded-full border border-border shrink-0" />
-                                  )}
-                                  <span
-                                    className={done || active ? "text-foreground font-medium" : "text-muted-foreground"}
+                            <ul className="space-y-2.5">
+                              {steps.map((step) => {
+                                const done = !isForm && trainingProgress >= step.at;
+                                const active = !isForm && !done && trainingProgress >= step.at - 30;
+                                return (
+                                  <li
+                                    key={step.label}
+                                    className={cn(
+                                      "flex items-center gap-2.5 rounded-2xl border px-4 py-3 text-sm transition-colors",
+                                      isForm
+                                        ? "border-border/40 bg-background/40 opacity-60"
+                                        : done
+                                          ? "border-primary/20 bg-primary/5"
+                                          : active
+                                            ? "border-primary/30 bg-primary/5"
+                                            : "border-border/50 bg-background/60",
+                                    )}
                                   >
-                                    {step.label}
-                                  </span>
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </div>
-                      )}
+                                    {isForm ? (
+                                      <div className="h-4 w-4 rounded-full border border-border/70 shrink-0" />
+                                    ) : done ? (
+                                      <Check className="h-4 w-4 text-primary shrink-0" />
+                                    ) : active ? (
+                                      <Loader2 className="h-4 w-4 animate-spin text-primary shrink-0" />
+                                    ) : (
+                                      <div className="h-4 w-4 rounded-full border border-border shrink-0" />
+                                    )}
+                                    <span
+                                      className={
+                                        isForm
+                                          ? "text-muted-foreground"
+                                          : done || active
+                                            ? "text-foreground font-medium"
+                                            : "text-muted-foreground"
+                                      }
+                                    >
+                                      {step.label}
+                                    </span>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                            {isForm && (
+                              <p className="pt-1 text-center text-xs text-muted-foreground/80">
+                                点击「开始训练」后，AI 将依次完成以上三步
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })()}
 
                       {trainingStage === "result" && (
                         <div className="space-y-3">
