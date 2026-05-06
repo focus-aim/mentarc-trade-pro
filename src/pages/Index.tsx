@@ -1589,7 +1589,7 @@ const Index = () => {
                     </div>
 
                     {/* Body — aligned to left's mt-6 spacing */}
-                    <div className="relative mt-6">
+                    <div className="relative mt-6 flex-1">
                       {(trainingStage === "form" || trainingStage === "training") && (() => {
                         const steps = [
                           { label: "AI 理解业务文档", at: 30 },
