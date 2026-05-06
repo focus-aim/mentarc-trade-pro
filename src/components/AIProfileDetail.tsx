@@ -644,7 +644,6 @@ const SubModule = ({
 );
 
 const FormRow = ({
-  icon: Icon,
   label,
   required,
   optional,
@@ -655,7 +654,6 @@ const FormRow = ({
   chips,
   onChipToggle,
 }: {
-  icon: typeof Package;
   label: string;
   required?: boolean;
   optional?: boolean;
@@ -666,31 +664,26 @@ const FormRow = ({
   chips?: string[];
   onChipToggle?: (chip: string) => void;
 }) => (
-  <div className="group rounded-xl px-2 py-2 transition-colors duration-200 hover:bg-muted/30 focus-within:bg-muted/40">
-    <div className="flex items-center gap-2">
-      <div className={cn(
-        "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg",
-        required ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
-      )}>
-        <Icon className="h-3.5 w-3.5" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-1 text-[10.5px] font-medium text-muted-foreground">
-          <span>{label}</span>
-          {required && <span className="text-destructive">*</span>}
-          {optional && <span className="text-muted-foreground/70">· 选填</span>}
-        </div>
-        <input
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          disabled={disabled}
-          placeholder={placeholder}
-          className="w-full bg-transparent text-[13px] font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none disabled:opacity-90"
-        />
-      </div>
+  <div className="group py-2">
+    <div className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
+      <span>{label}</span>
+      {required && <span className="text-destructive">*</span>}
+      {optional && <span className="text-muted-foreground/70">· 选填</span>}
     </div>
+    {disabled ? (
+      <p className="mt-1 text-[13px] leading-relaxed text-foreground/90 break-words">
+        {value || <span className="text-muted-foreground/60">{placeholder}</span>}
+      </p>
+    ) : (
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="mt-1 w-full bg-transparent text-[13px] font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none border-b border-border/40 focus:border-primary/50 pb-1 transition-colors"
+      />
+    )}
     {chips && onChipToggle && (
-      <div className="mt-2 flex flex-wrap gap-1.5 pl-9">
+      <div className="mt-2 flex flex-wrap gap-1.5">
         {chips.map((chip) => {
           const active = value.includes(chip);
           return (
