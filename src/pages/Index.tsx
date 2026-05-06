@@ -668,6 +668,9 @@ const Index = () => {
           setPartnerConfigured(true);
           setShowPartnerConfig(false);
           setTrainingStage("idle");
+          toast.success("AI 已理解你的资料并生效", {
+            description: "已为你进入工作台，可立即发起任务。",
+          });
         }, 800);
       }
     }, 80);
