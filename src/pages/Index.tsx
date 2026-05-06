@@ -55,6 +55,7 @@ import leadsExpertAvatar from "@/assets/expert-leads-frank.jpg";
 import brandExpertAvatar from "@/assets/expert-brand-eva.jpg";
 import wechatServiceQr from "@/assets/wechat-service-qr.png";
 import defaultProductBike from "@/assets/default-product-bike.png";
+import HistoryDropdown from "@/components/HistoryDropdown";
 
 const modules = [
   {
