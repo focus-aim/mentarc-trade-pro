@@ -133,8 +133,7 @@ const AppSidebar = ({ onNewTask, onBoardClick, onPartnerClick, onResultsClick, o
 
       {/* Nav */}
       <nav className="px-5 pt-7 space-y-2">
-        <p className="px-3 pb-1 text-sm font-semibold text-sidebar-foreground">工作看板</p>
-        {navItems.map((item, i) => (
+        {navItems.map((item) => (
           <div key={item.key}>
             <button
               onClick={item.key === "new" ? onNewTask : item.key === "board" ? onBoardClick : item.key === "results" ? onResultsClick : item.key === "market" ? onMarketClick : undefined}
@@ -147,11 +146,32 @@ const AppSidebar = ({ onNewTask, onBoardClick, onPartnerClick, onResultsClick, o
             >
               <item.icon className="w-[18px] h-[18px]" />
               <span>{item.label}</span>
-              {(item.key === "board" || item.key === "market" || item.key === "results") && <span className="ml-auto rounded-full bg-background/80 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">即将上线</span>}
             </button>
           </div>
         ))}
       </nav>
+
+      {/* Recent conversations */}
+      <div className="px-5 pt-6 flex-1 min-h-0 flex flex-col">
+        <p className="px-3 pb-2 text-xs font-semibold text-muted-foreground">最近会话</p>
+        <div className="flex-1 min-h-0 overflow-y-auto scrollbar-thin space-y-0.5 pr-1">
+          {RECENT_CONVERSATIONS.map((item, idx) => (
+            <button
+              key={idx}
+              className="w-full px-3 py-2 rounded-lg text-left hover:bg-muted/70 transition-colors group"
+              title={item.title}
+            >
+              <p className="text-[12.5px] text-sidebar-foreground truncate group-hover:text-foreground">
+                {item.title}
+              </p>
+              <div className="mt-0.5 flex items-center gap-2 text-[10.5px] text-muted-foreground">
+                <span className="rounded bg-accent px-1.5 py-0.5 font-medium text-accent-foreground">{item.module}</span>
+                <span>{item.time}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
       <button onClick={onLogout} className="mt-auto mx-5 mb-5 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-sidebar-foreground hover:bg-muted hover:text-foreground transition-colors">
         <LogOut className="w-[18px] h-[18px]" />
         退出登录
