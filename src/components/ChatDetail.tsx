@@ -1,8 +1,10 @@
 import { useState, useCallback, useMemo, useEffect, useRef, ReactNode } from "react";
-import { ChevronDown, FileText, History, Image as ImageIcon, UserRound, Sparkles, BarChart3, Clock, Check } from "lucide-react";
+import { ChevronDown, FileText, History, Image as ImageIcon, UserRound, Sparkles, BarChart3, Clock, Check, Coins, Users, LogOut } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import TeamManagementDialog from "./TeamManagementDialog";
 import { ArrowLeft } from "lucide-react";
 
 import ChatInput, { ChatAttachment } from "./ChatInput";
