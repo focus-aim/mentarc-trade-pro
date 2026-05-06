@@ -1538,7 +1538,7 @@ const Index = () => {
                   </div>
 
                   {/* RIGHT: Mind-flow process / structured result */}
-                  <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-secondary/5 p-6 shadow-xl shadow-primary/5 backdrop-blur-md sm:p-8">
+                  <div className="relative flex flex-col overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-secondary/5 p-6 shadow-xl shadow-primary/5 backdrop-blur-md sm:p-8">
                     <div
                       aria-hidden
                       className="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full bg-secondary/15 blur-3xl"
@@ -1589,7 +1589,7 @@ const Index = () => {
                     </div>
 
                     {/* Body — aligned to left's mt-6 spacing */}
-                    <div className="relative mt-6">
+                    <div className="relative mt-6 flex-1">
                       {(trainingStage === "form" || trainingStage === "training") && (() => {
                         const steps = [
                           { label: "AI 理解业务文档", at: 30 },
@@ -1756,24 +1756,27 @@ const Index = () => {
                             </div>
                           </article>
 
-                          <button
-                            onClick={() => {
-                              setPartnerConfigured(true);
-                              setShowPartnerConfig(false);
-                              setTrainingStage("idle");
-                            }}
-                            className="group relative mt-3 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
-                          >
-                            <span
-                              aria-hidden
-                              className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-                            />
-                            进入工作台
-                            <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
-                          </button>
                         </div>
                       )}
                     </div>
+
+                    {trainingStage === "result" && (
+                      <button
+                        onClick={() => {
+                          setPartnerConfigured(true);
+                          setShowPartnerConfig(false);
+                          setTrainingStage("idle");
+                        }}
+                        className="group relative mt-6 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
+                      >
+                        <span
+                          aria-hidden
+                          className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                        />
+                        进入工作台
+                        <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
