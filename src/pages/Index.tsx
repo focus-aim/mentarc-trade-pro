@@ -1401,54 +1401,41 @@ const Index = () => {
                         />
                       </div>
 
-                      {/* Business focus — with quick chips */}
-                      <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
+                      {/* Business focus — chips only, no text input */}
+                      <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200">
                         <div className="text-xs font-medium text-muted-foreground">
                           业务关注点
                         </div>
-                        <input
-                          value={trainingForm.targetMarket}
-                          onChange={(e) => setTrainingForm({ ...trainingForm, targetMarket: e.target.value })}
-                          disabled={trainingStage !== "form"}
-                          className="w-full bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none disabled:opacity-70"
-                        />
-                        {trainingStage === "form" && (
-                          <div className="mt-2.5 flex flex-wrap gap-1.5">
-                            {["内贸转外贸", "新市场开拓", "多渠道营销", "买家成交转化", "客户黏性运营"].map((focus) => {
-                              const active = trainingForm.targetMarket.includes(focus);
-                              return (
-                                <button
-                                  key={focus}
-                                  type="button"
-                                  onClick={() => {
-                                    const current = trainingForm.targetMarket.trim();
-                                    if (active) {
-                                      const next = current
-                                        .split(/[、,,\s]+/)
-                                        .filter((r) => r && r !== focus)
-                                        .join("、");
-                                      setTrainingForm({ ...trainingForm, targetMarket: next });
-                                    } else {
-                                      setTrainingForm({
-                                        ...trainingForm,
-                                        targetMarket: current ? `${current}、${focus}` : focus,
-                                      });
-                                    }
-                                  }}
-                                  className={cn(
-                                    "rounded-full border px-2.5 py-1 text-xs font-medium transition-all",
-                                    active
-                                      ? "border-primary/40 bg-primary/10 text-primary"
-                                      : "border-border bg-background/60 text-muted-foreground hover:border-primary/30 hover:text-foreground",
-                                  )}
-                                >
-                                  {active && <span className="mr-0.5">✓</span>}
-                                  {focus}
-                                </button>
-                              );
-                            })}
-                          </div>
-                        )}
+                        <div className="mt-2.5 flex flex-wrap gap-1.5">
+                          {["内贸转外贸", "新市场开拓", "多渠道营销", "买家成交转化", "客户黏性运营"].map((focus) => {
+                            const selected = trainingForm.targetMarket
+                              .split(/[、,,\s]+/)
+                              .filter(Boolean);
+                            const active = selected.includes(focus);
+                            return (
+                              <button
+                                key={focus}
+                                type="button"
+                                disabled={trainingStage !== "form"}
+                                onClick={() => {
+                                  const next = active
+                                    ? selected.filter((r) => r !== focus)
+                                    : [...selected, focus];
+                                  setTrainingForm({ ...trainingForm, targetMarket: next.join("、") });
+                                }}
+                                className={cn(
+                                  "rounded-full border px-2.5 py-1 text-xs font-medium transition-all disabled:opacity-70",
+                                  active
+                                    ? "border-primary/40 bg-primary/10 text-primary"
+                                    : "border-border bg-background/60 text-muted-foreground hover:border-primary/30 hover:text-foreground",
+                                )}
+                              >
+                                {active && <span className="mr-0.5">✓</span>}
+                                {focus}
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
 
                       {/* Website — optional, light style */}
