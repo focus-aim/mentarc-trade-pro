@@ -338,99 +338,47 @@ const AIProfileDetail = () => {
               }
             />
 
-            <div className="mt-4 grid gap-6 lg:grid-cols-3 lg:gap-8">
-              {/* 子模块 1: 企业档案 */}
-              <SubModule icon={Building2} title="企业档案" desc="公司基础信息与目标市场">
-                <FormRow
-                  label="公司名称"
-                  required
-                  value={companyEditing ? draft.companyName : company.companyName}
-                  placeholder="请输入公司全称"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, companyName: v })}
-                />
-                <FormRow
-                  label="主营产品"
-                  required
-                  value={companyEditing ? draft.mainProducts : company.mainProducts}
-                  placeholder="说说你卖什么，比如 不锈钢保温杯"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, mainProducts: v })}
-                />
-                <FormRow
-                  label="业务关注点"
-                  value={companyEditing ? draft.businessFocus : company.businessFocus}
-                  placeholder="例如 高客单 DTC 品牌、定制订单"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, businessFocus: v })}
-                />
-                <FormRow
-                  label="公司网址"
-                  optional
-                  value={companyEditing ? draft.website : company.website}
-                  placeholder="贴上网址，AI 自动抓取分析"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, website: v })}
-                />
-                <FormRow
-                  label="目标市场"
-                  required
-                  value={companyEditing ? draft.targetMarket : company.targetMarket}
-                  placeholder="覆盖区域 / 买家类型"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, targetMarket: v })}
-                />
-              </SubModule>
+            <div className="mt-4 space-y-4">
+              <KnowledgeCard
+                icon={Building2}
+                title="企业档案"
+                desc="公司基础信息与目标市场"
+                badge="已识别 5 项"
+                editing={companyEditing}
+                items={[
+                  { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }), required: true },
+                  { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }), required: true },
+                  { label: "业务关注点", value: company.businessFocus, draft: draft.businessFocus, onChange: (v) => setDraft({ ...draft, businessFocus: v }) },
+                  { label: "公司网址", value: company.website, draft: draft.website, onChange: (v) => setDraft({ ...draft, website: v }) },
+                  { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }), required: true },
+                ]}
+              />
 
-              {/* 子模块 2: 产品知识 */}
-              <SubModule icon={Tags} title="产品知识" desc="主营产品的关键词、卖点与典型案例">
-                <FormRow
-                  label="主营产品关键词"
-                  value={companyEditing ? draft.productKeywords : company.productKeywords}
-                  placeholder="用顿号分隔，例如 保温杯、运动水壶"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, productKeywords: v })}
-                />
-                <FormRow
-                  label="产品卖点"
-                  value={companyEditing ? draft.productSelling : company.productSelling}
-                  placeholder="核心卖点 / 差异化优势"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, productSelling: v })}
-                />
-                <FormRow
-                  label="产品案例"
-                  value={companyEditing ? draft.productCases : company.productCases}
-                  placeholder="代表性合作客户或订单案例"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, productCases: v })}
-                />
-              </SubModule>
+              <KnowledgeCard
+                icon={Tags}
+                title="产品知识"
+                desc="主营产品的关键词、卖点与典型案例"
+                badge="已识别 3 项"
+                editing={companyEditing}
+                items={[
+                  { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
+                  { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
+                  { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
+                ]}
+              />
 
-              {/* 子模块 3: 业务规则 */}
-              <SubModule icon={ShieldCheck} title="业务规则" desc="样品、报价、付款的标准做法">
-                <FormRow
-                  label="样品规则"
-                  value={companyEditing ? draft.sampleRule : company.sampleRule}
-                  placeholder="例如 免费样 1pcs，运费到付"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, sampleRule: v })}
-                />
-                <FormRow
-                  label="报价规则"
-                  value={companyEditing ? draft.quoteRule : company.quoteRule}
-                  placeholder="贸易术语 / MOQ / 报价档位"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, quoteRule: v })}
-                />
-                <FormRow
-                  label="付款规则"
-                  value={companyEditing ? draft.paymentRule : company.paymentRule}
-                  placeholder="例如 T/T 30% + 70% 见提单副本"
-                  disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, paymentRule: v })}
-                />
-              </SubModule>
+              <KnowledgeCard
+                icon={ShieldCheck}
+                title="业务规则"
+                desc="样品、报价、付款的标准做法"
+                badge="已识别 3 项"
+                editing={companyEditing}
+                items={[
+                  { label: "样品规则", value: company.sampleRule, draft: draft.sampleRule, onChange: (v) => setDraft({ ...draft, sampleRule: v }) },
+                  { label: "报价规则", value: company.quoteRule, draft: draft.quoteRule, onChange: (v) => setDraft({ ...draft, quoteRule: v }) },
+                  { label: "付款规则", value: company.paymentRule, draft: draft.paymentRule, onChange: (v) => setDraft({ ...draft, paymentRule: v }) },
+                ]}
+              />
             </div>
 
             {companyEditing && (
@@ -640,6 +588,75 @@ const SubModule = ({
       </div>
     </header>
     <div className="space-y-1">{children}</div>
+  </div>
+);
+
+interface KnowledgeItem {
+  label: string;
+  value: string;
+  draft: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+}
+
+const KnowledgeCard = ({
+  icon: Icon,
+  title,
+  desc,
+  badge,
+  editing,
+  items,
+}: {
+  icon: typeof Package;
+  title: string;
+  desc: string;
+  badge?: string;
+  editing: boolean;
+  items: KnowledgeItem[];
+}) => (
+  <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card via-card to-primary/[0.04] shadow-sm transition-all hover:shadow-md">
+    <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/8 blur-3xl" />
+    <header className="relative flex items-center justify-between gap-3 border-b border-border/40 px-4 py-3">
+      <div className="flex items-center gap-2.5">
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <Icon className="h-4 w-4" />
+        </div>
+        <div>
+          <div className="flex items-center gap-1.5">
+            <h3 className="text-[13.5px] font-bold text-foreground">{title}</h3>
+            {badge && (
+              <span className="inline-flex items-center gap-0.5 rounded-full bg-success/10 px-1.5 py-0.5 text-[10px] font-semibold text-success">
+                <Check className="h-2.5 w-2.5" />
+                {badge}
+              </span>
+            )}
+          </div>
+          <p className="mt-0.5 text-[10.5px] text-muted-foreground">{desc}</p>
+        </div>
+      </div>
+    </header>
+    <ul className="relative flex-1 divide-y divide-border/30 px-4 py-1">
+      {items.map((it) => (
+        <li
+          key={it.label}
+          className="flex items-baseline gap-3 py-2.5 text-[12.5px] leading-relaxed"
+        >
+          <span className="w-24 shrink-0 text-[11.5px] font-medium text-muted-foreground">
+            {it.label}
+            {it.required && <span className="ml-0.5 text-destructive">*</span>}
+          </span>
+          {editing ? (
+            <input
+              value={it.draft}
+              onChange={(e) => it.onChange(e.target.value)}
+              className="min-w-0 flex-1 bg-transparent text-foreground/90 focus:outline-none border-b border-border/40 focus:border-primary/50 pb-0.5 transition-colors"
+            />
+          ) : (
+            <span className="min-w-0 flex-1 text-foreground/85 break-words">{it.value || <span className="text-muted-foreground/60">未填写</span>}</span>
+          )}
+        </li>
+      ))}
+    </ul>
   </div>
 );
 
