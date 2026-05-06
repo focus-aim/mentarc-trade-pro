@@ -1577,8 +1577,11 @@ const Index = () => {
                             等待启动
                           </span>
                           <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
-                            AI 学习与画像预览
+                            AI 将读懂你的业务，组建专属团队
                           </h1>
+                          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                            理解业务知识与产品特点，构建企业画像，并明确 AI 团队的跟进目标。
+                          </p>
                         </>
                       )}
                       {trainingStage === "training" && (
