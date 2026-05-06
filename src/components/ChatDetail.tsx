@@ -584,6 +584,14 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
     ]);
   }, []);
 
+  const handleFollowupStrategyMindFlowComplete = useCallback(() => {
+    setShowingFollowupStrategyMindFlow(false);
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", content: "", type: "followup-strategy-result" },
+    ]);
+  }, []);
+
   const handleKeywordMindFlowComplete = useCallback(() => {
     setMessages((prev) => [
       ...prev,
