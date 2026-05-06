@@ -663,7 +663,11 @@ const Index = () => {
       setTrainingProgress(pct);
       if (pct >= 100) {
         clearInterval(id);
-        setTimeout(() => setTrainingStage("result"), 350);
+        setTimeout(() => {
+          setPartnerConfigured(true);
+          setShowPartnerConfig(false);
+          setTrainingStage("idle");
+        }, 800);
       }
     }, 80);
     return () => clearInterval(id);
