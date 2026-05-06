@@ -878,10 +878,9 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
           </div>
 
           <div ref={chatScrollRef} className="flex-1 overflow-y-auto scrollbar-thin px-5 py-4">
-            <div className="mx-auto w-full max-w-2xl space-y-4">
+            <div className="mx-auto w-full max-w-3xl space-y-4">
             {messages.map((msg, i) => {
-              // Hide result-type messages from chat (they're surfaced in the right panel + history archive)
-              const isResultOnly =
+              const isResult =
                 msg.type === "operation-result" ||
                 msg.type === "inquiry-result" ||
                 msg.type === "inquiry-followup-result" ||
@@ -893,7 +892,17 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 msg.type === "keyword-result" ||
                 msg.type === "market-result" ||
                 msg.type === "trend-result";
-              if (isResultOnly) return null;
+              if (isResult) {
+                const built = buildResultFor(msg);
+                if (!built) return null;
+                return (
+                  <div key={i} className="w-full">
+                    <div className="rounded-2xl border border-border/60 bg-card/70 backdrop-blur-sm shadow-sm p-4">
+                      {built.node}
+                    </div>
+                  </div>
+                );
+              }
               return (
               <div key={i} className={`flex gap-2.5 ${msg.role === "user" ? "ml-auto max-w-[78%] flex-row-reverse" : "w-full"}`}>
                 <div
