@@ -480,7 +480,6 @@ const AIProfileDetail = () => {
                 </div>
               )}
             </div>
-            </div>
           </section>
         )}
 
