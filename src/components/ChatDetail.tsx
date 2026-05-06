@@ -818,6 +818,12 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
         </button>
         <div className="ml-auto flex items-center gap-3">
           <button
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card border border-border/60 text-sm font-medium text-foreground hover:bg-muted transition-colors cursor-pointer"
+          >
+            <Share2 className="w-4 h-4 text-muted-foreground" />
+            <span>分享</span>
+          </button>
+          <button
             onClick={() => setTeamDialogOpen(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 transition-colors cursor-pointer"
           >
