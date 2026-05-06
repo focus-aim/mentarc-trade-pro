@@ -838,6 +838,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 msg.type === "operation-result" ||
                 msg.type === "inquiry-result" ||
                 msg.type === "inquiry-followup-result" ||
+                msg.type === "followup-strategy-result" ||
                 msg.type === "buyer-background-result" ||
                 msg.type === "image-result" ||
                 msg.type === "detail-result" ||
