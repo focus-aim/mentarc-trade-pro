@@ -866,6 +866,8 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                     <MindFlowMessage richSteps={BUYER_BG_RICH_STEPS} onComplete={handleBuyerBgMindFlowComplete} />
                   ) : msg.type === "emails-mindflow" ? (
                     <MindFlowMessage richSteps={EMAIL_GEN_RICH_STEPS} onComplete={handleEmailsMindFlowComplete} />
+                  ) : msg.type === "followup-strategy-mindflow" ? (
+                    <MindFlowMessage richSteps={FOLLOWUP_STRATEGY_RICH_STEPS} onComplete={handleFollowupStrategyMindFlowComplete} />
                   ) : msg.type === "image-mindflow" ? (
                     <MindFlowMessage steps={IMAGE_MINDFLOW_STEPS} onComplete={handleImageMindFlowComplete} />
                   ) : msg.type === "inquiry-strategy-prompt" ? (
