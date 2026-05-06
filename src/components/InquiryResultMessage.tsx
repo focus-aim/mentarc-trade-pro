@@ -110,18 +110,17 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
 
         <SectionCard icon={ListChecks} title="需求摘要">
           <div className="space-y-1">
-            <KV label="产品" value="5kW 混合逆变器 · UL1741" />
-            <KV label="数量" value="300 台（首批）" />
             <KV
-              label="目标价"
+              label="需求完整度"
               value={
-                <span className="px-1 py-0 text-[10px] rounded border border-amber-500/20 bg-amber-500/10 text-amber-600 font-medium">
-                  FOB &lt; $380 / 台
+                <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-medium">
+                  较完整
                 </span>
               }
             />
-            <KV label="交期" value="≤ 35 天，7 月上架" />
-            <KV label="动作" value="先空运样品 → 大货" />
+            <KV label="采购产品" value="5kW 混合逆变器 · UL1741" />
+            <KV label="规格/数量" value="单相 / 240V，300 台（首批）" />
+            <KV label="核心关注点" value="UL 认证 + 交期 + 样品政策" />
           </div>
         </SectionCard>
       </div>
