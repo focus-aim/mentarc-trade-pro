@@ -126,18 +126,34 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
 
       {/* AI 关键判断 — 三栏 + 内联风险 */}
       <SectionCard icon={Brain} title="AI 关键判断">
-        <div className="grid grid-cols-3 gap-1.5 mb-2">
+        <div className="grid grid-cols-2 gap-1.5 mb-2">
+          <div className="rounded-md border border-emerald-500/20 bg-emerald-500/5 px-2 py-1.5">
+            <div className="flex items-center justify-between">
+              <p className="text-[10px] text-muted-foreground">询盘真实性</p>
+              <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 font-semibold">高</span>
+            </div>
+            <p className="mt-1 text-[11px] text-foreground/80 leading-[1.5]">
+              邮件结构完整、产品/数量/认证/交期明确，无可疑链接，判定为真实买家询盘。
+            </p>
+          </div>
+          <div className="rounded-md border border-amber-500/20 bg-amber-500/5 px-2 py-1.5">
+            <div className="flex items-center justify-between">
+              <p className="text-[10px] text-muted-foreground">订单交易风险</p>
+              <span className="px-1 py-0 text-[10px] rounded border border-amber-500/25 bg-amber-500/10 text-amber-600 font-semibold">中</span>
+            </div>
+            <p className="mt-1 text-[11px] text-foreground/80 leading-[1.5]">
+              美国近期对华关税与合规审查趋严，建议优先 T/T 30% 定金 + 见提单付余款，规避汇款与清关风险。
+            </p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-1.5 mb-2">
           <div className="rounded-md border border-border bg-muted/20 px-2 py-1.5">
-            <p className="text-[10px] text-muted-foreground">采购经验</p>
-            <p className="text-[12px] font-medium text-emerald-600">高</p>
+            <p className="text-[10px] text-muted-foreground">采购能力</p>
+            <p className="mt-0.5 text-[11px] font-medium text-foreground leading-tight">中型分销商 · 年采购约 $1.2M，复购意愿明确</p>
           </div>
           <div className="rounded-md border border-border bg-muted/20 px-2 py-1.5">
-            <p className="text-[10px] text-muted-foreground">价格敏感</p>
-            <p className="text-[12px] font-medium text-amber-600">中高</p>
-          </div>
-          <div className="rounded-md border border-border bg-muted/20 px-2 py-1.5">
-            <p className="text-[10px] text-muted-foreground">最大痛点</p>
-            <p className="text-[11px] font-medium text-foreground leading-tight">认证 / 交期</p>
+            <p className="text-[10px] text-muted-foreground">竞争态势</p>
+            <p className="mt-0.5 text-[11px] font-medium text-foreground leading-tight">同步询价 3-5 家中国供应商，价格与交期为关键决胜点</p>
           </div>
         </div>
         <div className="space-y-1">
