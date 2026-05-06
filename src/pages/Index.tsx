@@ -32,7 +32,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -664,14 +663,7 @@ const Index = () => {
       setTrainingProgress(pct);
       if (pct >= 100) {
         clearInterval(id);
-        setTimeout(() => {
-          setPartnerConfigured(true);
-          setShowPartnerConfig(false);
-          setTrainingStage("idle");
-          toast.success("AI 已理解你的资料并生效", {
-            description: "已为你进入工作台，可立即发起任务。",
-          });
-        }, 800);
+        setTimeout(() => setTrainingStage("result"), 350);
       }
     }, 80);
     return () => clearInterval(id);
@@ -1525,18 +1517,26 @@ const Index = () => {
 
                     <div className="relative mt-6 space-y-2">
                       {trainingStage === "form" ? (
-                        <button
-                          onClick={() => setTrainingStage("training")}
-                          className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
-                        >
-                          <span
-                            aria-hidden
-                            className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-                          />
-                          <Sparkles className="h-[18px] w-[18px]" />
-                          开始训练
-                          <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
-                        </button>
+                        <>
+                          <button
+                            onClick={() => setTrainingStage("training")}
+                            className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
+                          >
+                            <span
+                              aria-hidden
+                              className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                            />
+                            <Sparkles className="h-[18px] w-[18px]" />
+                            开始训练
+                            <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
+                          </button>
+                          <button
+                            onClick={() => setTrainingStage("training")}
+                            className="inline-flex w-full items-center justify-center gap-1.5 rounded-full px-6 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            跳过，直接启动
+                          </button>
+                        </>
                       ) : trainingStage === "training" ? (
                         <button
                           disabled
@@ -1577,11 +1577,8 @@ const Index = () => {
                             等待启动
                           </span>
                           <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
-                            AI 将读懂你的业务，组建专属团队
+                            AI 学习与画像预览
                           </h1>
-                          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                            理解业务知识与产品特点，构建企业画像，并明确 AI 团队的跟进目标。
-                          </p>
                         </>
                       )}
                       {trainingStage === "training" && (
