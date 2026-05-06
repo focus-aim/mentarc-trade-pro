@@ -807,14 +807,14 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
 
 
   return (
-    <div className="flex-1 flex flex-col h-screen overflow-hidden p-3 gap-3">
-      <div className="flex items-center gap-2 px-2">
+    <div className="flex-1 flex flex-col h-screen overflow-hidden px-6 py-4 gap-3">
+      <div className="flex items-center gap-2">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-1.5 px-2 py-1 -ml-1 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors active:scale-95"
+          className="inline-flex items-center gap-1.5 px-2 py-1 -ml-2 rounded-lg text-base font-semibold text-foreground hover:bg-muted transition-colors active:scale-95"
         >
           <ArrowLeft className="w-4 h-4" />
-          返回工作台
+          {config.taskName}
         </button>
         <div className="ml-auto flex items-center gap-3">
           <button
@@ -854,31 +854,10 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       </div>
       <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
 
-      <div className="flex-1 flex gap-3 min-h-0">
-        {/* Conversation + mind-flow + inline results */}
-        <div className="flex-1 mx-auto w-full max-w-4xl flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm shadow-sm">
-          {/* Expert header — "AI专家专项分析" */}
-          <div className="relative overflow-hidden border-b border-border/60 bg-gradient-to-r from-primary/8 via-card/70 to-secondary/8 px-5 py-3.5">
-            <div aria-hidden className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-primary/15 blur-3xl" />
-            <div className="relative flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 -m-0.5 rounded-full bg-gradient-to-br from-primary/40 to-secondary/40 blur-sm" />
-                <div className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-card ring-2 ring-primary/20">
-                  <img src={expertMeta.avatar} alt={expertMeta.name} className="h-full w-full object-cover object-top" />
-                </div>
-                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-success ring-2 ring-card" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5">
-                  <h2 className="text-sm font-bold text-foreground">{expertMeta.name}</h2>
-                </div>
-                <p className="mt-0.5 truncate text-[11.5px] text-muted-foreground">{expertMeta.tagline}</p>
-              </div>
-            </div>
-          </div>
-
-          <div ref={chatScrollRef} className="flex-1 overflow-y-auto scrollbar-thin px-5 py-4">
-            <div className="mx-auto w-full max-w-3xl space-y-4">
+      <div className="flex-1 flex min-h-0">
+        <div className="flex-1 mx-auto w-full max-w-3xl flex flex-col min-w-0 overflow-hidden">
+          <div ref={chatScrollRef} className="flex-1 overflow-y-auto scrollbar-thin py-4">
+            <div className="w-full space-y-4">
             {messages.map((msg, i) => {
               const isResult =
                 msg.type === "operation-result" ||
@@ -897,9 +876,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 if (!built) return null;
                 return (
                   <div key={i} className="w-full">
-                    <div className="rounded-2xl border border-border/60 bg-card/70 backdrop-blur-sm shadow-sm p-4">
-                      {built.node}
-                    </div>
+                    {built.node}
                   </div>
                 );
               }
@@ -908,7 +885,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 <div
                   className={`text-[15px] leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-muted px-4 py-2.5 rounded-2xl rounded-tr-md text-foreground whitespace-pre-line"
+                      ? "bg-primary text-primary-foreground px-4 py-2.5 rounded-2xl rounded-tr-md whitespace-pre-line"
                       : "text-foreground pt-1"
                   }`}
                 >
@@ -973,13 +950,11 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
             </div>
           </div>
 
-          <div className="border-t border-border/60 bg-card/40 px-5 py-3">
-            <div className="mx-auto w-full max-w-2xl">
-              <ChatInput key={prefillKey} onSend={handleSend} placeholder={config.placeholder} defaultValue={prefillValue} attachment={config.attachment} attachments={config.attachments} quote={activeQuote} onClearQuote={() => setActiveQuote(null)} />
-              <p className="text-[11px] text-muted-foreground text-center mt-1.5">
-                AI 可能会产生错误信息，请核实重要内容。
-              </p>
-            </div>
+          <div className="pt-3 pb-2">
+            <ChatInput key={prefillKey} onSend={handleSend} placeholder={config.placeholder} defaultValue={prefillValue} attachment={config.attachment} attachments={config.attachments} quote={activeQuote} onClearQuote={() => setActiveQuote(null)} />
+            <p className="text-[11px] text-muted-foreground text-center mt-1.5">
+              AI 可能会产生错误信息，请核实重要内容。
+            </p>
           </div>
         </div>
 
