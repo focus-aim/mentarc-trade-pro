@@ -867,21 +867,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
               <BarChart3 className="h-4 w-4" />
             </div>
             <div className="min-w-0 flex-1">
-              {moduleTitle === "业务专家" ? (
-                <>
-                  <h3 className="text-[13px] font-bold text-foreground truncate">
-                    Inquiry for Artist Acrylic Paint &amp; Brushes
-                  </h3>
-                  <p className="text-[11px] text-muted-foreground truncate">
-                    About Murals Inc. · 加拿大 安省 Hamilton
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h3 className="text-[13px] font-bold text-foreground">{latestResultLabel || expertMeta.resultLabel}</h3>
-                  <p className="text-[11px] text-muted-foreground">由 {expertMeta.name} 专项输出</p>
-                </>
-              )}
+              <h3 className="text-[13px] font-bold text-foreground">对话区</h3>
             </div>
 
 
