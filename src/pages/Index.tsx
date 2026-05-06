@@ -1461,7 +1461,7 @@ const Index = () => {
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="text-xs font-medium text-muted-foreground">
-                            产品资料 <span className="text-muted-foreground/70">· 选填</span>
+                            产品资料
                           </div>
                           <div className="truncate text-sm text-foreground/80">
                             {trainingForm.docName || "拖拽或点击上传 PDF / Word / Excel"}
