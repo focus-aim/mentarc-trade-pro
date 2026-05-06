@@ -98,7 +98,7 @@ const OperationResultMessage = ({ onAction, onQuote, onSendPrompt, expertAvatar 
             <img src={expertAvatar} alt="运营专家" className="w-full h-full object-cover object-top" />
           </div>
         )}
-        <span className="font-semibold text-foreground text-[14px]">运营专家支招</span>
+        <span className="font-semibold text-foreground text-[14px]">AI专家指点</span>
       </div>
 
 
