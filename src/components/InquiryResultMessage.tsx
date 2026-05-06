@@ -161,44 +161,10 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
 
       {/* 询盘概要 */}
       <SectionCard icon={UserRound} title="询盘概要">
-        <div className="space-y-1">
-          <KV label="公司" value="TechSol US" />
-          <KV label="地区" value="美国 · 加州" />
-          <KV label="联系方式" value="john.carter@techsol.us" />
-          <KV label="采购产品" value="5kW 混合逆变器 · UL1741,单相 / 240V,300 台(首批)" />
+        <div className="space-y-1.5">
+          <KV label="买家背景" value="美国加州中型分销商 TechSol US · 年采购约 $1.2M · 主营北美住宅光储渠道" />
           <KV label="沟通阶段" value="需求沟通阶段(前期已收到两次该买家询价邮件)" />
-        </div>
-      </SectionCard>
-
-      {/* AI 关键判断 */}
-      <SectionCard icon={Brain} title="AI 关键判断">
-        <div className="space-y-2.5">
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/25 text-emerald-600 font-semibold">高</span>
-              <p className="text-[11.5px] text-muted-foreground">询盘真实性</p>
-            </div>
-            <p className="mt-1 text-[12px] text-foreground/85 leading-[1.6]">
-              邮件结构完整、产品/数量/认证/交期明确,无可疑链接,判定为真实买家询盘。
-            </p>
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="px-1 py-0 text-[10px] rounded border border-amber-500/30 text-amber-600 font-semibold">中</span>
-              <p className="text-[11.5px] text-muted-foreground">订单交易风险</p>
-            </div>
-            <p className="mt-1 text-[12px] text-foreground/85 leading-[1.6]">
-              美国近期对华关税与合规审查趋严,建议优先 T/T 30% 定金 + 见提单付余款,规避汇款与清关风险。
-            </p>
-          </div>
-          <div>
-            <p className="text-[11.5px] text-muted-foreground mb-1">其他必要提示</p>
-            <ul className="space-y-1 text-[12px] text-foreground/85">
-              <li className="leading-[1.6]"><span className="text-muted-foreground">· 采购能力:</span> 中型分销商 · 年采购约 $1.2M,复购意愿明确。</li>
-              <li className="leading-[1.6]"><span className="text-muted-foreground">· 竞争态势:</span> 同步询价 3-5 家中国供应商,价格与交期为关键决胜点。</li>
-              <li className="leading-[1.6]"><span className="text-muted-foreground">· 价格提示:</span> $380 低于常见价,确认是否接受替代方案或翻新机;样品运费未明说,警惕免费寄样要求。</li>
-            </ul>
-          </div>
+          <KV label="需求完整度" value="高 · 产品 / 数量 / 认证 / 交期 / 目标价均已明确" />
         </div>
       </SectionCard>
 
