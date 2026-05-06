@@ -1543,9 +1543,6 @@ const Index = () => {
                           <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
                             AI 学习与画像预览
                           </h1>
-                          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                            填写左侧素材后，这里会实时展示学习过程与结构化成果。
-                          </p>
                         </>
                       )}
                       {trainingStage === "training" && (
