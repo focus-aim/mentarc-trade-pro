@@ -96,37 +96,20 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
         </div>
       </SectionCard>
 
-      {/* 买家 + 需求 — 双栏合并 */}
-      <div className="grid grid-cols-2 gap-2.5">
-        <SectionCard icon={UserRound} title="买家速览">
-          <div className="space-y-1">
-            <KV label="公司" value="TechSol US" />
-            <KV label="地区" value="美国 · 加州" />
-            <KV label="联系方式" value="john.carter@techsol.us" />
-            <KV label="沟通阶段" value="需求沟通阶段（前期已收到两次该买家询价邮件）" />
-          </div>
-        </SectionCard>
+      {/* 买家速览 */}
+      <SectionCard icon={UserRound} title="买家速览">
+        <div className="space-y-1">
+          <KV label="公司" value="TechSol US" />
+          <KV label="地区" value="美国 · 加州" />
+          <KV label="联系方式" value="john.carter@techsol.us" />
+          <KV label="采购产品" value="5kW 混合逆变器 · UL1741，单相 / 240V，300 台（首批）" />
+          <KV label="沟通阶段" value="需求沟通阶段（前期已收到两次该买家询价邮件）" />
+        </div>
+      </SectionCard>
 
-        <SectionCard icon={ListChecks} title="需求摘要">
-          <div className="space-y-1">
-            <KV
-              label="需求完整度"
-              value={
-                <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-medium">
-                  较完整
-                </span>
-              }
-            />
-            <KV label="采购产品" value="5kW 混合逆变器 · UL1741" />
-            <KV label="规格/数量" value="单相 / 240V，300 台（首批）" />
-            <KV label="核心关注点" value="UL 认证 + 交期 + 样品政策" />
-          </div>
-        </SectionCard>
-      </div>
-
-      {/* AI 关键判断 — 三栏 + 内联风险 */}
+      {/* AI 关键判断 — 三子项 */}
       <SectionCard icon={Brain} title="AI 关键判断">
-        <div className="grid grid-cols-2 gap-1.5 mb-2">
+        <div className="space-y-1.5">
           <div className="rounded-md border border-emerald-500/20 bg-emerald-500/5 px-2 py-1.5">
             <div className="flex items-center justify-between">
               <p className="text-[10px] text-muted-foreground">询盘真实性</p>
@@ -145,25 +128,22 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
               美国近期对华关税与合规审查趋严，建议优先 T/T 30% 定金 + 见提单付余款，规避汇款与清关风险。
             </p>
           </div>
-        </div>
-        <div className="grid grid-cols-2 gap-1.5 mb-2">
           <div className="rounded-md border border-border bg-muted/20 px-2 py-1.5">
-            <p className="text-[10px] text-muted-foreground">采购能力</p>
-            <p className="mt-0.5 text-[11px] font-medium text-foreground leading-tight">中型分销商 · 年采购约 $1.2M，复购意愿明确</p>
-          </div>
-          <div className="rounded-md border border-border bg-muted/20 px-2 py-1.5">
-            <p className="text-[10px] text-muted-foreground">竞争态势</p>
-            <p className="mt-0.5 text-[11px] font-medium text-foreground leading-tight">同步询价 3-5 家中国供应商，价格与交期为关键决胜点</p>
-          </div>
-        </div>
-        <div className="space-y-1">
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
-            <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">$380 低于常见价，确认是否接受替代方案或翻新机。</p>
-          </div>
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
-            <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">样品运费未明说，警惕客户要求免费寄样。</p>
+            <p className="text-[10px] text-muted-foreground mb-1">其他必要提示</p>
+            <div className="space-y-1">
+              <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
+                <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
+                <p className="leading-[1.55]"><span className="text-muted-foreground">采购能力：</span>中型分销商 · 年采购约 $1.2M，复购意愿明确。</p>
+              </div>
+              <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
+                <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
+                <p className="leading-[1.55]"><span className="text-muted-foreground">竞争态势：</span>同步询价 3-5 家中国供应商，价格与交期为关键决胜点。</p>
+              </div>
+              <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
+                <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
+                <p className="leading-[1.55]">$380 低于常见价，确认是否接受替代方案或翻新机；样品运费未明说，警惕免费寄样要求。</p>
+              </div>
+            </div>
           </div>
         </div>
       </SectionCard>
