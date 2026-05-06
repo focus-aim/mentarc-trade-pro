@@ -936,7 +936,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
 
           <div className="flex-1 overflow-y-auto scrollbar-thin px-4 py-4">
             {latestResult ? (
-              <div ref={resultContentRef} className="text-[14px] leading-relaxed text-foreground">
+              <div ref={resultContentRef} className="mx-auto w-full max-w-3xl text-[14px] leading-relaxed text-foreground">
                 {latestResult}
               </div>
             ) : (
