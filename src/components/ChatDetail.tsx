@@ -334,6 +334,7 @@ const MARKET_REPORT_RECORDS = [
 ];
 
 const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps) => {
+  const [teamDialogOpen, setTeamDialogOpen] = useState(false);
   const config = MODULE_CONFIG[moduleTitle] || MODULE_CONFIG["业务专家"];
   const initialMessage = initialUserMessage?.trim() || config.defaultUserMessage;
   const expertAvatar = useMemo(() => {
