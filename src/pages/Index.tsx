@@ -1756,24 +1756,27 @@ const Index = () => {
                             </div>
                           </article>
 
-                          <button
-                            onClick={() => {
-                              setPartnerConfigured(true);
-                              setShowPartnerConfig(false);
-                              setTrainingStage("idle");
-                            }}
-                            className="group relative mt-3 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
-                          >
-                            <span
-                              aria-hidden
-                              className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-                            />
-                            进入工作台
-                            <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
-                          </button>
                         </div>
                       )}
                     </div>
+
+                    {trainingStage === "result" && (
+                      <button
+                        onClick={() => {
+                          setPartnerConfigured(true);
+                          setShowPartnerConfig(false);
+                          setTrainingStage("idle");
+                        }}
+                        className="group relative mt-6 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
+                      >
+                        <span
+                          aria-hidden
+                          className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                        />
+                        进入工作台
+                        <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
