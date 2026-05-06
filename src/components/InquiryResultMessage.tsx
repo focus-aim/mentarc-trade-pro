@@ -107,40 +107,42 @@ Best regards,
 [Your Name]`;
 
 const ReplyTemplateBlock = () => {
-  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
-  const handleCopy = async (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleCopy = async () => {
     await navigator.clipboard.writeText(REPLY_TEMPLATE);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
   return (
     <section className="rounded-xl border border-border bg-background/40 overflow-hidden">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-1.5 px-3.5 py-3 hover:bg-muted/30 transition-colors"
-      >
+      <div className="flex items-center gap-1.5 px-3.5 py-3 border-b border-border/60">
         <Mail className="w-3.5 h-3.5 text-muted-foreground" />
         <h3 className="font-medium text-foreground text-[12.5px]">询盘回复模板</h3>
-        <span className="ml-auto flex items-center gap-1">
-          <span
-            onClick={handleCopy}
-            role="button"
-            className="p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-primary/[0.08] transition-colors"
-            title={copied ? "已复制" : "复制"}
-          >
-            {copied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Copy className="w-3.5 h-3.5" />}
-          </span>
-          <ChevronDown
-            className={`w-3.5 h-3.5 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
-          />
-        </span>
-      </button>
-      {open && (
-        <pre className="px-3.5 py-3 whitespace-pre-wrap text-[12px] text-foreground/85 leading-[1.75] font-sans border-t border-border/60 max-h-[320px] overflow-y-auto">
+        <button
+          onClick={handleCopy}
+          className="ml-auto p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-primary/[0.08] transition-colors"
+          title={copied ? "已复制" : "复制"}
+        >
+          {copied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Copy className="w-3.5 h-3.5" />}
+        </button>
+      </div>
+      <div className={`relative ${expanded ? "" : "max-h-[4.2em] overflow-hidden"}`}>
+        <pre className="px-3.5 py-3 whitespace-pre-wrap text-[12px] text-foreground/85 leading-[1.4] font-sans">
           {REPLY_TEMPLATE}
         </pre>
+        {!expanded && (
+          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-background/90 to-transparent" />
+        )}
+      </div>
+      {!expanded && (
+        <button
+          onClick={() => setExpanded(true)}
+          className="w-full flex items-center justify-center gap-1 px-4 py-2 text-xs text-primary font-medium hover:bg-muted/50 transition-colors active:scale-[0.995] border-t border-border/60"
+        >
+          展开全部
+          <ChevronDown className="w-3.5 h-3.5" />
+        </button>
       )}
     </section>
   );
@@ -149,7 +151,7 @@ const ReplyTemplateBlock = () => {
 // ============================================================
 // Main inquiry analysis report (compact, one-screen)
 // ============================================================
-const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResultMessageProps) => {
+const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }: InquiryResultMessageProps) => {
   return (
     <div className="space-y-5">
       {/* AI 专家指点 — header + avatar bubble + integrated key points */}
@@ -184,6 +186,25 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
 
       {/* 询盘回复模板 */}
       <ReplyTemplateBlock />
+
+      {/* 行动引导 */}
+      <div className="space-y-1.5 pt-1">
+        <p className="text-[13px] text-foreground/80">接下来，您可以：</p>
+        <div className="flex flex-col gap-1">
+          <button
+            onClick={() => onBackgroundCheck?.()}
+            className="text-left text-primary text-[13px] hover:text-primary/80 hover:underline transition-colors"
+          >
+            对买家 Memories Souvenirs Pte Ltd 进行深度背调
+          </button>
+          <button
+            onClick={() => onSendPrompt?.("生成两版差异化的邮件回复话术")}
+            className="text-left text-primary text-[13px] hover:text-primary/80 hover:underline transition-colors"
+          >
+            生成两版差异化的邮件回复话术
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
