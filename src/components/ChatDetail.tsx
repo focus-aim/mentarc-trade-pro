@@ -25,6 +25,7 @@ import ResultDownloadButton from "./ResultDownloadButton";
 import KeywordTrendResult from "./KeywordTrendResult";
 import MarketResearchResult from "./MarketResearchResult";
 import TrendCollectionResult from "./TrendCollectionResult";
+import FollowupStrategyResult from "./FollowupStrategyResult";
 
 
 interface ChatDetailProps {
