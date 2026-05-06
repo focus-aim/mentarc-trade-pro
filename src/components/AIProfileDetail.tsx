@@ -399,6 +399,8 @@ const AIProfileDetail = () => {
                 </button>
               </div>
             )}
+          </section>
+        )}
 
         {/* Module 2: 团队经验 */}
         {activeTab === "preference" && (
