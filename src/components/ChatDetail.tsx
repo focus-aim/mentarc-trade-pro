@@ -699,12 +699,17 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
           setShowingMindFlow(true);
         }
       } else if (moduleTitle === "业务专家") {
-        newMessages.push({
-          role: "assistant",
-          content: "",
-          type: "mindflow",
-        });
-        setShowingMindFlow(true);
+        if (isBuyerBackgroundPrompt(text)) {
+          newMessages.push({ role: "assistant", content: "", type: "buyer-background-mindflow" });
+          setShowingBuyerBgMindFlow(true);
+        } else {
+          newMessages.push({
+            role: "assistant",
+            content: "",
+            type: "mindflow",
+          });
+          setShowingMindFlow(true);
+        }
       } else if (moduleTitle === "市场专家" && isMarketResearchPrompt(text)) {
         newMessages.push({ role: "assistant", content: "", type: "market-mindflow" });
       } else if (moduleTitle === "市场专家" && isTrendCollectionPrompt(text)) {
