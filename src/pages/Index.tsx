@@ -638,7 +638,7 @@ const Index = () => {
   const [trainingProgress, setTrainingProgress] = useState(0);
   const selectedTaskTab = TASK_TABS.find((tab) => tab.label === activeTaskTab) ?? TASK_TABS[0];
   const selectedModuleTitle =
-    selectedTaskTab.label === "产品转化" ? "运营专家" : selectedTaskTab.label === "业务沉淀" ? "市场专家" : "业务专家";
+    selectedTaskTab.label === "产品转化" ? "运营专家" : selectedTaskTab.label === "业务沉淀" ? "培训专家" : "业务专家";
 
   const handleLogout = useCallback(() => {
     setPartnerConfigured(false);
