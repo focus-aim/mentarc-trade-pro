@@ -460,20 +460,10 @@ const AIProfileDetail = () => {
                       <Lightbulb className="h-4 w-4" />
                     </div>
                     <div>
-                      <div className="flex items-center gap-1.5">
-                        <h3 className="text-[13.5px] font-bold text-foreground">团队经验技巧</h3>
-                        <span className="inline-flex items-center gap-0.5 rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary">
-                          <Plus className="h-2.5 w-2.5" />
-                          可新增
-                        </span>
-                      </div>
+                      <h3 className="text-[13.5px] font-bold text-foreground">团队经验技巧</h3>
                       <p className="mt-0.5 text-[10.5px] text-muted-foreground">来自团队业务员沉淀</p>
                     </div>
                   </div>
-                  <button className="inline-flex shrink-0 items-center gap-1 rounded-full border border-border/60 bg-background/70 px-2.5 py-1 text-[11px] font-semibold text-foreground hover:border-primary/30 hover:bg-accent transition-colors">
-                    <Plus className="h-3 w-3" />
-                    新增
-                  </button>
                 </header>
 
                 <ul className="relative flex-1 space-y-2.5 px-4 py-4">
