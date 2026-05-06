@@ -187,21 +187,23 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
       {/* 询盘回复模板 */}
       <ReplyTemplateBlock />
 
-      {/* 行动引导 */}
-      <div className="space-y-1.5 pt-1">
-        <p className="text-[13px] text-foreground/80">接下来，您可以：</p>
-        <div className="flex flex-col gap-1">
+      {/* 行动引导按钮 */}
+      <div className="space-y-1.5">
+        <p className="text-[13px] text-foreground/80">接下来你想？</p>
+        <div className="flex flex-col gap-2">
           <button
             onClick={() => onBackgroundCheck?.()}
-            className="text-left text-primary text-[13px] hover:text-primary/80 hover:underline transition-colors"
+            className="flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl border border-border bg-background text-[13px] text-foreground hover:bg-muted/50 transition-colors"
           >
-            对买家 Memories Souvenirs Pte Ltd 进行深度背调
+            <span>补充公司签名</span>
+            <ChevronDown className="w-3.5 h-3.5 text-muted-foreground -rotate-90" />
           </button>
           <button
-            onClick={() => onSendPrompt?.("生成两版差异化的邮件回复话术")}
-            className="text-left text-primary text-[13px] hover:text-primary/80 hover:underline transition-colors"
+            onClick={() => onSendPrompt?.("改成更强势/更委婉语气")}
+            className="flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl border border-border bg-background text-[13px] text-foreground hover:bg-muted/50 transition-colors"
           >
-            生成两版差异化的邮件回复话术
+            <span>改成更强势/更委婉语气</span>
+            <ChevronDown className="w-3.5 h-3.5 text-muted-foreground -rotate-90" />
           </button>
         </div>
       </div>
