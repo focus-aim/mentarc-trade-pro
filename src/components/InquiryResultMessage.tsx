@@ -19,6 +19,7 @@ import {
   Mail,
   Zap,
   Sparkles,
+  ChevronDown,
 } from "lucide-react";
 
 export interface ChatQuote {
