@@ -547,15 +547,14 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       const aiMindFlow: Message = {
         role: "assistant",
         content: "",
-        type: choice === "background" ? "buyer-background-mindflow" : "emails-mindflow",
+        type: choice === "background" ? "buyer-background-mindflow" : "followup-strategy-mindflow",
       };
       return [...next, userMsg, aiMindFlow];
     });
     if (choice === "background") {
       setShowingBuyerBgMindFlow(true);
     } else {
-      // For emails: reuse mindflow but with a tailored set of steps via state flag
-      setShowingEmailsMindFlow(true);
+      setShowingFollowupStrategyMindFlow(true);
     }
   }, []);
 
