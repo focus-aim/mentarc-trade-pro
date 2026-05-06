@@ -51,22 +51,14 @@ const SectionCard = ({
   action?: React.ReactNode;
   children: React.ReactNode;
 }) => (
-  <div
-    className={`rounded-lg overflow-hidden border ${
-      accent ? "border-primary/20 bg-primary/[0.03]" : "border-border"
-    }`}
-  >
-    <div
-      className={`px-3 py-1.5 flex items-center gap-1.5 border-b ${
-        accent ? "border-primary/10" : "border-border bg-muted/30"
-      }`}
-    >
-      <Icon className="w-3.5 h-3.5 text-primary" />
-      <span className="font-semibold text-foreground text-[12.5px]">{title}</span>
+  <section className="space-y-1.5">
+    <div className="flex items-center gap-1.5">
+      <Icon className={`w-3.5 h-3.5 ${accent ? "text-primary" : "text-muted-foreground"}`} />
+      <h3 className="font-medium text-foreground text-[12.5px]">{title}</h3>
       {action && <span className="ml-auto">{action}</span>}
     </div>
-    <div className="px-3 py-2">{children}</div>
-  </div>
+    <div className={accent ? "pl-5 border-l-2 border-primary/30" : "pl-5"}>{children}</div>
+  </section>
 );
 
 const KV = ({ label, value }: { label: string; value: React.ReactNode }) => (
