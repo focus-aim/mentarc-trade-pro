@@ -338,11 +338,10 @@ const AIProfileDetail = () => {
               }
             />
 
-            <div className="mt-4 space-y-4">
+            <div className="mt-4 grid gap-6 lg:grid-cols-3 lg:gap-8">
               {/* 子模块 1: 企业档案 */}
               <SubModule icon={Building2} title="企业档案" desc="公司基础信息与目标市场">
                 <FormRow
-                  icon={Building2}
                   label="公司名称"
                   required
                   value={companyEditing ? draft.companyName : company.companyName}
@@ -351,25 +350,14 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, companyName: v })}
                 />
                 <FormRow
-                  icon={Package}
                   label="主营产品"
                   required
                   value={companyEditing ? draft.mainProducts : company.mainProducts}
                   placeholder="说说你卖什么，比如 不锈钢保温杯"
                   disabled={!companyEditing}
                   onChange={(v) => setDraft({ ...draft, mainProducts: v })}
-                  chips={companyEditing ? focusChips : undefined}
-                  onChipToggle={(chip) => {
-                    const current = draft.mainProducts;
-                    if (current.includes(chip)) {
-                      setDraft({ ...draft, mainProducts: current.split(/[、,，\s]+/).filter((r) => r && r !== chip).join("、") });
-                    } else {
-                      setDraft({ ...draft, mainProducts: current ? `${current}、${chip}` : chip });
-                    }
-                  }}
                 />
                 <FormRow
-                  icon={Briefcase}
                   label="业务关注点"
                   value={companyEditing ? draft.businessFocus : company.businessFocus}
                   placeholder="例如 高客单 DTC 品牌、定制订单"
@@ -377,7 +365,6 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, businessFocus: v })}
                 />
                 <FormRow
-                  icon={Globe}
                   label="公司网址"
                   optional
                   value={companyEditing ? draft.website : company.website}
@@ -386,29 +373,18 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, website: v })}
                 />
                 <FormRow
-                  icon={Target}
                   label="目标市场"
                   required
                   value={companyEditing ? draft.targetMarket : company.targetMarket}
                   placeholder="覆盖区域 / 买家类型"
                   disabled={!companyEditing}
                   onChange={(v) => setDraft({ ...draft, targetMarket: v })}
-                  chips={companyEditing ? marketChips : undefined}
-                  onChipToggle={(chip) => {
-                    const current = draft.targetMarket;
-                    if (current.includes(chip)) {
-                      setDraft({ ...draft, targetMarket: current.split(/[、,，\s]+/).filter((r) => r && r !== chip).join("、") });
-                    } else {
-                      setDraft({ ...draft, targetMarket: current ? `${current}、${chip}` : chip });
-                    }
-                  }}
                 />
               </SubModule>
 
               {/* 子模块 2: 产品知识 */}
               <SubModule icon={Tags} title="产品知识" desc="主营产品的关键词、卖点与典型案例">
                 <FormRow
-                  icon={Tags}
                   label="主营产品关键词"
                   value={companyEditing ? draft.productKeywords : company.productKeywords}
                   placeholder="用顿号分隔，例如 保温杯、运动水壶"
@@ -416,7 +392,6 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, productKeywords: v })}
                 />
                 <FormRow
-                  icon={Star}
                   label="产品卖点"
                   value={companyEditing ? draft.productSelling : company.productSelling}
                   placeholder="核心卖点 / 差异化优势"
@@ -424,7 +399,6 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, productSelling: v })}
                 />
                 <FormRow
-                  icon={Briefcase}
                   label="产品案例"
                   value={companyEditing ? draft.productCases : company.productCases}
                   placeholder="代表性合作客户或订单案例"
@@ -436,7 +410,6 @@ const AIProfileDetail = () => {
               {/* 子模块 3: 业务规则 */}
               <SubModule icon={ShieldCheck} title="业务规则" desc="样品、报价、付款的标准做法">
                 <FormRow
-                  icon={FlaskConical}
                   label="样品规则"
                   value={companyEditing ? draft.sampleRule : company.sampleRule}
                   placeholder="例如 免费样 1pcs，运费到付"
@@ -444,7 +417,6 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, sampleRule: v })}
                 />
                 <FormRow
-                  icon={Calculator}
                   label="报价规则"
                   value={companyEditing ? draft.quoteRule : company.quoteRule}
                   placeholder="贸易术语 / MOQ / 报价档位"
@@ -452,7 +424,6 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, quoteRule: v })}
                 />
                 <FormRow
-                  icon={Wallet}
                   label="付款规则"
                   value={companyEditing ? draft.paymentRule : company.paymentRule}
                   placeholder="例如 T/T 30% + 70% 见提单副本"
@@ -460,26 +431,26 @@ const AIProfileDetail = () => {
                   onChange={(v) => setDraft({ ...draft, paymentRule: v })}
                 />
               </SubModule>
-
-              {companyEditing && (
-                <div className="flex items-center gap-2 pt-1">
-                  <button
-                    onClick={saveCompany}
-                    className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
-                  >
-                    <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                    <Sparkles className="h-4 w-4" />
-                    保存并重新对齐
-                  </button>
-                  <button
-                    onClick={cancelEditCompany}
-                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-background/70 px-5 py-2.5 text-sm font-medium text-foreground hover:bg-accent transition-colors"
-                  >
-                    取消
-                  </button>
-                </div>
-              )}
             </div>
+
+            {companyEditing && (
+              <div className="mt-6 flex items-center gap-2">
+                <button
+                  onClick={saveCompany}
+                  className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
+                >
+                  <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                  <Sparkles className="h-4 w-4" />
+                  保存并重新对齐
+                </button>
+                <button
+                  onClick={cancelEditCompany}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-background/70 px-5 py-2.5 text-sm font-medium text-foreground hover:bg-accent transition-colors"
+                >
+                  取消
+                </button>
+              </div>
+            )}
           </section>
         )}
 
@@ -673,7 +644,6 @@ const SubModule = ({
 );
 
 const FormRow = ({
-  icon: Icon,
   label,
   required,
   optional,
@@ -684,7 +654,6 @@ const FormRow = ({
   chips,
   onChipToggle,
 }: {
-  icon: typeof Package;
   label: string;
   required?: boolean;
   optional?: boolean;
@@ -695,31 +664,26 @@ const FormRow = ({
   chips?: string[];
   onChipToggle?: (chip: string) => void;
 }) => (
-  <div className="group rounded-xl px-2 py-2 transition-colors duration-200 hover:bg-muted/30 focus-within:bg-muted/40">
-    <div className="flex items-center gap-2">
-      <div className={cn(
-        "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg",
-        required ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
-      )}>
-        <Icon className="h-3.5 w-3.5" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-1 text-[10.5px] font-medium text-muted-foreground">
-          <span>{label}</span>
-          {required && <span className="text-destructive">*</span>}
-          {optional && <span className="text-muted-foreground/70">· 选填</span>}
-        </div>
-        <input
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          disabled={disabled}
-          placeholder={placeholder}
-          className="w-full bg-transparent text-[13px] font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none disabled:opacity-90"
-        />
-      </div>
+  <div className="group py-2">
+    <div className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
+      <span>{label}</span>
+      {required && <span className="text-destructive">*</span>}
+      {optional && <span className="text-muted-foreground/70">· 选填</span>}
     </div>
+    {disabled ? (
+      <p className="mt-1 text-[13px] leading-relaxed text-foreground/90 break-words">
+        {value || <span className="text-muted-foreground/60">{placeholder}</span>}
+      </p>
+    ) : (
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="mt-1 w-full bg-transparent text-[13px] font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none border-b border-border/40 focus:border-primary/50 pb-1 transition-colors"
+      />
+    )}
     {chips && onChipToggle && (
-      <div className="mt-2 flex flex-wrap gap-1.5 pl-9">
+      <div className="mt-2 flex flex-wrap gap-1.5">
         {chips.map((chip) => {
           const active = value.includes(chip);
           return (
