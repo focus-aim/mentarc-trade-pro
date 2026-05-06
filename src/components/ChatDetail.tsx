@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect, useRef, ReactNode } from "react";
-import { ChevronDown, FileText, History, Image as ImageIcon, UserRound, Sparkles, BarChart3, Clock, Check, Coins, Users, LogOut } from "lucide-react";
+import { ChevronDown, FileText, History, Image as ImageIcon, UserRound, Sparkles, BarChart3, Clock, Check, Coins, Users, LogOut, Share2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -817,6 +817,12 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
           {config.taskName}
         </button>
         <div className="ml-auto flex items-center gap-3">
+          <button
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card border border-border/60 text-sm font-medium text-foreground hover:bg-muted transition-colors cursor-pointer"
+          >
+            <Share2 className="w-4 h-4 text-muted-foreground" />
+            <span>分享</span>
+          </button>
           <button
             onClick={() => setTeamDialogOpen(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 transition-colors cursor-pointer"
