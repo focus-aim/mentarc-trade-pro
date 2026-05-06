@@ -74,6 +74,72 @@ const KV = ({ label, value }: { label: string; value: React.ReactNode }) => (
 );
 
 // ============================================================
+// 询盘回复模板 — collapsible text block
+// ============================================================
+const REPLY_TEMPLATE = `Subject: Re: 5kW Hybrid Inverter (UL1741) — Cert, Lead Time & Sample Plan
+
+Dear John,
+
+Thanks for the detailed inquiry. This is [Your Name] from [Your Company]. We are a UL1741-certified manufacturer of residential hybrid inverters and have been supplying US distributors for 5+ years.
+
+To address your priorities directly:
+
+1) UL1741 certification
+   — Please find attached the UL1741 certificate and the latest SGS test report.
+   — Model: HBR-5K-US (5kW hybrid, 48V battery, US split-phase 120/240V).
+
+2) Lead time — two options for 300 units
+   — Standard production: 35–38 days ex-works.
+   — Expedited production: 26–28 days ex-works (+3% fee).
+
+3) Sample plan
+   — We can air-ship 1–2 samples within 3 working days from stock.
+   — Sample fee + air freight are 100% deductible from your bulk PO.
+
+Best regards,
+[Your Name]`;
+
+const ReplyTemplateBlock = () => {
+  const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    await navigator.clipboard.writeText(REPLY_TEMPLATE);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <section className="rounded-xl border border-border bg-background/40 overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-1.5 px-3.5 py-3 hover:bg-muted/30 transition-colors"
+      >
+        <Mail className="w-3.5 h-3.5 text-muted-foreground" />
+        <h3 className="font-medium text-foreground text-[12.5px]">询盘回复模板</h3>
+        <span className="ml-auto flex items-center gap-1">
+          <span
+            onClick={handleCopy}
+            role="button"
+            className="p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-primary/[0.08] transition-colors"
+            title={copied ? "已复制" : "复制"}
+          >
+            {copied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Copy className="w-3.5 h-3.5" />}
+          </span>
+          <ChevronDown
+            className={`w-3.5 h-3.5 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
+          />
+        </span>
+      </button>
+      {open && (
+        <pre className="px-3.5 py-3 whitespace-pre-wrap text-[12px] text-foreground/85 leading-[1.75] font-sans border-t border-border/60 max-h-[320px] overflow-y-auto">
+          {REPLY_TEMPLATE}
+        </pre>
+      )}
+    </section>
+  );
+};
+
+// ============================================================
 // Main inquiry analysis report (compact, one-screen)
 // ============================================================
 const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResultMessageProps) => {
