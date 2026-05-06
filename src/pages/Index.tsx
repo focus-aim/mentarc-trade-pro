@@ -1452,23 +1452,34 @@ const Index = () => {
                         />
                       </div>
 
-                      {/* File upload — tile style */}
+                      {/* File upload — taller tile with explicit button */}
                       <label
                         className={cn(
-                          "group flex cursor-pointer items-center gap-2.5 rounded-2xl border border-dashed border-border/60 bg-background/40 px-4 py-3 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5",
+                          "group relative flex min-h-[140px] cursor-pointer flex-col gap-3 rounded-2xl border border-dashed border-border/60 bg-background/40 px-5 py-5 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5",
                           trainingStage !== "form" && "pointer-events-none opacity-70",
                         )}
                       >
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
-                          <FileUp className="h-4 w-4" />
+                        <div className="flex items-center gap-2.5">
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
+                            <FileUp className="h-4 w-4" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="text-xs font-medium text-muted-foreground">
+                              产品资料
+                            </div>
+                            <div className="truncate text-sm text-foreground/80">
+                              {trainingForm.docName || "拖拽文件到此，或点击下方按钮上传"}
+                            </div>
+                          </div>
                         </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-xs font-medium text-muted-foreground">
-                            产品资料
-                          </div>
-                          <div className="truncate text-sm text-foreground/80">
-                            {trainingForm.docName || "拖拽或点击上传 PDF / Word / Excel"}
-                          </div>
+                        <div className="mt-auto flex items-center justify-between gap-3 pl-[46px]">
+                          <span className="text-xs text-muted-foreground/80">
+                            支持 PDF / Word / Excel / PPT
+                          </span>
+                          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                            <FileUp className="h-3.5 w-3.5" />
+                            上传文档
+                          </span>
                         </div>
                         <input
                           type="file"
