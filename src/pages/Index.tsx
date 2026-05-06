@@ -1584,9 +1584,6 @@ const Index = () => {
                           <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
                             你的专属 AI 团队已就绪
                           </h1>
-                          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                            以下结构化成果可随时调整与扩展。
-                          </p>
                         </>
                       )}
                     </div>
