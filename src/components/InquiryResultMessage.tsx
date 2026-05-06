@@ -92,8 +92,8 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
         </div>
       </SectionCard>
 
-      {/* 买家速览 */}
-      <SectionCard icon={UserRound} title="买家速览">
+      {/* 询盘概要 */}
+      <SectionCard icon={UserRound} title="询盘概要">
         <div className="space-y-1">
           <KV label="公司" value="TechSol US" />
           <KV label="地区" value="美国 · 加州" />
