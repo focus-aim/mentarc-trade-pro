@@ -860,10 +860,8 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       </div>
       <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
 
-      <div className="flex-1 flex min-h-0">
-        <div className="flex-1 mx-auto w-full max-w-3xl flex flex-col min-w-0 overflow-hidden">
-          <div ref={chatScrollRef} className="flex-1 overflow-y-auto scrollbar-thin py-4">
-            <div className="w-full space-y-4">
+      <div ref={chatScrollRef} className="flex-1 overflow-y-auto scrollbar-thin">
+        <div className="mx-auto w-full max-w-3xl px-6 pt-2 pb-4 space-y-4">
             {messages.map((msg, i) => {
               const isResult =
                 msg.type === "operation-result" ||
@@ -953,17 +951,16 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
               </div>
               );
             })}
-            </div>
-          </div>
-
-          <div className="pt-3 pb-2">
-            <ChatInput key={prefillKey} onSend={handleSend} placeholder={config.placeholder} defaultValue={prefillValue} attachment={config.attachment} attachments={config.attachments} quote={activeQuote} onClearQuote={() => setActiveQuote(null)} />
-            <p className="text-[11px] text-muted-foreground text-center mt-1.5">
-              AI 可能会产生错误信息，请核实重要内容。
-            </p>
-          </div>
         </div>
+      </div>
 
+      <div className="px-6 pt-3 pb-2">
+        <div className="mx-auto w-full max-w-3xl">
+          <ChatInput key={prefillKey} onSend={handleSend} placeholder={config.placeholder} defaultValue={prefillValue} attachment={config.attachment} attachments={config.attachments} quote={activeQuote} onClearQuote={() => setActiveQuote(null)} />
+          <p className="text-[11px] text-muted-foreground text-center mt-1.5">
+            AI 可能会产生错误信息，请核实重要内容。
+          </p>
+        </div>
       </div>
 
       <Dialog open={showCompetitorDialog} onOpenChange={setShowCompetitorDialog}>
