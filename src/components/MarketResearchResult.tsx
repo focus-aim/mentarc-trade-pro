@@ -11,18 +11,14 @@ const SectionCard = ({ icon: Icon, title, subtitle, children }: {
   subtitle?: string;
   children: React.ReactNode;
 }) => (
-  <div className="rounded-xl border border-border/70 bg-card/70 backdrop-blur-sm overflow-hidden">
-    <div className="flex items-center gap-2 px-3.5 py-2.5 border-b border-border/60 bg-gradient-to-r from-primary/[0.04] to-transparent">
-      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10 text-primary">
-        <Icon className="h-3.5 w-3.5" />
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-[12.5px] font-bold text-foreground leading-tight">{title}</p>
-        {subtitle && <p className="text-[10.5px] text-muted-foreground mt-0.5 truncate">{subtitle}</p>}
-      </div>
+  <section className="rounded-xl border border-border bg-background/40 p-3.5">
+    <div className="flex items-center gap-1.5 mb-2">
+      <Icon className="w-3.5 h-3.5 text-muted-foreground" />
+      <h3 className="font-medium text-foreground text-[12.5px]">{title}</h3>
+      {subtitle && <span className="text-[10.5px] text-muted-foreground truncate">· {subtitle}</span>}
     </div>
-    <div className="p-3.5">{children}</div>
-  </div>
+    <div>{children}</div>
+  </section>
 );
 
 // 一、概述

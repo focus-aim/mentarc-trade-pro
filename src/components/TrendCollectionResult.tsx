@@ -9,15 +9,13 @@ const SectionCard = ({ icon: Icon, title, children }: {
   title: string;
   children: React.ReactNode;
 }) => (
-  <div className="rounded-xl border border-border/70 bg-card/70 backdrop-blur-sm overflow-hidden">
-    <div className="flex items-center gap-2 px-3.5 py-2.5 border-b border-border/60 bg-gradient-to-r from-primary/[0.04] to-transparent">
-      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10 text-primary">
-        <Icon className="h-3.5 w-3.5" />
-      </div>
-      <p className="text-[12.5px] font-bold text-foreground leading-tight flex-1 min-w-0">{title}</p>
+  <section className="rounded-xl border border-border bg-background/40 p-3.5">
+    <div className="flex items-center gap-1.5 mb-2">
+      <Icon className="w-3.5 h-3.5 text-muted-foreground" />
+      <h3 className="font-medium text-foreground text-[12.5px]">{title}</h3>
     </div>
-    <div className="p-3.5">{children}</div>
-  </div>
+    <div>{children}</div>
+  </section>
 );
 
 // 一、海外社媒流行趋势 — 平台 + 高频标签
