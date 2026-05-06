@@ -1517,26 +1517,18 @@ const Index = () => {
 
                     <div className="relative mt-6 space-y-2">
                       {trainingStage === "form" ? (
-                        <>
-                          <button
-                            onClick={() => setTrainingStage("training")}
-                            className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
-                          >
-                            <span
-                              aria-hidden
-                              className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-                            />
-                            <Sparkles className="h-[18px] w-[18px]" />
-                            开始训练
-                            <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
-                          </button>
-                          <button
-                            onClick={() => setTrainingStage("training")}
-                            className="inline-flex w-full items-center justify-center gap-1.5 rounded-full px-6 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            跳过，直接启动
-                          </button>
-                        </>
+                        <button
+                          onClick={() => setTrainingStage("training")}
+                          className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99]"
+                        >
+                          <span
+                            aria-hidden
+                            className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                          />
+                          <Sparkles className="h-[18px] w-[18px]" />
+                          开始训练
+                          <ArrowRight className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-1" />
+                        </button>
                       ) : trainingStage === "training" ? (
                         <button
                           disabled
