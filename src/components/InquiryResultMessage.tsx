@@ -111,18 +111,18 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
       <SectionCard icon={Brain} title="AI 关键判断">
         <div className="space-y-1.5">
           <div className="rounded-md border border-emerald-500/20 bg-emerald-500/5 px-2 py-1.5">
-            <div className="flex items-center justify-between">
-              <p className="text-[10px] text-muted-foreground">询盘真实性</p>
+            <div className="flex items-center gap-1.5">
               <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 font-semibold">高</span>
+              <p className="text-[10px] text-muted-foreground">询盘真实性</p>
             </div>
             <p className="mt-1 text-[11px] text-foreground/80 leading-[1.5]">
               邮件结构完整、产品/数量/认证/交期明确，无可疑链接，判定为真实买家询盘。
             </p>
           </div>
           <div className="rounded-md border border-amber-500/20 bg-amber-500/5 px-2 py-1.5">
-            <div className="flex items-center justify-between">
-              <p className="text-[10px] text-muted-foreground">订单交易风险</p>
+            <div className="flex items-center gap-1.5">
               <span className="px-1 py-0 text-[10px] rounded border border-amber-500/25 bg-amber-500/10 text-amber-600 font-semibold">中</span>
+              <p className="text-[10px] text-muted-foreground">订单交易风险</p>
             </div>
             <p className="mt-1 text-[11px] text-foreground/80 leading-[1.5]">
               美国近期对华关税与合规审查趋严，建议优先 T/T 30% 定金 + 见提单付余款，规避汇款与清关风险。
