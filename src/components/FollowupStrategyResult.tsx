@@ -1,61 +1,17 @@
 import { useState } from "react";
-import {
-  Compass,
-  CalendarClock,
-  MessageSquareText,
-  ListChecks,
-  Copy,
-  Check,
-  Mail,
-  Phone,
-  AlertCircle,
-} from "lucide-react";
-
-const KV = ({ label, value }: { label: string; value: React.ReactNode }) => (
-  <div className="flex items-start gap-1.5 text-[12px] leading-[1.55]">
-    <span className="text-muted-foreground shrink-0">{label}</span>
-    <span className="text-foreground/85 flex-1">{value}</span>
-  </div>
-);
-
-const SectionCard = ({
-  icon: Icon,
-  title,
-  accent = false,
-  children,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  accent?: boolean;
-  children: React.ReactNode;
-}) => (
-  <section
-    className={`rounded-xl border p-3.5 ${
-      accent ? "border-primary/20 bg-primary/[0.03]" : "border-border bg-background/40"
-    }`}
-  >
-    <div className="flex items-center gap-1.5 mb-2">
-      <Icon className={`w-3.5 h-3.5 ${accent ? "text-primary" : "text-muted-foreground"}`} />
-      <h3 className="font-medium text-foreground text-[12.5px]">{title}</h3>
-    </div>
-    <div>{children}</div>
-  </section>
-);
+import { Compass, MessageSquareText, Copy, Check, ChevronDown, ChevronUp } from "lucide-react";
 
 const ScriptCard = ({
-  channel,
-  title,
-  desc,
+  type,
+  summary,
   body,
-  icon: Icon,
 }: {
-  channel: string;
-  title: string;
-  desc: string;
+  type: string;
+  summary: string;
   body: string;
-  icon: React.ComponentType<{ className?: string }>;
 }) => {
   const [copied, setCopied] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const handleCopy = async () => {
     await navigator.clipboard.writeText(body);
     setCopied(true);
@@ -64,14 +20,12 @@ const ScriptCard = ({
   return (
     <div className="rounded-lg border border-border bg-card/40 overflow-hidden">
       <div className="flex items-start gap-2 px-3 py-2 border-b border-border/60 bg-muted/30">
-        <span className="shrink-0 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10.5px] font-bold bg-primary/10 text-primary border border-primary/20">
-          <Icon className="w-3 h-3" />
-          {channel}
+        <span className="shrink-0 inline-flex items-center rounded-md px-1.5 py-0.5 text-[10.5px] font-bold bg-primary/10 text-primary border border-primary/20">
+          {type}
         </span>
-        <div className="min-w-0 flex-1">
-          <p className="text-[12.5px] font-semibold text-foreground leading-tight">{title}</p>
-          <p className="text-[11px] text-muted-foreground mt-0.5 leading-[1.5]">{desc}</p>
-        </div>
+        <p className="min-w-0 flex-1 text-[12.5px] font-medium text-foreground leading-[1.5]">
+          {summary}
+        </p>
         <button
           onClick={handleCopy}
           className="shrink-0 p-1 rounded-md text-muted-foreground hover:text-primary hover:bg-primary/[0.08] transition-colors"
@@ -80,145 +34,104 @@ const ScriptCard = ({
           {copied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Copy className="w-3.5 h-3.5" />}
         </button>
       </div>
-      <pre className="px-3 py-2.5 whitespace-pre-wrap text-[12px] text-foreground/85 leading-[1.7] font-sans">
-        {body}
-      </pre>
+      <div className="relative">
+        <pre
+          className={`px-3 py-2.5 whitespace-pre-wrap text-[12px] text-foreground/85 leading-[1.7] font-sans overflow-hidden ${
+            expanded ? "" : "max-h-[4.4em]"
+          }`}
+        >
+          {body}
+        </pre>
+        {!expanded && (
+          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card/95 to-transparent pointer-events-none" />
+        )}
+      </div>
+      <button
+        onClick={() => setExpanded((v) => !v)}
+        className="w-full flex items-center justify-center gap-1 px-3 py-1.5 text-[11.5px] text-primary hover:bg-primary/[0.06] border-t border-border/60 transition-colors"
+      >
+        {expanded ? (
+          <>
+            收起 <ChevronUp className="w-3 h-3" />
+          </>
+        ) : (
+          <>
+            展开全部 <ChevronDown className="w-3 h-3" />
+          </>
+        )}
+      </button>
     </div>
   );
 };
 
 const FollowupStrategyResult = () => {
-  const cadence = [
-    { day: "D+0", action: "首封回复 · 锁认证 + 双交期 + 样品政策", channel: "Email" },
-    { day: "D+2", action: "未回复则发短跟进，问样品收件信息 / 课题优先级", channel: "Email" },
-    { day: "D+5", action: "LinkedIn 添加 John Carter，附产品视频 / 工厂介绍", channel: "LinkedIn" },
-    { day: "D+8", action: "电话 / WhatsApp 触达，约 20 分钟视频会议", channel: "Phone" },
-    { day: "D+14", action: "若仍未推进，发「项目机会延期」信号促成报价", channel: "Email" },
-  ];
+  const scriptA = `Dear John,
 
-  const emailScript = `Subject: Re: 5kW Hybrid Inverter (UL1741) — Cert, Lead Time & Sample Plan
+Thanks again for the inquiry on the 5kW UL1741 hybrid inverter. Just checking in to see if our quote and lead-time options align with your July rollout plan.
 
-Dear John,
+To make sure we're proposing the best fit, could you share:
+1) Is the July deadline for warehouse arrival or shipment?
+2) Has your internal review surfaced any new spec or budget constraint we should adjust for?
 
-Thanks for the detailed inquiry. We are a UL1741-certified manufacturer of 5kW residential hybrid inverters with 5+ years of US distributor experience.
-
-Quick answers to your priorities:
-1) UL1741 cert + SGS test report attached (model HBR-5K-US, 120/240V split-phase)
-2) Lead time options for 300 units:
-   — Standard 35-38 days ex-works
-   — Expedited 26-28 days ex-works (+3%)
-3) Samples: 1-2 units air-shipped from stock in 3 days; sample fee + freight 100% deductible from bulk PO
-
-To lock the July timeline, could you confirm preferred sample shipping address and which production slot you'd like reserved?
-
-Happy to jump on a 20-min call at your convenience (EST).
+If helpful, I can send a 1-min factory walkthrough video and 2 US install cases as reference. Happy to jump on a 20-min call this week.
 
 Best regards,
 [Your Name]`;
 
-  const linkedinScript = `Hi John, I'm [Your Name] from [Your Company]. We just exchanged emails on the 5kW UL1741 hybrid inverter project for TechSol.
+  const scriptB = `Hi John,
 
-Adding you here so you can get a feel of our factory & US install cases — feel free to ping me if any spec / timing question comes up before the formal quote review.
+Wanted to give you a quick heads-up — our July production slot is filling up, and we're holding 300 units capacity for your project until the end of this week.
 
-Looking forward to supporting your July rollout.`;
+If the timeline still works on your side, just reply "hold" and I'll lock the slot for you (no commitment until PO). If priorities have shifted, let me know what's changed and we'll re-plan together.
 
-  const phoneScript = `开场:  Hi John, this is [Your Name] from [Your Company]. Do you have 2 minutes? I'm following up on the 5kW UL1741 inverter inquiry — wanted to make sure our quote answers exactly what you need before your internal review.
+Either way, appreciate a quick line so I can plan accordingly.
 
-确认:  Just to confirm — is the July deadline for warehouse arrival or shipment? And on UL1741, is it standard or SA (rule 21) you require?
-
-承诺:  Got it. I'll send a revised offer within 24 hours with two lead-time options and a sample air-shipping plan. Anything else I should include?`;
-
-  const nextActions = [
-    { priority: "P0", title: "今日内发送首封回复邮件", desc: "套用主动报价版话术，附 UL1741 + SGS 报告 PDF。" },
-    { priority: "P0", title: "准备 1-2 台样品并预约空运", desc: "确认现货库存，预留 3 天空运窗口。" },
-    { priority: "P1", title: "建立买家档案", desc: "在 CRM 中登记 John Carter / Mark Liu / Sarah Wong 决策链。" },
-    { priority: "P1", title: "整理 2 份美国安装案例", desc: "用作 LinkedIn / 第二封跟进邮件的信任背书素材。" },
-    { priority: "P2", title: "设置 D+2 / D+5 / D+8 提醒", desc: "未回复时按节奏自动触发后续动作。" },
-  ];
+Best,
+[Your Name]`;
 
   return (
     <div className="space-y-3">
-      {/* 策略概要 */}
-      <SectionCard icon={Compass} title="跟进策略概要" accent>
-        <p className="text-[12.5px] text-foreground/85 leading-[1.7]">
-          买家处于<span className="text-primary font-medium">需求沟通阶段</span>，决策窗口约 <span className="text-primary font-medium">2 周</span>。建议采用 <span className="text-primary font-medium">「邮件主推 + LinkedIn 加温 + 电话促成」</span>三通道并行节奏，第一周锁认证与样品价值，第二周推动报价确认与合同条款。
-        </p>
-      </SectionCard>
-
-      {/* 跟进节奏 */}
-      <SectionCard icon={CalendarClock} title="跟进节奏（14 天计划）">
-        <div className="space-y-1.5">
-          {cadence.map((c) => (
-            <div key={c.day} className="flex items-start gap-2 text-[12px] py-1 border-b border-border/40 last:border-b-0">
-              <span className="shrink-0 w-12 px-1.5 py-0.5 rounded text-[10.5px] font-bold bg-primary/10 text-primary text-center">
-                {c.day}
-              </span>
-              <p className="flex-1 text-foreground/85 leading-[1.55]">{c.action}</p>
-              <span className="shrink-0 text-[10.5px] text-muted-foreground">{c.channel}</span>
-            </div>
-          ))}
+      {/* 跟进诊断 */}
+      <section className="rounded-xl border border-primary/20 bg-primary/[0.03] p-3.5">
+        <div className="flex items-center gap-1.5 mb-2.5">
+          <Compass className="w-3.5 h-3.5 text-primary" />
+          <h3 className="font-medium text-foreground text-[12.5px]">跟进诊断</h3>
         </div>
-      </SectionCard>
+        <div className="space-y-2 text-[12.5px] leading-[1.7]">
+          <p className="text-foreground/85">
+            <span className="text-muted-foreground">当前阶段：</span>
+            报价已发，买家处于<span className="text-primary font-medium">比价评估阶段</span>，成交意向中等。
+          </p>
+          <p className="text-foreground/85">
+            <span className="text-muted-foreground">卡点诊断：</span>
+            买家暂未形成明确选择，核心顾虑可能集中在<span className="text-foreground font-medium">价格、交期或方案匹配度</span>。
+          </p>
+          <p className="text-foreground/85">
+            <span className="text-muted-foreground">跟进策略：</span>
+            结合你以往的跟进策略偏好，优先确认采购进度和真实需求变化，推动买家给出明确反馈。
+          </p>
+        </div>
+      </section>
 
-      {/* 关键话术 */}
-      <SectionCard icon={MessageSquareText} title="关键话术模板">
+      {/* 实战话术 */}
+      <section className="rounded-xl border border-border bg-background/40 p-3.5">
+        <div className="flex items-center gap-1.5 mb-2.5">
+          <MessageSquareText className="w-3.5 h-3.5 text-muted-foreground" />
+          <h3 className="font-medium text-foreground text-[12.5px]">实战话术</h3>
+        </div>
         <div className="space-y-2.5">
           <ScriptCard
-            channel="邮件"
-            icon={Mail}
-            title="首封回复 · 主动报价版"
-            desc="一次性给出认证、双交期与样品抵货款政策。"
-            body={emailScript}
+            type="温和确认型"
+            summary="主动询问采购进度，挖掘真实顾虑，铺垫下一步沟通。"
+            body={scriptA}
           />
           <ScriptCard
-            channel="LinkedIn"
-            icon={MessageSquareText}
-            title="LinkedIn 加温文案"
-            desc="第 5 天发送，建立私域信任，铺垫电话沟通。"
-            body={linkedinScript}
-          />
-          <ScriptCard
-            channel="电话"
-            icon={Phone}
-            title="电话 / 视频会议开场脚本"
-            desc="第 8 天触达，确认决策时间表与未明确条款。"
-            body={phoneScript}
+            type="紧迫促单型"
+            summary="用产能紧张制造稀缺感，逼买家给出明确反馈或时间节点。"
+            body={scriptB}
           />
         </div>
-      </SectionCard>
-
-      {/* 下一步动作 */}
-      <SectionCard icon={ListChecks} title="下一步动作清单">
-        <div className="space-y-1.5">
-          {nextActions.map((a, i) => (
-            <div key={i} className="flex items-start gap-2 text-[12px]">
-              <span
-                className={`shrink-0 px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                  a.priority === "P0"
-                    ? "bg-primary/15 text-primary border border-primary/25"
-                    : a.priority === "P1"
-                      ? "bg-amber-500/10 text-amber-600 border border-amber-500/20"
-                      : "bg-muted text-muted-foreground border border-border"
-                }`}
-              >
-                {a.priority}
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-foreground/90 font-medium leading-[1.55]">{a.title}</p>
-                <p className="text-[11.5px] text-muted-foreground leading-[1.55] mt-0.5">{a.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </SectionCard>
-
-      {/* 风险提示 */}
-      <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded-lg bg-amber-500/[0.06] border border-amber-500/15 px-2.5 py-2">
-        <AlertCircle className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
-        <p className="leading-[1.55]">
-          买家同步询价 3-5 家中国供应商，<span className="font-medium">D+5 之前必须建立 LinkedIn 私信链路</span>，避免只在邮件中被对比报价。
-        </p>
-      </div>
+      </section>
     </div>
   );
 };
