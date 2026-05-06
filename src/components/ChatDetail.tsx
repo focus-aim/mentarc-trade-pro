@@ -816,7 +816,43 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
           <ArrowLeft className="w-4 h-4" />
           返回工作台
         </button>
+        <div className="ml-auto flex items-center gap-3">
+          <button
+            onClick={() => setTeamDialogOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 transition-colors cursor-pointer"
+          >
+            <Coins className="w-4 h-4 text-[hsl(45,100%,51%)]" />
+            <span>1,280 点</span>
+          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center gap-1.5 rounded-full hover:bg-muted/60 p-1 pr-2 transition-all duration-200 focus:outline-none">
+                <Avatar className="h-8 w-8 ring-2 ring-border/40 transition-shadow hover:ring-primary/30">
+                  <AvatarImage src="" />
+                  <AvatarFallback className="bg-primary text-primary-foreground text-xs font-semibold">
+                    MC
+                  </AvatarFallback>
+                </Avatar>
+                <ChevronDown className="w-3.5 h-3.5 text-muted-foreground transition-transform duration-200" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-44 rounded-xl shadow-lg border-border/50 p-1.5">
+              <DropdownMenuItem
+                className="gap-2.5 cursor-pointer rounded-lg px-3 py-3 text-sm"
+                onSelect={() => setTeamDialogOpen(true)}
+              >
+                <Users className="w-4 h-4 text-muted-foreground" />
+                团队管理
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2.5 cursor-pointer rounded-lg px-3 py-3 text-sm text-destructive focus:text-destructive">
+                <LogOut className="w-4 h-4" />
+                退出账号
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
+      <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
 
       <div className="flex-1 flex gap-3 min-h-0">
         {/* LEFT: Conversation + mind-flow */}
