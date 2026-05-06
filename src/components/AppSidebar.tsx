@@ -149,7 +149,7 @@ const AppSidebar = ({ onNewTask, onBoardClick, onPartnerClick, onResultsClick, o
             >
               <item.icon className="w-[18px] h-[18px]" />
               <span>{item.label}</span>
-              {(item.key === "board" || item.key === "market") && <span className="ml-auto rounded-full bg-background/80 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">即将上线</span>}
+              {(item.key === "board" || item.key === "market" || item.key === "results") && <span className="ml-auto rounded-full bg-background/80 px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">即将上线</span>}
             </button>
           </div>
         ))}
