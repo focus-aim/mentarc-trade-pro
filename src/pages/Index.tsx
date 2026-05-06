@@ -1346,9 +1346,6 @@ const Index = () => {
                       <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
                         让 AI 团队读懂你的业务
                       </h1>
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                        提供少量关键信息，AI 即可建立你的业务画像。
-                      </p>
                     </div>
 
                     <div className="relative mt-6 space-y-3">
