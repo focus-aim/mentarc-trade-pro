@@ -658,18 +658,17 @@ const SubModule = ({
   desc: string;
   children: React.ReactNode;
 }) => (
-  <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-primary/5 p-5 shadow-sm backdrop-blur-md sm:p-6">
-    <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/8 blur-3xl" />
-    <header className="relative mb-3 flex items-center gap-2.5">
+  <div className="pt-2">
+    <header className="mb-4 flex items-center gap-2.5">
       <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-primary">
         <Icon className="h-4 w-4" />
       </div>
       <div>
-        <h3 className="text-[14px] font-bold text-foreground">{title}</h3>
+        <h3 className="text-[15px] font-bold text-foreground">{title}</h3>
         <p className="mt-0.5 text-[11.5px] text-muted-foreground">{desc}</p>
       </div>
     </header>
-    <div className="relative space-y-2.5">{children}</div>
+    <div className="space-y-1">{children}</div>
   </div>
 );
 
@@ -696,7 +695,7 @@ const FormRow = ({
   chips?: string[];
   onChipToggle?: (chip: string) => void;
 }) => (
-  <div className="group rounded-2xl border border-border/50 bg-background/70 px-3.5 py-2.5 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
+  <div className="group rounded-xl px-2 py-2 transition-colors duration-200 hover:bg-muted/30 focus-within:bg-muted/40">
     <div className="flex items-center gap-2">
       <div className={cn(
         "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg",
