@@ -807,14 +807,14 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
 
 
   return (
-    <div className="flex-1 flex flex-col h-screen overflow-hidden p-3 gap-3">
-      <div className="flex items-center gap-2 px-2">
+    <div className="flex-1 flex flex-col h-screen overflow-hidden px-6 py-4 gap-3">
+      <div className="flex items-center gap-2">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-1.5 px-2 py-1 -ml-1 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors active:scale-95"
+          className="inline-flex items-center gap-1.5 px-2 py-1 -ml-2 rounded-lg text-base font-semibold text-foreground hover:bg-muted transition-colors active:scale-95"
         >
           <ArrowLeft className="w-4 h-4" />
-          返回工作台
+          {config.taskName}
         </button>
         <div className="ml-auto flex items-center gap-3">
           <button
