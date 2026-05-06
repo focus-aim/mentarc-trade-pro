@@ -167,10 +167,9 @@ const AppSidebar = ({ onNewTask, onBoardClick, onPartnerClick, onResultsClick, o
           {RECENT_CONVERSATIONS.map((title, idx) => (
             <button
               key={idx}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-left text-[13px] text-sidebar-foreground hover:bg-muted hover:text-foreground transition-colors"
+              className="w-full flex items-center px-3 py-2 rounded-lg text-left text-[13px] text-sidebar-foreground hover:bg-muted hover:text-foreground transition-colors"
               title={title}
             >
-              <MessageSquare className="w-3.5 h-3.5 shrink-0 text-muted-foreground" />
               <span className="truncate">{title}</span>
             </button>
           ))}
