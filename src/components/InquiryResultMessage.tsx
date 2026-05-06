@@ -152,9 +152,9 @@ const ReplyTemplateBlock = () => {
 const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResultMessageProps) => {
   return (
     <div className="space-y-5">
-      {/* AI 专家指点 — card with title outside bubble, avatar + text inside */}
-      <section className="rounded-2xl border border-border bg-card/60 p-4">
-        <h3 className="font-semibold text-foreground text-[14px] mb-3">AI 专家指点</h3>
+      {/* AI 专家指点 — header + avatar bubble + integrated key points */}
+      <section className="rounded-2xl border border-border bg-card/60 p-4 space-y-3">
+        <h3 className="font-semibold text-foreground text-[14px]">AI 专家指点</h3>
         <div className="flex gap-3 items-start">
           {expertAvatar && (
             <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 border border-border/60">
@@ -167,19 +167,23 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
             </p>
           </div>
         </div>
-      </section>
-
-      {/* 询盘要点 — plain KV list, no card */}
-      <section className="px-1 space-y-2">
-        <InlineKV label="买家背景：" value="Memories Souvenirs Pte Ltd，新加坡本地 corporate gifts/souvenirs 供应商，成立于 1994/2000，网站显示主营赠品、杯壶、随身旅行类礼品，员工规模约 1-10 人，属于小型但成熟的礼品采购/分销型买家。" />
+        <div className="space-y-1.5 pt-1">
+          <InlineKV label="买家背景：" value="Memories Souvenirs Pte Ltd，新加坡本地 corporate gifts/souvenirs 供应商，成立于 1994/2000，网站显示主营赠品、杯壶、随身旅行类礼品，员工规模约 1-10 人，属于小型但成熟的礼品采购/分销型买家。" />
           <InlineKV label="跟进阶段：" value="首次询盘，且明确点名 14 oz travel mug、型号 MGS0107、数量 10k，并要求直接报价、lead time 和图片，说明已进入比价/筛选阶段。" />
           <InlineKV label="需求完整度：" value="高；产品、规格、数量、联系人、公司、邮箱、网站都已给出，信息足够做首轮报价回复。" />
-          <InlineKV label="风险提示：" value="新加坡买家通常对交期、样品图和报价响应速度要求高；对这类 corporate gift 订单，图片呈现、包装方式和交期说明会直接影响下一步推进。" />
+        </div>
+      </section>
+
+      {/* AI 风险判断 — white card */}
+      <section className="rounded-2xl border border-border bg-background p-4 space-y-2">
+        <h3 className="font-semibold text-foreground text-[14px] mb-1">AI 风险判断</h3>
+        <InlineKV label="询盘真实性：" value="警惕！这是一封典型的钓鱼邮件。客户没有明确提及任何具体产品名称，通篇只用 'your items' 代替，且急于引导你点击查看附件或链接（很可能是木马）。" />
+        <InlineKV label="订单交易风险：" value="该询盘采购婴儿玩具，与您的主营产品方向完全不符。" />
+        <InlineKV label="其他必要提醒：" value="补充一条其他注意事项，如：产品匹配度、交期风险等。" />
       </section>
 
       {/* 询盘回复模板 */}
       <ReplyTemplateBlock />
-
     </div>
   );
 };
@@ -307,7 +311,6 @@ Best regards,
 
   return (
     <div className="space-y-3">
-      {/* Header summary */}
       <SectionCard icon={Mail} title="询盘回复邮件 · 两版对比" accent>
         <p className="text-[12.5px] text-foreground/85 leading-[1.7]">
           已为本次询盘生成两版邮件方案，您可对比后择优发送：
@@ -316,7 +319,6 @@ Best regards,
         </p>
       </SectionCard>
 
-      {/* Two emails stacked */}
       <EmailCard
         badge="主动报价版"
         badgeTone="primary"
@@ -341,21 +343,18 @@ Best regards,
 export const BuyerBackgroundReport = () => {
   return (
     <div className="space-y-3">
-      {/* 评估概要 */}
       <SectionCard icon={Lightbulb} title="评估概要" accent>
         <p className="text-[12.5px] text-foreground/85 leading-[1.7]">
           这是一家具有 <span className="text-primary font-medium">15 年历史</span>的成熟型进口商，其产品线定价处于<span className="text-primary font-medium">市场中高段位</span>。这类客户的供应链通常相对稳定，他们对价格的敏感度排在第二位，第一诉求是 <span className="text-primary font-medium">"品质的一致性"</span> 和 <span className="text-primary font-medium">"交期的绝对保障"</span>。如果对方主动询盘，大概率是原有供应商出现了质量波动或产能瓶颈。
         </p>
       </SectionCard>
 
-      {/* 详细背调报告 — 单一外边框 */}
       <section className="rounded-xl border border-border bg-background/40 p-4 space-y-4">
         <div className="flex items-center gap-1.5 pb-2 border-b border-border/60">
           <FileText className="w-3.5 h-3.5 text-muted-foreground" />
           <h3 className="font-medium text-foreground text-[12.5px]">详细背调报告</h3>
         </div>
 
-        {/* 公司概况 */}
         <div>
           <div className="flex items-center gap-1.5 mb-2">
             <Building2 className="w-3.5 h-3.5 text-muted-foreground" />
@@ -371,7 +370,6 @@ export const BuyerBackgroundReport = () => {
           </div>
         </div>
 
-        {/* 核心管理层 */}
         <div>
           <div className="flex items-center gap-1.5 mb-2">
             <Users className="w-3.5 h-3.5 text-muted-foreground" />
@@ -399,7 +397,6 @@ export const BuyerBackgroundReport = () => {
           </div>
         </div>
 
-        {/* 主营业务与核心产品 */}
         <div>
           <div className="flex items-center gap-1.5 mb-2">
             <Globe className="w-3.5 h-3.5 text-muted-foreground" />
@@ -408,77 +405,34 @@ export const BuyerBackgroundReport = () => {
           <div className="space-y-1">
             <KV label="主营业务" value="家用光伏 / 储能系统集成、安装与零售" />
             <KV label="核心品类" value="混合逆变器、储能电池柜、智能能源管理网关" />
-            <KV label="价格定位" value="市场中高段位，主推 5–10kW 家用方案" />
-            <KV label="销售渠道" value="官网 D2C · Amazon US · 加州 / 德州区域经销网络" />
-            <KV label="终端客户" value="北美中产家庭 · 中小型商业屋顶项目" />
+            <KV label="目标市场" value="美国德州及周边州（ERCOT 电网区域）" />
+            <KV label="品牌定位" value="中高端 · 终端零售均价 $4,500–$8,000" />
           </div>
         </div>
 
-        {/* 市场表现 */}
-        <div>
-          <div className="flex items-center gap-1.5 mb-2">
-            <TrendingUp className="w-3.5 h-3.5 text-muted-foreground" />
-            <h4 className="font-medium text-foreground text-[12.5px]">市场表现</h4>
-          </div>
-          <div className="space-y-1">
-            <KV label="市场地位" value="美国西部区域 Top 30 家用储能集成商" />
-            <KV label="客户口碑" value="Google 4.6 ★（172 条）· Trustpilot 4.4 ★ · 安装好评率 92%" />
-            <KV label="品牌声量" value="LinkedIn 1.2k followers · YouTube 安装教程 8k 订阅" />
-            <KV label="增长趋势" value="近 3 年营收 CAGR 约 18%，受 IRA 法案利好" />
-          </div>
-        </div>
-
-        {/* 风险提示 */}
-        <div>
-          <div className="flex items-center gap-1.5 mb-2">
-            <ShieldAlert className="w-3.5 h-3.5 text-muted-foreground" />
-            <h4 className="font-medium text-foreground text-[12.5px]">风险提示</h4>
-          </div>
-          <div className="space-y-1.5">
-            <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
-              <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-              <p className="leading-[1.55]">质量一致性敏感，曾因产品质量发起 2 起退货，建议主动提供 QC 报告与第三方验货。</p>
-            </div>
-            <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
-              <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-              <p className="leading-[1.55]">受美国对华关税与 UL 合规审查影响，建议明确 HS 编码与认证范围。</p>
-            </div>
-            <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-emerald-500/[0.06] border border-emerald-500/15 px-2 py-1">
-              <Sparkles className="w-3 h-3 text-emerald-600 shrink-0 mt-0.5" />
-              <p className="leading-[1.55]">付款记录良好，无诉讼，首单可走 T/T 30/70，长期合作潜力 $300k+/年。</p>
-            </div>
-          </div>
-        </div>
-
-        {/* 财务与贸易数据 */}
         <div>
           <div className="flex items-center gap-1.5 mb-2">
             <CreditCard className="w-3.5 h-3.5 text-muted-foreground" />
-            <h4 className="font-medium text-foreground text-[12.5px]">财务与贸易数据</h4>
+            <h4 className="font-medium text-foreground text-[12.5px]">采购行为与财务信号</h4>
           </div>
-          <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-            <KV label="估算年营收" value="$15–22M（2024）" />
-            <KV label="D&B 评级" value={<span className="text-emerald-600">3A2 · 良好</span>} />
-            <KV label="近 12 月进口" value="逆变器 / 储能柜 6 票" />
-            <KV label="主要来源国" value="中国 4 票 · 越南 1 票 · 韩国 1 票" />
-            <KV label="单票金额" value="$80k – $220k" />
-            <KV label="付款方式" value="T/T 30/70 为主，偶用 LC at sight" />
+          <div className="space-y-1">
+            <KV label="年采购额" value="≈ $2.5–4M（逆变器 + 电池柜）" />
+            <KV label="主要供应商" value="深圳 × 2、宁波 × 1，另有韩国 LG-Chem 电芯直采" />
+            <KV label="付款方式" value="30% T/T + 70% L/C 60 天，大单可接受 D/P" />
+            <KV label="财务状况" value={<span className="text-emerald-600">D&B 评级 3A2 · 无欠款记录</span>} />
           </div>
         </div>
 
-        {/* 参考资料 */}
         <div>
           <div className="flex items-center gap-1.5 mb-2">
-            <FileText className="w-3.5 h-3.5 text-muted-foreground" />
-            <h4 className="font-medium text-foreground text-[12.5px]">参考资料</h4>
+            <ShieldAlert className="w-3.5 h-3.5 text-amber-500" />
+            <h4 className="font-medium text-foreground text-[12.5px]">风险提示</h4>
           </div>
-          <ul className="space-y-1 text-[12px] text-foreground/85">
-            <li className="leading-[1.6]">· 官网：<span className="text-primary">techsol.us</span></li>
-            <li className="leading-[1.6]">· 美国海关 ImportGenius 进口提单（2024.04 – 2025.03）</li>
-            <li className="leading-[1.6]">· Dun &amp; Bradstreet 企业信用档案</li>
-            <li className="leading-[1.6]">· LinkedIn 公司主页与关键人公开资料</li>
-            <li className="leading-[1.6]">· Google Reviews / Trustpilot 终端客户评价</li>
-          </ul>
+          <div className="space-y-1">
+            <KV label="法律纠纷" value="无公开诉讼或仲裁记录" />
+            <KV label="制裁 / 黑名单" value="未出现在 OFAC/BIS/EU 制裁清单中" />
+            <KV label="潜在风险" value={<span className="text-amber-600">德州电网政策变动可能影响采购节奏</span>} />
+          </div>
         </div>
       </section>
     </div>
