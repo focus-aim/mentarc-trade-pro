@@ -170,9 +170,9 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
           </div>
         </div>
         <div className="space-y-1.5 pt-1">
-          <InlineKV label="买家背景：" value="Memories Souvenirs Pte Ltd，新加坡本地 corporate gifts/souvenirs 供应商，成立于 1994/2000，网站显示主营赠品、杯壶、随身旅行类礼品，员工规模约 1-10 人，属于小型但成熟的礼品采购/分销型买家。" />
-          <InlineKV label="跟进阶段：" value="首次询盘，且明确点名 14 oz travel mug、型号 MGS0107、数量 10k，并要求直接报价、lead time 和图片，说明已进入比价/筛选阶段。" />
-          <InlineKV label="需求完整度：" value="高；产品、规格、数量、联系人、公司、邮箱、网站都已给出，信息足够做首轮报价回复。" />
+          <InlineKV label="买家背景：" value="新加坡礼品分销商，成立 20+ 年，主营赠品杯壶，小型但成熟。" />
+          <InlineKV label="跟进阶段：" value="需求沟通阶段（前期已收到两次该买家询价邮件）" />
+          <InlineKV label="需求完整度：" value="高（产品、规格、数量、联系方式齐全，可直接报价）" />
         </div>
       </section>
 
