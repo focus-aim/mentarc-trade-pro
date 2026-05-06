@@ -209,94 +209,81 @@ const EmailCard = ({
 // (active + conservative) side-by-side for comparison.
 // ============================================================
 export const InquiryFollowUpResult = () => {
-  const activeEmail = `Subject: Re: 5kW Hybrid Inverter (UL1741) — Cert, Lead Time & Sample Plan
+  const activeEmail = `Hi John,
 
-Dear John,
+距离上次报价已过 5 天,想跟进一下进度。
 
-Thanks for the detailed inquiry. This is [Your Name] from [Your Company]. We are a UL1741-certified manufacturer of residential hybrid inverters and have been supplying US distributors for 5+ years.
+为帮你尽快推进项目,这边可以即时支持:
+1) UL1741 证书 + SGS 报告原件,需要随时发你;
+2) 300 台标准 / 加急两档交期已为你预留 7 天确认窗;
+3) 样品现货可在 3 个工作日内空运,样品费 + 运费 100% 抵大货。
 
-To address your priorities directly:
+如果你这两天有内部评审,我可以同步准备一份简短的 PPT 配合你的会议。
+方便告诉我目前的进展、或还有哪些信息缺口吗?
 
-1) UL1741 certification
-   — Please find attached the UL1741 certificate and the latest SGS test report.
-   — Model: HBR-5K-US (5kW hybrid, 48V battery, US split-phase 120/240V).
+Best,
+[Your Name]`;
 
-2) Lead time — two options for 300 units
-   — Standard production: 35–38 days ex-works, in line with your July on-shelf target.
-   — Expedited production: 26–28 days ex-works (+3% fee), buffer for shipping & customs.
+  const conservativeEmail = `Hi John,
 
-3) Sample plan
-   — We can air-ship 1–2 samples within 3 working days from stock.
-   — Sample fee + air freight are 100% deductible from your bulk PO.
+跟进一下我们 9 月 12 日的报价。理解你应该正在多家比对,
+不催促,只是想了解你这边的节奏是否有变化:
 
-4) Indicative bulk price
-   — FOB Ningbo, 300 units: USD [X.XX] / unit, EXW available on request.
-   — Payment: 30% T/T deposit, 70% before shipment; LC at sight also acceptable.
+· 项目上线时间是否仍按 7 月计划?
+· UL1741 / 价格 / 交期 三项中,是否有特定环节让你犹豫?
+· 是否需要我提供同型号的客户案例 / 安装视频?
 
-To lock the July timeline, could you confirm:
-- Preferred sample shipping address and courier account (if any)?
-- Whether you'd like the standard or expedited production slot reserved?
+如果方便,任何反馈我都希望听到——哪怕暂时搁置,
+也帮我了解一下原因,后续才能更好地配合你。
 
-Happy to jump on a 20-min call at your convenience (EST).
-
-Best regards,
-[Your Name]
-[Your Company]`;
-
-  const conservativeEmail = `Subject: Re: 5kW Hybrid Inverter (UL1741) — A Few Quick Questions Before Quotation
-
-Dear John,
-
-Thank you for reaching out. This is [Your Name] from [Your Company]. We manufacture UL1741-certified 5kW hybrid inverters for the US residential market.
-
-Before sending the formal quotation and sample plan, could you please confirm:
-
-1) UL1741 scope: do you require the standard UL1741 or UL1741-SA (rule 21 compliant)?
-2) Target delivery: is the July deadline based on warehouse arrival or shipment date?
-3) Sample logistics: do you prefer us to use your courier account (DHL / FedEx) or quote door-to-door?
-
-On samples — we can air-ship 1–2 units from stock within 3 working days. Sample fee + freight are deductible from your first bulk order.
-
-Once the above is confirmed, I will send:
-- Full UL1741 certificate + SGS test report
-- Two lead-time options (standard / expedited) for 300 units
-- Indicative FOB price and payment terms
-
-Looking forward to your reply.
-
-Best regards,
-[Your Name]
-[Your Company]`;
+Best,
+[Your Name]`;
 
   return (
-    <div className="space-y-3">
-      {/* Header summary */}
-      <SectionCard icon={Mail} title="询盘回复邮件 · 两版对比" accent>
-        <p className="text-[12.5px] text-foreground/85 leading-[1.7]">
-          已为本次询盘生成两版邮件方案，您可对比后择优发送：
-          <span className="text-primary font-medium">主动报价版</span> 直接给认证 + 双交期 + 样品政策；
-          <span className="text-foreground font-medium">保守追问版</span> 先用 3 个关键问题收敛需求，再给报价。
+    <div className="space-y-2.5">
+      {/* 跟进诊断 */}
+      <SectionCard icon={Compass} title="跟进诊断" accent>
+        <div className="space-y-1.5">
+          <KV
+            label="当前阶段"
+            value={<>报价已发,买家处于 <span className="text-primary font-medium">比价评估</span> 阶段,成交意向中等。</>}
+          />
+          <KV
+            label="卡点诊断"
+            value="买家暂未形成明确选择,核心顾虑可能集中在价格、交期或方案匹配度。"
+          />
+          <KV
+            label="跟进策略"
+            value={<>结合你以往的跟进策略偏好,优先 <span className="text-primary font-medium">确认采购进度</span> 与 <span className="text-primary font-medium">真实需求变化</span>,推动买家给出明确反馈。</>}
+          />
+        </div>
+      </SectionCard>
+
+      {/* 实战话术 */}
+      <SectionCard icon={Mail} title="实战话术">
+        <p className="text-[12px] text-muted-foreground leading-[1.6] mb-2">
+          已生成两版跟进话术,可对比后择优发送:
         </p>
       </SectionCard>
 
-      {/* Two emails stacked */}
       <EmailCard
-        badge="主动报价版"
+        badge="进度推动版"
         badgeTone="primary"
-        title="锁认证 + 双交期 + 样品抵货款"
-        desc="适合需求清晰、抓单效率优先；客户可一次拿到所有关键信息。"
+        title="主动给资料 + 预留确认窗,推动买家表态"
+        desc="适合买家未明确反馈、但项目尚在窗口期。先给信息,再要进展。"
         email={activeEmail}
       />
       <EmailCard
-        badge="保守追问版"
+        badge="温和探询版"
         badgeTone="muted"
-        title="先收敛需求，再给结构化报价"
-        desc="适合品类级询盘或目标价偏低的场景，避免一次报散被压价。"
+        title="不催促,挖掘真实卡点与节奏变化"
+        desc="适合长决策周期或买家已转冷,通过开放式问题探明真实顾虑。"
         email={conservativeEmail}
       />
     </div>
   );
 };
+
 
 // ============================================================
 // Buyer Background Check Report — triggered by 「深度背调」
