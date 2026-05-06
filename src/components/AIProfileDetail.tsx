@@ -75,11 +75,17 @@ const experts = [
 ];
 
 const initialCompanyForm: CompanyForm = {
+  companyName: "宁波恒杯进出口有限公司",
   mainProducts: "双层不锈钢真空保温杯（12 款 SKU，含运动、商务、儿童系列）",
-  targetMarket: "欧洲、北美、澳洲；DTC 品牌、垂直进口商",
+  businessFocus: "高客单 DTC 品牌、定制 Logo、长周期复购订单",
   website: "https://www.example-trade.com",
-  docName: "产品认证与合规资料.pdf",
-  certifications: "FDA、LFGB、FCC、CE",
+  targetMarket: "欧洲、北美、澳洲；DTC 品牌、垂直进口商",
+  productKeywords: "保温杯、真空杯、运动水壶、礼品杯",
+  productSelling: "12h 长效保温、316 食品级内胆、防漏静音盖、可定制 Logo",
+  productCases: "德国 DTC 5,000 pcs 首单 / 美亚卖家 2×40HQ 复购",
+  sampleRule: "免费样品 1–2 pcs，运费到付；定制样收 80–150 USD，可在大货中冲抵",
+  quoteRule: "默认 FOB 宁波；MOQ 1,000 pcs；标准 / 定制 / 品牌三档报价",
+  paymentRule: "T/T 30% 定金 + 70% 见提单副本；老客户支持 OA 30 天",
 };
 
 const initialPreferences: PreferenceItem[] = [
