@@ -936,17 +936,8 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
 
           <div className="flex-1 overflow-y-auto scrollbar-thin px-4 py-4">
             {latestResult ? (
-              <div className="relative">
-                <div className="absolute right-0 top-1.5 z-10">
-                  <ResultDownloadButton
-                    getTargetNode={() => resultContentRef.current}
-                    label={latestResultLabel || expertMeta.resultLabel}
-                    disabled={!latestResult}
-                  />
-                </div>
-                <div ref={resultContentRef} className="text-[14px] leading-relaxed text-foreground [&>div:first-child>p]:pr-24">
-                  {latestResult}
-                </div>
+              <div ref={resultContentRef} className="text-[14px] leading-relaxed text-foreground">
+                {latestResult}
               </div>
             ) : (
               <div className="flex h-full flex-col items-center justify-center text-center px-4 py-10">
