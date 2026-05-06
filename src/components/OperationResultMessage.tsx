@@ -71,23 +71,7 @@ const ImageGrid = ({ images, label }: { images: string[]; label: string }) => {
   );
 };
 
-const OperationResultMessage = ({ onAction, onQuote, onSendPrompt, expertAvatar }: OperationResultMessageProps) => {
-  const handleQuote = (moduleName: string, content: string) => {
-    onQuote?.({
-      moduleName,
-      preview: content.slice(0, 20) + (content.length > 20 ? "…" : ""),
-      fullContent: content,
-    });
-  };
-  const [expanded, setExpanded] = useState(false);
-  const [copied, setCopied] = useState(false);
-  
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(PRODUCT_COPY);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+const OperationResultMessage = ({ onSendPrompt, expertAvatar }: OperationResultMessageProps) => {
 
   return (
     <div className="space-y-4 text-sm leading-relaxed">
