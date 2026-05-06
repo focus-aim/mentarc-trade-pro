@@ -218,6 +218,11 @@ const isTrendCollectionPrompt = (text?: string) => {
   return /热点趋势采集|采集.*海外社媒|海外社媒.*趋势|社媒.*商机|采集.*热点趋势/.test(text);
 };
 
+const isBuyerBackgroundPrompt = (text?: string) => {
+  if (!text) return false;
+  return /深度?背景调查|买家背调|生成买家背调报告|深度背调|公司画像.*采购实力|背景调查.*风险/.test(text);
+};
+
 const BUYER_BG_RICH_STEPS: RichStep[] = [
   {
     label: "公司基础信息核查",
