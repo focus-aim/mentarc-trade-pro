@@ -20,6 +20,16 @@ const navItems = [
   { icon: MessageSquarePlus, label: "发起任务", key: "new" },
 ];
 
+const RECENT_CONVERSATIONS = [
+  "保温啤酒杯阶梯报价询盘分析",
+  "1000W Fat Tire 电助力车详情页生成",
+  "TikTok 户外露营趋势采集",
+  "美国市场 FDA 认证流程咨询",
+  "买家 TechSol US 背调",
+  "欧洲电助力自行车市场调研报告",
+  "阿里国际站热门关键词挖掘",
+];
+
 const AppSidebar = ({ onNewTask, onBoardClick, onPartnerClick, onResultsClick, onMarketClick, onLogout, partnerConfigured = false, collapsed = false, activeView = "new" }: AppSidebarProps) => {
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
