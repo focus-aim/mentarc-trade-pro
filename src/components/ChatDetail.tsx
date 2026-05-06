@@ -937,6 +937,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
         </div>
 
         {/* RIGHT: Expert analysis result panel */}
+        {moduleTitle !== "培训专家" && (
         <aside id="expert-result-panel" className="hidden flex-[7] min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/70 shadow-sm backdrop-blur-sm xl:flex">
           <div className="flex items-center gap-2 border-b border-border/60 bg-gradient-to-r from-secondary/8 via-card/70 to-primary/8 px-4 py-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
