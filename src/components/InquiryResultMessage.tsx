@@ -143,6 +143,8 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
   );
 };
 
+export default InquiryResultMessage;
+
 // ============================================================
 // Email card with copy button (used by InquiryFollowUpResult)
 // ============================================================
