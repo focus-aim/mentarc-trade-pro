@@ -756,6 +756,9 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
         if (isBuyerBackgroundPrompt(text)) {
           newMessages.push({ role: "assistant", content: "", type: "buyer-background-mindflow" });
           setShowingBuyerBgMindFlow(true);
+        } else if (isFollowupStrategyPrompt(text)) {
+          newMessages.push({ role: "assistant", content: "", type: "followup-strategy-mindflow" });
+          setShowingFollowupStrategyMindFlow(true);
         } else {
           newMessages.push({
             role: "assistant",
