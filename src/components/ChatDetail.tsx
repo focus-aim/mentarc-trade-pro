@@ -91,7 +91,7 @@ const OPERATION_IMAGE_ATTACHMENT: ChatAttachment = {
 
 const MODULE_CONFIG: Record<string, { taskName: string; greeting: string; defaultUserMessage: string; guidedReply: string; placeholder: string; defaultValue?: string; attachment?: ChatAttachment; attachments?: ChatAttachment[] }> = {
   "业务专家": {
-    taskName: "询盘分析任务",
+    taskName: "跟单转化",
     greeting: "您好，我是您的询盘分析助手。",
     defaultUserMessage: "我收到一封新的询盘邮件，帮我分析一下买家背景和回复策略",
     guidedReply: "好的，请将询盘内容发送给我，我将为您：\n\n1. **解析询盘关键信息** — 提取产品需求、数量、交期等核心要素\n2. **评估买家质量** — 分析买家背景和采购意图\n3. **生成专业回复建议** — 匹配您的产品优势，提供报价策略\n\n您可以直接粘贴邮件内容，或通过下方输入框上传询盘文件。",
