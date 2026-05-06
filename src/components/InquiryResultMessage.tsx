@@ -151,7 +151,7 @@ const ReplyTemplateBlock = () => {
 // ============================================================
 // Main inquiry analysis report (compact, one-screen)
 // ============================================================
-const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResultMessageProps) => {
+const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }: InquiryResultMessageProps) => {
   return (
     <div className="space-y-5">
       {/* AI 专家指点 — header + avatar bubble + integrated key points */}
@@ -186,6 +186,25 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
 
       {/* 询盘回复模板 */}
       <ReplyTemplateBlock />
+
+      {/* 行动引导 */}
+      <div className="space-y-1.5 pt-1">
+        <p className="text-[13px] text-foreground/80">接下来，您可以：</p>
+        <div className="flex flex-col gap-1">
+          <button
+            onClick={() => onBackgroundCheck?.()}
+            className="text-left text-primary text-[13px] hover:text-primary/80 hover:underline transition-colors"
+          >
+            对买家 Memories Souvenirs Pte Ltd 进行深度背调
+          </button>
+          <button
+            onClick={() => onSendPrompt?.("生成两版差异化的邮件回复话术")}
+            className="text-left text-primary text-[13px] hover:text-primary/80 hover:underline transition-colors"
+          >
+            生成两版差异化的邮件回复话术
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
