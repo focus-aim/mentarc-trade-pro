@@ -311,111 +311,139 @@ export const BuyerBackgroundReport = () => {
         </p>
       </SectionCard>
 
-      {/* 详细背调报告 标题分隔 */}
-      <div className="flex items-center gap-2 px-1 pt-1">
-        <FileText className="w-3.5 h-3.5 text-muted-foreground" />
-        <span className="text-[12px] font-semibold text-foreground/80">详细背调报告</span>
-        <div className="flex-1 h-px bg-border" />
-      </div>
-
-      {/* 公司概况 */}
-      <SectionCard icon={Building2} title="公司概况">
-        <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-          <KV label="公司名" value="TechSol US LLC" />
-          <KV label="注册地" value="Austin, Texas, USA" />
-          <KV label="成立时间" value="2010 年（约 15 年）" />
-          <KV label="员工规模" value="80–120 人" />
-          <KV label="组织形式" value="独立法人 · 私有制 LLC" />
-          <KV label="经营状态" value={<span className="text-emerald-600">活跃 · 良好</span>} />
+      {/* 详细背调报告 — 单一外边框 */}
+      <section className="rounded-xl border border-border bg-background/40 p-4 space-y-4">
+        <div className="flex items-center gap-1.5 pb-2 border-b border-border/60">
+          <FileText className="w-3.5 h-3.5 text-muted-foreground" />
+          <h3 className="font-medium text-foreground text-[12.5px]">详细背调报告</h3>
         </div>
-      </SectionCard>
 
-      {/* 核心管理层 */}
-      <SectionCard icon={Users} title="核心管理层">
-        <div className="space-y-1.5">
-          <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary">CEO</span>
-            <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">Sarah Wong</span> · 创始人 · 在职 15 年，主导战略与大额订单签批
-            </p>
+        {/* 公司概况 */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <Building2 className="w-3.5 h-3.5 text-muted-foreground" />
+            <h4 className="font-medium text-foreground text-[12.5px]">公司概况</h4>
           </div>
-          <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">采购</span>
-            <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">John Carter</span> · Procurement Manager · 在职 6 年，对接中国工厂
-            </p>
-          </div>
-          <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">技术</span>
-            <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">Mark Liu</span> · 技术总监 · 决定认证、兼容性与样品验收
-            </p>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+            <KV label="公司名" value="TechSol US LLC" />
+            <KV label="注册地" value="Austin, Texas, USA" />
+            <KV label="成立时间" value="2010 年（约 15 年）" />
+            <KV label="员工规模" value="80–120 人" />
+            <KV label="组织形式" value="独立法人 · 私有制 LLC" />
+            <KV label="经营状态" value={<span className="text-emerald-600">活跃 · 良好</span>} />
           </div>
         </div>
-      </SectionCard>
 
-      {/* 主营业务与核心产品 */}
-      <SectionCard icon={Globe} title="主营业务与核心产品">
-        <div className="space-y-1">
-          <KV label="主营业务" value="家用光伏 / 储能系统集成、安装与零售" />
-          <KV label="核心品类" value="混合逆变器、储能电池柜、智能能源管理网关" />
-          <KV label="价格定位" value="市场中高段位，主推 5–10kW 家用方案" />
-          <KV label="销售渠道" value="官网 D2C · Amazon US · 加州 / 德州区域经销网络" />
-          <KV label="终端客户" value="北美中产家庭 · 中小型商业屋顶项目" />
-        </div>
-      </SectionCard>
-
-      {/* 市场表现 */}
-      <SectionCard icon={TrendingUp} title="市场表现">
-        <div className="space-y-1">
-          <KV label="市场地位" value="美国西部区域 Top 30 家用储能集成商" />
-          <KV label="客户口碑" value="Google 4.6 ★（172 条）· Trustpilot 4.4 ★ · 安装好评率 92%" />
-          <KV label="品牌声量" value="LinkedIn 1.2k followers · YouTube 安装教程 8k 订阅" />
-          <KV label="增长趋势" value="近 3 年营收 CAGR 约 18%，受 IRA 法案利好" />
-        </div>
-      </SectionCard>
-
-      {/* 风险提示 */}
-      <SectionCard icon={ShieldAlert} title="风险提示">
-        <div className="space-y-1.5">
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
-            <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">质量一致性敏感，曾因产品质量发起 2 起退货，建议主动提供 QC 报告与第三方验货。</p>
+        {/* 核心管理层 */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <Users className="w-3.5 h-3.5 text-muted-foreground" />
+            <h4 className="font-medium text-foreground text-[12.5px]">核心管理层</h4>
           </div>
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
-            <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">受美国对华关税与 UL 合规审查影响，建议明确 HS 编码与认证范围。</p>
-          </div>
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-emerald-500/[0.06] border border-emerald-500/15 px-2 py-1">
-            <Sparkles className="w-3 h-3 text-emerald-600 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">付款记录良好，无诉讼，首单可走 T/T 30/70，长期合作潜力 $300k+/年。</p>
+          <div className="space-y-1.5">
+            <div className="flex items-start gap-2 text-[12px]">
+              <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary">CEO</span>
+              <p className="flex-1 text-foreground/85 leading-[1.6]">
+                <span className="font-medium text-foreground">Sarah Wong</span> · 创始人 · 在职 15 年，主导战略与大额订单签批
+              </p>
+            </div>
+            <div className="flex items-start gap-2 text-[12px]">
+              <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">采购</span>
+              <p className="flex-1 text-foreground/85 leading-[1.6]">
+                <span className="font-medium text-foreground">John Carter</span> · Procurement Manager · 在职 6 年，对接中国工厂
+              </p>
+            </div>
+            <div className="flex items-start gap-2 text-[12px]">
+              <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">技术</span>
+              <p className="flex-1 text-foreground/85 leading-[1.6]">
+                <span className="font-medium text-foreground">Mark Liu</span> · 技术总监 · 决定认证、兼容性与样品验收
+              </p>
+            </div>
           </div>
         </div>
-      </SectionCard>
 
-      {/* 财务与贸易数据 */}
-      <SectionCard icon={CreditCard} title="财务与贸易数据">
-        <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-          <KV label="估算年营收" value="$15–22M（2024）" />
-          <KV label="D&B 评级" value={<span className="text-emerald-600">3A2 · 良好</span>} />
-          <KV label="近 12 月进口" value="逆变器 / 储能柜 6 票" />
-          <KV label="主要来源国" value="中国 4 票 · 越南 1 票 · 韩国 1 票" />
-          <KV label="单票金额" value="$80k – $220k" />
-          <KV label="付款方式" value="T/T 30/70 为主，偶用 LC at sight" />
+        {/* 主营业务与核心产品 */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <Globe className="w-3.5 h-3.5 text-muted-foreground" />
+            <h4 className="font-medium text-foreground text-[12.5px]">主营业务与核心产品</h4>
+          </div>
+          <div className="space-y-1">
+            <KV label="主营业务" value="家用光伏 / 储能系统集成、安装与零售" />
+            <KV label="核心品类" value="混合逆变器、储能电池柜、智能能源管理网关" />
+            <KV label="价格定位" value="市场中高段位，主推 5–10kW 家用方案" />
+            <KV label="销售渠道" value="官网 D2C · Amazon US · 加州 / 德州区域经销网络" />
+            <KV label="终端客户" value="北美中产家庭 · 中小型商业屋顶项目" />
+          </div>
         </div>
-      </SectionCard>
 
-      {/* 参考资料 */}
-      <SectionCard icon={FileText} title="参考资料">
-        <ul className="space-y-1 text-[12px] text-foreground/85">
-          <li className="leading-[1.6]">· 官网：<span className="text-primary">techsol.us</span></li>
-          <li className="leading-[1.6]">· 美国海关 ImportGenius 进口提单（2024.04 – 2025.03）</li>
-          <li className="leading-[1.6]">· Dun &amp; Bradstreet 企业信用档案</li>
-          <li className="leading-[1.6]">· LinkedIn 公司主页与关键人公开资料</li>
-          <li className="leading-[1.6]">· Google Reviews / Trustpilot 终端客户评价</li>
-        </ul>
-      </SectionCard>
+        {/* 市场表现 */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <TrendingUp className="w-3.5 h-3.5 text-muted-foreground" />
+            <h4 className="font-medium text-foreground text-[12.5px]">市场表现</h4>
+          </div>
+          <div className="space-y-1">
+            <KV label="市场地位" value="美国西部区域 Top 30 家用储能集成商" />
+            <KV label="客户口碑" value="Google 4.6 ★（172 条）· Trustpilot 4.4 ★ · 安装好评率 92%" />
+            <KV label="品牌声量" value="LinkedIn 1.2k followers · YouTube 安装教程 8k 订阅" />
+            <KV label="增长趋势" value="近 3 年营收 CAGR 约 18%，受 IRA 法案利好" />
+          </div>
+        </div>
+
+        {/* 风险提示 */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <ShieldAlert className="w-3.5 h-3.5 text-muted-foreground" />
+            <h4 className="font-medium text-foreground text-[12.5px]">风险提示</h4>
+          </div>
+          <div className="space-y-1.5">
+            <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
+              <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
+              <p className="leading-[1.55]">质量一致性敏感，曾因产品质量发起 2 起退货，建议主动提供 QC 报告与第三方验货。</p>
+            </div>
+            <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
+              <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
+              <p className="leading-[1.55]">受美国对华关税与 UL 合规审查影响，建议明确 HS 编码与认证范围。</p>
+            </div>
+            <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-emerald-500/[0.06] border border-emerald-500/15 px-2 py-1">
+              <Sparkles className="w-3 h-3 text-emerald-600 shrink-0 mt-0.5" />
+              <p className="leading-[1.55]">付款记录良好，无诉讼，首单可走 T/T 30/70，长期合作潜力 $300k+/年。</p>
+            </div>
+          </div>
+        </div>
+
+        {/* 财务与贸易数据 */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <CreditCard className="w-3.5 h-3.5 text-muted-foreground" />
+            <h4 className="font-medium text-foreground text-[12.5px]">财务与贸易数据</h4>
+          </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+            <KV label="估算年营收" value="$15–22M（2024）" />
+            <KV label="D&B 评级" value={<span className="text-emerald-600">3A2 · 良好</span>} />
+            <KV label="近 12 月进口" value="逆变器 / 储能柜 6 票" />
+            <KV label="主要来源国" value="中国 4 票 · 越南 1 票 · 韩国 1 票" />
+            <KV label="单票金额" value="$80k – $220k" />
+            <KV label="付款方式" value="T/T 30/70 为主，偶用 LC at sight" />
+          </div>
+        </div>
+
+        {/* 参考资料 */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <FileText className="w-3.5 h-3.5 text-muted-foreground" />
+            <h4 className="font-medium text-foreground text-[12.5px]">参考资料</h4>
+          </div>
+          <ul className="space-y-1 text-[12px] text-foreground/85">
+            <li className="leading-[1.6]">· 官网：<span className="text-primary">techsol.us</span></li>
+            <li className="leading-[1.6]">· 美国海关 ImportGenius 进口提单（2024.04 – 2025.03）</li>
+            <li className="leading-[1.6]">· Dun &amp; Bradstreet 企业信用档案</li>
+            <li className="leading-[1.6]">· LinkedIn 公司主页与关键人公开资料</li>
+            <li className="leading-[1.6]">· Google Reviews / Trustpilot 终端客户评价</li>
+          </ul>
+        </div>
+      </section>
     </div>
   );
 };
-
