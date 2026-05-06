@@ -421,8 +421,9 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       };
     }
     if (m.type === "operation-result") {
+      const hideDescription = /营销素材|多平台/.test(initialUserMessage || "");
       return {
-        node: <OperationResultMessage onAction={handleAction} onQuote={setActiveQuote} onSendPrompt={(text) => handleSend(text)} expertAvatar={expertAvatar} />,
+        node: <OperationResultMessage onAction={handleAction} onQuote={setActiveQuote} onSendPrompt={(text) => handleSend(text)} expertAvatar={expertAvatar} hideDescription={hideDescription} />,
         label: "产品分析结果",
       };
     }
