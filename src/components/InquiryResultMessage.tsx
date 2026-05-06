@@ -209,81 +209,94 @@ const EmailCard = ({
 // (active + conservative) side-by-side for comparison.
 // ============================================================
 export const InquiryFollowUpResult = () => {
-  const activeEmail = `Hi John,
+  const activeEmail = `Subject: Re: 5kW Hybrid Inverter (UL1741) — Cert, Lead Time & Sample Plan
 
-距离上次报价已过 5 天,想跟进一下进度。
+Dear John,
 
-为帮你尽快推进项目,这边可以即时支持:
-1) UL1741 证书 + SGS 报告原件,需要随时发你;
-2) 300 台标准 / 加急两档交期已为你预留 7 天确认窗;
-3) 样品现货可在 3 个工作日内空运,样品费 + 运费 100% 抵大货。
+Thanks for the detailed inquiry. This is [Your Name] from [Your Company]. We are a UL1741-certified manufacturer of residential hybrid inverters and have been supplying US distributors for 5+ years.
 
-如果你这两天有内部评审,我可以同步准备一份简短的 PPT 配合你的会议。
-方便告诉我目前的进展、或还有哪些信息缺口吗?
+To address your priorities directly:
 
-Best,
-[Your Name]`;
+1) UL1741 certification
+   — Please find attached the UL1741 certificate and the latest SGS test report.
+   — Model: HBR-5K-US (5kW hybrid, 48V battery, US split-phase 120/240V).
 
-  const conservativeEmail = `Hi John,
+2) Lead time — two options for 300 units
+   — Standard production: 35–38 days ex-works, in line with your July on-shelf target.
+   — Expedited production: 26–28 days ex-works (+3% fee), buffer for shipping & customs.
 
-跟进一下我们 9 月 12 日的报价。理解你应该正在多家比对,
-不催促,只是想了解你这边的节奏是否有变化:
+3) Sample plan
+   — We can air-ship 1–2 samples within 3 working days from stock.
+   — Sample fee + air freight are 100% deductible from your bulk PO.
 
-· 项目上线时间是否仍按 7 月计划?
-· UL1741 / 价格 / 交期 三项中,是否有特定环节让你犹豫?
-· 是否需要我提供同型号的客户案例 / 安装视频?
+4) Indicative bulk price
+   — FOB Ningbo, 300 units: USD [X.XX] / unit, EXW available on request.
+   — Payment: 30% T/T deposit, 70% before shipment; LC at sight also acceptable.
 
-如果方便,任何反馈我都希望听到——哪怕暂时搁置,
-也帮我了解一下原因,后续才能更好地配合你。
+To lock the July timeline, could you confirm:
+- Preferred sample shipping address and courier account (if any)?
+- Whether you'd like the standard or expedited production slot reserved?
 
-Best,
-[Your Name]`;
+Happy to jump on a 20-min call at your convenience (EST).
+
+Best regards,
+[Your Name]
+[Your Company]`;
+
+  const conservativeEmail = `Subject: Re: 5kW Hybrid Inverter (UL1741) — A Few Quick Questions Before Quotation
+
+Dear John,
+
+Thank you for reaching out. This is [Your Name] from [Your Company]. We manufacture UL1741-certified 5kW hybrid inverters for the US residential market.
+
+Before sending the formal quotation and sample plan, could you please confirm:
+
+1) UL1741 scope: do you require the standard UL1741 or UL1741-SA (rule 21 compliant)?
+2) Target delivery: is the July deadline based on warehouse arrival or shipment date?
+3) Sample logistics: do you prefer us to use your courier account (DHL / FedEx) or quote door-to-door?
+
+On samples — we can air-ship 1–2 units from stock within 3 working days. Sample fee + freight are deductible from your first bulk order.
+
+Once the above is confirmed, I will send:
+- Full UL1741 certificate + SGS test report
+- Two lead-time options (standard / expedited) for 300 units
+- Indicative FOB price and payment terms
+
+Looking forward to your reply.
+
+Best regards,
+[Your Name]
+[Your Company]`;
 
   return (
-    <div className="space-y-2.5">
-      {/* 跟进诊断 */}
-      <SectionCard icon={Compass} title="跟进诊断" accent>
-        <div className="space-y-1.5">
-          <KV
-            label="当前阶段"
-            value={<>报价已发,买家处于 <span className="text-primary font-medium">比价评估</span> 阶段,成交意向中等。</>}
-          />
-          <KV
-            label="卡点诊断"
-            value="买家暂未形成明确选择,核心顾虑可能集中在价格、交期或方案匹配度。"
-          />
-          <KV
-            label="跟进策略"
-            value={<>结合你以往的跟进策略偏好,优先 <span className="text-primary font-medium">确认采购进度</span> 与 <span className="text-primary font-medium">真实需求变化</span>,推动买家给出明确反馈。</>}
-          />
-        </div>
-      </SectionCard>
-
-      {/* 实战话术 */}
-      <SectionCard icon={Mail} title="实战话术">
-        <p className="text-[12px] text-muted-foreground leading-[1.6] mb-2">
-          已生成两版跟进话术,可对比后择优发送:
+    <div className="space-y-3">
+      {/* Header summary */}
+      <SectionCard icon={Mail} title="询盘回复邮件 · 两版对比" accent>
+        <p className="text-[12.5px] text-foreground/85 leading-[1.7]">
+          已为本次询盘生成两版邮件方案，您可对比后择优发送：
+          <span className="text-primary font-medium">主动报价版</span> 直接给认证 + 双交期 + 样品政策；
+          <span className="text-foreground font-medium">保守追问版</span> 先用 3 个关键问题收敛需求，再给报价。
         </p>
       </SectionCard>
 
+      {/* Two emails stacked */}
       <EmailCard
-        badge="进度推动版"
+        badge="主动报价版"
         badgeTone="primary"
-        title="主动给资料 + 预留确认窗,推动买家表态"
-        desc="适合买家未明确反馈、但项目尚在窗口期。先给信息,再要进展。"
+        title="锁认证 + 双交期 + 样品抵货款"
+        desc="适合需求清晰、抓单效率优先；客户可一次拿到所有关键信息。"
         email={activeEmail}
       />
       <EmailCard
-        badge="温和探询版"
+        badge="保守追问版"
         badgeTone="muted"
-        title="不催促,挖掘真实卡点与节奏变化"
-        desc="适合长决策周期或买家已转冷,通过开放式问题探明真实顾虑。"
+        title="先收敛需求，再给结构化报价"
+        desc="适合品类级询盘或目标价偏低的场景，避免一次报散被压价。"
         email={conservativeEmail}
       />
     </div>
   );
 };
-
 
 // ============================================================
 // Buyer Background Check Report — triggered by 「深度背调」
@@ -291,108 +304,103 @@ Best,
 export const BuyerBackgroundReport = () => {
   return (
     <div className="space-y-2.5">
-      {/* 画像概述 */}
-      <SectionCard icon={Lightbulb} title="画像概述" accent>
-        <p className="text-foreground/85 text-[12.5px] leading-[1.65]">
-          这是一家具有 <span className="text-primary font-medium">15 年</span> 历史的成熟型进口商,其产品线定价处于市场<span className="text-primary font-medium">中高段位</span>。这类客户的供应链通常相对稳定,他们对价格的敏感度排在第二位,第一诉求是 <span className="text-primary font-medium">"品质的一致性"</span> 和 <span className="text-primary font-medium">"交期的绝对保障"</span>。如果对方主动询盘,大概率是原有供应商出现了质量波动或产能瓶颈。
-        </p>
-      </SectionCard>
-
-      {/* 公司概况 */}
-      <SectionCard icon={Building2} title="公司概况">
+      {/* 公司概览 */}
+      <SectionCard icon={Building2} title="公司概览" accent>
         <div className="grid grid-cols-2 gap-x-3 gap-y-1">
           <KV label="公司名" value="TechSol US LLC" />
           <KV label="注册地" value="Austin, Texas, USA" />
-          <KV label="成立时间" value="2010 年(约 15 年)" />
-          <KV label="规模" value="员工 80–120 人" />
-          <KV label="组织形式" value="独立进口商 · 私人控股" />
-          <KV label="官网" value={<span className="text-primary">techsol.us</span>} />
+          <KV label="成立时间" value="2018 年（约 7 年）" />
+          <KV label="规模" value="员工 25–50 人" />
+          <KV label="年营收" value="约 $8–12M（估算）" />
+          <KV label="主营业务" value="家用光伏 / 储能系统集成与零售" />
         </div>
       </SectionCard>
 
-      {/* 核心管理层 */}
-      <SectionCard icon={Users} title="核心管理层">
+      {/* 在线业务足迹 */}
+      <SectionCard icon={Globe} title="在线业务足迹">
+        <div className="space-y-1">
+          <KV label="官网" value={<span className="text-primary">techsol.us</span>} />
+          <KV label="主销渠道" value="官网 D2C + Amazon US + 区域光伏经销网络" />
+          <KV label="社媒" value="LinkedIn 1.2k followers · YouTube 安装教程 8k 订阅" />
+          <KV label="客户口碑" value="Google 4.6 ★（172 条评论）· Trustpilot 4.4 ★" />
+        </div>
+      </SectionCard>
+
+      {/* 采购历史 + 信用 — 双栏 */}
+      <div className="grid grid-cols-2 gap-2.5">
+        <SectionCard icon={ShieldCheck} title="采购 / 进口记录">
+          <div className="space-y-1">
+            <KV label="近 12 月" value="逆变器 / 储能柜 6 票" />
+            <KV label="主要来源" value="中国（4 票）· 越南（1 票）· 韩国（1 票）" />
+            <KV label="单票金额" value="$80k–$220k 不等" />
+            <KV
+              label="活跃度"
+              value={
+                <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-medium">
+                  活跃 · 持续采购
+                </span>
+              }
+            />
+          </div>
+        </SectionCard>
+
+        <SectionCard icon={CreditCard} title="信用与履约">
+          <div className="space-y-1">
+            <KV
+              label="D&B 评级"
+              value={
+                <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-medium">
+                  3A2 · 良好
+                </span>
+              }
+            />
+            <KV label="付款记录" value="同业反馈：T/T 30/70 准时，无拖欠" />
+            <KV label="诉讼记录" value="未检索到买卖合同纠纷" />
+            <KV label="退货争议" value="2 起，均为质量问题，已和解" />
+          </div>
+        </SectionCard>
+      </div>
+
+      {/* 决策链 */}
+      <SectionCard icon={Users} title="决策链路与关键人">
         <div className="space-y-1.5">
           <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary">CEO</span>
+            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary">决策人</span>
             <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">Sarah Wong</span> · 创始人 · 行业 20 年 · LinkedIn 活跃
+              <span className="font-medium text-foreground">John Carter</span> · Procurement Manager · 在职 3 年 · LinkedIn 活跃
             </p>
           </div>
           <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">采购</span>
+            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">影响人</span>
             <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">John Carter</span> · Procurement Manager · 在职 6 年
+              <span className="font-medium text-foreground">Mark Liu</span> · 技术总监（决定认证 / 兼容性）
             </p>
           </div>
           <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">技术</span>
+            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">最终拍板</span>
             <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">Mark Liu</span> · CTO · 决定认证与兼容性
+              <span className="font-medium text-foreground">Sarah Wong</span> · CEO（金额 &gt; $100k 需其签字）
             </p>
           </div>
         </div>
       </SectionCard>
 
-      {/* 主营业务与核心产品 */}
-      <SectionCard icon={ShieldCheck} title="主营业务与核心产品">
+      {/* 风险与合作建议 */}
+      <SectionCard icon={ShieldAlert} title="风险提示与合作建议">
         <div className="space-y-1">
-          <KV label="主营" value="家用光伏 / 储能系统集成与零售" />
-          <KV label="核心 SKU" value="混合逆变器、储能电池柜、家用并网套件" />
-          <KV label="定价段位" value="中高端(高于市场均价 15–25%)" />
-          <KV label="覆盖区域" value="美国西部 7 州 · 经销商 60+" />
-        </div>
-      </SectionCard>
-
-      {/* 市场表现 */}
-      <SectionCard icon={Globe} title="市场表现">
-        <div className="space-y-1">
-          <KV label="主销渠道" value="官网 D2C + Amazon US + 区域光伏经销网络" />
-          <KV label="社媒影响" value="LinkedIn 8.4k followers · YouTube 安装教程 32k 订阅" />
-          <KV label="客户口碑" value="Google 4.7 ★(820 条)· Trustpilot 4.5 ★" />
-          <KV label="行业奖项" value="2023 SEIA Top Installer (Texas Region)" />
-        </div>
-      </SectionCard>
-
-      {/* 风险提示 */}
-      <SectionCard icon={ShieldAlert} title="风险提示">
-        <div className="space-y-1">
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
+          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
             <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">2022 年曾因供应商品质波动诉讼 1 起,对来料一致性极度敏感。</p>
+            <p className="leading-[1.55]">中小规模 + 价格敏感，建议首单要求 30% 定金，避免账期。</p>
           </div>
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
+          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
             <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">美国对华关税 + UL 复检趋严,首单建议预留合规与清关缓冲期。</p>
+            <p className="leading-[1.55]">曾因质量退货 2 起，QC 报告与第三方验货建议主动提供。</p>
           </div>
-          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
+          <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-emerald-500/[0.06] border border-emerald-500/15 px-2 py-1">
             <Sparkles className="w-3 h-3 text-emerald-600 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">付款记录良好,首单顺利后年化复购潜力可达 $1.2M+。</p>
+            <p className="leading-[1.55]">活跃采购 + 良好口碑，若首单顺利，年化复购潜力 $300k+。</p>
           </div>
         </div>
-      </SectionCard>
-
-      {/* 财务与贸易数据 */}
-      <SectionCard icon={CreditCard} title="财务与贸易数据">
-        <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-          <KV label="年营收" value="$25–35M(估算)" />
-          <KV label="D&B 评级" value={<span className="px-1 py-0 text-[10px] rounded border border-emerald-500/25 text-emerald-600 font-medium">3A2 · 良好</span>} />
-          <KV label="付款记录" value="T/T 30/70 准时,无拖欠" />
-          <KV label="近 12 月进口" value="逆变器 / 储能柜 18 票" />
-          <KV label="主要来源" value="中国(12)· 越南(3)· 韩国(3)" />
-          <KV label="单票金额" value="$120k–$480k" />
-        </div>
-      </SectionCard>
-
-      {/* 参考资料 */}
-      <SectionCard icon={FileText} title="参考资料">
-        <ul className="space-y-1 text-[12px]">
-          <li className="leading-[1.6]"><span className="text-muted-foreground">· 官网:</span> <span className="text-primary">techsol.us/about</span></li>
-          <li className="leading-[1.6]"><span className="text-muted-foreground">· 进口数据:</span> ImportYeti / Panjiva 提单记录</li>
-          <li className="leading-[1.6]"><span className="text-muted-foreground">· 信用报告:</span> Dun &amp; Bradstreet (D-U-N-S 96-xxx-xxxx)</li>
-          <li className="leading-[1.6]"><span className="text-muted-foreground">· 公开诉讼:</span> PACER / CourtListener 检索</li>
-          <li className="leading-[1.6]"><span className="text-muted-foreground">· 社媒:</span> LinkedIn 公司主页 / YouTube 频道</li>
-        </ul>
       </SectionCard>
     </div>
   );
