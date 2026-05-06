@@ -1264,8 +1264,10 @@ const Index = () => {
 
           <div
             className={cn(
-              "relative mx-auto flex min-h-[calc(100vh-64px)] w-full flex-col justify-center overflow-hidden px-4 pb-10 pt-6 sm:px-6 lg:px-8",
-              trainingStage === "idle" ? "max-w-4xl" : "max-w-6xl",
+              "relative mx-auto flex w-full flex-col overflow-hidden px-4 pb-10 sm:px-6 lg:px-8",
+              trainingStage === "idle"
+                ? "min-h-[calc(100vh-64px)] max-w-4xl justify-center pt-6"
+                : "max-w-7xl justify-start pt-8",
             )}
           >
             {/* Ambient glow */}
