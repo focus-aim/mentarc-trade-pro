@@ -341,22 +341,48 @@ Best regards,
 };
 
 // ============================================================
-// Buyer Background Check Report — triggered by 「深度背调」
+// Buyer Background Check Report — inquiry-analysis style
 // ============================================================
-export const BuyerBackgroundReport = () => {
-  return (
-    <div className="space-y-3">
-      <SectionCard icon={Lightbulb} title="评估概要" accent>
-        <p className="text-[12.5px] text-foreground/85 leading-[1.7]">
-          这是一家具有 <span className="text-primary font-medium">15 年历史</span>的成熟型进口商，其产品线定价处于<span className="text-primary font-medium">市场中高段位</span>。这类客户的供应链通常相对稳定，他们对价格的敏感度排在第二位，第一诉求是 <span className="text-primary font-medium">"品质的一致性"</span> 和 <span className="text-primary font-medium">"交期的绝对保障"</span>。如果对方主动询盘，大概率是原有供应商出现了质量波动或产能瓶颈。
-        </p>
-      </SectionCard>
+interface ReportProps {
+  expertAvatar?: string;
+}
 
-      <section className="rounded-xl border border-border bg-background/40 p-4 space-y-4">
-        <div className="flex items-center gap-1.5 pb-2 border-b border-border/60">
-          <FileText className="w-3.5 h-3.5 text-muted-foreground" />
-          <h3 className="font-medium text-foreground text-[12.5px]">详细背调报告</h3>
+export const BuyerBackgroundReport = ({ expertAvatar }: ReportProps) => {
+  return (
+    <div className="space-y-5">
+      {/* AI 专家指点 */}
+      <section className="rounded-2xl border border-border bg-card/60 p-4 space-y-3">
+        <h3 className="font-semibold text-foreground text-[14px]">AI 专家指点</h3>
+        <div className="flex gap-3 items-start">
+          {expertAvatar && (
+            <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 border border-border/60">
+              <img src={expertAvatar} alt="业务专家" className="w-full h-full object-cover object-top" />
+            </div>
+          )}
+          <div className="flex-1 rounded-xl bg-muted/40 px-4 py-3">
+            <p className="text-foreground/85 text-[13px] leading-[1.7]">
+              这是一家 15 年历史的成熟型进口商，定价偏中高端，最在意的是品质一致性和交期保障。这次主动询盘大概率是原供应商出问题，是切入的好窗口，建议优先用认证 + 案例打信任。
+            </p>
+          </div>
         </div>
+        <div className="space-y-1.5 pt-1">
+          <InlineKV label="公司画像：" value="TechSol US LLC，美国德州，成立 15 年，80–120 人，私有制 LLC，经营状态良好。" />
+          <InlineKV label="采购实力：" value="年采购额 $2.5–4M，逆变器 + 储能电池，供应链稳定（深圳 ×2、宁波 ×1）。" />
+          <InlineKV label="决策链路：" value="CEO Sarah Wong（签批）→ 采购 John Carter（对接）→ 技术 Mark Liu（验收）。" />
+        </div>
+      </section>
+
+      {/* AI 风险判断 */}
+      <section className="rounded-2xl border border-border bg-background p-4 space-y-2">
+        <h3 className="font-semibold text-foreground text-[14px] mb-1">AI 风险判断</h3>
+        <InlineKV label="信用风险：" value="D&B 评级 3A2，无欠款记录，未出现在 OFAC / BIS / EU 制裁清单中。" />
+        <InlineKV label="法律风险：" value="无公开诉讼或仲裁记录，过往 5 年无产品召回事件。" />
+        <InlineKV label="其他必要提醒：" value="德州电网政策变动可能影响采购节奏，建议在合同中预留交期弹性条款。" />
+      </section>
+
+      {/* 详细背调报告 */}
+      <section className="rounded-2xl border border-border bg-card/60 p-4 space-y-4">
+        <h3 className="font-semibold text-foreground text-[14px]">详细背调报告</h3>
 
         <div>
           <div className="flex items-center gap-1.5 mb-2">
@@ -425,19 +451,8 @@ export const BuyerBackgroundReport = () => {
             <KV label="财务状况" value={<span className="text-emerald-600">D&B 评级 3A2 · 无欠款记录</span>} />
           </div>
         </div>
-
-        <div>
-          <div className="flex items-center gap-1.5 mb-2">
-            <ShieldAlert className="w-3.5 h-3.5 text-amber-500" />
-            <h4 className="font-medium text-foreground text-[12.5px]">风险提示</h4>
-          </div>
-          <div className="space-y-1">
-            <KV label="法律纠纷" value="无公开诉讼或仲裁记录" />
-            <KV label="制裁 / 黑名单" value="未出现在 OFAC/BIS/EU 制裁清单中" />
-            <KV label="潜在风险" value={<span className="text-amber-600">德州电网政策变动可能影响采购节奏</span>} />
-          </div>
-        </div>
       </section>
     </div>
   );
 };
+
