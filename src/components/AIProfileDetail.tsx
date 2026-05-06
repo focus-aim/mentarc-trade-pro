@@ -32,11 +32,20 @@ import businessAvatar from "@/assets/expert-business.jpg";
 import trainingAvatar from "@/assets/expert-training.jpg";
 
 interface CompanyForm {
+  // 企业档案
+  companyName: string;
   mainProducts: string;
-  targetMarket: string;
+  businessFocus: string;
   website: string;
-  docName: string;
-  certifications: string;
+  targetMarket: string;
+  // 产品知识
+  productKeywords: string;
+  productSelling: string;
+  productCases: string;
+  // 业务规则
+  sampleRule: string;
+  quoteRule: string;
+  paymentRule: string;
 }
 
 interface PreferenceItem {
