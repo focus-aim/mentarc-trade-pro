@@ -692,6 +692,29 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
   }, [startImageGeneration]);
 
   const handleSend = (text: string, quote?: ChatQuote) => {
+    // Special routing: buyer background check
+    if (isBuyerBackgroundPrompt(text)) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "user", content: text, type: "text", quote },
+        { role: "assistant", content: "", type: "buyer-background-mindflow" },
+      ]);
+      setShowingBuyerBgMindFlow(true);
+      setAnalyzed(true);
+      return;
+    }
+    // Special routing: follow-up strategy → reuse emails mindflow + follow-up result
+    if (isFollowUpStrategyPrompt(text)) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "user", content: text, type: "text", quote },
+        { role: "assistant", content: "", type: "emails-mindflow" },
+      ]);
+      setShowingEmailsMindFlow(true);
+      setAnalyzed(true);
+      return;
+    }
+
     const newMessages: Message[] = [...messages, { role: "user", content: text, type: "text", quote }];
 
     if (!analyzed) {
