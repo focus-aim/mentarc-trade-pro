@@ -855,8 +855,8 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
 
       <div className="flex-1 flex gap-3 min-h-0">
-        {/* LEFT: Conversation + mind-flow */}
-        <div className={`${moduleTitle === "培训专家" ? "flex-1 mx-auto w-full max-w-4xl" : "flex-[3]"} flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm shadow-sm`}>
+        {/* Conversation + mind-flow + inline results */}
+        <div className="flex-1 mx-auto w-full max-w-4xl flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm shadow-sm">
           {/* Expert header — "AI专家专项分析" */}
           <div className="relative overflow-hidden border-b border-border/60 bg-gradient-to-r from-primary/8 via-card/70 to-secondary/8 px-5 py-3.5">
             <div aria-hidden className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-primary/15 blur-3xl" />
