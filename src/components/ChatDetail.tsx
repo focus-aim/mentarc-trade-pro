@@ -808,7 +808,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
 
   return (
     <div className="flex-1 flex flex-col h-screen overflow-hidden">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 px-6 pt-4 pb-3">
         <button
           onClick={onBack}
           className="inline-flex items-center gap-1.5 px-2 py-1 -ml-2 rounded-lg text-base font-semibold text-foreground hover:bg-muted transition-colors active:scale-95"
