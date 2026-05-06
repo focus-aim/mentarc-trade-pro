@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MessageSquarePlus, PanelLeft, Archive, LogOut, SlidersHorizontal, Store } from "lucide-react";
+import { MessageSquarePlus, PanelLeft, Archive, LogOut, SlidersHorizontal, Store, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 import mentarcIcon from "@/assets/mentarc-icon.png";
 
