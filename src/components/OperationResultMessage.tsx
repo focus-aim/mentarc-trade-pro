@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, X, Copy, Check, MessageSquareQuote } from "lucide-react";
+import { X } from "lucide-react";
 import type { ChatQuote } from "./InquiryResultMessage";
 
 interface OperationResultMessageProps {
