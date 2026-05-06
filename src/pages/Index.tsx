@@ -1538,7 +1538,7 @@ const Index = () => {
                   </div>
 
                   {/* RIGHT: Mind-flow process / structured result */}
-                  <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-secondary/5 p-6 shadow-xl shadow-primary/5 backdrop-blur-md sm:p-8">
+                  <div className="relative flex flex-col overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-secondary/5 p-6 shadow-xl shadow-primary/5 backdrop-blur-md sm:p-8">
                     <div
                       aria-hidden
                       className="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full bg-secondary/15 blur-3xl"
