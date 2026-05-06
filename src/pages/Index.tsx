@@ -1584,9 +1584,6 @@ const Index = () => {
                           <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
                             你的专属 AI 团队已就绪
                           </h1>
-                          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                            以下结构化成果可随时调整与扩展。
-                          </p>
                         </>
                       )}
                     </div>
@@ -1690,9 +1687,16 @@ const Index = () => {
 
                       {trainingStage === "result" && (
                         <div className="space-y-3">
-                          {/* 1. 主营产品 */}
-                          <article
-                            className="rounded-2xl border border-border/50 bg-background/70 px-4 py-3 opacity-0 animate-fade-up"
+                          {/* 1. 查看AI团队档案详情 */}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPartnerConfigured(true);
+                              setShowPartnerConfig(false);
+                              setTrainingStage("idle");
+                              setShowProfile(true);
+                            }}
+                            className="group w-full text-left rounded-2xl border border-border/50 bg-background/70 px-4 py-3 opacity-0 animate-fade-up transition-all hover:border-primary/40 hover:bg-background hover:shadow-md hover:shadow-primary/10"
                             style={{ animationDelay: "80ms" }}
                           >
                             <div className="flex items-center gap-2.5">
@@ -1700,55 +1704,12 @@ const Index = () => {
                                 <Package className="h-4 w-4" />
                               </div>
                               <div className="min-w-0 flex-1">
-                                <div className="text-xs font-medium text-muted-foreground">主营产品</div>
-                                <div className="mt-1 flex flex-wrap gap-1.5">
-                                  {(trainingForm.mainProducts
-                                    ? trainingForm.mainProducts
-                                        .split(/[、,，;；]/)
-                                        .map((s) => s.trim())
-                                        .filter(Boolean)
-                                    : ["—"]
-                                  ).map((item) => (
-                                    <span
-                                      key={item}
-                                      className="rounded-md bg-primary/10 px-2 py-0.5 text-[13px] font-medium text-primary/90"
-                                    >
-                                      {item}
-                                    </span>
-                                  ))}
-                                </div>
+                                <div className="text-xs font-medium text-muted-foreground">AI 团队档案</div>
+                                <div className="mt-0.5 text-sm font-medium text-foreground">查看 AI 团队档案详情</div>
                               </div>
+                              <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
                             </div>
-                          </article>
-
-                          {/* 2. 目标买家画像 */}
-                          <article
-                            className="rounded-2xl border border-border/50 bg-background/70 px-4 py-3 opacity-0 animate-fade-up"
-                            style={{ animationDelay: "150ms" }}
-                          >
-                            <div className="flex items-start gap-2.5">
-                              <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                <UsersIcon className="h-4 w-4" />
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <div className="text-xs font-medium text-muted-foreground">目标买家画像</div>
-                                <div className="mt-1.5 space-y-1 text-[13px] leading-relaxed">
-                                  <div className="flex gap-2">
-                                    <span className="shrink-0 text-muted-foreground/80">类型</span>
-                                    <span className="text-foreground/90">进口商 / 经销商 / 品牌方</span>
-                                  </div>
-                                  <div className="flex gap-2">
-                                    <span className="shrink-0 text-muted-foreground/80">关注</span>
-                                    <span className="text-foreground/90">品质稳定、交期可控、认证合规</span>
-                                  </div>
-                                  <div className="flex gap-2">
-                                    <span className="shrink-0 text-muted-foreground/80">画像</span>
-                                    <span className="text-foreground/90">高复购的中大型采购方为主</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </article>
+                          </button>
 
                           {/* 3. AI团队跟进目标 — overlapping avatars */}
                           <article
