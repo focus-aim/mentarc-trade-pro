@@ -444,4 +444,6 @@ export const BuyerBackgroundReport = () => {
           </ul>
         </div>
       </section>
-
+    </div>
+  );
+};
