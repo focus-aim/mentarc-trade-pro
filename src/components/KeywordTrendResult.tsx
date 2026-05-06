@@ -1,4 +1,4 @@
-import { TrendingUp, Lightbulb, Target, Tag } from "lucide-react";
+import { Lightbulb, Target, Tag } from "lucide-react";
 
 interface KeywordTrendResultProps {
   onSendPrompt?: (text: string) => void;
