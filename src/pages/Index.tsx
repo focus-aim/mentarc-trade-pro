@@ -401,18 +401,55 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "成交策略提炼":
+    case "解答问题":
       return (
-        <div className={cn(baseWrap, "bg-gradient-to-br from-muted/50 to-secondary/10 p-3")}>
-          <div className="flex h-full flex-col items-center justify-center gap-1.5">
-            <div className="flex items-center gap-1">
-              <div className="h-3 w-1.5 rounded-sm bg-foreground/15" />
-              <div className="h-5 w-1.5 rounded-sm bg-foreground/20" />
-              <div className="h-7 w-1.5 rounded-sm bg-primary/40" />
-              <div className="h-9 w-1.5 rounded-sm bg-primary/60" />
-              <div className="h-11 w-1.5 rounded-sm bg-primary/80" />
+        <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
+          <div className="space-y-1.5">
+            <div className="ml-auto max-w-[70%] rounded-lg rounded-tr-sm bg-muted/70 px-2 py-1.5">
+              <div className="h-1.5 w-full rounded-full bg-foreground/15" />
+              <div className="mt-1 h-1.5 w-3/4 rounded-full bg-foreground/10" />
             </div>
-            <div className="text-[9px] font-medium text-muted-foreground">敬请期待</div>
+            <div className="max-w-[80%] rounded-lg rounded-tl-sm bg-card/90 px-2 py-1.5 shadow-sm">
+              <div className="flex items-center gap-1 mb-1">
+                <Sparkles className="h-2.5 w-2.5 text-primary" />
+                <div className="h-1 w-10 rounded-full bg-primary/40" />
+              </div>
+              <div className="h-1.5 w-full rounded-full bg-foreground/10" />
+              <div className="mt-1 h-1.5 w-5/6 rounded-full bg-foreground/10" />
+            </div>
+          </div>
+        </div>
+      );
+    case "理解业务":
+      return (
+        <div className={cn(baseWrap, "bg-gradient-to-br from-secondary/10 to-primary/5 p-3")}>
+          <div className="flex items-center justify-center">
+            <div className="relative flex h-20 w-20 items-center justify-center">
+              <div className="absolute inset-0 rounded-full border-2 border-dashed border-primary/30" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-card/90 shadow-sm">
+                <Briefcase className="h-5 w-5 text-primary" />
+              </div>
+              <span className="absolute -left-1 top-2 rounded-md bg-card/90 px-1.5 py-0.5 text-[8px] font-medium text-foreground/70 shadow-sm">产品</span>
+              <span className="absolute -right-2 top-3 rounded-md bg-card/90 px-1.5 py-0.5 text-[8px] font-medium text-foreground/70 shadow-sm">优势</span>
+              <span className="absolute -left-2 bottom-2 rounded-md bg-card/90 px-1.5 py-0.5 text-[8px] font-medium text-foreground/70 shadow-sm">服务</span>
+              <span className="absolute -right-1 bottom-2 rounded-md bg-card/90 px-1.5 py-0.5 text-[8px] font-medium text-foreground/70 shadow-sm">行业</span>
+            </div>
+          </div>
+        </div>
+      );
+    case "资产沉淀":
+      return (
+        <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
+          <div className="space-y-1.5">
+            {["案例", "话术", "素材"].map((n, i) => (
+              <div key={n} className="flex items-center gap-2 rounded-md bg-card/80 px-2 py-1 shadow-sm">
+                <div className="flex h-4 w-4 items-center justify-center rounded-md bg-primary/15 text-[8px] font-bold text-primary">
+                  {n[0]}
+                </div>
+                <div className="h-1.5 rounded-full bg-foreground/10" style={{ width: `${65 - i * 10}%` }} />
+                <span className="ml-auto text-[8px] text-muted-foreground">{n}</span>
+              </div>
+            ))}
           </div>
         </div>
       );
