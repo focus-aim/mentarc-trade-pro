@@ -73,6 +73,13 @@ const KV = ({ label, value }: { label: string; value: React.ReactNode }) => (
   </div>
 );
 
+const InlineKV = ({ label, value }: { label: string; value: React.ReactNode }) => (
+  <p className="text-[13px] leading-[1.75] text-foreground/85">
+    <span className="font-semibold text-foreground">{label}</span>
+    {value}
+  </p>
+);
+
 // ============================================================
 // 询盘回复模板 — collapsible text block
 // ============================================================
@@ -145,28 +152,30 @@ const ReplyTemplateBlock = () => {
 const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResultMessageProps) => {
   return (
     <div className="space-y-5">
-      {/* 业务专家指点 */}
-      <SectionCard icon={Lightbulb} title="业务专家指点" accent>
-        <div className="flex gap-2.5 items-start">
+      {/* AI 专家指点 — card with title outside bubble, avatar + text inside */}
+      <section className="rounded-2xl border border-border bg-card/60 p-4">
+        <h3 className="font-semibold text-foreground text-[14px] mb-3">AI 专家指点</h3>
+        <div className="flex gap-3 items-start">
           {expertAvatar && (
-            <div className="w-7 h-7 rounded-full overflow-hidden shrink-0">
+            <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 border border-border/60">
               <img src={expertAvatar} alt="业务专家" className="w-full h-full object-cover object-top" />
             </div>
           )}
-          <p className="text-foreground/85 text-[12.5px] leading-[1.65] flex-1">
-            结合你当前主营的 <span className="text-primary font-medium">【产品类型】</span> 和主要市场 <span className="text-primary font-medium">【区域】</span>，这类询盘和你的业务匹配度较高。客户懂认证且时间紧迫，首封邮件先确认 <span className="text-primary font-medium">UL 认证 + 最快交期</span>，并主动询问<span className="text-primary font-medium">样品费能否抵扣大货</span>——美国中小买家很在意这一点。
-          </p>
+          <div className="flex-1 rounded-xl bg-muted/40 px-4 py-3">
+            <p className="text-foreground/85 text-[13px] leading-[1.7]">
+              这是一个成熟礼品买家，表达很直接，核心诉求就是快、准、可视化。建议首封邮件先回应型号和数量，再把交期、图片、可选配套和下一步确认点一次说清。
+            </p>
+          </div>
         </div>
-      </SectionCard>
+      </section>
 
-      {/* 询盘概要 */}
-      <SectionCard icon={UserRound} title="询盘概要">
-        <div className="space-y-1.5">
-          <KV label="买家背景" value="美国加州中型分销商 TechSol US · 年采购约 $1.2M · 主营北美住宅光储渠道" />
-          <KV label="沟通阶段" value="需求沟通阶段(前期已收到两次该买家询价邮件)" />
-          <KV label="需求完整度" value="高 · 产品 / 数量 / 认证 / 交期 / 目标价均已明确" />
-        </div>
-      </SectionCard>
+      {/* 询盘要点 — plain KV list, no card */}
+      <section className="px-1 space-y-2">
+        <InlineKV label="买家背景：" value="Memories Souvenirs Pte Ltd，新加坡本地 corporate gifts/souvenirs 供应商，成立于 1994/2000，网站显示主营赠品、杯壶、随身旅行类礼品，员工规模约 1-10 人，属于小型但成熟的礼品采购/分销型买家。" />
+          <InlineKV label="跟进阶段：" value="首次询盘，且明确点名 14 oz travel mug、型号 MGS0107、数量 10k，并要求直接报价、lead time 和图片，说明已进入比价/筛选阶段。" />
+          <InlineKV label="需求完整度：" value="高；产品、规格、数量、联系人、公司、邮箱、网站都已给出，信息足够做首轮报价回复。" />
+          <InlineKV label="风险提示：" value="新加坡买家通常对交期、样品图和报价响应速度要求高；对这类 corporate gift 订单，图片呈现、包装方式和交期说明会直接影响下一步推进。" />
+      </section>
 
       {/* 询盘回复模板 */}
       <ReplyTemplateBlock />
