@@ -376,6 +376,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
   const [assetPanelOpen, setAssetPanelOpen] = useState(false);
   const [showingBuyerBgMindFlow, setShowingBuyerBgMindFlow] = useState(initialIsBuyerBg);
   const [showingEmailsMindFlow, setShowingEmailsMindFlow] = useState(false);
+  const [showingFollowupStrategyMindFlow, setShowingFollowupStrategyMindFlow] = useState(false);
   const [latestResult, setLatestResult] = useState<ReactNode>(null);
   const [latestResultLabel, setLatestResultLabel] = useState<string>("");
   const [activeResultIdx, setActiveResultIdx] = useState<number | null>(null);
