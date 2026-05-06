@@ -367,18 +367,6 @@ const AIProfileDetail = () => {
                 ]}
               />
 
-              <KnowledgeCard
-                icon={ShieldCheck}
-                title="业务规则"
-                desc="样品、报价、付款的标准做法"
-                badge="已识别 3 项"
-                editing={companyEditing}
-                items={[
-                  { label: "样品规则", value: company.sampleRule, draft: draft.sampleRule, onChange: (v) => setDraft({ ...draft, sampleRule: v }) },
-                  { label: "报价规则", value: company.quoteRule, draft: draft.quoteRule, onChange: (v) => setDraft({ ...draft, quoteRule: v }) },
-                  { label: "付款规则", value: company.paymentRule, draft: draft.paymentRule, onChange: (v) => setDraft({ ...draft, paymentRule: v }) },
-                ]}
-              />
             </div>
 
             {companyEditing && (
