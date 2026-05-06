@@ -832,7 +832,6 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
                   <h2 className="text-sm font-bold text-foreground">{expertMeta.name}</h2>
-                  <span className="rounded-md border border-primary/20 bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary">{expertMeta.role}</span>
                 </div>
                 <p className="mt-0.5 truncate text-[11.5px] text-muted-foreground">{expertMeta.tagline}</p>
               </div>
