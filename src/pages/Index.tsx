@@ -1357,7 +1357,7 @@ const Index = () => {
                           </div>
                           <div className="min-w-0 flex-1">
                             <div className="text-xs font-medium text-muted-foreground">
-                              主营产品 <span className="text-muted-foreground/70">· 选填</span>
+                              主营产品
                             </div>
                             <input
                               value={trainingForm.mainProducts}
