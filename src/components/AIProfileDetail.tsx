@@ -695,7 +695,7 @@ const FormRow = ({
   chips?: string[];
   onChipToggle?: (chip: string) => void;
 }) => (
-  <div className="group rounded-2xl border border-border/50 bg-background/70 px-3.5 py-2.5 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
+  <div className="group rounded-xl px-2 py-2 transition-colors duration-200 hover:bg-muted/30 focus-within:bg-muted/40">
     <div className="flex items-center gap-2">
       <div className={cn(
         "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg",
