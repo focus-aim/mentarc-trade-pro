@@ -68,8 +68,12 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
         </div>
       </SectionCard>
 
-      {/* 二、Top 趋势关键词 */}
-      <SectionCard icon={Target} title="二、Top 趋势关键词">
+      {/* Top 趋势关键词 */}
+      <div>
+        <div className="flex items-center gap-1.5 mb-2">
+          <Target className="w-3.5 h-3.5 text-muted-foreground" />
+          <h3 className="font-medium text-foreground text-[12.5px]">Top 趋势关键词</h3>
+        </div>
         <div className="overflow-hidden rounded-lg border border-border/60">
           <table className="w-full text-[11.5px] border-collapse">
             <thead>
@@ -90,13 +94,17 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
             </tbody>
           </table>
         </div>
-        <p className="text-[10px] text-muted-foreground pt-2">
+        <p className="text-[10px] text-muted-foreground pt-1.5">
           趋势 = 30 天搜索量环比 · 竞争度 = SEO / 广告投放强度
         </p>
-      </SectionCard>
+      </div>
 
-      {/* 三、长尾关键词 */}
-      <SectionCard icon={Tag} title="三、长尾关键词">
+      {/* 长尾关键词 */}
+      <div>
+        <div className="flex items-center gap-1.5 mb-2">
+          <Tag className="w-3.5 h-3.5 text-muted-foreground" />
+          <h3 className="font-medium text-foreground text-[12.5px]">长尾关键词</h3>
+        </div>
         <p className="text-[11.5px] text-foreground/80 leading-[1.7] mb-2">
           <span className="text-muted-foreground">趋势动因：</span>
           海外项目方倾向于直接搜索<span className="font-medium text-foreground">具体规格 + 应用场景 + 采购意图</span>词，反映询盘已进入选型与比价阶段。
@@ -119,7 +127,7 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
             </tbody>
           </table>
         </div>
-      </SectionCard>
+      </div>
     </div>
   );
 };
