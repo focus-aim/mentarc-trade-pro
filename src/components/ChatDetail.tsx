@@ -396,6 +396,12 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
         label: "询盘回复邮件 · 两版对比",
       };
     }
+    if (m.type === "followup-strategy-result") {
+      return {
+        node: <FollowupStrategyResult />,
+        label: "跟进策略 · 节奏 / 话术 / 动作",
+      };
+    }
     if (m.type === "buyer-background-result") {
       return {
         node: <BuyerBackgroundReport />,
