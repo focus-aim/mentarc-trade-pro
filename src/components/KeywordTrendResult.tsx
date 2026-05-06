@@ -47,18 +47,8 @@ const LONGTAIL: { kw: string; trend: string }[] = [
 const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
   return (
     <div className="space-y-3 text-[13px] leading-relaxed">
-      {/* Header */}
-      <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-primary/15 bg-gradient-to-r from-primary/[0.06] to-transparent">
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/12 text-primary">
-          <TrendingUp className="h-3.5 w-3.5" />
-        </div>
-        <p className="text-[13.5px] font-bold text-foreground leading-tight">
-          热点关键词分析报告
-        </p>
-      </div>
-
-      {/* 一、趋势概要 */}
-      <SectionCard icon={Lightbulb} title="一、趋势概要">
+      {/* 趋势概要 */}
+      <SectionCard icon={Lightbulb} title="趋势概要">
         <div className="space-y-2 text-[12px] leading-[1.7]">
           <p className="text-foreground/85">
             基于近 30 天海外主流采购平台及搜索引擎数据：
