@@ -101,43 +101,12 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
 
       {/* 买家 + 需求 — 双栏合并 */}
       <div className="grid grid-cols-2 gap-2.5">
-        <SectionCard
-          icon={UserRound}
-          title="买家画像"
-          action={
-            onBackgroundCheck && (
-              <button
-                onClick={onBackgroundCheck}
-                className="inline-flex items-center gap-1 rounded-md border border-primary/25 bg-primary/8 px-2 py-0.5 text-[10.5px] font-semibold text-primary transition-colors hover:bg-primary/15"
-                title="对该买家进行深度背景调查"
-              >
-                <Search className="w-3 h-3" />
-                深度背调
-              </button>
-            )
-          }
-        >
+        <SectionCard icon={UserRound} title="买家速览">
           <div className="space-y-1">
             <KV label="公司" value="TechSol US" />
-            <KV label="联系人" value="John Carter" />
-            <KV label="时区" value="美国东部（工作时间）" />
-            <KV label="角色" value="小型品牌商 / 区域分销商" />
-            <KV
-              label="评分"
-              value={
-                <span className="inline-flex items-center gap-1">
-                  <span className="inline-flex text-amber-500">
-                    <Star className="w-3 h-3 fill-current" />
-                    <Star className="w-3 h-3 fill-current" />
-                    <Star className="w-3 h-3 fill-current" />
-                    <Star className="w-3 h-3 fill-current" />
-                  </span>
-                  <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-medium">
-                    A 级
-                  </span>
-                </span>
-              }
-            />
+            <KV label="地区" value="美国 · 加州" />
+            <KV label="联系方式" value="john.carter@techsol.us" />
+            <KV label="沟通阶段" value="需求沟通阶段（前期已收到两次该买家询价邮件）" />
           </div>
         </SectionCard>
 
