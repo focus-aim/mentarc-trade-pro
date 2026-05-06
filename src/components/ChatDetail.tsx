@@ -224,6 +224,38 @@ const isBuyerBackgroundPrompt = (text?: string) => {
   return /深度?背景调查|买家背调|生成买家背调报告|深度背调|公司画像.*采购实力|背景调查.*风险/.test(text);
 };
 
+const isFollowupStrategyPrompt = (text?: string) => {
+  if (!text) return false;
+  return /跟进策略|生成两版询盘回复邮件|节奏.*话术|话术.*下一步|跟进.*节奏|制定.*跟进/.test(text);
+};
+
+const FOLLOWUP_STRATEGY_RICH_STEPS: RichStep[] = [
+  {
+    label: "买家阶段判定",
+    subSteps: [
+      { plugin: "买家画像", query: "判断当前沟通阶段与决策窗口", description: "结合询盘内容、回复速度评估推进时机。" },
+    ],
+  },
+  {
+    label: "节奏与通道规划",
+    subSteps: [
+      { plugin: "策略引擎", query: "邮件 / LinkedIn / 电话 三通道时间轴", description: "排布 14 天内关键触达节点。" },
+    ],
+  },
+  {
+    label: "话术模板生成",
+    subSteps: [
+      { plugin: "模板引擎", query: "首封回复 + LinkedIn 加温 + 电话开场", description: "针对不同通道生成匹配文案。" },
+    ],
+  },
+  {
+    label: "下一步动作清单",
+    subSteps: [
+      { plugin: "任务编排", query: "按优先级输出可执行 To-Do", description: "标注 P0/P1/P2 与负责动作。" },
+    ],
+  },
+];
+
 const BUYER_BG_RICH_STEPS: RichStep[] = [
   {
     label: "公司基础信息核查",
