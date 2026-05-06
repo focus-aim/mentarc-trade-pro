@@ -18,6 +18,13 @@ import {
   Handshake,
   Megaphone,
   Lightbulb,
+  Building2,
+  Tags,
+  Star,
+  Briefcase,
+  FlaskConical,
+  Calculator,
+  Wallet,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
