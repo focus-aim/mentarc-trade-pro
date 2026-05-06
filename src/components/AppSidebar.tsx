@@ -18,8 +18,6 @@ interface AppSidebarProps {
 
 const navItems = [
   { icon: MessageSquarePlus, label: "发起任务", key: "new" },
-  { icon: Archive, label: "任务成果", key: "results" },
-  { icon: Store, label: "技能市场", key: "market" },
 ];
 
 const AppSidebar = ({ onNewTask, onBoardClick, onPartnerClick, onResultsClick, onMarketClick, onLogout, partnerConfigured = false, collapsed = false, activeView = "new" }: AppSidebarProps) => {
