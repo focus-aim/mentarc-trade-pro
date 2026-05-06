@@ -855,8 +855,8 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
 
       <div className="flex-1 flex gap-3 min-h-0">
-        {/* LEFT: Conversation + mind-flow */}
-        <div className={`${moduleTitle === "培训专家" ? "flex-1 mx-auto w-full max-w-4xl" : "flex-[3]"} flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm shadow-sm`}>
+        {/* Conversation + mind-flow + inline results */}
+        <div className="flex-1 mx-auto w-full max-w-4xl flex flex-col min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm shadow-sm">
           {/* Expert header — "AI专家专项分析" */}
           <div className="relative overflow-hidden border-b border-border/60 bg-gradient-to-r from-primary/8 via-card/70 to-secondary/8 px-5 py-3.5">
             <div aria-hidden className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-primary/15 blur-3xl" />
@@ -878,10 +878,9 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
           </div>
 
           <div ref={chatScrollRef} className="flex-1 overflow-y-auto scrollbar-thin px-5 py-4">
-            <div className="mx-auto w-full max-w-2xl space-y-4">
+            <div className="mx-auto w-full max-w-3xl space-y-4">
             {messages.map((msg, i) => {
-              // Hide result-type messages from chat (they're surfaced in the right panel + history archive)
-              const isResultOnly =
+              const isResult =
                 msg.type === "operation-result" ||
                 msg.type === "inquiry-result" ||
                 msg.type === "inquiry-followup-result" ||
@@ -893,7 +892,17 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 msg.type === "keyword-result" ||
                 msg.type === "market-result" ||
                 msg.type === "trend-result";
-              if (isResultOnly) return null;
+              if (isResult) {
+                const built = buildResultFor(msg);
+                if (!built) return null;
+                return (
+                  <div key={i} className="w-full">
+                    <div className="rounded-2xl border border-border/60 bg-card/70 backdrop-blur-sm shadow-sm p-4">
+                      {built.node}
+                    </div>
+                  </div>
+                );
+              }
               return (
               <div key={i} className={`flex gap-2.5 ${msg.role === "user" ? "ml-auto max-w-[78%] flex-row-reverse" : "w-full"}`}>
                 <div
@@ -973,104 +982,6 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
             </div>
           </div>
         </div>
-
-        {/* RIGHT: Expert analysis result panel */}
-        {moduleTitle !== "培训专家" && (
-        <aside id="expert-result-panel" className="hidden flex-[7] min-w-0 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/70 shadow-sm backdrop-blur-sm xl:flex">
-          <div className="flex items-center gap-2 border-b border-border/60 bg-gradient-to-r from-secondary/8 via-card/70 to-primary/8 px-4 py-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <BarChart3 className="h-4 w-4" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <h3 className="text-[13px] font-bold text-foreground">对话区</h3>
-            </div>
-
-            {latestResult && (
-              <ResultDownloadButton
-                getTargetNode={() => resultContentRef.current}
-                label={latestResultLabel || expertMeta.resultLabel}
-                disabled={!latestResult}
-              />
-            )}
-
-            {resultHistory.length > 0 && (
-              <Popover>
-                <PopoverTrigger asChild>
-                  <button
-                    className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/70 bg-card/80 px-3 py-1.5 text-[11.5px] font-semibold text-foreground/85 transition-all hover:border-primary/30 hover:bg-primary/[0.05] hover:text-foreground"
-                    title="查看历史生成结果"
-                  >
-                    <History className="h-3.5 w-3.5" />
-                    历史结果
-                    <span className="inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-primary/12 px-1 text-[10px] font-bold text-primary">
-                      {resultHistory.length}
-                    </span>
-                    <ChevronDown className="h-3 w-3 opacity-70" />
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent align="end" sideOffset={8} className="w-[320px] p-0 overflow-hidden">
-                  <div className="border-b border-border/60 bg-gradient-to-r from-primary/5 via-card to-secondary/5 px-3.5 py-2.5">
-                    <p className="text-[12px] font-bold text-foreground">历史生成记录</p>
-                    <p className="mt-0.5 text-[11px] text-muted-foreground">共 {resultHistory.length} 条 · 点击任意记录查看详情</p>
-                  </div>
-                  <div className="max-h-[360px] overflow-y-auto scrollbar-thin py-1">
-                    {[...resultHistory].reverse().map((item) => {
-                      const isActive = activeResultIdx === item.idx;
-                      return (
-                        <button
-                          key={item.idx}
-                          onClick={() => restoreResult(item.m, item.idx)}
-                          className={`group flex w-full items-start gap-2.5 px-3 py-2.5 text-left transition-colors ${
-                            isActive ? "bg-primary/8" : "hover:bg-muted/60"
-                          }`}
-                        >
-                          <span className={`mt-0.5 inline-flex h-5 shrink-0 items-center rounded-md px-1.5 text-[10px] font-bold tracking-wide ${
-                            isActive ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
-                          }`}>
-                            {item.kind}
-                          </span>
-                          <div className="min-w-0 flex-1">
-                            <p className={`truncate text-[12.5px] font-semibold leading-snug ${isActive ? "text-primary" : "text-foreground"}`}>
-                              {item.label}
-                            </p>
-                            <p className="mt-0.5 flex items-center gap-1 text-[11px] text-muted-foreground">
-                              <Clock className="h-2.5 w-2.5" />
-                              {item.time}
-                            </p>
-                          </div>
-                          {isActive && <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-primary" />}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </PopoverContent>
-              </Popover>
-            )}
-          </div>
-
-
-          <div className="flex-1 overflow-y-auto scrollbar-thin px-4 py-4">
-            {latestResult ? (
-              <div ref={resultContentRef} className="mx-auto w-full max-w-3xl text-[14px] leading-relaxed text-foreground">
-                {latestResult}
-              </div>
-            ) : (
-              <div className="flex h-full flex-col items-center justify-center text-center px-4 py-10">
-                <div className="relative h-14 w-14 opacity-90">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-xl" />
-                  <div className="relative flex h-14 w-14 items-center justify-center rounded-full border border-primary/20 bg-card/80">
-                    <Sparkles className="h-6 w-6 text-primary" />
-                  </div>
-                </div>
-                <p className="mt-3 text-[12.5px] font-medium text-foreground">等待 AI 专家专项分析</p>
-                <p className="mt-1 max-w-[260px] text-[11.5px] leading-relaxed text-muted-foreground">
-                  与左侧 {expertMeta.name} 对话后，分析结果将在此结构化呈现。
-                </p>
-              </div>
-            )}
-          </div>
-        </aside>
-        )}
 
       </div>
 
