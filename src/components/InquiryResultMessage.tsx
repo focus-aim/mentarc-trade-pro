@@ -171,10 +171,10 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
 
       {/* 询盘要点 — plain KV list, no card */}
       <section className="px-1 space-y-2">
-        <KV label="买家背景：" value="Memories Souvenirs Pte Ltd，新加坡本地 corporate gifts/souvenirs 供应商，成立于 1994/2000，网站显示主营赠品、杯壶、随身旅行类礼品，员工规模约 1-10 人，属于小型但成熟的礼品采购/分销型买家。" />
-          <KV label="跟进阶段：" value="首次询盘，且明确点名 14 oz travel mug、型号 MGS0107、数量 10k，并要求直接报价、lead time 和图片，说明已进入比价/筛选阶段。" />
-          <KV label="需求完整度：" value="高；产品、规格、数量、联系人、公司、邮箱、网站都已给出，信息足够做首轮报价回复。" />
-          <KV label="风险提示：" value="新加坡买家通常对交期、样品图和报价响应速度要求高；对这类 corporate gift 订单，图片呈现、包装方式和交期说明会直接影响下一步推进。" />
+        <InlineKV label="买家背景：" value="Memories Souvenirs Pte Ltd，新加坡本地 corporate gifts/souvenirs 供应商，成立于 1994/2000，网站显示主营赠品、杯壶、随身旅行类礼品，员工规模约 1-10 人，属于小型但成熟的礼品采购/分销型买家。" />
+          <InlineKV label="跟进阶段：" value="首次询盘，且明确点名 14 oz travel mug、型号 MGS0107、数量 10k，并要求直接报价、lead time 和图片，说明已进入比价/筛选阶段。" />
+          <InlineKV label="需求完整度：" value="高；产品、规格、数量、联系人、公司、邮箱、网站都已给出，信息足够做首轮报价回复。" />
+          <InlineKV label="风险提示：" value="新加坡买家通常对交期、样品图和报价响应速度要求高；对这类 corporate gift 订单，图片呈现、包装方式和交期说明会直接影响下一步推进。" />
       </section>
 
       {/* 询盘回复模板 */}
