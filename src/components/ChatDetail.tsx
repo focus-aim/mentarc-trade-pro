@@ -1032,6 +1032,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
             )}
           </div>
         </aside>
+        )}
 
       </div>
 
