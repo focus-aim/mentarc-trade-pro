@@ -1264,8 +1264,10 @@ const Index = () => {
 
           <div
             className={cn(
-              "relative mx-auto flex min-h-[calc(100vh-64px)] w-full flex-col justify-center overflow-hidden px-4 pb-10 pt-6 sm:px-6 lg:px-8",
-              trainingStage === "idle" ? "max-w-4xl" : "max-w-6xl",
+              "relative mx-auto flex w-full flex-col overflow-hidden px-4 pb-10 sm:px-6 lg:px-8",
+              trainingStage === "idle"
+                ? "min-h-[calc(100vh-64px)] max-w-4xl justify-center pt-6"
+                : "max-w-7xl justify-start pt-8",
             )}
           >
             {/* Ambient glow */}
@@ -1387,46 +1389,31 @@ const Index = () => {
                     <div className="relative mt-6 space-y-3">
                       {/* Main products — conversational row */}
                       <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
-                        <div className="flex items-center gap-2.5">
-                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                            <Package className="h-4 w-4" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-xs font-medium text-muted-foreground">
-                              主营产品
-                            </div>
-                            <input
-                              value={trainingForm.mainProducts}
-                              onChange={(e) => setTrainingForm({ ...trainingForm, mainProducts: e.target.value })}
-                              disabled={trainingStage !== "form"}
-                              placeholder="说说你卖什么，比如 不锈钢保温杯"
-                              className="w-full bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none disabled:opacity-70"
-                            />
-                          </div>
+                        <div className="text-xs font-medium text-muted-foreground">
+                          主营产品
                         </div>
+                        <input
+                          value={trainingForm.mainProducts}
+                          onChange={(e) => setTrainingForm({ ...trainingForm, mainProducts: e.target.value })}
+                          disabled={trainingStage !== "form"}
+                          placeholder="说说你卖什么，比如 不锈钢保温杯"
+                          className="w-full bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none disabled:opacity-70"
+                        />
                       </div>
 
                       {/* Business focus — with quick chips */}
                       <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
-                        <div className="flex items-center gap-2.5">
-                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                            <Target className="h-4 w-4" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-xs font-medium text-muted-foreground">
-                              业务关注点
-                            </div>
-                            <input
-                              value={trainingForm.targetMarket}
-                              onChange={(e) => setTrainingForm({ ...trainingForm, targetMarket: e.target.value })}
-                              disabled={trainingStage !== "form"}
-                              placeholder="当前最想突破的方向"
-                              className="w-full bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none disabled:opacity-70"
-                            />
-                          </div>
+                        <div className="text-xs font-medium text-muted-foreground">
+                          业务关注点
                         </div>
+                        <input
+                          value={trainingForm.targetMarket}
+                          onChange={(e) => setTrainingForm({ ...trainingForm, targetMarket: e.target.value })}
+                          disabled={trainingStage !== "form"}
+                          className="w-full bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none disabled:opacity-70"
+                        />
                         {trainingStage === "form" && (
-                          <div className="mt-2.5 flex flex-wrap gap-1.5 pl-[46px]">
+                          <div className="mt-2.5 flex flex-wrap gap-1.5">
                             {["内贸转外贸", "新市场开拓", "多渠道营销", "买家成交转化", "客户黏性运营"].map((focus) => {
                               const active = trainingForm.targetMarket.includes(focus);
                               return (
@@ -1437,7 +1424,7 @@ const Index = () => {
                                     const current = trainingForm.targetMarket.trim();
                                     if (active) {
                                       const next = current
-                                        .split(/[、,，\s]+/)
+                                        .split(/[、,,\s]+/)
                                         .filter((r) => r && r !== focus)
                                         .join("、");
                                       setTrainingForm({ ...trainingForm, targetMarket: next });
@@ -1466,23 +1453,16 @@ const Index = () => {
 
                       {/* Website — optional, light style */}
                       <div className="group rounded-2xl border border-border/40 bg-background/50 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
-                        <div className="flex items-center gap-2.5">
-                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
-                            <Globe className="h-4 w-4" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-xs font-medium text-muted-foreground">
-                              企业官网
-                            </div>
-                            <input
-                              value={trainingForm.website}
-                              onChange={(e) => setTrainingForm({ ...trainingForm, website: e.target.value })}
-                              disabled={trainingStage !== "form"}
-                              placeholder="贴上网址，AI 自动抓取分析"
-                              className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none disabled:opacity-70"
-                            />
-                          </div>
+                        <div className="text-xs font-medium text-muted-foreground">
+                          企业官网
                         </div>
+                        <input
+                          value={trainingForm.website}
+                          onChange={(e) => setTrainingForm({ ...trainingForm, website: e.target.value })}
+                          disabled={trainingStage !== "form"}
+                          placeholder="贴上网址，AI 自动抓取分析"
+                          className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none disabled:opacity-70"
+                        />
                       </div>
 
                       {/* File upload — tile style */}
