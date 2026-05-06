@@ -80,18 +80,29 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
 
       {/* 二、Top 趋势关键词 */}
       <SectionCard icon={Target} title="二、Top 趋势关键词">
-        <div className="space-y-1.5">
-          {TOP_KEYWORDS.map((k) => (
-            <div key={k.kw} className="flex items-center gap-2 text-[11.5px] leading-snug">
-              <span className="font-medium text-foreground flex-1 truncate">{k.kw}</span>
-              <span className="shrink-0 text-[11px] font-semibold text-destructive tabular-nums w-12 text-right">{k.trend}</span>
-              <span className={`shrink-0 text-[11px] font-semibold w-10 text-right ${COMP_CLS[k.comp]}`}>{k.comp}</span>
-            </div>
-          ))}
-          <p className="text-[10px] text-muted-foreground pt-1 border-t border-border/40 mt-2">
-            趋势 = 30 天搜索量环比 · 竞争度 = SEO / 广告投放强度
-          </p>
+        <div className="overflow-hidden rounded-lg border border-border/60">
+          <table className="w-full text-[11.5px] border-collapse">
+            <thead>
+              <tr className="bg-muted/40 text-muted-foreground">
+                <th className="text-left font-medium px-2.5 py-1.5">关键词</th>
+                <th className="text-right font-medium px-2.5 py-1.5 w-[88px]">近30天趋势</th>
+                <th className="text-right font-medium px-2.5 py-1.5 w-[72px]">竞争度</th>
+              </tr>
+            </thead>
+            <tbody>
+              {TOP_KEYWORDS.map((k, i) => (
+                <tr key={k.kw} className={`border-t border-border/40 ${i % 2 === 1 ? "bg-muted/15" : ""}`}>
+                  <td className="px-2.5 py-1.5 text-foreground font-medium">{k.kw}</td>
+                  <td className="px-2.5 py-1.5 text-right font-semibold text-destructive tabular-nums">{k.trend}</td>
+                  <td className={`px-2.5 py-1.5 text-right font-semibold ${COMP_CLS[k.comp]}`}>{k.comp}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+        <p className="text-[10px] text-muted-foreground pt-2">
+          趋势 = 30 天搜索量环比 · 竞争度 = SEO / 广告投放强度
+        </p>
       </SectionCard>
 
       {/* 三、长尾关键词 */}
@@ -100,13 +111,23 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
           <span className="text-muted-foreground">趋势动因：</span>
           海外项目方倾向于直接搜索<span className="font-medium text-foreground">具体规格 + 应用场景 + 采购意图</span>词，反映询盘已进入选型与比价阶段。
         </p>
-        <div className="space-y-1.5">
-          {LONGTAIL.map((k) => (
-            <div key={k.kw} className="flex items-center gap-2 text-[11.5px] leading-snug">
-              <span className="font-medium text-foreground flex-1 truncate">{k.kw}</span>
-              <span className="shrink-0 text-[11px] font-semibold text-destructive tabular-nums w-12 text-right">{k.trend}</span>
-            </div>
-          ))}
+        <div className="overflow-hidden rounded-lg border border-border/60">
+          <table className="w-full text-[11.5px] border-collapse">
+            <thead>
+              <tr className="bg-muted/40 text-muted-foreground">
+                <th className="text-left font-medium px-2.5 py-1.5">长尾关键词</th>
+                <th className="text-right font-medium px-2.5 py-1.5 w-[88px]">近30天趋势</th>
+              </tr>
+            </thead>
+            <tbody>
+              {LONGTAIL.map((k, i) => (
+                <tr key={k.kw} className={`border-t border-border/40 ${i % 2 === 1 ? "bg-muted/15" : ""}`}>
+                  <td className="px-2.5 py-1.5 text-foreground font-medium">{k.kw}</td>
+                  <td className="px-2.5 py-1.5 text-right font-semibold text-destructive tabular-nums">{k.trend}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </SectionCard>
     </div>
