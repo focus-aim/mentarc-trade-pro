@@ -114,24 +114,18 @@ Best,
       </section>
 
       {/* 实战话术 */}
-      <section className="rounded-xl border border-border bg-background/40 p-3.5">
-        <div className="flex items-center gap-1.5 mb-2.5">
-          <MessageSquareText className="w-3.5 h-3.5 text-muted-foreground" />
-          <h3 className="font-medium text-foreground text-[12.5px]">实战话术</h3>
-        </div>
-        <div className="space-y-2.5">
-          <ScriptCard
-            type="温和确认型"
-            summary="主动询问采购进度，挖掘真实顾虑，铺垫下一步沟通。"
-            body={scriptA}
-          />
-          <ScriptCard
-            type="紧迫促单型"
-            summary="用产能紧张制造稀缺感，逼买家给出明确反馈或时间节点。"
-            body={scriptB}
-          />
-        </div>
-      </section>
+      <div className="space-y-2.5">
+        <ScriptCard
+          type="温和确认型"
+          summary="主动询问采购进度，挖掘真实顾虑，铺垫下一步沟通。"
+          body={scriptA}
+        />
+        <ScriptCard
+          type="紧迫促单型"
+          summary="用产能紧张制造稀缺感，逼买家给出明确反馈或时间节点。"
+          body={scriptB}
+        />
+      </div>
     </div>
   );
 };
