@@ -1858,8 +1858,9 @@ const Index = () => {
                   </div>
                   <button
                     onClick={() => {
+                      const isBuyerBg = /深度?背景调查|买家背调|生成买家背调报告|深度背调|公司画像.*采购实力|背景调查.*风险/.test(prefillValue);
                       setChatInitialMessage(prefillValue);
-                      setActiveModule(selectedModuleTitle);
+                      setActiveModule(isBuyerBg ? "业务专家" : selectedModuleTitle);
                     }}
                     className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md shadow-primary/20 hover:bg-primary/90 transition-colors"
                     aria-label="发送"
