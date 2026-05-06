@@ -1905,21 +1905,29 @@ const Index = () => {
               </p>
               <div className="grid gap-4 md:grid-cols-3">
                 {selectedTaskTab.steps.map((step) => {
-                  const isProfileLink = step.title === "企业知识画像" || step.title === "团队经验技巧";
+                  const isProfileLink = step.title === "理解业务" || step.title === "资产沉淀" || step.title === "企业知识画像" || step.title === "团队经验技巧";
+                  const isPromptFill = step.title === "解答问题";
+                  const stepAny = step as { soon?: boolean };
                   return (
                     <article
                       key={step.title}
-                      onClick={isProfileLink ? handleOpenProfile : undefined}
+                      onClick={
+                        isProfileLink
+                          ? handleOpenProfile
+                          : isPromptFill
+                            ? () => handleUseCasePrompt(step.prompt)
+                            : undefined
+                      }
                       className={cn(
                         "group relative overflow-hidden rounded-2xl border border-border/70 bg-card/80 p-4 shadow-sm shadow-primary/3",
-                        step.soon && "bg-muted/40 opacity-75",
-                        isProfileLink &&
+                        stepAny.soon && "bg-muted/40 opacity-75",
+                        (isProfileLink || isPromptFill) &&
                           "cursor-pointer transition-all hover:border-primary/50 hover:shadow-md hover:shadow-primary/10",
                       )}
                     >
                       <div className="flex items-center gap-2">
                         <h2 className="text-base font-bold text-foreground">{step.title}</h2>
-                        {step.soon && (
+                        {stepAny.soon && (
                           <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
                             即将上线
                           </span>
@@ -1929,7 +1937,7 @@ const Index = () => {
                       <div className="mt-4">
                         <StepPreview title={step.title} />
                       </div>
-                      {!step.soon && !isProfileLink && (
+                      {!stepAny.soon && !isProfileLink && !isPromptFill && (
                         <div className="absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-center gap-2 bg-card/90 px-4 py-4 opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                           <button
                             onClick={() => setCaseDialogOpen(true)}
@@ -1950,6 +1958,12 @@ const Index = () => {
                       {isProfileLink && (
                         <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100">
                           查看档案
+                          <ArrowRight className="h-3 w-3" />
+                        </div>
+                      )}
+                      {isPromptFill && (
+                        <div className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                          填入提示词
                           <ArrowRight className="h-3 w-3" />
                         </div>
                       )}
