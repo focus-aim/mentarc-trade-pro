@@ -73,16 +73,16 @@ const KV = ({ label, value }: { label: string; value: React.ReactNode }) => (
 // ============================================================
 const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResultMessageProps) => {
   return (
-    <div className="space-y-2.5">
-      {/* 业务专家指点 — 紧凑横排 */}
+    <div className="space-y-5">
+      {/* 业务专家指点 */}
       <SectionCard icon={Lightbulb} title="业务专家指点" accent>
         <div className="flex gap-2.5 items-start">
           {expertAvatar && (
-            <div className="w-8 h-8 rounded-full overflow-hidden shrink-0">
+            <div className="w-7 h-7 rounded-full overflow-hidden shrink-0">
               <img src={expertAvatar} alt="业务专家" className="w-full h-full object-cover object-top" />
             </div>
           )}
-          <p className="text-foreground/85 text-[12.5px] leading-[1.6] flex-1">
+          <p className="text-foreground/85 text-[12.5px] leading-[1.65] flex-1">
             结合你当前主营的 <span className="text-primary font-medium">【产品类型】</span> 和主要市场 <span className="text-primary font-medium">【区域】</span>，这类询盘和你的业务匹配度较高。客户懂认证且时间紧迫，首封邮件先确认 <span className="text-primary font-medium">UL 认证 + 最快交期</span>，并主动询问<span className="text-primary font-medium">样品费能否抵扣大货</span>——美国中小买家很在意这一点。
           </p>
         </div>
@@ -94,74 +94,54 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
           <KV label="公司" value="TechSol US" />
           <KV label="地区" value="美国 · 加州" />
           <KV label="联系方式" value="john.carter@techsol.us" />
-          <KV label="采购产品" value="5kW 混合逆变器 · UL1741，单相 / 240V，300 台（首批）" />
-          <KV label="沟通阶段" value="需求沟通阶段（前期已收到两次该买家询价邮件）" />
+          <KV label="采购产品" value="5kW 混合逆变器 · UL1741,单相 / 240V,300 台(首批)" />
+          <KV label="沟通阶段" value="需求沟通阶段(前期已收到两次该买家询价邮件)" />
         </div>
       </SectionCard>
 
-      {/* AI 关键判断 — 三子项 */}
+      {/* AI 关键判断 */}
       <SectionCard icon={Brain} title="AI 关键判断">
-        <div className="space-y-1.5">
-          <div className="rounded-md border border-emerald-500/20 bg-emerald-500/5 px-2 py-1.5">
+        <div className="space-y-2.5">
+          <div>
             <div className="flex items-center gap-1.5">
-              <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/25 bg-emerald-500/10 text-emerald-600 font-semibold">高</span>
-              <p className="text-[10px] text-muted-foreground">询盘真实性</p>
+              <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/25 text-emerald-600 font-semibold">高</span>
+              <p className="text-[11.5px] text-muted-foreground">询盘真实性</p>
             </div>
-            <p className="mt-1 text-[11px] text-foreground/80 leading-[1.5]">
-              邮件结构完整、产品/数量/认证/交期明确，无可疑链接，判定为真实买家询盘。
+            <p className="mt-1 text-[12px] text-foreground/85 leading-[1.6]">
+              邮件结构完整、产品/数量/认证/交期明确,无可疑链接,判定为真实买家询盘。
             </p>
           </div>
-          <div className="rounded-md border border-amber-500/20 bg-amber-500/5 px-2 py-1.5">
+          <div>
             <div className="flex items-center gap-1.5">
-              <span className="px-1 py-0 text-[10px] rounded border border-amber-500/25 bg-amber-500/10 text-amber-600 font-semibold">中</span>
-              <p className="text-[10px] text-muted-foreground">订单交易风险</p>
+              <span className="px-1 py-0 text-[10px] rounded border border-amber-500/30 text-amber-600 font-semibold">中</span>
+              <p className="text-[11.5px] text-muted-foreground">订单交易风险</p>
             </div>
-            <p className="mt-1 text-[11px] text-foreground/80 leading-[1.5]">
-              美国近期对华关税与合规审查趋严，建议优先 T/T 30% 定金 + 见提单付余款，规避汇款与清关风险。
+            <p className="mt-1 text-[12px] text-foreground/85 leading-[1.6]">
+              美国近期对华关税与合规审查趋严,建议优先 T/T 30% 定金 + 见提单付余款,规避汇款与清关风险。
             </p>
           </div>
-          <div className="rounded-md border border-border bg-muted/20 px-2 py-1.5">
-            <p className="text-[10px] text-muted-foreground mb-1">其他必要提示</p>
-            <div className="space-y-1">
-              <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
-                <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-                <p className="leading-[1.55]"><span className="text-muted-foreground">采购能力：</span>中型分销商 · 年采购约 $1.2M，复购意愿明确。</p>
-              </div>
-              <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
-                <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-                <p className="leading-[1.55]"><span className="text-muted-foreground">竞争态势：</span>同步询价 3-5 家中国供应商，价格与交期为关键决胜点。</p>
-              </div>
-              <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85">
-                <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-                <p className="leading-[1.55]">$380 低于常见价，确认是否接受替代方案或翻新机；样品运费未明说，警惕免费寄样要求。</p>
-              </div>
-            </div>
+          <div>
+            <p className="text-[11.5px] text-muted-foreground mb-1">其他必要提示</p>
+            <ul className="space-y-1 text-[12px] text-foreground/85">
+              <li className="leading-[1.6]"><span className="text-muted-foreground">· 采购能力:</span> 中型分销商 · 年采购约 $1.2M,复购意愿明确。</li>
+              <li className="leading-[1.6]"><span className="text-muted-foreground">· 竞争态势:</span> 同步询价 3-5 家中国供应商,价格与交期为关键决胜点。</li>
+              <li className="leading-[1.6]"><span className="text-muted-foreground">· 价格提示:</span> $380 低于常见价,确认是否接受替代方案或翻新机;样品运费未明说,警惕免费寄样要求。</li>
+            </ul>
           </div>
         </div>
       </SectionCard>
 
-      {/* 跟进策略要点 — 紧凑列表 */}
+      {/* 跟进策略要点 */}
       <SectionCard icon={Compass} title="跟进策略要点">
-        <div className="space-y-1">
-          {[
-            "确认 UL 认证 + 现货样品，给两个交期选项（标准 38 天 / 加急 28 天）。",
-            "首封邮件不提降价，先巩固认证与交期价值。",
-            "建议客户次日上午 10 点前回复（可定时发送）。",
-          ].map((p, i) => (
-            <div key={i} className="flex gap-2 text-[12px]">
-              <span className="shrink-0 w-4 h-4 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[10px] font-semibold mt-0.5">
-                {i + 1}
-              </span>
-              <p className="flex-1 text-foreground/85 leading-[1.55]">{p}</p>
-            </div>
-          ))}
-        </div>
+        <ol className="space-y-1 list-decimal pl-4 text-[12px] text-foreground/85 marker:text-muted-foreground">
+          <li className="leading-[1.6]">确认 UL 认证 + 现货样品,给两个交期选项(标准 38 天 / 加急 28 天)。</li>
+          <li className="leading-[1.6]">首封邮件不提降价,先巩固认证与交期价值。</li>
+          <li className="leading-[1.6]">建议客户次日上午 10 点前回复(可定时发送)。</li>
+        </ol>
       </SectionCard>
     </div>
   );
 };
-
-export default InquiryResultMessage;
 
 // ============================================================
 // Email card with copy button (used by InquiryFollowUpResult)
