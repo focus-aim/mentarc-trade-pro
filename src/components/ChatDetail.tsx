@@ -218,6 +218,11 @@ const isTrendCollectionPrompt = (text?: string) => {
   return /热点趋势采集|采集.*海外社媒|海外社媒.*趋势|社媒.*商机|采集.*热点趋势/.test(text);
 };
 
+const isBuyerBackgroundPrompt = (text?: string) => {
+  if (!text) return false;
+  return /深度?背景调查|买家背调|生成买家背调报告|深度背调|公司画像.*采购实力|背景调查.*风险/.test(text);
+};
+
 const BUYER_BG_RICH_STEPS: RichStep[] = [
   {
     label: "公司基础信息核查",
@@ -694,12 +699,17 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
           setShowingMindFlow(true);
         }
       } else if (moduleTitle === "业务专家") {
-        newMessages.push({
-          role: "assistant",
-          content: "",
-          type: "mindflow",
-        });
-        setShowingMindFlow(true);
+        if (isBuyerBackgroundPrompt(text)) {
+          newMessages.push({ role: "assistant", content: "", type: "buyer-background-mindflow" });
+          setShowingBuyerBgMindFlow(true);
+        } else {
+          newMessages.push({
+            role: "assistant",
+            content: "",
+            type: "mindflow",
+          });
+          setShowingMindFlow(true);
+        }
       } else if (moduleTitle === "市场专家" && isMarketResearchPrompt(text)) {
         newMessages.push({ role: "assistant", content: "", type: "market-mindflow" });
       } else if (moduleTitle === "市场专家" && isTrendCollectionPrompt(text)) {
@@ -713,6 +723,9 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       }
     } else if (moduleTitle === "运营专家" && isKeywordPrompt(text)) {
       newMessages.push({ role: "assistant", content: "", type: "keyword-mindflow" });
+    } else if (moduleTitle === "业务专家" && isBuyerBackgroundPrompt(text)) {
+      newMessages.push({ role: "assistant", content: "", type: "buyer-background-mindflow" });
+      setShowingBuyerBgMindFlow(true);
     } else if (moduleTitle === "市场专家" && isMarketResearchPrompt(text)) {
       newMessages.push({ role: "assistant", content: "", type: "market-mindflow" });
     } else if (moduleTitle === "市场专家" && isTrendCollectionPrompt(text)) {
