@@ -338,11 +338,18 @@ const AIProfileDetail = () => {
               }
             />
 
-            <div className="relative mt-4 overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-primary/5 p-5 shadow-sm backdrop-blur-md sm:p-6">
-              <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
-              <div aria-hidden className="pointer-events-none absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-secondary/15 blur-3xl" />
-
-              <div className="relative space-y-2.5">
+            <div className="mt-4 space-y-4">
+              {/* 子模块 1: 企业档案 */}
+              <SubModule icon={Building2} title="企业档案" desc="公司基础信息与目标市场">
+                <FormRow
+                  icon={Building2}
+                  label="公司名称"
+                  required
+                  value={companyEditing ? draft.companyName : company.companyName}
+                  placeholder="请输入公司全称"
+                  disabled={!companyEditing}
+                  onChange={(v) => setDraft({ ...draft, companyName: v })}
+                />
                 <FormRow
                   icon={Package}
                   label="主营产品"
@@ -361,10 +368,26 @@ const AIProfileDetail = () => {
                     }
                   }}
                 />
-
+                <FormRow
+                  icon={Briefcase}
+                  label="业务关注点"
+                  value={companyEditing ? draft.businessFocus : company.businessFocus}
+                  placeholder="例如 高客单 DTC 品牌、定制订单"
+                  disabled={!companyEditing}
+                  onChange={(v) => setDraft({ ...draft, businessFocus: v })}
+                />
+                <FormRow
+                  icon={Globe}
+                  label="公司网址"
+                  optional
+                  value={companyEditing ? draft.website : company.website}
+                  placeholder="贴上网址，AI 自动抓取分析"
+                  disabled={!companyEditing}
+                  onChange={(v) => setDraft({ ...draft, website: v })}
+                />
                 <FormRow
                   icon={Target}
-                  label="目标市场与买家画像"
+                  label="目标市场"
                   required
                   value={companyEditing ? draft.targetMarket : company.targetMarket}
                   placeholder="覆盖区域 / 买家类型"
@@ -380,58 +403,66 @@ const AIProfileDetail = () => {
                     }
                   }}
                 />
+              </SubModule>
 
+              {/* 子模块 2: 产品知识 */}
+              <SubModule icon={Tags} title="产品知识" desc="主营产品的关键词、卖点与典型案例">
                 <FormRow
-                  icon={Globe}
-                  label="企业官网"
-                  optional
-                  value={companyEditing ? draft.website : company.website}
-                  placeholder="贴上网址，AI 自动抓取分析"
+                  icon={Tags}
+                  label="主营产品关键词"
+                  value={companyEditing ? draft.productKeywords : company.productKeywords}
+                  placeholder="用顿号分隔，例如 保温杯、运动水壶"
                   disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, website: v })}
+                  onChange={(v) => setDraft({ ...draft, productKeywords: v })}
                 />
-
                 <FormRow
-                  icon={ShieldCheck}
-                  label="资质与认证"
-                  optional
-                  value={companyEditing ? draft.certifications : company.certifications}
-                  placeholder="例如 FDA、CE、LFGB"
+                  icon={Star}
+                  label="产品卖点"
+                  value={companyEditing ? draft.productSelling : company.productSelling}
+                  placeholder="核心卖点 / 差异化优势"
                   disabled={!companyEditing}
-                  onChange={(v) => setDraft({ ...draft, certifications: v })}
+                  onChange={(v) => setDraft({ ...draft, productSelling: v })}
                 />
+                <FormRow
+                  icon={Briefcase}
+                  label="产品案例"
+                  value={companyEditing ? draft.productCases : company.productCases}
+                  placeholder="代表性合作客户或订单案例"
+                  disabled={!companyEditing}
+                  onChange={(v) => setDraft({ ...draft, productCases: v })}
+                />
+              </SubModule>
 
-                <label
-                  className={cn(
-                    "group flex items-center gap-2 rounded-2xl border border-dashed border-border/60 bg-background/40 px-3.5 py-2.5 transition-all duration-200",
-                    companyEditing ? "cursor-pointer hover:border-primary/40 hover:bg-primary/5" : "pointer-events-none opacity-90"
-                  )}
-                >
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
-                    <FileUp className="h-3.5 w-3.5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[10.5px] font-medium text-muted-foreground">
-                      产品资料 <span className="text-muted-foreground/70">· 选填</span>
-                    </div>
-                    <div className="truncate text-[13px] text-foreground/80">
-                      {(companyEditing ? draft.docName : company.docName) || "拖拽或点击上传 PDF / Word / Excel"}
-                    </div>
-                  </div>
-                  <input
-                    type="file"
-                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
-                    className="hidden"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) setDraft({ ...draft, docName: file.name });
-                    }}
-                  />
-                </label>
-              </div>
+              {/* 子模块 3: 业务规则 */}
+              <SubModule icon={ShieldCheck} title="业务规则" desc="样品、报价、付款的标准做法">
+                <FormRow
+                  icon={FlaskConical}
+                  label="样品规则"
+                  value={companyEditing ? draft.sampleRule : company.sampleRule}
+                  placeholder="例如 免费样 1pcs，运费到付"
+                  disabled={!companyEditing}
+                  onChange={(v) => setDraft({ ...draft, sampleRule: v })}
+                />
+                <FormRow
+                  icon={Calculator}
+                  label="报价规则"
+                  value={companyEditing ? draft.quoteRule : company.quoteRule}
+                  placeholder="贸易术语 / MOQ / 报价档位"
+                  disabled={!companyEditing}
+                  onChange={(v) => setDraft({ ...draft, quoteRule: v })}
+                />
+                <FormRow
+                  icon={Wallet}
+                  label="付款规则"
+                  value={companyEditing ? draft.paymentRule : company.paymentRule}
+                  placeholder="例如 T/T 30% + 70% 见提单副本"
+                  disabled={!companyEditing}
+                  onChange={(v) => setDraft({ ...draft, paymentRule: v })}
+                />
+              </SubModule>
 
               {companyEditing && (
-                <div className="relative mt-5 flex items-center gap-2">
+                <div className="flex items-center gap-2 pt-1">
                   <button
                     onClick={saveCompany}
                     className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
@@ -448,6 +479,7 @@ const AIProfileDetail = () => {
                   </button>
                 </div>
               )}
+            </div>
             </div>
           </section>
         )}
