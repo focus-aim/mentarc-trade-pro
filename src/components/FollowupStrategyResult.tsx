@@ -93,7 +93,7 @@ const FollowupStrategyResult = () => {
     { day: "D+2", action: "未回复则发短跟进，问样品收件信息 / 课题优先级", channel: "Email" },
     { day: "D+5", action: "LinkedIn 添加 John Carter，附产品视频 / 工厂介绍", channel: "LinkedIn" },
     { day: "D+8", action: "电话 / WhatsApp 触达，约 20 分钟视频会议", channel: "Phone" },
-    { day: "D+14", action: "若仍未推进，发"项目机会延期"信号促成报价", channel: "Email" },
+    { day: "D+14", action: "若仍未推进，发「项目机会延期」信号促成报价", channel: "Email" },
   ];
 
   const emailScript = `Subject: Re: 5kW Hybrid Inverter (UL1741) — Cert, Lead Time & Sample Plan
