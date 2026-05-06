@@ -591,6 +591,75 @@ const SubModule = ({
   </div>
 );
 
+interface KnowledgeItem {
+  label: string;
+  value: string;
+  draft: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+}
+
+const KnowledgeCard = ({
+  icon: Icon,
+  title,
+  desc,
+  badge,
+  editing,
+  items,
+}: {
+  icon: typeof Package;
+  title: string;
+  desc: string;
+  badge?: string;
+  editing: boolean;
+  items: KnowledgeItem[];
+}) => (
+  <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card via-card to-primary/[0.04] shadow-sm transition-all hover:shadow-md">
+    <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/8 blur-3xl" />
+    <header className="relative flex items-center justify-between gap-3 border-b border-border/40 px-4 py-3">
+      <div className="flex items-center gap-2.5">
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <Icon className="h-4 w-4" />
+        </div>
+        <div>
+          <div className="flex items-center gap-1.5">
+            <h3 className="text-[13.5px] font-bold text-foreground">{title}</h3>
+            {badge && (
+              <span className="inline-flex items-center gap-0.5 rounded-full bg-success/10 px-1.5 py-0.5 text-[10px] font-semibold text-success">
+                <Check className="h-2.5 w-2.5" />
+                {badge}
+              </span>
+            )}
+          </div>
+          <p className="mt-0.5 text-[10.5px] text-muted-foreground">{desc}</p>
+        </div>
+      </div>
+    </header>
+    <ul className="relative flex-1 divide-y divide-border/30 px-4 py-1">
+      {items.map((it) => (
+        <li
+          key={it.label}
+          className="flex items-baseline gap-3 py-2.5 text-[12.5px] leading-relaxed"
+        >
+          <span className="w-24 shrink-0 text-[11.5px] font-medium text-muted-foreground">
+            {it.label}
+            {it.required && <span className="ml-0.5 text-destructive">*</span>}
+          </span>
+          {editing ? (
+            <input
+              value={it.draft}
+              onChange={(e) => it.onChange(e.target.value)}
+              className="min-w-0 flex-1 bg-transparent text-foreground/90 focus:outline-none border-b border-border/40 focus:border-primary/50 pb-0.5 transition-colors"
+            />
+          ) : (
+            <span className="min-w-0 flex-1 text-foreground/85 break-words">{it.value || <span className="text-muted-foreground/60">未填写</span>}</span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 const FormRow = ({
   label,
   required,
