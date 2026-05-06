@@ -40,12 +40,14 @@ const MindFlowMessage = ({ onComplete, steps, richSteps, stepLinks }: MindFlowMe
 
   const isRunning = currentStep < resolvedSteps.length && !completed;
 
+  // Compute per-tick timing so the whole flow finishes in ~3s total
+  const totalTicks = useMemo(() => {
+    return resolvedSteps.reduce((acc, s) => acc + Math.max(1, s.subSteps?.length || 0), 0);
+  }, [resolvedSteps]);
+  const tickMs = useMemo(() => Math.max(80, Math.min(220, 2400 / Math.max(1, totalTicks))), [totalTicks]);
+
   useEffect(() => {
-    if (currentStep >= resolvedSteps.length) {
-      // Completion is handled by a separate effect to avoid the cleanup
-      // from this effect canceling the finalization timer.
-      return;
-    }
+    if (currentStep >= resolvedSteps.length) return;
 
     const step = resolvedSteps[currentStep];
     const subCount = step.subSteps?.length || 0;
@@ -54,18 +56,30 @@ const MindFlowMessage = ({ onComplete, steps, richSteps, stepLinks }: MindFlowMe
       const timer = setTimeout(() => {
         setCurrentStep((s) => s + 1);
         setCurrentSubStep(0);
-      }, 280 + Math.random() * 120);
+      }, tickMs);
       return () => clearTimeout(timer);
     }
 
     const timer = setTimeout(() => {
       setCurrentSubStep((s) => s + 1);
-    }, 320 + Math.random() * 180);
+    }, tickMs);
     return () => clearTimeout(timer);
-  }, [currentStep, currentSubStep, resolvedSteps]);
+  }, [currentStep, currentSubStep, resolvedSteps, tickMs]);
 
-  // Finalization: fire once when all steps are done. Independent of step deps
-  // so that intermediate re-renders cannot cancel the 600ms timer.
+  // Hard cap: force completion after 3s no matter what.
+  useEffect(() => {
+    const cap = setTimeout(() => {
+      if (completedRef.current) return;
+      completedRef.current = true;
+      setCurrentStep(resolvedSteps.length);
+      setCompleted(true);
+      setCollapsed(true);
+      onComplete();
+    }, 3000);
+    return () => clearTimeout(cap);
+  }, [resolvedSteps.length, onComplete]);
+
+  // Finalization: fire once when all steps are done.
   useEffect(() => {
     if (currentStep < resolvedSteps.length) return;
     if (completedRef.current) return;
@@ -74,7 +88,7 @@ const MindFlowMessage = ({ onComplete, steps, richSteps, stepLinks }: MindFlowMe
     const timer = setTimeout(() => {
       setCollapsed(true);
       onComplete();
-    }, 600);
+    }, 200);
     return () => clearTimeout(timer);
   }, [currentStep, resolvedSteps.length, onComplete]);
 
