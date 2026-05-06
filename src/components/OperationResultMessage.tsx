@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { ChevronDown, X, Copy, Check, MessageSquareQuote } from "lucide-react";
 import type { ChatQuote } from "./InquiryResultMessage";
 
 interface OperationResultMessageProps {
@@ -7,6 +7,8 @@ interface OperationResultMessageProps {
   onQuote?: (quote: ChatQuote) => void;
   onSendPrompt?: (text: string) => void;
   expertAvatar?: string;
+  /** 营销素材任务隐藏产品详情描述模块 */
+  hideDescription?: boolean;
 }
 
 const PRODUCT_COPY = `标题：
@@ -33,13 +35,6 @@ const MOCK_MAIN_IMAGES = [
   "https://images.unsplash.com/photo-1570831739435-6601aa3fa4fb?w=300&h=300&fit=crop",
   "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=300&h=300&fit=crop",
   "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=300&h=300&fit=crop",
-];
-
-const COMPETITOR_HIGHLIGHTS = [
-  { title: "价格策略", desc: "阶梯报价清晰：1-9台 $899、10-49台 $829、50+台 $769，支持整柜议价" },
-  { title: "认证优势", desc: "CE、ROHS、EN15194、FCC 四证齐全，附 SGS 检测报告链接" },
-  { title: "定制能力", desc: "支持 OEM/ODM：自定义 LOGO、车架配色、电池容量（10Ah/15Ah/20Ah）" },
-  { title: "信任背书", desc: "详情页展示工厂实拍视频、出货记录、欧美客户合影" },
 ];
 
 const ImageLightbox = ({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) => (
@@ -71,7 +66,23 @@ const ImageGrid = ({ images, label }: { images: string[]; label: string }) => {
   );
 };
 
-const OperationResultMessage = ({ onSendPrompt, expertAvatar }: OperationResultMessageProps) => {
+const OperationResultMessage = ({ onQuote, onSendPrompt, expertAvatar, hideDescription }: OperationResultMessageProps) => {
+  const [expanded, setExpanded] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleQuote = (moduleName: string, content: string) => {
+    onQuote?.({
+      moduleName,
+      preview: content.slice(0, 20) + (content.length > 20 ? "…" : ""),
+      fullContent: content,
+    });
+  };
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(PRODUCT_COPY);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div className="space-y-4 text-sm leading-relaxed">
@@ -85,10 +96,51 @@ const OperationResultMessage = ({ onSendPrompt, expertAvatar }: OperationResultM
         <span className="font-semibold text-foreground text-[14px]">AI专家指点</span>
       </div>
 
-
       <p className="text-foreground/85 text-[13px] leading-relaxed">
         B端采购商最关注"采购成本、售后保障、终端适销性"。详情页须明确标注：①阶梯报价（样品/小批量/整柜）；②认证齐全（CE、ROHS、EN15194）；③定制能力（贴牌、配色、电池容量可选）。主图首张用白底加参数标签，第二张展示沙滩/雪地商用场景，视频呈现电池插拔与装柜实拍。用实测续航与承重数据打消顾虑，让采购商放心询盘。
       </p>
+
+      {/* 产品详情描述（营销素材任务隐藏） */}
+      {!hideDescription && (
+        <div className="border border-border rounded-xl overflow-hidden bg-muted/30">
+          <div className="px-4 py-3 border-b border-border/60 flex items-center justify-between">
+            <span className="font-medium text-foreground text-sm">产品详情描述</span>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => handleQuote("产品详情描述", PRODUCT_COPY)}
+                className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                title="追问"
+              >
+                <MessageSquareQuote className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={handleCopy}
+                className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                title={copied ? "已复制" : "复制"}
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+              </button>
+            </div>
+          </div>
+          <div className={`relative ${expanded ? "" : "max-h-[160px] overflow-hidden"}`}>
+            <pre className="whitespace-pre-wrap text-[13px] text-foreground/90 leading-relaxed px-4 py-3 font-sans">
+              {PRODUCT_COPY}
+            </pre>
+            {!expanded && (
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-muted/80 to-transparent" />
+            )}
+          </div>
+          {!expanded && (
+            <button
+              onClick={() => setExpanded(true)}
+              className="w-full flex items-center justify-center gap-1 px-4 py-2 text-xs text-primary font-medium hover:bg-muted/50 transition-colors active:scale-[0.995] border-t border-border/60"
+            >
+              展开全部
+              <ChevronDown className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+      )}
 
       <div className="space-y-2">
         <span className="font-medium text-foreground text-sm">产品主图</span>
