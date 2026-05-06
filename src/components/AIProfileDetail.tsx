@@ -53,9 +53,9 @@ interface ExpertSkillBlock {
 }
 
 const experts = [
-  { name: "Allen", role: "业务专家", avatar: businessAvatar, tasks: 17, tagline: "询盘到成交全流程" },
-  { name: "Bella", role: "运营专家", avatar: operationAvatar, tasks: 13, tagline: "选品·内容·转化" },
-  { name: "Cici", role: "培训专家", avatar: trainingAvatar, tasks: 11, tagline: "市场·合规·风控" },
+  { name: "业务专家", role: "询盘到成交全流程", avatar: businessAvatar, tasks: 17, tagline: "询盘到成交全流程" },
+  { name: "运营专家", role: "选品·内容·转化", avatar: operationAvatar, tasks: 13, tagline: "选品·内容·转化" },
+  { name: "培训专家", role: "市场·合规·风控", avatar: trainingAvatar, tasks: 11, tagline: "市场·合规·风控" },
 ];
 
 const initialCompanyForm: CompanyForm = {
