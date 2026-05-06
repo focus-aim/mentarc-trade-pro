@@ -404,13 +404,13 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
     }
     if (m.type === "followup-strategy-result") {
       return {
-        node: <FollowupStrategyResult />,
+        node: <FollowupStrategyResult expertAvatar={expertAvatar} />,
         label: "跟进策略 · 节奏 / 话术 / 动作",
       };
     }
     if (m.type === "buyer-background-result") {
       return {
-        node: <BuyerBackgroundReport />,
+        node: <BuyerBackgroundReport expertAvatar={expertAvatar} />,
         label: "买家背调报告 · TechSol US",
       };
     }
