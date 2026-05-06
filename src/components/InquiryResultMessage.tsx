@@ -91,8 +91,7 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
             </div>
           )}
           <p className="text-foreground/85 text-[12.5px] leading-[1.6] flex-1">
-            客户懂认证且时间紧迫，首封邮件先确认 <span className="text-primary font-medium">UL 认证 + 最快交期</span>，
-            并主动询问<span className="text-primary font-medium">样品费能否抵扣大货</span>——美国中小买家很在意这一点。
+            结合你当前主营的 <span className="text-primary font-medium">【产品类型】</span> 和主要市场 <span className="text-primary font-medium">【区域】</span>，这类询盘和你的业务匹配度较高。客户懂认证且时间紧迫，首封邮件先确认 <span className="text-primary font-medium">UL 认证 + 最快交期</span>，并主动询问<span className="text-primary font-medium">样品费能否抵扣大货</span>——美国中小买家很在意这一点。
           </p>
         </div>
       </SectionCard>
