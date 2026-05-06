@@ -1029,7 +1029,7 @@ const Index = () => {
                 {[
                   {
                     avatar: businessAvatar,
-                    name: "Allen 的可装技能",
+                    name: "业务专家的可装技能",
                     role: "Buyer Follow-up AI",
                     installed: 2,
                     total: 3,
@@ -1041,7 +1041,7 @@ const Index = () => {
                   },
                   {
                     avatar: operationAvatar,
-                    name: "Bella 的可装技能",
+                    name: "运营专家的可装技能",
                     role: "Product Ops AI",
                     installed: 2,
                     total: 3,
@@ -1053,7 +1053,7 @@ const Index = () => {
                   },
                   {
                     avatar: trainingAvatar,
-                    name: "Cici 的可装技能",
+                    name: "培训专家的可装技能",
                     role: "Market Insight AI",
                     installed: 1,
                     total: 3,
