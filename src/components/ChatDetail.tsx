@@ -472,6 +472,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
     const labelMap = (m: Message): { label: string; kind: string } | null => {
       if (m.type === "inquiry-result") return { label: "询盘解析结果", kind: "解析" };
       if (m.type === "inquiry-followup-result") return { label: "询盘回复邮件 · 两版对比", kind: "邮件" };
+      if (m.type === "followup-strategy-result") return { label: "跟进策略 · 节奏 / 话术 / 动作", kind: "策略" };
       if (m.type === "buyer-background-result") return { label: "买家背调报告 · TechSol US", kind: "背调" };
       if (m.type === "operation-result") return { label: "产品分析结果", kind: "分析" };
       if (m.type === "image-result") return { label: "产品图生成结果", kind: "生成" };
