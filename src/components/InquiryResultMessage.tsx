@@ -303,104 +303,117 @@ Best regards,
 // ============================================================
 export const BuyerBackgroundReport = () => {
   return (
-    <div className="space-y-2.5">
-      {/* 公司概览 */}
-      <SectionCard icon={Building2} title="公司概览" accent>
+    <div className="space-y-3">
+      {/* 评估概要 */}
+      <SectionCard icon={Lightbulb} title="评估概要" accent>
+        <p className="text-[12.5px] text-foreground/85 leading-[1.7]">
+          这是一家具有 <span className="text-primary font-medium">15 年历史</span>的成熟型进口商，其产品线定价处于<span className="text-primary font-medium">市场中高段位</span>。这类客户的供应链通常相对稳定，他们对价格的敏感度排在第二位，第一诉求是 <span className="text-primary font-medium">"品质的一致性"</span> 和 <span className="text-primary font-medium">"交期的绝对保障"</span>。如果对方主动询盘，大概率是原有供应商出现了质量波动或产能瓶颈。
+        </p>
+      </SectionCard>
+
+      {/* 详细背调报告 标题分隔 */}
+      <div className="flex items-center gap-2 px-1 pt-1">
+        <FileText className="w-3.5 h-3.5 text-muted-foreground" />
+        <span className="text-[12px] font-semibold text-foreground/80">详细背调报告</span>
+        <div className="flex-1 h-px bg-border" />
+      </div>
+
+      {/* 公司概况 */}
+      <SectionCard icon={Building2} title="公司概况">
         <div className="grid grid-cols-2 gap-x-3 gap-y-1">
           <KV label="公司名" value="TechSol US LLC" />
           <KV label="注册地" value="Austin, Texas, USA" />
-          <KV label="成立时间" value="2018 年（约 7 年）" />
-          <KV label="规模" value="员工 25–50 人" />
-          <KV label="年营收" value="约 $8–12M（估算）" />
-          <KV label="主营业务" value="家用光伏 / 储能系统集成与零售" />
+          <KV label="成立时间" value="2010 年（约 15 年）" />
+          <KV label="员工规模" value="80–120 人" />
+          <KV label="组织形式" value="独立法人 · 私有制 LLC" />
+          <KV label="经营状态" value={<span className="text-emerald-600">活跃 · 良好</span>} />
         </div>
       </SectionCard>
 
-      {/* 在线业务足迹 */}
-      <SectionCard icon={Globe} title="在线业务足迹">
-        <div className="space-y-1">
-          <KV label="官网" value={<span className="text-primary">techsol.us</span>} />
-          <KV label="主销渠道" value="官网 D2C + Amazon US + 区域光伏经销网络" />
-          <KV label="社媒" value="LinkedIn 1.2k followers · YouTube 安装教程 8k 订阅" />
-          <KV label="客户口碑" value="Google 4.6 ★（172 条评论）· Trustpilot 4.4 ★" />
-        </div>
-      </SectionCard>
-
-      {/* 采购历史 + 信用 — 双栏 */}
-      <div className="grid grid-cols-2 gap-2.5">
-        <SectionCard icon={ShieldCheck} title="采购 / 进口记录">
-          <div className="space-y-1">
-            <KV label="近 12 月" value="逆变器 / 储能柜 6 票" />
-            <KV label="主要来源" value="中国（4 票）· 越南（1 票）· 韩国（1 票）" />
-            <KV label="单票金额" value="$80k–$220k 不等" />
-            <KV
-              label="活跃度"
-              value={
-                <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-medium">
-                  活跃 · 持续采购
-                </span>
-              }
-            />
-          </div>
-        </SectionCard>
-
-        <SectionCard icon={CreditCard} title="信用与履约">
-          <div className="space-y-1">
-            <KV
-              label="D&B 评级"
-              value={
-                <span className="px-1 py-0 text-[10px] rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 font-medium">
-                  3A2 · 良好
-                </span>
-              }
-            />
-            <KV label="付款记录" value="同业反馈：T/T 30/70 准时，无拖欠" />
-            <KV label="诉讼记录" value="未检索到买卖合同纠纷" />
-            <KV label="退货争议" value="2 起，均为质量问题，已和解" />
-          </div>
-        </SectionCard>
-      </div>
-
-      {/* 决策链 */}
-      <SectionCard icon={Users} title="决策链路与关键人">
+      {/* 核心管理层 */}
+      <SectionCard icon={Users} title="核心管理层">
         <div className="space-y-1.5">
           <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary">决策人</span>
+            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary">CEO</span>
             <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">John Carter</span> · Procurement Manager · 在职 3 年 · LinkedIn 活跃
+              <span className="font-medium text-foreground">Sarah Wong</span> · 创始人 · 在职 15 年，主导战略与大额订单签批
             </p>
           </div>
           <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">影响人</span>
+            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">采购</span>
             <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">Mark Liu</span> · 技术总监（决定认证 / 兼容性）
+              <span className="font-medium text-foreground">John Carter</span> · Procurement Manager · 在职 6 年，对接中国工厂
             </p>
           </div>
           <div className="flex items-start gap-2 text-[12px]">
-            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">最终拍板</span>
+            <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground">技术</span>
             <p className="flex-1 text-foreground/85 leading-[1.6]">
-              <span className="font-medium text-foreground">Sarah Wong</span> · CEO（金额 &gt; $100k 需其签字）
+              <span className="font-medium text-foreground">Mark Liu</span> · 技术总监 · 决定认证、兼容性与样品验收
             </p>
           </div>
         </div>
       </SectionCard>
 
-      {/* 风险与合作建议 */}
-      <SectionCard icon={ShieldAlert} title="风险提示与合作建议">
+      {/* 主营业务与核心产品 */}
+      <SectionCard icon={Globe} title="主营业务与核心产品">
         <div className="space-y-1">
+          <KV label="主营业务" value="家用光伏 / 储能系统集成、安装与零售" />
+          <KV label="核心品类" value="混合逆变器、储能电池柜、智能能源管理网关" />
+          <KV label="价格定位" value="市场中高段位，主推 5–10kW 家用方案" />
+          <KV label="销售渠道" value="官网 D2C · Amazon US · 加州 / 德州区域经销网络" />
+          <KV label="终端客户" value="北美中产家庭 · 中小型商业屋顶项目" />
+        </div>
+      </SectionCard>
+
+      {/* 市场表现 */}
+      <SectionCard icon={TrendingUp} title="市场表现">
+        <div className="space-y-1">
+          <KV label="市场地位" value="美国西部区域 Top 30 家用储能集成商" />
+          <KV label="客户口碑" value="Google 4.6 ★（172 条）· Trustpilot 4.4 ★ · 安装好评率 92%" />
+          <KV label="品牌声量" value="LinkedIn 1.2k followers · YouTube 安装教程 8k 订阅" />
+          <KV label="增长趋势" value="近 3 年营收 CAGR 约 18%，受 IRA 法案利好" />
+        </div>
+      </SectionCard>
+
+      {/* 风险提示 */}
+      <SectionCard icon={ShieldAlert} title="风险提示">
+        <div className="space-y-1.5">
           <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
             <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">中小规模 + 价格敏感，建议首单要求 30% 定金，避免账期。</p>
+            <p className="leading-[1.55]">质量一致性敏感，曾因产品质量发起 2 起退货，建议主动提供 QC 报告与第三方验货。</p>
           </div>
           <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-amber-500/[0.06] border border-amber-500/15 px-2 py-1">
             <AlertTriangle className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">曾因质量退货 2 起，QC 报告与第三方验货建议主动提供。</p>
+            <p className="leading-[1.55]">受美国对华关税与 UL 合规审查影响，建议明确 HS 编码与认证范围。</p>
           </div>
           <div className="flex gap-1.5 items-start text-[11.5px] text-foreground/85 rounded bg-emerald-500/[0.06] border border-emerald-500/15 px-2 py-1">
             <Sparkles className="w-3 h-3 text-emerald-600 shrink-0 mt-0.5" />
-            <p className="leading-[1.55]">活跃采购 + 良好口碑，若首单顺利，年化复购潜力 $300k+。</p>
+            <p className="leading-[1.55]">付款记录良好，无诉讼，首单可走 T/T 30/70，长期合作潜力 $300k+/年。</p>
           </div>
         </div>
+      </SectionCard>
+
+      {/* 财务与贸易数据 */}
+      <SectionCard icon={CreditCard} title="财务与贸易数据">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+          <KV label="估算年营收" value="$15–22M（2024）" />
+          <KV label="D&B 评级" value={<span className="text-emerald-600">3A2 · 良好</span>} />
+          <KV label="近 12 月进口" value="逆变器 / 储能柜 6 票" />
+          <KV label="主要来源国" value="中国 4 票 · 越南 1 票 · 韩国 1 票" />
+          <KV label="单票金额" value="$80k – $220k" />
+          <KV label="付款方式" value="T/T 30/70 为主，偶用 LC at sight" />
+        </div>
+      </SectionCard>
+
+      {/* 参考资料 */}
+      <SectionCard icon={FileText} title="参考资料">
+        <ul className="space-y-1 text-[12px] text-foreground/85">
+          <li className="leading-[1.6]">· 官网：<span className="text-primary">techsol.us</span></li>
+          <li className="leading-[1.6]">· 美国海关 ImportGenius 进口提单（2024.04 – 2025.03）</li>
+          <li className="leading-[1.6]">· Dun &amp; Bradstreet 企业信用档案</li>
+          <li className="leading-[1.6]">· LinkedIn 公司主页与关键人公开资料</li>
+          <li className="leading-[1.6]">· Google Reviews / Trustpilot 终端客户评价</li>
+        </ul>
       </SectionCard>
     </div>
   );
