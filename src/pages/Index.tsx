@@ -1346,9 +1346,6 @@ const Index = () => {
                       <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
                         让 AI 团队读懂你的业务
                       </h1>
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                        提供少量关键信息，AI 即可建立你的业务画像。
-                      </p>
                     </div>
 
                     <div className="relative mt-6 space-y-3">
@@ -1360,7 +1357,7 @@ const Index = () => {
                           </div>
                           <div className="min-w-0 flex-1">
                             <div className="text-xs font-medium text-muted-foreground">
-                              主营产品 <span className="text-muted-foreground/70">· 选填</span>
+                              主营产品
                             </div>
                             <input
                               value={trainingForm.mainProducts}
@@ -1381,7 +1378,7 @@ const Index = () => {
                           </div>
                           <div className="min-w-0 flex-1">
                             <div className="text-xs font-medium text-muted-foreground">
-                              业务关注点 <span className="text-muted-foreground/70">· 选填</span>
+                              业务关注点
                             </div>
                             <input
                               value={trainingForm.targetMarket}
@@ -1439,7 +1436,7 @@ const Index = () => {
                           </div>
                           <div className="min-w-0 flex-1">
                             <div className="text-xs font-medium text-muted-foreground">
-                              企业官网 <span className="text-muted-foreground/70">· 选填</span>
+                              企业官网
                             </div>
                             <input
                               value={trainingForm.website}
@@ -1464,7 +1461,7 @@ const Index = () => {
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="text-xs font-medium text-muted-foreground">
-                            产品资料 <span className="text-muted-foreground/70">· 选填</span>
+                            产品资料
                           </div>
                           <div className="truncate text-sm text-foreground/80">
                             {trainingForm.docName || "拖拽或点击上传 PDF / Word / Excel"}
@@ -1546,9 +1543,6 @@ const Index = () => {
                           <h1 className="mt-3 text-2xl font-bold leading-snug tracking-tight text-foreground">
                             AI 学习与画像预览
                           </h1>
-                          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                            填写左侧素材后，这里会实时展示学习过程与结构化成果。
-                          </p>
                         </>
                       )}
                       {trainingStage === "training" && (
