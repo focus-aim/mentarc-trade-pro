@@ -870,6 +870,13 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
               <h3 className="text-[13px] font-bold text-foreground">对话区</h3>
             </div>
 
+            {latestResult && (
+              <ResultDownloadButton
+                getTargetNode={() => resultContentRef.current}
+                label={latestResultLabel || expertMeta.resultLabel}
+                disabled={!latestResult}
+              />
+            )}
 
             {resultHistory.length > 0 && (
               <Popover>
