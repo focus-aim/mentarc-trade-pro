@@ -135,14 +135,9 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck }: InquiryResult
         </div>
       </SectionCard>
 
-      {/* 跟进策略要点 */}
-      <SectionCard icon={Compass} title="跟进策略要点">
-        <ol className="space-y-1 list-decimal pl-4 text-[12px] text-foreground/85 marker:text-muted-foreground">
-          <li className="leading-[1.6]">确认 UL 认证 + 现货样品,给两个交期选项(标准 38 天 / 加急 28 天)。</li>
-          <li className="leading-[1.6]">首封邮件不提降价,先巩固认证与交期价值。</li>
-          <li className="leading-[1.6]">建议客户次日上午 10 点前回复(可定时发送)。</li>
-        </ol>
-      </SectionCard>
+      {/* 询盘回复模板 */}
+      <ReplyTemplateBlock />
+
     </div>
   );
 };
