@@ -289,9 +289,7 @@ const AIProfileDetail = () => {
                 <p className="text-[15px] font-bold text-foreground">
                   3 位在职 AI 专家 · 已协作 <span className="text-primary">23</span> 天
                 </p>
-                <p className="mt-1 text-[12.5px] text-muted-foreground">
-                  累计承接 41 项任务 · 沉淀 12 条专属偏好 · 同步 7 项行业更新
-                </p>
+                <div className="mt-1 h-4" />
               </div>
             </div>
 
@@ -302,7 +300,7 @@ const AIProfileDetail = () => {
                   className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/80 px-3 py-1.5 text-[12px] font-medium text-foreground/85 backdrop-blur-sm"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                  {e.name} · {e.tasks} 任务
+                  {e.name}
                 </span>
               ))}
             </div>
