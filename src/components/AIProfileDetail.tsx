@@ -259,7 +259,7 @@ const AIProfileDetail = () => {
             AI团队档案
           </h1>
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
-            档案承载企业一手资料、AI 在协作中沉淀的偏好，以及三位专家的专业能力图谱。
+            档案承载企业文档资料、AI 在协作中沉淀的偏好，以及三位专家的专业能力图谱。
           </p>
         </section>
 
