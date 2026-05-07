@@ -25,6 +25,8 @@ import {
   FlaskConical,
   Calculator,
   Wallet,
+  ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
