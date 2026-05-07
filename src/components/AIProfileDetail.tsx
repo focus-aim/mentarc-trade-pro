@@ -263,49 +263,6 @@ const AIProfileDetail = () => {
           </p>
         </section>
 
-        {/* Hero band */}
-        <section
-          className="relative mt-10 overflow-hidden rounded-[28px] border border-border/60 bg-gradient-to-br from-accent/60 via-card to-secondary/40 px-6 py-5 shadow-sm sm:px-8 sm:py-6 opacity-0 animate-fade-up"
-          style={{ animationDelay: "140ms" }}
-        >
-          <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/8 blur-3xl" />
-          <div aria-hidden className="pointer-events-none absolute -left-20 bottom-0 h-48 w-48 rounded-full bg-secondary/40 blur-3xl" />
-
-          <div className="relative flex flex-col items-start gap-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex shrink-0 -space-x-3">
-                {experts.map((e, i) => (
-                  <div
-                    key={e.name}
-                    className="relative h-12 w-12 overflow-hidden rounded-full border-[3px] border-card shadow-sm transition-transform hover:z-10 hover:scale-105"
-                    style={{ zIndex: 3 - i }}
-                    title={`${e.name} · ${e.role}`}
-                  >
-                    <img src={e.avatar} alt={e.name} className="h-full w-full object-cover object-top" loading="lazy" />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-[15px] font-bold text-foreground">
-                  3 位在职 AI 专家 · 已协作 <span className="text-primary">23</span> 天
-                </p>
-                <div className="mt-1 h-4" />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {experts.map((e) => (
-                <span
-                  key={e.name}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/80 px-3 py-1.5 text-[12px] font-medium text-foreground/85 backdrop-blur-sm"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                  {e.name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Tabs */}
         <section className="mt-10 opacity-0 animate-fade-up" style={{ animationDelay: "200ms" }}>
