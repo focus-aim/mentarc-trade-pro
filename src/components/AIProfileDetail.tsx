@@ -191,23 +191,49 @@ type TabKey = "company" | "preference" | "skills";
 const focusChips = ["保温杯", "户外水壶", "运动水杯", "儿童学饮杯", "礼品杯", "商务杯"];
 const marketChips = ["欧洲", "北美", "澳洲", "中东", "东南亚", "拉美"];
 
+const FOCUS_OPTIONS = ["内贸转外贸", "新市场开拓", "多渠道营销", "买家成交转化", "客户黏性运营"];
+
 const AIProfileDetail = () => {
   const [activeTab, setActiveTab] = useState<TabKey>("company");
   const [company, setCompany] = useState<CompanyForm>(initialCompanyForm);
   const [companyEditing, setCompanyEditing] = useState(false);
   const [draft, setDraft] = useState<CompanyForm>(initialCompanyForm);
+  const [docName, setDocName] = useState<string>("产品手册-2024.pdf");
+  const [draftDocName, setDraftDocName] = useState<string>(docName);
+  const [retraining, setRetraining] = useState(false);
+  const [retrainProgress, setRetrainProgress] = useState(0);
   const [preferences, setPreferences] = useState<PreferenceItem[]>(initialPreferences);
 
   const newPreferenceCount = preferences.filter((p) => p.isNew).length;
 
   const startEditCompany = () => {
     setDraft(company);
+    setDraftDocName(docName);
     setCompanyEditing(true);
   };
   const cancelEditCompany = () => setCompanyEditing(false);
   const saveCompany = () => {
     setCompany(draft);
+    setDocName(draftDocName);
     setCompanyEditing(false);
+    setRetrainProgress(0);
+    setRetraining(true);
+    const timer = setInterval(() => {
+      setRetrainProgress((p) => {
+        if (p >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setRetraining(false), 600);
+          return 100;
+        }
+        return Math.min(100, p + 8);
+      });
+    }, 120);
+  };
+
+  const toggleFocus = (chip: string) => {
+    const selected = draft.businessFocus.split(/[、,,\s]+/).filter(Boolean);
+    const next = selected.includes(chip) ? selected.filter((c) => c !== chip) : [...selected, chip];
+    setDraft({ ...draft, businessFocus: next.join("、") });
   };
 
   const dismissPreference = (id: string) =>
