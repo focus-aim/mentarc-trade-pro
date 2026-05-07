@@ -402,7 +402,40 @@ const AIProfileDetail = () => {
                     { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
                   ]}
                 />
-                <div className="h-4" />
+                {docName && (
+                  <div className="rounded-2xl border border-border/60 bg-card/70 px-4 py-3.5 backdrop-blur-sm">
+                    <div className="mb-2.5 flex items-center justify-between">
+                      <div>
+                        <h4 className="text-[13px] font-bold text-foreground">产品资料</h4>
+                        <p className="mt-0.5 text-[11px] text-muted-foreground">已上传的产品文档,支持下载查看</p>
+                      </div>
+                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10.5px] font-semibold text-primary">
+                        共 1 份
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/60 px-3 py-2.5 transition-colors hover:bg-background">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <FileText className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-[13px] font-medium text-foreground">{docName}</div>
+                        <div className="text-[11px] text-muted-foreground">
+                          {docName.split(".").pop()?.toUpperCase()} · 已同步至 AI 知识库
+                        </div>
+                      </div>
+                      <a
+                        href="#"
+                        download={docName}
+                        onClick={(e) => e.preventDefault()}
+                        className="inline-flex shrink-0 items-center gap-1 rounded-full border border-border bg-background/70 px-2.5 py-1 text-[11.5px] font-medium text-foreground hover:bg-accent transition-colors"
+                        title="下载查看"
+                      >
+                        <Download className="h-3.5 w-3.5" />
+                        下载
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
