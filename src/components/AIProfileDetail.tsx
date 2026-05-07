@@ -419,7 +419,7 @@ const AIProfileDetail = () => {
                     更新企业知识库
                   </span>
                   <h2 className="mt-3 text-xl font-bold leading-snug tracking-tight text-foreground">
-                    更新素材
+                    重新训练
                   </h2>
                   <p className="mt-1.5 text-[13px] text-muted-foreground">
                     修改完成后保存,AI 会基于最新素材重新构建画像。
@@ -510,7 +510,7 @@ const AIProfileDetail = () => {
                   >
                     <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                     <Sparkles className="h-4 w-4" />
-                    保存并重新对齐
+                    重新训练
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                   <button
