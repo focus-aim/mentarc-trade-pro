@@ -419,7 +419,7 @@ const AIProfileDetail = () => {
                     更新企业知识库
                   </span>
                   <h2 className="mt-3 text-xl font-bold leading-snug tracking-tight text-foreground">
-                    调整素材,让 AI 团队重新对齐
+                    更新素材
                   </h2>
                   <p className="mt-1.5 text-[13px] text-muted-foreground">
                     修改完成后保存,AI 会基于最新素材重新构建画像。
