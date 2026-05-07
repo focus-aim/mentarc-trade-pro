@@ -402,9 +402,7 @@ const AIProfileDetail = () => {
                     { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
                   ]}
                 />
-                <p className="px-1 text-[11.5px] text-muted-foreground/80">
-                  <span className="font-medium text-foreground/70">已上传产品资料:</span> {docName || "未上传"}
-                </p>
+                <div className="h-4" />
               </div>
             )}
 
