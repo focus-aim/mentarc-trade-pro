@@ -1591,7 +1591,7 @@ const Index = () => {
                         ];
                         const isForm = trainingStage === "form";
                         return (
-                          <div className="space-y-3">
+                          <div className="flex h-full flex-col space-y-3">
                             <div
                               className={cn(
                                 "rounded-2xl border px-4 py-3.5 transition-colors",
@@ -1653,7 +1653,7 @@ const Index = () => {
                               </p>
                             )}
                             {!isForm && (
-                              <div className="pt-3 space-y-2">
+                              <div className="mt-auto pt-3 space-y-2">
                                 <p className="text-center text-xs text-muted-foreground">
                                   无需等待，AI 将在后台持续学习
                                 </p>
