@@ -354,7 +354,7 @@ const AIProfileDetail = () => {
                   retraining ? (
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
                       <Loader2 className="h-3 w-3 animate-spin" />
-                      重新对齐 · {retrainProgress}%
+                      正在重新训练,请稍候
                     </span>
                   ) : (
                     <button
