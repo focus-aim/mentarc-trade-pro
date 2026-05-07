@@ -27,6 +27,8 @@ import {
   Wallet,
   ArrowRight,
   Loader2,
+  FileText,
+  Download,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
