@@ -25,6 +25,8 @@ import {
   FlaskConical,
   Calculator,
   Wallet,
+  ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
@@ -189,23 +191,49 @@ type TabKey = "company" | "preference" | "skills";
 const focusChips = ["保温杯", "户外水壶", "运动水杯", "儿童学饮杯", "礼品杯", "商务杯"];
 const marketChips = ["欧洲", "北美", "澳洲", "中东", "东南亚", "拉美"];
 
+const FOCUS_OPTIONS = ["内贸转外贸", "新市场开拓", "多渠道营销", "买家成交转化", "客户黏性运营"];
+
 const AIProfileDetail = () => {
   const [activeTab, setActiveTab] = useState<TabKey>("company");
   const [company, setCompany] = useState<CompanyForm>(initialCompanyForm);
   const [companyEditing, setCompanyEditing] = useState(false);
   const [draft, setDraft] = useState<CompanyForm>(initialCompanyForm);
+  const [docName, setDocName] = useState<string>("产品手册-2024.pdf");
+  const [draftDocName, setDraftDocName] = useState<string>(docName);
+  const [retraining, setRetraining] = useState(false);
+  const [retrainProgress, setRetrainProgress] = useState(0);
   const [preferences, setPreferences] = useState<PreferenceItem[]>(initialPreferences);
 
   const newPreferenceCount = preferences.filter((p) => p.isNew).length;
 
   const startEditCompany = () => {
     setDraft(company);
+    setDraftDocName(docName);
     setCompanyEditing(true);
   };
   const cancelEditCompany = () => setCompanyEditing(false);
   const saveCompany = () => {
     setCompany(draft);
+    setDocName(draftDocName);
     setCompanyEditing(false);
+    setRetrainProgress(0);
+    setRetraining(true);
+    const timer = setInterval(() => {
+      setRetrainProgress((p) => {
+        if (p >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setRetraining(false), 600);
+          return 100;
+        }
+        return Math.min(100, p + 8);
+      });
+    }, 120);
+  };
+
+  const toggleFocus = (chip: string) => {
+    const selected = draft.businessFocus.split(/[、,,\s]+/).filter(Boolean);
+    const next = selected.includes(chip) ? selected.filter((c) => c !== chip) : [...selected, chip];
+    setDraft({ ...draft, businessFocus: next.join("、") });
   };
 
   const dismissPreference = (id: string) =>
@@ -314,7 +342,7 @@ const AIProfileDetail = () => {
           </div>
         </section>
 
-        {/* Module 1: 企业知识库 — 复用初始化表单视觉与交互 */}
+        {/* Module 1: 企业知识库 */}
         {activeTab === "company" && (
           <section className="mt-6 opacity-0 animate-fade-up" style={{ animationDelay: "220ms" }}>
             <ModuleHeader
@@ -323,13 +351,20 @@ const AIProfileDetail = () => {
               sub="沉淀企业知识,让 AI 真正懂你,并在每次生成中持续应用"
               actions={
                 !companyEditing ? (
-                  <button
-                    onClick={startEditCompany}
-                    className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
-                  >
-                    <PenLine className="h-3.5 w-3.5" />
-                    编辑
-                  </button>
+                  retraining ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                      重新对齐 · {retrainProgress}%
+                    </span>
+                  ) : (
+                    <button
+                      onClick={startEditCompany}
+                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
+                    >
+                      <PenLine className="h-3.5 w-3.5" />
+                      编辑
+                    </button>
+                  )
                 ) : (
                   <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
                     编辑中
@@ -338,53 +373,153 @@ const AIProfileDetail = () => {
               }
             />
 
-            <div className="mt-4 space-y-4">
-              <KnowledgeCard
-                icon={Building2}
-                title="企业档案"
-                desc="公司基础信息与目标市场"
-                badge="已识别 5 项"
-                editing={companyEditing}
-                items={[
-                  { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }), required: true },
-                  { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }), required: true },
-                  { label: "业务关注点", value: company.businessFocus, draft: draft.businessFocus, onChange: (v) => setDraft({ ...draft, businessFocus: v }) },
-                  { label: "公司网址", value: company.website, draft: draft.website, onChange: (v) => setDraft({ ...draft, website: v }) },
-                  { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }), required: true },
-                ]}
-              />
+            {!companyEditing && (
+              <div className="mt-4 space-y-4">
+                <KnowledgeCard
+                  icon={Building2}
+                  title="企业档案"
+                  desc="公司基础信息与目标市场"
+                  badge="已识别 5 项"
+                  editing={false}
+                  items={[
+                    { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }), required: true },
+                    { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }), required: true },
+                    { label: "业务关注点", value: company.businessFocus, draft: draft.businessFocus, onChange: (v) => setDraft({ ...draft, businessFocus: v }) },
+                    { label: "公司网址", value: company.website, draft: draft.website, onChange: (v) => setDraft({ ...draft, website: v }) },
+                    { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }), required: true },
+                  ]}
+                />
 
-              <KnowledgeCard
-                icon={Tags}
-                title="产品知识"
-                desc="主营产品的关键词、卖点与典型案例"
-                badge="已识别 3 项"
-                editing={companyEditing}
-                items={[
-                  { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
-                  { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
-                  { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
-                ]}
-              />
-
-            </div>
+                <KnowledgeCard
+                  icon={Tags}
+                  title="产品知识"
+                  desc="主营产品的关键词、卖点与典型案例"
+                  badge="已识别 3 项"
+                  editing={false}
+                  items={[
+                    { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
+                    { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
+                    { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
+                  ]}
+                />
+                <p className="px-1 text-[11.5px] text-muted-foreground/80">
+                  <span className="font-medium text-foreground/70">已上传产品资料:</span> {docName || "未上传"}
+                </p>
+              </div>
+            )}
 
             {companyEditing && (
-              <div className="mt-6 flex items-center gap-2">
-                <button
-                  onClick={saveCompany}
-                  className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
-                >
-                  <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                  <Sparkles className="h-4 w-4" />
-                  保存并重新对齐
-                </button>
-                <button
-                  onClick={cancelEditCompany}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-background/70 px-5 py-2.5 text-sm font-medium text-foreground hover:bg-accent transition-colors"
-                >
-                  取消
-                </button>
+              <div className="mt-4 relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-primary/5 p-6 shadow-xl shadow-primary/5 backdrop-blur-md sm:p-8">
+                <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+                <div aria-hidden className="pointer-events-none absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-secondary/15 blur-3xl" />
+
+                <div className="relative">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    更新企业知识库
+                  </span>
+                  <h2 className="mt-3 text-xl font-bold leading-snug tracking-tight text-foreground">
+                    调整素材,让 AI 团队重新对齐
+                  </h2>
+                  <p className="mt-1.5 text-[13px] text-muted-foreground">
+                    修改完成后保存,AI 会基于最新素材重新构建画像。
+                  </p>
+                </div>
+
+                <div className="relative mt-6 space-y-3">
+                  {/* 主营产品 */}
+                  <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
+                    <div className="text-xs font-medium text-muted-foreground">主营产品</div>
+                    <input
+                      value={draft.mainProducts}
+                      onChange={(e) => setDraft({ ...draft, mainProducts: e.target.value })}
+                      placeholder="说说你卖什么,比如 不锈钢保温杯"
+                      className="w-full bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none"
+                    />
+                  </div>
+
+                  {/* 业务关注点 chips */}
+                  <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200">
+                    <div className="text-xs font-medium text-muted-foreground">业务关注点</div>
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
+                      {FOCUS_OPTIONS.map((focus) => {
+                        const selected = draft.businessFocus.split(/[、,,\s]+/).filter(Boolean);
+                        const active = selected.includes(focus);
+                        return (
+                          <button
+                            key={focus}
+                            type="button"
+                            onClick={() => toggleFocus(focus)}
+                            className={cn(
+                              "rounded-full border px-2.5 py-1 text-xs font-medium transition-all",
+                              active
+                                ? "border-primary/40 bg-primary/10 text-primary"
+                                : "border-border bg-background/60 text-muted-foreground hover:border-primary/30 hover:text-foreground",
+                            )}
+                          >
+                            {active && <span className="mr-0.5">✓</span>}
+                            {focus}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 企业官网 */}
+                  <div className="group rounded-2xl border border-border/40 bg-background/50 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
+                    <div className="text-xs font-medium text-muted-foreground">企业官网</div>
+                    <input
+                      value={draft.website}
+                      onChange={(e) => setDraft({ ...draft, website: e.target.value })}
+                      placeholder="贴上网址,AI 自动抓取分析"
+                      className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+                    />
+                  </div>
+
+                  {/* 产品资料 */}
+                  <label className="group relative flex min-h-[140px] cursor-pointer flex-col gap-3 rounded-2xl border border-dashed border-border/60 bg-background/40 px-5 py-5 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5">
+                    <div className="min-w-0">
+                      <div className="text-xs font-medium text-muted-foreground">产品资料</div>
+                      <div className="truncate text-sm text-foreground/80">
+                        {draftDocName || "拖拽文件到此,或点击下方按钮上传"}
+                      </div>
+                    </div>
+                    <div className="mt-auto flex items-center justify-between gap-3">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                        <FileUp className="h-3.5 w-3.5" />
+                        上传文档
+                      </span>
+                      <span className="text-xs text-muted-foreground/80">支持 PDF / Word / Excel / PPT</span>
+                    </div>
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) setDraftDocName(file.name);
+                      }}
+                    />
+                  </label>
+                </div>
+
+                <div className="relative mt-6 flex items-center gap-2">
+                  <button
+                    onClick={saveCompany}
+                    className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
+                  >
+                    <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                    <Sparkles className="h-4 w-4" />
+                    保存并重新对齐
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                  <button
+                    onClick={cancelEditCompany}
+                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-background/70 px-5 py-3 text-sm font-medium text-foreground hover:bg-accent transition-colors"
+                  >
+                    取消
+                  </button>
+                </div>
               </div>
             )}
           </section>
