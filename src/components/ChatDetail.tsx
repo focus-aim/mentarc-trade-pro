@@ -990,6 +990,13 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                     <KeywordGuidancePrompt onPick={handleKeywordGuidancePick} selected={msg.keywordChoice || null} />
                   ) : msg.type === "operation-greeting" ? (
                     <OperationGreeting onPrefill={handlePrefill} onStartDemo={handleStartDemo} />
+                  ) : msg.type === "plain-text" ? (
+                    <div className="rounded-2xl border border-border bg-card px-5 py-4 shadow-sm">
+                      <div className="prose prose-sm max-w-none text-foreground text-base leading-relaxed prose-headings:text-foreground prose-headings:font-semibold prose-h2:text-[18px] prose-h2:mt-4 prose-h2:mb-2 prose-h2:first:mt-0 prose-h3:text-[15px] prose-h3:mt-3 prose-h3:mb-1.5 prose-p:my-1.5 prose-p:text-base prose-strong:text-foreground prose-strong:font-semibold prose-ul:my-1.5 prose-ul:pl-5 prose-li:my-0.5 prose-li:text-base prose-li:marker:text-muted-foreground">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                      </div>
+                    </div>
+
                   ) : (
                     <div>
                       {msg.quote && (
