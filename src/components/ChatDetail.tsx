@@ -801,6 +801,14 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
   const handleSend = (text: string, quote?: ChatQuote) => {
     const newMessages: Message[] = [...messages, { role: "user", content: text, type: "text", quote }];
 
+    if (isPlainTextPrompt(text)) {
+      setAnalyzed(true);
+      newMessages.push({ role: "assistant", content: PLAIN_TEXT_DEMO_RESPONSE, type: "plain-text" });
+      setMessages(newMessages);
+      return;
+    }
+
+
     if (!analyzed) {
       setAnalyzed(true);
       if (moduleTitle === "运营专家") {
