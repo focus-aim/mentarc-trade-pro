@@ -28,7 +28,61 @@ import KeywordTrendResult from "./KeywordTrendResult";
 import MarketResearchResult from "./MarketResearchResult";
 import TrendCollectionResult from "./TrendCollectionResult";
 import FollowupStrategyResult from "./FollowupStrategyResult";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
+const PLAIN_TEXT_DEMO_RESPONSE = `## 询盘拆解
+
+### 公司/邮箱线索
+- **发件人**：john.carter@techsol.us
+- **公司线索**：TechSol
+- **国家线索**：USA / 美国
+
+### 产品需求
+- **产品**：5kW hybrid inverter（5kW 混合逆变器）
+- **认证**：UL1741
+- **用途**：USA retail project（美国零售项目）
+
+### 数量与价格
+- **首单数量**：300 units
+- **目标价**：FOB < USD 380/unit
+- **价格导向**：明确、强烈，且有硬性目标价
+
+### 交付与样品
+- **样品**：需要空运发样
+- **上市时间**：July（7 月上线/发售）
+- **时效**：非常紧急
+
+### 动作要求
+- 希望尽快报价（Please quote fast）
+
+## 🎯 买家意图判断
+
+**意图类型：高意向、强采购信号**
+
+- 这不是泛泛询价，而是已经给出型号级需求 + 数量 + 目标价 + 认证 + 时间表
+- 说明买家大概率已在做供应商比价/筛选
+- 目前阶段更接近：方案确认 + 快速比价 + 供应商初筛
+
+**采购阶段**
+
+- 偏向项目推进中的决策前期
+- 需求已较清晰，但仍会看：认证、价格、交期、样品响应速度
+
+**关注重点**
+
+- 合规性：UL1741 是否可提供
+- 价格竞争力：FOB 380 美金以下是否可达成
+- 交付能力：300 台首单是否能按项目节点供货
+- 样品速度：是否能快速寄样
+
+**风险信号**
+
+- 价格目标较明确，说明很可能在同时对比多家供应商
+- 和 "Urgent" "Please quote fast" 搭配，买家对响应速度敏感，若回复慢容易流失
+- 如果你没有 UL1741 认证或交期不稳，这单会有较高流失风险`;
+
+const isPlainTextPrompt = (text?: string) => !!text && /纯文本输出/.test(text);
 
 interface ChatDetailProps {
   moduleTitle: string;
