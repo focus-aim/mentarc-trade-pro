@@ -46,7 +46,7 @@ const LONGTAIL: { kw: string; trend: string }[] = [
 
 const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
   return (
-    <div className="space-y-3 text-[13px] leading-relaxed">
+    <div className="space-y-3 text-base leading-relaxed">
       {/* 趋势概要 */}
       <SectionCard icon={Lightbulb} title="趋势概要">
         <div className="space-y-2 text-[12px] leading-[1.7]">

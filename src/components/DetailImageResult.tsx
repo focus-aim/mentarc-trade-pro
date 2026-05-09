@@ -19,7 +19,7 @@ interface DetailImageResultProps {
 
 const DetailImageResult = ({ types }: DetailImageResultProps) => {
   return (
-    <div className="space-y-4 text-sm leading-relaxed">
+    <div className="space-y-4 text-base leading-relaxed">
       <p className="text-foreground">
         已根据您选择的类型，生成以下产品详情图：
       </p>

@@ -116,7 +116,7 @@ const TrendChart = () => (
 
 const MarketResearchResult = (_props: MarketResearchResultProps) => {
   return (
-    <div className="space-y-3 text-[13px] leading-relaxed">
+    <div className="space-y-3 text-base leading-relaxed">
       {/* Header — 仅标题 */}
       <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-primary/15 bg-gradient-to-r from-primary/[0.06] to-transparent">
         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/12 text-primary">

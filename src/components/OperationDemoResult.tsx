@@ -4,12 +4,12 @@ interface OperationDemoResultProps {
 
 const OperationDemoResult = ({ onSendPrompt }: OperationDemoResultProps) => {
   return (
-    <div className="text-[15px] leading-relaxed space-y-3">
+    <div className="text-base leading-relaxed space-y-3">
       <p className="text-foreground">
         根据您提供的链接，已经完成网页内容分析，我识别到：
       </p>
 
-      <div className="space-y-1.5 text-[14px]">
+      <div className="space-y-1.5 text-base">
         <p className="text-foreground">
           <span className="text-muted-foreground">产品名称：</span>
           China-24-Inch-48V-15ah-10ah-9-Speed-Cycle-Aluminum-Alloy-Fat-Tire-1000W-Electric-Bike
@@ -24,7 +24,7 @@ const OperationDemoResult = ({ onSendPrompt }: OperationDemoResultProps) => {
 
       <div className="border-t border-border my-2" />
 
-      <p className="text-foreground/80 text-[14px]">已经提炼产品和图片特征，下一步我可以帮您：</p>
+      <p className="text-foreground/80 text-base">已经提炼产品和图片特征，下一步我可以帮您：</p>
 
       <div className="flex flex-col gap-0.5">
         <button
