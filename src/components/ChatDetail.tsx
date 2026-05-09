@@ -862,7 +862,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
 
       <div ref={chatScrollRef} className="flex-1 overflow-y-auto scrollbar-thin">
-        <div className="mx-auto w-full max-w-3xl px-6 pt-2 pb-4 space-y-4">
+        <div className="mx-auto w-full max-w-4xl px-6 pt-2 pb-4 space-y-4">
             {messages.map((msg, i) => {
               const isResult =
                 msg.type === "operation-result" ||
@@ -956,7 +956,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
       </div>
 
       <div className="px-6 pt-3 pb-2">
-        <div className="mx-auto w-full max-w-3xl">
+        <div className="mx-auto w-full max-w-4xl">
           <ChatInput key={prefillKey} onSend={handleSend} placeholder={config.placeholder} defaultValue={prefillValue} attachment={config.attachment} attachments={config.attachments} quote={activeQuote} onClearQuote={() => setActiveQuote(null)} />
           <p className="text-[11px] text-muted-foreground text-center mt-1.5">
             AI 可能会产生错误信息，请核实重要内容。
