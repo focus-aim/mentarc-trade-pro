@@ -18,7 +18,7 @@ const ScriptCard = ({
     setTimeout(() => setCopied(false), 2000);
   };
   return (
-    <div className="rounded-lg border border-border bg-card/40 overflow-hidden">
+    <div className="rounded-lg border border-border bg-card overflow-hidden">
       <div className="flex items-start gap-2 px-3 py-2 border-b border-border/60 bg-muted/30">
         <span className="shrink-0 inline-flex items-center rounded-md px-1.5 py-0.5 text-[10.5px] font-bold bg-primary/10 text-primary border border-primary/20">
           {type}

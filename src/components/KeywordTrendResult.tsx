@@ -9,7 +9,7 @@ const SectionCard = ({ icon: Icon, title, children }: {
   title: string;
   children: React.ReactNode;
 }) => (
-  <section className="rounded-xl border border-border bg-background/40 p-3.5">
+  <section className="rounded-xl border border-border bg-card p-3.5">
     <div className="flex items-center gap-1.5 mb-2">
       <Icon className="w-3.5 h-3.5 text-muted-foreground" />
       <h3 className="font-medium text-foreground text-[12.5px]">{title}</h3>
