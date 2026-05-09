@@ -54,7 +54,7 @@ const SectionCard = ({
 }) => (
   <section
     className={`rounded-xl border p-3.5 ${
-      accent ? "border-primary/20 bg-primary/[0.03]" : "border-border bg-background/40"
+      accent ? "border-primary/20 bg-primary/[0.03]" : "border-border bg-card"
     }`}
   >
     <div className="flex items-center gap-1.5 mb-2">
@@ -115,7 +115,7 @@ const ReplyTemplateBlock = () => {
     setTimeout(() => setCopied(false), 2000);
   };
   return (
-    <section className="rounded-xl border border-border bg-background/40 overflow-hidden">
+    <section className="rounded-xl border border-border bg-card overflow-hidden">
       <div className="flex items-center gap-1.5 px-3.5 py-3 border-b border-border/60">
         <Mail className="w-3.5 h-3.5 text-muted-foreground" />
         <h3 className="font-medium text-foreground text-[12.5px]">询盘回复模板</h3>
@@ -155,7 +155,7 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
   return (
     <div className="space-y-5">
       {/* AI 专家指点 — header + avatar bubble + integrated key points */}
-      <section className="rounded-2xl border border-border bg-card/60 p-4 space-y-3">
+      <section className="rounded-2xl border border-border bg-card p-4 space-y-3">
         <h3 className="font-semibold text-foreground text-[14px]">AI 专家指点</h3>
         <div className="flex gap-3 items-start">
           {expertAvatar && (
@@ -217,7 +217,7 @@ const EmailCard = ({
   };
   const isPrimary = badgeTone === "primary";
   return (
-    <div className={`rounded-xl overflow-hidden border ${isPrimary ? "border-primary/25 bg-primary/[0.03]" : "border-border bg-card/40"}`}>
+    <div className={`rounded-xl overflow-hidden border ${isPrimary ? "border-primary/25 bg-primary/[0.03]" : "border-border bg-card"}`}>
       <div className={`px-3.5 py-2.5 border-b flex items-start gap-2 ${isPrimary ? "border-primary/15" : "border-border bg-muted/30"}`}>
         <span
           className={`shrink-0 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10.5px] font-bold ${
@@ -352,7 +352,7 @@ export const BuyerBackgroundReport = () => {
         </p>
       </SectionCard>
 
-      <section className="rounded-xl border border-border bg-background/40 p-4 space-y-4">
+      <section className="rounded-xl border border-border bg-card p-4 space-y-4">
         <div className="flex items-center gap-1.5 pb-2 border-b border-border/60">
           <FileText className="w-3.5 h-3.5 text-muted-foreground" />
           <h3 className="font-medium text-foreground text-[12.5px]">详细背调报告</h3>
