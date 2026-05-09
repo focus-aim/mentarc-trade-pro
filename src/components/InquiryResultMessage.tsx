@@ -164,7 +164,7 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
             </div>
           )}
           <div className="flex-1 rounded-xl bg-muted/40 px-4 py-3">
-            <p className="text-foreground/85 text-[13px] leading-[1.7]">
+            <p className="text-foreground/85 text-base leading-[1.7]">
               这是一个成熟礼品买家，表达很直接，核心诉求就是快、准、可视化。建议首封邮件先回应型号和数量，再把交期、图片、可选配套和下一步确认点一次说清。
             </p>
           </div>
