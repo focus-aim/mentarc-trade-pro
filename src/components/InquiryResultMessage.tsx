@@ -74,7 +74,7 @@ const KV = ({ label, value }: { label: string; value: React.ReactNode }) => (
 );
 
 const InlineKV = ({ label, value }: { label: string; value: React.ReactNode }) => (
-  <p className="text-[13px] leading-[1.75] text-foreground/85">
+  <p className="text-base leading-[1.75] text-foreground/85">
     <span className="font-semibold text-foreground">{label}</span>
     {value}
   </p>
