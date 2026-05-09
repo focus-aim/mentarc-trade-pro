@@ -59,7 +59,7 @@ const ChatInput = ({
   const hasAttachments = currentAttachments.length > 0;
 
   return (
-    <div className="border border-border/60 rounded-2xl bg-card/80 backdrop-blur-sm shadow-sm shadow-primary/3 focus-within:border-primary/25 focus-within:shadow-md focus-within:shadow-primary/6 transition-all duration-300">
+    <div className="border border-border/70 rounded-2xl bg-card/90 backdrop-blur-md shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.18),0_2px_6px_-2px_hsl(var(--primary)/0.08)] hover:shadow-[0_12px_32px_-12px_hsl(var(--primary)/0.22),0_3px_8px_-2px_hsl(var(--primary)/0.10)] focus-within:border-primary/40 focus-within:shadow-[0_16px_40px_-12px_hsl(var(--primary)/0.28),0_4px_12px_-2px_hsl(var(--primary)/0.14)] transition-all duration-300">
       {/* Quote reference */}
       {quote && (
         <div className="px-4 pt-3 pb-0">
