@@ -85,7 +85,7 @@ const OperationResultMessage = ({ onQuote, onSendPrompt, expertAvatar, hideDescr
   };
 
   return (
-    <div className="space-y-4 text-sm leading-relaxed">
+    <div className="space-y-4 text-base leading-relaxed">
       {/* Expert header */}
       <div className="flex items-center gap-2">
         {expertAvatar && (
@@ -96,7 +96,7 @@ const OperationResultMessage = ({ onQuote, onSendPrompt, expertAvatar, hideDescr
         <span className="font-semibold text-foreground text-[14px]">AI专家指点</span>
       </div>
 
-      <p className="text-foreground/85 text-[13px] leading-relaxed">
+      <p className="text-foreground/85 text-base leading-relaxed">
         B端采购商最关注"采购成本、售后保障、终端适销性"。详情页须明确标注：①阶梯报价（样品/小批量/整柜）；②认证齐全（CE、ROHS、EN15194）；③定制能力（贴牌、配色、电池容量可选）。主图首张用白底加参数标签，第二张展示沙滩/雪地商用场景，视频呈现电池插拔与装柜实拍。用实测续航与承重数据打消顾虑，让采购商放心询盘。
       </p>
 
