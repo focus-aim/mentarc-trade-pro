@@ -13,7 +13,7 @@ interface ImageResultMessageProps {
 
 const ImageResultMessage = ({ onAction }: ImageResultMessageProps) => {
   return (
-    <div className="space-y-3 text-sm leading-relaxed">
+    <div className="space-y-3 text-base leading-relaxed">
       <p className="text-foreground">
         好的，亚马逊等电商平台的产品主图通常采用：白底图 + 场景图 + 多角度细节图，已为您结合同行图片优点，生成如下结果：
       </p>
