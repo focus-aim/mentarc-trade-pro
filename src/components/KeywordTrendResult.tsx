@@ -349,7 +349,7 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
           <div className="flex justify-center px-4 py-2 border-t border-border/40 bg-card">
             <button
               onClick={() => setReportOpen((v) => !v)}
-              className="inline-flex items-center gap-1 text-[12px] font-medium text-primary hover:text-primary/80 transition-colors"
+              className="inline-flex items-center gap-1 text-[13px] font-semibold text-[hsl(217,100%,50%)] hover:text-[hsl(217,100%,42%)] transition-colors"
             >
               {reportOpen ? "收起" : "展开全部"}
               <ChevronDown
