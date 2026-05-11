@@ -351,8 +351,24 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
             <p className="text-[10.5px] text-muted-foreground leading-[1.7] pt-1 border-t border-border/40">
               数据说明：本报告中"近30天搜索热度趋势"数据来源于 Google Trends，统计时间范围为 2026 年 04 月 10 日至 2026 年 05 月 10 日。
             </p>
+            </div>
           </div>
 
+          {!reportOpen && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card via-card/90 to-transparent" />
+          )}
+
+          <div className="flex justify-center px-4 py-2 border-t border-border/40 bg-card">
+            <button
+              onClick={() => setReportOpen((v) => !v)}
+              className="inline-flex items-center gap-1 text-[12px] text-primary hover:text-primary/80 transition-colors"
+            >
+              {reportOpen ? "收起" : "展开全部"}
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${reportOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+          </div>
         </div>
       </section>
     </div>
