@@ -218,7 +218,6 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
               <h4 className="text-[14px] font-semibold text-foreground">核心关键词策略</h4>
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <span className="text-[14px]">📦</span>
                   <h5 className="text-[13px] font-semibold text-foreground">产品核心词</h5>
                 </div>
                 <p className="text-[12px] text-foreground/80 leading-[1.7] mb-2">
@@ -261,7 +260,6 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
 
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <span className="text-[14px]">🔎</span>
                   <h5 className="text-[13px] font-semibold text-foreground">采购意图长尾词</h5>
                 </div>
                 <p className="text-[12px] text-foreground/80 leading-[1.7] mb-2">
@@ -292,7 +290,6 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
 
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <span className="text-[14px]">❓</span>
                   <h5 className="text-[13px] font-semibold text-foreground">常见问题与短语</h5>
                 </div>
                 <p className="text-[12px] text-foreground/80 leading-[1.7] mb-2">
