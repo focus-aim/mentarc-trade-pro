@@ -146,9 +146,6 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
           <div>
             <h4 className="text-[15px] font-semibold text-foreground mb-1.5">
               市场趋势概览
-              <span className="ml-1.5 text-[12px] font-normal text-muted-foreground">
-                Market Trend Overview
-              </span>
             </h4>
           </div>
 
@@ -253,9 +250,6 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
             <div className="space-y-3">
               <h4 className="text-[14px] font-semibold text-foreground">
                 长尾关键词趋势
-                <span className="ml-1.5 text-[11px] font-normal text-muted-foreground">
-                  Long-tail Keyword Trends
-                </span>
               </h4>
 
               <div>
@@ -323,9 +317,6 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
             <div className="space-y-2">
               <h4 className="text-[14px] font-semibold text-foreground">
                 关键词布局策略
-                <span className="ml-1.5 text-[11px] font-normal text-muted-foreground">
-                  Keyword Layout Strategy
-                </span>
               </h4>
               <p className="text-[12px] text-foreground/80 leading-[1.7]">
                 为最大化营销资产可见性，以下是智能自动售货机市场的关键词布局建议：
