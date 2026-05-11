@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Lightbulb, Target, Tag, ChevronDown, Globe2 } from "lucide-react";
+import { Lightbulb, Target, ChevronDown, Globe2 } from "lucide-react";
 
 interface KeywordTrendResultProps {
   onSendPrompt?: (text: string) => void;
