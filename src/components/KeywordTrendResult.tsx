@@ -1,4 +1,5 @@
-import { Lightbulb, Target, Tag } from "lucide-react";
+import { useState } from "react";
+import { Lightbulb, Target, Tag, ChevronDown, Globe2 } from "lucide-react";
 
 interface KeywordTrendResultProps {
   onSendPrompt?: (text: string) => void;
@@ -9,10 +10,10 @@ const SectionCard = ({ icon: Icon, title, children }: {
   title: string;
   children: React.ReactNode;
 }) => (
-  <section className="rounded-xl border border-border bg-card p-3.5">
-    <div className="flex items-center gap-1.5 mb-2">
-      <Icon className="w-3.5 h-3.5 text-muted-foreground" />
-      <h3 className="font-medium text-foreground text-[12.5px]">{title}</h3>
+  <section className="rounded-xl border border-border bg-card p-4">
+    <div className="flex items-center gap-1.5 mb-3">
+      <Icon className="w-4 h-4 text-muted-foreground" />
+      <h3 className="font-semibold text-foreground text-[15px]">{title}</h3>
     </div>
     <div>{children}</div>
   </section>
@@ -27,107 +28,195 @@ const COMP_CLS: Record<Comp, string> = {
 };
 
 const TOP_KEYWORDS: { kw: string; trend: string; comp: Comp }[] = [
-  { kw: "integrated solar street light 100W", trend: "+86%", comp: "适中" },
-  { kw: "all in one solar street light 200W", trend: "+72%", comp: "高" },
-  { kw: "solar street light for rural project", trend: "+58%", comp: "低" },
-  { kw: "high lumen solar street light outdoor", trend: "+44%", comp: "高" },
-  { kw: "solar street light with motion sensor", trend: "+39%", comp: "适中" },
-  { kw: "LiFePO4 solar street light supplier", trend: "+33%", comp: "低" },
+  { kw: "smart vending machine cashless payment", trend: "+86%", comp: "适中" },
+  { kw: "intelligent vending machine Southeast Asia", trend: "+72%", comp: "高" },
+  { kw: "máquina expendedora inteligente", trend: "+58%", comp: "低" },
+  { kw: "vending machine durable outdoor", trend: "+44%", comp: "高" },
+  { kw: "eco-friendly vending machine Europe", trend: "+39%", comp: "适中" },
+  { kw: "energieeffizienter Verkaufsautomat", trend: "+33%", comp: "低" },
 ];
 
 const LONGTAIL: { kw: string; trend: string }[] = [
-  { kw: "integrated solar street light 100W price list", trend: "+112%" },
-  { kw: "200W all in one solar street light for highway", trend: "+95%" },
-  { kw: "solar street light bulk order Africa project", trend: "+78%" },
-  { kw: "solar street light IP66 5 years warranty", trend: "+64%" },
-  { kw: "remote control solar street light wholesale", trend: "+51%" },
-  { kw: "solar street light OEM factory China", trend: "+42%" },
+  { kw: "smart vending machine with mobile payment Indonesia", trend: "+112%" },
+  { kw: "máquina expendedora inteligente precio Brasil", trend: "+95%" },
+  { kw: "vending machine CE certification energy saving", trend: "+78%" },
+  { kw: "vending machine local service Mexico distributor", trend: "+64%" },
+  { kw: "intelligent vending machine OEM Vietnam wholesale", trend: "+51%" },
+  { kw: "automate de vente écologique design moderne", trend: "+42%" },
+];
+
+const MARKET_ROWS: {
+  market: string;
+  language: string;
+  focus: string;
+  behavior: string;
+}[] = [
+  {
+    market: "东南亚",
+    language: "英语（含本地化后缀）",
+    focus: "智能互联、移动支付、运营效率",
+    behavior: "偏好技术先进、能提升效率的解决方案；重视品牌信誉和售后服务。",
+  },
+  {
+    market: "南美",
+    language: "西班牙语 / 葡萄牙语",
+    focus: "价格优势、产品耐用、本地支持",
+    behavior: "对价格敏感，重视本地化支付和物流；倾向于寻找有本地化经验的供应商。",
+  },
+  {
+    market: "欧洲",
+    language: "英语 / 德语 / 法语",
+    focus: "环保节能、法规合规、设计美学",
+    behavior: "注重产品品质与认证，对创新和可持续性有较高要求。",
+  },
 ];
 
 const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
+  const [reportOpen, setReportOpen] = useState(false);
+
   return (
     <div className="space-y-3 text-base leading-relaxed">
-      {/* 趋势概要 */}
+      {/* 模块 1：趋势概要 */}
       <SectionCard icon={Lightbulb} title="趋势概要">
-        <div className="space-y-2 text-[12px] leading-[1.7]">
-          <p className="text-foreground/85">
-            基于近 30 天海外主流采购平台及搜索引擎数据：
-          </p>
-          <p className="text-foreground/85">
-            <span className="text-muted-foreground">品类热度：</span>
-            整体搜索量环比上涨 <span className="font-semibold text-destructive">22%</span>，主要增量来自<span className="font-medium text-foreground">东南亚及非洲基建项目</span>。
-          </p>
-          <p className="text-foreground/85">
-            <span className="text-muted-foreground">核心痛点：</span>
-            采购商搜索词中，带有 <span className="font-medium text-foreground">"Integrated（一体化）"</span> 和特定瓦数 <span className="font-medium text-foreground">"100W / 200W"</span> 的长尾词上涨趋势最明显。
-          </p>
-          <p className="text-foreground/85">
-            <span className="text-muted-foreground">买家画像：</span>
-            以<span className="font-medium text-foreground">海外工程承包商、市政照明项目方、本地分销商</span>为主，关注<span className="font-medium text-foreground">一体化结构、长质保、批量交付能力</span>，对单价敏感但更看重整体项目交付稳定性。
-          </p>
+        <div className="space-y-4">
+          <div>
+            <h4 className="text-[15px] font-semibold text-foreground mb-1.5">
+              市场趋势概览
+              <span className="ml-1.5 text-[12px] font-normal text-muted-foreground">
+                Market Trend Overview
+              </span>
+            </h4>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="inline-block w-1 h-3.5 rounded-full bg-primary" />
+              <h5 className="text-[14px] font-semibold text-foreground">核心发现</h5>
+            </div>
+            <p className="text-[14px] text-foreground/85 leading-[1.75]">
+              智能自动售货机市场呈现多元化趋势：<span className="font-medium text-foreground">东南亚</span>对智能化、无现金支付需求强劲，英语为主；
+              <span className="font-medium text-foreground">南美</span>关注性价比、耐用性及本地化服务，西语 / 葡语是关键；
+              <span className="font-medium text-foreground">欧洲</span>则强调环保节能、法规合规与设计美学。
+            </p>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-1.5 mb-2">
+              <Globe2 className="w-3.5 h-3.5 text-primary" />
+              <h5 className="text-[14px] font-semibold text-foreground">目标市场画像</h5>
+            </div>
+            <div className="overflow-hidden rounded-lg border border-border/60">
+              <table className="w-full text-[12px] border-collapse">
+                <thead>
+                  <tr className="bg-muted/40 text-muted-foreground">
+                    <th className="text-left font-medium px-3 py-2 w-[72px]">目标市场</th>
+                    <th className="text-left font-medium px-3 py-2 w-[140px]">核心商业语言</th>
+                    <th className="text-left font-medium px-3 py-2">市场主要关注点</th>
+                    <th className="text-left font-medium px-3 py-2">采购行为特点</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {MARKET_ROWS.map((row, i) => (
+                    <tr
+                      key={row.market}
+                      className={`border-t border-border/40 align-top ${i % 2 === 1 ? "bg-muted/15" : ""}`}
+                    >
+                      <td className="px-3 py-2 text-foreground font-semibold whitespace-nowrap">{row.market}</td>
+                      <td className="px-3 py-2 text-foreground/85">{row.language}</td>
+                      <td className="px-3 py-2 text-foreground/85">{row.focus}</td>
+                      <td className="px-3 py-2 text-foreground/85 leading-[1.65]">{row.behavior}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </SectionCard>
 
-      {/* Top 趋势关键词 */}
-      <div>
-        <div className="flex items-center gap-1.5 mb-2">
-          <Target className="w-3.5 h-3.5 text-muted-foreground" />
-          <h3 className="font-medium text-foreground text-[12.5px]">Top 趋势关键词</h3>
-        </div>
-        <div className="overflow-hidden rounded-lg border border-border/60">
-          <table className="w-full text-[11.5px] border-collapse">
-            <thead>
-              <tr className="bg-muted/40 text-muted-foreground">
-                <th className="text-left font-medium px-2.5 py-1.5">关键词</th>
-                <th className="text-right font-medium px-2.5 py-1.5 w-[88px]">近30天趋势</th>
-                <th className="text-right font-medium px-2.5 py-1.5 w-[72px]">竞争度</th>
-              </tr>
-            </thead>
-            <tbody>
-              {TOP_KEYWORDS.map((k, i) => (
-                <tr key={k.kw} className={`border-t border-border/40 ${i % 2 === 1 ? "bg-muted/15" : ""}`}>
-                  <td className="px-2.5 py-1.5 text-foreground font-medium">{k.kw}</td>
-                  <td className="px-2.5 py-1.5 text-right font-semibold text-destructive tabular-nums">{k.trend}</td>
-                  <td className={`px-2.5 py-1.5 text-right font-semibold ${COMP_CLS[k.comp]}`}>{k.comp}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="text-[10px] text-muted-foreground pt-1.5">
-          趋势 = 30 天搜索量环比 · 竞争度 = SEO / 广告投放强度
-        </p>
-      </div>
+      {/* 模块 2：产品关键词分析报告（折叠） */}
+      <section className="rounded-xl border border-border bg-card overflow-hidden">
+        <button
+          onClick={() => setReportOpen((v) => !v)}
+          className="w-full flex items-center gap-2 px-4 py-3 hover:bg-muted/30 transition-colors"
+        >
+          <Target className="w-4 h-4 text-muted-foreground" />
+          <h3 className="font-semibold text-foreground text-[15px]">产品关键词分析报告</h3>
+          <span className="ml-2 text-[11px] text-muted-foreground">
+            Top 趋势 + 长尾关键词
+          </span>
+          <ChevronDown
+            className={`w-4 h-4 ml-auto text-muted-foreground transition-transform duration-200 ${reportOpen ? "rotate-180" : ""}`}
+          />
+        </button>
 
-      {/* 长尾关键词 */}
-      <div>
-        <div className="flex items-center gap-1.5 mb-2">
-          <Tag className="w-3.5 h-3.5 text-muted-foreground" />
-          <h3 className="font-medium text-foreground text-[12.5px]">长尾关键词</h3>
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-out ${reportOpen ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0"}`}
+        >
+          <div className="px-4 pb-4 pt-1 space-y-4 border-t border-border/60">
+            {/* Top 趋势关键词 */}
+            <div>
+              <div className="flex items-center gap-1.5 mb-2 mt-3">
+                <Target className="w-3.5 h-3.5 text-muted-foreground" />
+                <h4 className="font-medium text-foreground text-[13px]">Top 趋势关键词</h4>
+              </div>
+              <div className="overflow-hidden rounded-lg border border-border/60">
+                <table className="w-full text-[11.5px] border-collapse">
+                  <thead>
+                    <tr className="bg-muted/40 text-muted-foreground">
+                      <th className="text-left font-medium px-2.5 py-1.5">关键词</th>
+                      <th className="text-right font-medium px-2.5 py-1.5 w-[88px]">近30天趋势</th>
+                      <th className="text-right font-medium px-2.5 py-1.5 w-[72px]">竞争度</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {TOP_KEYWORDS.map((k, i) => (
+                      <tr key={k.kw} className={`border-t border-border/40 ${i % 2 === 1 ? "bg-muted/15" : ""}`}>
+                        <td className="px-2.5 py-1.5 text-foreground font-medium">{k.kw}</td>
+                        <td className="px-2.5 py-1.5 text-right font-semibold text-destructive tabular-nums">{k.trend}</td>
+                        <td className={`px-2.5 py-1.5 text-right font-semibold ${COMP_CLS[k.comp]}`}>{k.comp}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[10px] text-muted-foreground pt-1.5">
+                趋势 = 30 天搜索量环比 · 竞争度 = SEO / 广告投放强度
+              </p>
+            </div>
+
+            {/* 长尾关键词 */}
+            <div>
+              <div className="flex items-center gap-1.5 mb-2">
+                <Tag className="w-3.5 h-3.5 text-muted-foreground" />
+                <h4 className="font-medium text-foreground text-[13px]">长尾关键词</h4>
+              </div>
+              <p className="text-[11.5px] text-foreground/80 leading-[1.7] mb-2">
+                <span className="text-muted-foreground">趋势动因：</span>
+                海外项目方倾向于直接搜索<span className="font-medium text-foreground">具体规格 + 应用场景 + 采购意图</span>词，反映询盘已进入选型与比价阶段。
+              </p>
+              <div className="overflow-hidden rounded-lg border border-border/60">
+                <table className="w-full text-[11.5px] border-collapse">
+                  <thead>
+                    <tr className="bg-muted/40 text-muted-foreground">
+                      <th className="text-left font-medium px-2.5 py-1.5">长尾关键词</th>
+                      <th className="text-right font-medium px-2.5 py-1.5 w-[88px]">近30天趋势</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {LONGTAIL.map((k, i) => (
+                      <tr key={k.kw} className={`border-t border-border/40 ${i % 2 === 1 ? "bg-muted/15" : ""}`}>
+                        <td className="px-2.5 py-1.5 text-foreground font-medium">{k.kw}</td>
+                        <td className="px-2.5 py-1.5 text-right font-semibold text-destructive tabular-nums">{k.trend}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <p className="text-[11.5px] text-foreground/80 leading-[1.7] mb-2">
-          <span className="text-muted-foreground">趋势动因：</span>
-          海外项目方倾向于直接搜索<span className="font-medium text-foreground">具体规格 + 应用场景 + 采购意图</span>词，反映询盘已进入选型与比价阶段。
-        </p>
-        <div className="overflow-hidden rounded-lg border border-border/60">
-          <table className="w-full text-[11.5px] border-collapse">
-            <thead>
-              <tr className="bg-muted/40 text-muted-foreground">
-                <th className="text-left font-medium px-2.5 py-1.5">长尾关键词</th>
-                <th className="text-right font-medium px-2.5 py-1.5 w-[88px]">近30天趋势</th>
-              </tr>
-            </thead>
-            <tbody>
-              {LONGTAIL.map((k, i) => (
-                <tr key={k.kw} className={`border-t border-border/40 ${i % 2 === 1 ? "bg-muted/15" : ""}`}>
-                  <td className="px-2.5 py-1.5 text-foreground font-medium">{k.kw}</td>
-                  <td className="px-2.5 py-1.5 text-right font-semibold text-destructive tabular-nums">{k.trend}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };
