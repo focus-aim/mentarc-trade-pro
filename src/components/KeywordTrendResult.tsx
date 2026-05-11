@@ -19,31 +19,95 @@ const SectionCard = ({ icon: Icon, title, children }: {
   </section>
 );
 
-type Comp = "极高" | "高" | "适中" | "低";
-const COMP_CLS: Record<Comp, string> = {
-  "极高": "text-destructive",
-  "高": "text-destructive/80",
-  "适中": "text-primary",
-  "低": "text-success",
+type TrendTone = "up" | "down" | "flat";
+const TREND_CLS: Record<TrendTone, string> = {
+  up: "text-destructive",
+  down: "text-success",
+  flat: "text-muted-foreground",
 };
 
-const TOP_KEYWORDS: { kw: string; trend: string; comp: Comp }[] = [
-  { kw: "smart vending machine cashless payment", trend: "+86%", comp: "适中" },
-  { kw: "intelligent vending machine Southeast Asia", trend: "+72%", comp: "高" },
-  { kw: "máquina expendedora inteligente", trend: "+58%", comp: "低" },
-  { kw: "vending machine durable outdoor", trend: "+44%", comp: "高" },
-  { kw: "eco-friendly vending machine Europe", trend: "+39%", comp: "适中" },
-  { kw: "energieeffizienter Verkaufsautomat", trend: "+33%", comp: "低" },
+const CORE_KEYWORDS: {
+  category: string;
+  keywords: string;
+  trend: string;
+  tone: TrendTone;
+  markets: string;
+}[] = [
+  {
+    category: "智能自动售货机",
+    keywords: "Smart Vending Machine, Intelligent Vending Machine",
+    trend: "+15%",
+    tone: "up",
+    markets: "东南亚、北美、欧洲",
+  },
+  {
+    category: "综合机",
+    keywords: "Combo Vending Machine",
+    trend: "-8%",
+    tone: "down",
+    markets: "欧洲",
+  },
+  {
+    category: "升降机",
+    keywords: "Elevator Vending Machine",
+    trend: "无明显波动",
+    tone: "flat",
+    markets: "中东",
+  },
+  {
+    category: "格子自取生鲜柜",
+    keywords: "Smart Locker, Refrigerated Locker",
+    trend: "+22%",
+    tone: "up",
+    markets: "东南亚、南美、北美、欧洲",
+  },
 ];
 
-const LONGTAIL: { kw: string; trend: string }[] = [
-  { kw: "smart vending machine with mobile payment Indonesia", trend: "+112%" },
-  { kw: "máquina expendedora inteligente precio Brasil", trend: "+95%" },
-  { kw: "vending machine CE certification energy saving", trend: "+78%" },
-  { kw: "vending machine local service Mexico distributor", trend: "+64%" },
-  { kw: "intelligent vending machine OEM Vietnam wholesale", trend: "+51%" },
-  { kw: "automate de vente écologique design moderne", trend: "+42%" },
+const PURCHASE_INTENT: { category: string; keywords: string; markets: string }[] = [
+  {
+    category: "智能自动售货机",
+    keywords:
+      "Vending machine supplier Malaysia; Wholesale smart vending machine price; Buy intelligent vending machine Europe",
+    markets: "东南亚、北美、欧洲",
+  },
+  {
+    category: "格子自取生鲜柜",
+    keywords:
+      "Smart locker manufacturer Singapore; Cost of refrigerated locker system; Fresh food locker for apartment building",
+    markets: "东南亚、欧洲、北美",
+  },
 ];
+
+const FAQ_PHRASES: { category: string; keywords: string; markets: string }[] = [
+  {
+    category: "智能自动售货机",
+    keywords:
+      "How smart vending machines improve ROI?; What is an elevator vending machine?; Best vending machine for small business",
+    markets: "东南亚、北美、欧洲、中东",
+  },
+  {
+    category: "格子自取生鲜柜",
+    keywords:
+      "Smart lockers for last-mile delivery; How to choose a refrigerated locker?; Benefits of fresh food lockers",
+    markets: "东南亚、南美、欧洲、北美",
+  },
+];
+
+const LAYOUT_STRATEGY: { title: string; desc: string }[] = [
+  {
+    title: "独立站优化",
+    desc: "核心词、功能词融入 TDK；场景词、问题短语用于解决方案和 FAQ。",
+  },
+  {
+    title: "B2B 平台与本地化",
+    desc: "标题结合核心词、功能词、采购长尾词；多语言内容精准融入本地化关键词。",
+  },
+  {
+    title: "社媒与广告",
+    desc: "趋势词作社媒话题；常见问题制作图文 / 视频；精准投放高转化关键词。",
+  },
+];
+
 
 const MARKET_ROWS: {
   market: string;
