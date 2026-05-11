@@ -198,26 +198,21 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
         </div>
       </SectionCard>
 
-      {/* 模块 2：产品关键词分析报告（折叠） */}
+      {/* 模块 2：产品关键词分析报告（默认 5 行预览，支持展开全部） */}
       <section className="rounded-xl border border-border bg-card overflow-hidden">
-        <button
-          onClick={() => setReportOpen((v) => !v)}
-          className="w-full flex items-center gap-2 px-4 py-3 hover:bg-muted/30 transition-colors"
-        >
+        <div className="flex items-center gap-2 px-4 py-3">
           <Target className="w-4 h-4 text-muted-foreground" />
           <h3 className="font-semibold text-foreground text-[15px]">产品关键词分析报告</h3>
           <span className="ml-2 text-[11px] text-muted-foreground">
             核心词 / 长尾词 / 布局策略
           </span>
-          <ChevronDown
-            className={`w-4 h-4 ml-auto text-muted-foreground transition-transform duration-200 ${reportOpen ? "rotate-180" : ""}`}
-          />
-        </button>
+        </div>
 
-        <div
-          className={`overflow-hidden transition-all duration-300 ease-out ${reportOpen ? "max-h-[2400px] opacity-100" : "max-h-0 opacity-0"}`}
-        >
-          <div className="px-4 pb-4 pt-1 space-y-5 border-t border-border/60">
+        <div className="relative border-t border-border/60">
+          <div
+            className={`overflow-hidden transition-[max-height] duration-300 ease-out ${reportOpen ? "max-h-[3000px]" : "max-h-[140px]"}`}
+          >
+            <div className="px-4 pb-4 pt-1 space-y-5">
             {/* 1. 核心关键词策略 */}
             <div className="pt-3 space-y-3">
               <h4 className="text-[14px] font-semibold text-foreground">核心关键词策略</h4>
@@ -356,8 +351,24 @@ const KeywordTrendResult = (_props: KeywordTrendResultProps) => {
             <p className="text-[10.5px] text-muted-foreground leading-[1.7] pt-1 border-t border-border/40">
               数据说明：本报告中"近30天搜索热度趋势"数据来源于 Google Trends，统计时间范围为 2026 年 04 月 10 日至 2026 年 05 月 10 日。
             </p>
+            </div>
           </div>
 
+          {!reportOpen && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card via-card/90 to-transparent" />
+          )}
+
+          <div className="flex justify-center px-4 py-2 border-t border-border/40 bg-card">
+            <button
+              onClick={() => setReportOpen((v) => !v)}
+              className="inline-flex items-center gap-1 text-[12px] text-primary hover:text-primary/80 transition-colors"
+            >
+              {reportOpen ? "收起" : "展开全部"}
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${reportOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+          </div>
         </div>
       </section>
     </div>
