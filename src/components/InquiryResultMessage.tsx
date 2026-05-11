@@ -172,7 +172,7 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
         <div className="space-y-1.5 pt-1">
           <InlineKV label="买家背景：" value="新加坡礼品分销商，成立 20+ 年，主营赠品杯壶，小型但成熟。" />
           <InlineKV label="跟进阶段：" value="需求沟通阶段（前期已收到两次该买家询价邮件）" />
-          <InlineKV label="需求完整度：" value="高（产品、规格、数量、联系方式齐全，可直接报价）" />
+          <InlineKV label="产品匹配度：" value="高（产品、规格、数量、联系方式齐全，可直接报价）" />
         </div>
       </section>
 
