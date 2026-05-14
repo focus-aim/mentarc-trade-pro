@@ -596,7 +596,7 @@ const AIProfileDetail = () => {
                 <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-secondary/8 blur-3xl" />
                 <header className="relative flex items-center justify-between gap-3 border-b border-border/40 px-4 py-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-secondary/30 text-foreground/70">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-secondary/20 text-secondary">
                       <Lightbulb className="h-4 w-4" />
                     </div>
                     <div>
