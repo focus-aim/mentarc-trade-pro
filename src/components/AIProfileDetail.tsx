@@ -612,7 +612,7 @@ const AIProfileDetail = () => {
                   {teamSkillPageItems.map((it) => (
                     <li
                       key={`team-${it.headline}`}
-                      className="py-3"
+                      className="py-5"
                     >
                       <button
                         type="button"
@@ -626,14 +626,14 @@ const AIProfileDetail = () => {
                             </span>
                             <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground/40 transition-all group-hover/item:translate-x-0.5 group-hover/item:text-primary" />
                           </div>
-                          <p className="mt-1.5 text-[12px] leading-relaxed text-muted-foreground line-clamp-2">
+                          <p className="mt-2.5 text-[12px] leading-relaxed text-muted-foreground line-clamp-2">
                             {it.subtitle}
                           </p>
-                          <div className="mt-2 flex flex-wrap gap-1">
+                          <div className="mt-3 flex flex-wrap gap-1.5">
                             {it.tags.map((t) => (
                               <span
                                 key={t}
-                                className="inline-flex items-center rounded-md bg-muted px-1.5 py-0.5 text-[10.5px] font-medium text-muted-foreground"
+                                className="inline-flex items-center rounded-md bg-muted px-2 py-0.5 text-[10.5px] font-medium text-muted-foreground"
                               >
                                 {t}
                               </span>
