@@ -29,7 +29,16 @@ import {
   Loader2,
   FileText,
   Download,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
 import businessAvatar from "@/assets/expert-business.jpg";
