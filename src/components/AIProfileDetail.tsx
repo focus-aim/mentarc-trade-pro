@@ -577,17 +577,13 @@ const AIProfileDetail = () => {
         {/* Module 2: 团队经验 */}
         {activeTab === "preference" && (
           <section className="mt-6 opacity-0 animate-fade-up" style={{ animationDelay: "220ms" }}>
-            <ModuleHeader
-              icon={MessageCircleHeart}
-              title="团队经验"
-              sub="AI 从历史会话中沉淀的市场认知与团队打法"
-              actions={
-                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
-                  <Sparkles className="h-3 w-3" />
-                  本周持续学习中
-                </span>
-              }
-            />
+            <div className="flex items-end justify-between gap-3">
+              <p className="text-[12px] text-muted-foreground">AI 从历史会话中沉淀的市场认知与团队打法</p>
+              <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+                <Sparkles className="h-3 w-3" />
+                本周持续学习中
+              </span>
+            </div>
 
             {/* 上：团队经验技巧 — 可新增；下：专家实战经验 */}
             <div className="mt-4 space-y-4">
