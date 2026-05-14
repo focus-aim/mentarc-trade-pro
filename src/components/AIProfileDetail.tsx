@@ -259,6 +259,13 @@ const AIProfileDetail = () => {
   const [retraining, setRetraining] = useState(false);
   const [retrainProgress, setRetrainProgress] = useState(0);
   const [preferences, setPreferences] = useState<PreferenceItem[]>(initialPreferences);
+  const [teamSkillPage, setTeamSkillPage] = useState(1);
+  const [activeTeamSkill, setActiveTeamSkill] = useState<TeamSkillItem | null>(null);
+  const teamSkillTotalPages = Math.max(1, Math.ceil(teamSkillItems.length / TEAM_SKILLS_PER_PAGE));
+  const teamSkillPageItems = teamSkillItems.slice(
+    (teamSkillPage - 1) * TEAM_SKILLS_PER_PAGE,
+    teamSkillPage * TEAM_SKILLS_PER_PAGE,
+  );
 
   const newPreferenceCount = preferences.filter((p) => p.isNew).length;
 
