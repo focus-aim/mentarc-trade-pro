@@ -29,7 +29,16 @@ import {
   Loader2,
   FileText,
   Download,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
 import businessAvatar from "@/assets/expert-business.jpg";
@@ -154,13 +163,58 @@ const expertExperienceGroups: {
   },
 ];
 
-// 团队经验技巧：一行文本 + 来自业务员
-const teamSkillItems: { headline: string; author: string }[] = [
-  { headline: "首封回复先抛澄清问题，再给方案", author: "Rita" },
-  { headline: "报价用「标准 / 定制 / 品牌」三档组合", author: "Jason" },
-  { headline: "详情页用使用场景替代技术参数", author: "Cody" },
-  { headline: "差异化卖点放首屏，认证背书收尾", author: "Cody" },
+// 团队经验技巧：标题 + 副标题 + 标签 + 来自业务员
+interface TeamSkillItem {
+  headline: string;
+  subtitle: string;
+  tags: string[];
+  author: string;
+}
+const teamSkillItems: TeamSkillItem[] = [
+  {
+    headline: "刚询价且需求不清时先拆应用场景再引预算区间",
+    subtitle: "客户刚询价但需求不明确时，不直接报完整价格，先用应用场景拆需求并引出预算区间再推进报价。",
+    tags: ["询价", "报价跟进", "需求不清", "比价", "压价"],
+    author: "Rita",
+  },
+  {
+    headline: "首封回复先抛 3 个澄清问题，再给方案概览",
+    subtitle: "首封回复不堆产品参数，先用 3 个高价值澄清问题锁定客户真实场景，再附上方案概览引导深聊。",
+    tags: ["首封回复", "澄清问题", "意图判断", "节奏控制"],
+    author: "Jason",
+  },
+  {
+    headline: "报价用「标准 / 定制 / 品牌」三档组合替代单价",
+    subtitle: "面对不确定预算的客户，用三档组合报价替代单一报价，引导客户主动选档，降低议价压力。",
+    tags: ["报价策略", "三档组合", "议价", "客单价"],
+    author: "Jason",
+  },
+  {
+    headline: "详情页用使用场景替代技术参数堆砌",
+    subtitle: "在详情页前两屏用真实使用场景图与短句替代参数列表，提升非专业买家的转化率。",
+    tags: ["详情页", "使用场景", "转化率", "首屏"],
+    author: "Cody",
+  },
+  {
+    headline: "差异化卖点放首屏，认证背书收尾建立信任",
+    subtitle: "首屏直击差异化卖点，结尾集中放置认证、检测报告与合作品牌，形成「卖点 → 信任」闭环。",
+    tags: ["卖点", "首屏", "认证背书", "信任建立"],
+    author: "Cody",
+  },
+  {
+    headline: "未回复客户 D+3 改用「样品图 + 同类案例」",
+    subtitle: "对 3 天未回复的客户切换沟通角度，用样品实拍 + 同类客户成交案例，回复率可提升 2 倍。",
+    tags: ["跟进策略", "未回复", "样品", "案例触达"],
+    author: "Rita",
+  },
+  {
+    headline: "高意向客户走「样品 → 合同 → 试单」三步锁单",
+    subtitle: "识别高意向信号后用三步流程压缩决策周期，2 周内可推进试单，避免反复议价。",
+    tags: ["高意向", "锁单", "试单", "周期压缩"],
+    author: "Jason",
+  },
 ];
+const TEAM_SKILLS_PER_PAGE = 5;
 
 const expertSkillBlocks: ExpertSkillBlock[] = [
   {
@@ -205,6 +259,13 @@ const AIProfileDetail = () => {
   const [retraining, setRetraining] = useState(false);
   const [retrainProgress, setRetrainProgress] = useState(0);
   const [preferences, setPreferences] = useState<PreferenceItem[]>(initialPreferences);
+  const [teamSkillPage, setTeamSkillPage] = useState(1);
+  const [activeTeamSkill, setActiveTeamSkill] = useState<TeamSkillItem | null>(null);
+  const teamSkillTotalPages = Math.max(1, Math.ceil(teamSkillItems.length / TEAM_SKILLS_PER_PAGE));
+  const teamSkillPageItems = teamSkillItems.slice(
+    (teamSkillPage - 1) * TEAM_SKILLS_PER_PAGE,
+    teamSkillPage * TEAM_SKILLS_PER_PAGE,
+  );
 
   const newPreferenceCount = preferences.filter((p) => p.isNew).length;
 
@@ -528,9 +589,92 @@ const AIProfileDetail = () => {
               }
             />
 
-            {/* 左右两栏：实战经验 + 团队技巧 */}
-            <div className="mt-4 grid gap-4 lg:grid-cols-2">
-              {/* 左：专家实战经验 — 平台预置 */}
+            {/* 上：团队经验技巧 — 可新增；下：专家实战经验 */}
+            <div className="mt-4 space-y-4">
+              {/* 团队经验技巧 */}
+              <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card via-card to-secondary/[0.10] shadow-sm transition-all hover:shadow-md">
+                <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-secondary/30 blur-3xl" />
+                <header className="relative flex items-center justify-between gap-3 border-b border-border/40 px-4 py-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-secondary/40 text-foreground/70">
+                      <Lightbulb className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-[13.5px] font-bold text-foreground">团队经验技巧</h3>
+                      <p className="mt-0.5 text-[10.5px] text-muted-foreground">来自团队业务员沉淀 · 共 {teamSkillItems.length} 条</p>
+                    </div>
+                  </div>
+                </header>
+
+                <ul className="relative flex-1 divide-y divide-border/40 px-2 py-1">
+                  {teamSkillPageItems.map((it) => (
+                    <li key={`team-${it.headline}`}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveTeamSkill(it)}
+                        className="group/item w-full rounded-xl px-3 py-3 text-left transition-colors hover:bg-primary/[0.04] focus:outline-none focus-visible:bg-primary/[0.06]"
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[13px] font-semibold text-foreground leading-snug group-hover/item:text-primary">
+                              {it.headline}
+                            </p>
+                            <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground line-clamp-2">
+                              {it.subtitle}
+                            </p>
+                            <div className="mt-2 flex flex-wrap gap-1">
+                              {it.tags.map((t) => (
+                                <span
+                                  key={t}
+                                  className="inline-flex items-center rounded-md bg-muted px-1.5 py-0.5 text-[10.5px] font-medium text-muted-foreground"
+                                >
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="flex shrink-0 flex-col items-end gap-1">
+                            <span className="whitespace-nowrap text-[10.5px] text-muted-foreground/70">
+                              来自 {it.author}
+                            </span>
+                            <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50 transition-transform group-hover/item:translate-x-0.5 group-hover/item:text-primary" />
+                          </div>
+                        </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+
+                {teamSkillTotalPages > 1 && (
+                  <footer className="relative flex items-center justify-between gap-2 border-t border-border/40 px-4 py-2.5">
+                    <span className="text-[11px] text-muted-foreground">
+                      第 {teamSkillPage} / {teamSkillTotalPages} 页
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <button
+                        type="button"
+                        onClick={() => setTeamSkillPage((p) => Math.max(1, p - 1))}
+                        disabled={teamSkillPage === 1}
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/60 bg-background text-muted-foreground transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
+                        aria-label="上一页"
+                      >
+                        <ChevronLeft className="h-3.5 w-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setTeamSkillPage((p) => Math.min(teamSkillTotalPages, p + 1))}
+                        disabled={teamSkillPage === teamSkillTotalPages}
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/60 bg-background text-muted-foreground transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
+                        aria-label="下一页"
+                      >
+                        <ChevronRight className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  </footer>
+                )}
+              </div>
+
+              {/* 专家实战经验 — 平台预置 */}
               <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card via-card to-primary/[0.04] shadow-sm transition-all hover:shadow-md">
                 <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/8 blur-3xl" />
                 <header className="relative flex items-center justify-between gap-3 border-b border-border/40 px-4 py-3">
@@ -551,7 +695,7 @@ const AIProfileDetail = () => {
                   </div>
                 </header>
 
-                <div className="relative flex-1 space-y-4 px-4 py-4">
+                <div className="relative grid gap-4 px-4 py-4 sm:grid-cols-2">
                   {expertExperienceGroups.map((g) => (
                     <section key={g.key}>
                       <div className="flex items-baseline justify-between gap-2">
@@ -573,37 +717,45 @@ const AIProfileDetail = () => {
                   ))}
                 </div>
               </div>
-
-              {/* 右：团队经验技巧 — 可新增 */}
-              <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card via-card to-secondary/[0.10] shadow-sm transition-all hover:shadow-md">
-                <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-secondary/30 blur-3xl" />
-                <header className="relative flex items-center justify-between gap-3 border-b border-border/40 px-4 py-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-secondary/40 text-foreground/70">
-                      <Lightbulb className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <h3 className="text-[13.5px] font-bold text-foreground">团队经验技巧</h3>
-                      <p className="mt-0.5 text-[10.5px] text-muted-foreground">来自团队业务员沉淀</p>
-                    </div>
-                  </div>
-                </header>
-
-                <ul className="relative flex-1 space-y-2.5 px-4 py-4">
-                  {teamSkillItems.map((it) => (
-                    <li
-                      key={`team-${it.headline}`}
-                      className="flex items-baseline justify-between gap-3 text-[12px] leading-relaxed"
-                    >
-                      <span className="min-w-0 flex-1 text-foreground/85">{it.headline}</span>
-                      <span className="shrink-0 whitespace-nowrap text-[10.5px] text-muted-foreground/70">
-                        来自 {it.author}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
+
+            {/* 详情弹窗 */}
+            <Dialog open={!!activeTeamSkill} onOpenChange={(o) => !o && setActiveTeamSkill(null)}>
+              <DialogContent className="sm:max-w-[560px] sm:rounded-2xl">
+                {activeTeamSkill && (
+                  <>
+                    <DialogHeader>
+                      <DialogTitle className="pr-6 text-[16px] leading-snug">
+                        {activeTeamSkill.headline}
+                      </DialogTitle>
+                      <DialogDescription className="text-[13px] leading-relaxed text-foreground/75">
+                        {activeTeamSkill.subtitle}
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-3">
+                      <div>
+                        <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">标签</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {activeTeamSkill.tags.map((t) => (
+                            <span
+                              key={t}
+                              className="inline-flex items-center rounded-md bg-primary/8 px-2 py-0.5 text-[12px] font-medium text-primary"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 rounded-xl border border-border/50 bg-muted/40 px-3 py-2 text-[12px] text-muted-foreground">
+                        <Users className="h-3.5 w-3.5" />
+                        <span>来自 <span className="font-semibold text-foreground">{activeTeamSkill.author}</span> 的实战沉淀</span>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </DialogContent>
+            </Dialog>
           </section>
         )}
 
