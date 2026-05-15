@@ -249,7 +249,11 @@ const marketChips = ["欧洲", "北美", "澳洲", "中东", "东南亚", "拉�
 
 const FOCUS_OPTIONS = ["内贸转外贸", "新市场开拓", "多渠道营销", "买家成交转化", "客户黏性运营"];
 
-const AIProfileDetail = () => {
+interface AIProfileDetailProps {
+  onTrySimilar?: (prompt: string) => void;
+}
+
+const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
   const [activeTab, setActiveTab] = useState<TabKey>("company");
   const [company, setCompany] = useState<CompanyForm>(initialCompanyForm);
   const [companyEditing, setCompanyEditing] = useState(false);
@@ -754,6 +758,20 @@ const AIProfileDetail = () => {
                         <Users className="h-3.5 w-3.5" />
                         <span>来自 <span className="font-semibold text-foreground">{activeTeamSkill.author}</span> 的实战沉淀</span>
                       </div>
+                    </div>
+
+                    <div className="mt-6 flex items-center justify-end border-t border-border/50 pt-5">
+                      <button
+                        onClick={() => {
+                          const prompt = `参考团队经验技巧「${activeTeamSkill.headline}」：${activeTeamSkill.subtitle}\n\n请帮我把这个打法应用到当前的客户场景中。`;
+                          onTrySimilar?.(prompt);
+                          setActiveTeamSkill(null);
+                        }}
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-5 py-2.5 text-[13px] font-semibold text-primary-foreground shadow-sm shadow-primary/20 transition-all hover:bg-primary/90 active:scale-[0.98]"
+                      >
+                        <Sparkles className="h-3.5 w-3.5" />
+                        体验同款
+                      </button>
                     </div>
                   </>
                 )}

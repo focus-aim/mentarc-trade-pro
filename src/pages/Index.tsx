@@ -765,7 +765,14 @@ const Index = () => {
           initialUserMessage={chatInitialMessage}
         />
       ) : showProfile ? (
-        <AIProfileDetail />
+        <AIProfileDetail
+          onTrySimilar={(prompt) => {
+            setPrefillValue(prompt);
+            setPrefillAttachment(undefined);
+            setInputKey((k) => k + 1);
+            setShowProfile(false);
+          }}
+        />
       ) : showBoard ? (
         <main className="flex-1 h-screen overflow-y-auto scrollbar-thin bg-background">
           <div className="mx-auto w-full max-w-5xl px-4 pb-10 pt-10 sm:px-6 lg:px-8">
