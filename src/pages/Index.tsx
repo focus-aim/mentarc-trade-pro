@@ -333,7 +333,7 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "营销素材":
+    case "营销素材生成":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
           <div className="grid grid-cols-3 gap-1.5">
