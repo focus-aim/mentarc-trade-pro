@@ -420,7 +420,7 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "理解业务":
+    case "企业知识库":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-secondary/10 to-primary/5 p-3")}>
           <div className="flex items-center justify-center">
