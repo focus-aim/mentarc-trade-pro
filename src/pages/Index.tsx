@@ -1927,10 +1927,7 @@ const Index = () => {
                         isProfileLink
                           ? handleOpenProfile
                           : isPromptFill
-                            ? (e) => {
-                                e.stopPropagation();
-                                handleUseCasePrompt(step.prompt);
-                              }
+                            ? () => handleUseCasePrompt(step.prompt)
                             : undefined
                       }
                       className={cn(
