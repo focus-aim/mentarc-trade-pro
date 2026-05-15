@@ -623,6 +623,7 @@ const Index = () => {
   const [teamDialogOpen, setTeamDialogOpen] = useState(false);
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
   const [caseDialogOpen, setCaseDialogOpen] = useState(false);
+  const [casePrompt, setCasePrompt] = useState("");
   const [activeTaskTab, setActiveTaskTab] = useState(TASK_TABS[0].label);
   const [activeResultTab, setActiveResultTab] = useState<"all" | ResultCategory>("all");
   const [activeBuyerId, setActiveBuyerId] = useState<string | null>(null);
