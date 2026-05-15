@@ -209,7 +209,7 @@ Dear Sirs, do you have 5kW hybrid inverter with UL1741? Need 300 units first, pr
         prompt: "",
       },
       {
-        title: "资产沉淀",
+        title: "经验资产沉淀",
         desc: "归档团队经验、案例与素材资产",
         prompt: "",
       },
