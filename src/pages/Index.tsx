@@ -204,7 +204,7 @@ Dear Sirs, do you have 5kW hybrid inverter with UL1741? Need 300 units first, pr
         prompt: "我在外贸业务中遇到一些具体问题，想请教 AI 专家给出实操建议",
       },
       {
-        title: "理解业务",
+        title: "企业知识库",
         desc: "AI 学习公司业务，沉淀企业画像",
         prompt: "",
       },
