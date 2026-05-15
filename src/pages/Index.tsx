@@ -204,7 +204,7 @@ Dear Sirs, do you have 5kW hybrid inverter with UL1741? Need 300 units first, pr
         prompt: "我在外贸业务中遇到一些具体问题，想请教 AI 专家给出实操建议",
       },
       {
-        title: "理解业务",
+        title: "企业知识库",
         desc: "AI 学习公司业务，沉淀企业画像",
         prompt: "",
       },
@@ -420,7 +420,7 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "理解业务":
+    case "企业知识库":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-secondary/10 to-primary/5 p-3")}>
           <div className="flex items-center justify-center">
@@ -1916,7 +1916,7 @@ const Index = () => {
               </p>
               <div className="grid gap-4 md:grid-cols-3">
                 {selectedTaskTab.steps.map((step) => {
-                  const isProfileLink = step.title === "理解业务" || step.title === "资产沉淀" || step.title === "企业知识画像" || step.title === "团队经验技巧";
+                  const isProfileLink = step.title === "企业知识库" || step.title === "资产沉淀" || step.title === "企业知识画像" || step.title === "团队经验技巧";
                   const isPromptFill = step.title === "外贸问题解答";
                   const stepAny = step as { soon?: boolean };
                   return (
