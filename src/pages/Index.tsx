@@ -623,6 +623,7 @@ const Index = () => {
   const [teamDialogOpen, setTeamDialogOpen] = useState(false);
   const [qrDialogOpen, setQrDialogOpen] = useState(false);
   const [caseDialogOpen, setCaseDialogOpen] = useState(false);
+  const [casePrompt, setCasePrompt] = useState("");
   const [activeTaskTab, setActiveTaskTab] = useState(TASK_TABS[0].label);
   const [activeResultTab, setActiveResultTab] = useState<"all" | ResultCategory>("all");
   const [activeBuyerId, setActiveBuyerId] = useState<string | null>(null);
@@ -1951,7 +1952,10 @@ const Index = () => {
                       {!stepAny.soon && !isProfileLink && !isPromptFill && (
                         <div className="absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-center gap-2 bg-card/90 px-4 py-4 opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                           <button
-                            onClick={() => setCaseDialogOpen(true)}
+                            onClick={() => {
+                              setCasePrompt(step.prompt);
+                              setCaseDialogOpen(true);
+                            }}
                             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
                           >
                             <Eye className="h-3.5 w-3.5" />
@@ -1988,11 +1992,11 @@ const Index = () => {
       )}
       <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
       <Dialog open={caseDialogOpen} onOpenChange={setCaseDialogOpen}>
-        <DialogContent className="max-w-3xl max-h-[86vh] overflow-y-auto rounded-2xl p-0">
-          <DialogHeader className="border-b border-border/70 px-6 py-4 text-left">
+        <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
+          <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
             <DialogTitle className="text-base font-semibold text-foreground">询盘分析案例效果</DialogTitle>
           </DialogHeader>
-          <div className="space-y-5 px-6 py-5">
+          <div className="flex-1 space-y-5 overflow-y-auto px-6 py-5">
             <section className="ml-auto max-w-[86%] rounded-2xl rounded-tr-md bg-muted px-4 py-3 text-sm leading-relaxed text-foreground">
               <p className="font-medium">用户发送的询盘</p>
               <p className="mt-2 whitespace-pre-line text-foreground/80">
@@ -2004,6 +2008,18 @@ const Index = () => {
             <section className="max-w-[92%] rounded-2xl border border-border/70 bg-card/80 p-4">
               <InquiryResultMessage expertAvatar={businessAvatar} onSendPrompt={handleUseCasePrompt} />
             </section>
+          </div>
+          <div className="shrink-0 flex items-center justify-end gap-2 border-t border-border/70 bg-card/95 px-6 py-3 backdrop-blur-md">
+            <button
+              onClick={() => {
+                if (casePrompt) handleUseCasePrompt(casePrompt);
+                setCaseDialogOpen(false);
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/20 transition-colors hover:bg-primary/90"
+            >
+              <Wand2 className="h-4 w-4" />
+              做同款
+            </button>
           </div>
         </DialogContent>
       </Dialog>
