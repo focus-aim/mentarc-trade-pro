@@ -1952,7 +1952,10 @@ const Index = () => {
                       {!stepAny.soon && !isProfileLink && !isPromptFill && (
                         <div className="absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-center gap-2 bg-card/90 px-4 py-4 opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                           <button
-                            onClick={() => setCaseDialogOpen(true)}
+                            onClick={() => {
+                              setCasePrompt(step.prompt);
+                              setCaseDialogOpen(true);
+                            }}
                             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
                           >
                             <Eye className="h-3.5 w-3.5" />
