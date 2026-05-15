@@ -156,7 +156,7 @@ const TASK_TABS = [
       {
         title: "分析询盘",
         desc: "提取需求要点，识别买家意图",
-        prompt: `帮我拆解这封买家询盘，提取核心需求并判断买家意图：
+        prompt: `帮我分析这封买家询盘，提取核心需求并判断买家意图：
 
 From: john.carter@techsol.us
 Subject: Urgent: Solar inverter 5kW for USA retail project
