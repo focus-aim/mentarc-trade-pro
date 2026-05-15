@@ -404,11 +404,11 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   badge="已识别 5 项"
                   editing={false}
                   items={[
-                    { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }), required: true },
-                    { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }), required: true },
+                    { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }) },
+                    { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }) },
                     { label: "业务关注点", value: company.businessFocus, draft: draft.businessFocus, onChange: (v) => setDraft({ ...draft, businessFocus: v }) },
                     { label: "公司网址", value: company.website, draft: draft.website, onChange: (v) => setDraft({ ...draft, website: v }) },
-                    { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }), required: true },
+                    { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }) },
                   ]}
                 />
 
