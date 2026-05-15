@@ -222,7 +222,7 @@ const StepPreview = ({ title }: { title: string }) => {
   const baseWrap = "relative h-28 w-full overflow-hidden rounded-xl border border-border/60";
 
   switch (title) {
-    case "拆解询盘":
+    case "分析询盘":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
           <div className="rounded-md bg-card/80 p-2 shadow-sm">
