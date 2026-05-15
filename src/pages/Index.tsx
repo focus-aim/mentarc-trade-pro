@@ -1992,9 +1992,6 @@ const Index = () => {
       )}
       <TeamManagementDialog open={teamDialogOpen} onOpenChange={setTeamDialogOpen} />
       <Dialog open={caseDialogOpen} onOpenChange={setCaseDialogOpen}>
-        <DialogContent className="max-w-3xl max-h-[86vh] overflow-y-auto rounded-2xl p-0">
-          <DialogHeader className="border-b border-border/70 px-6 py-4 text-left">
-      <Dialog open={caseDialogOpen} onOpenChange={setCaseDialogOpen}>
         <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
             <DialogTitle className="text-base font-semibold text-foreground">询盘分析案例效果</DialogTitle>
