@@ -154,9 +154,9 @@ const TASK_TABS = [
     expert: "业务专家",
     steps: [
       {
-        title: "拆解询盘",
+        title: "分析询盘",
         desc: "提取需求要点，识别买家意图",
-        prompt: `帮我拆解这封买家询盘，提取核心需求并判断买家意图：
+        prompt: `帮我分析这封买家询盘，提取核心需求并判断买家意图：
 
 From: john.carter@techsol.us
 Subject: Urgent: Solar inverter 5kW for USA retail project
@@ -222,7 +222,7 @@ const StepPreview = ({ title }: { title: string }) => {
   const baseWrap = "relative h-28 w-full overflow-hidden rounded-xl border border-border/60";
 
   switch (title) {
-    case "拆解询盘":
+    case "分析询盘":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
           <div className="rounded-md bg-card/80 p-2 shadow-sm">
