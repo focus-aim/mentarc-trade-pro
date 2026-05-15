@@ -437,7 +437,7 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "资产沉淀":
+    case "经验资产沉淀":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
           <div className="space-y-1.5">
