@@ -169,7 +169,7 @@ Dear Sirs, do you have 5kW hybrid inverter with UL1741? Need 300 units first, pr
         prompt: "帮我对这个买家做深度背景调查，输出公司画像、采购实力和风险提示",
       },
       {
-        title: "跟进策略",
+        title: "​策略咨询",
         desc: "制定跟进节奏与话术路径",
         prompt: "帮我为这个买家制定一套跟进策略，包括节奏、话术和下一步动作",
       },
@@ -272,7 +272,7 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "跟进策略":
+    case "​策略咨询":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
           <div className="space-y-2">
