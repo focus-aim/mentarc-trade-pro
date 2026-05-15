@@ -314,7 +314,7 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "产品卖点&SEO":
+    case "提炼卖点&SEO":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-secondary/10 to-primary/5 p-3")}>
           <div className="rounded-md bg-card/80 p-2 shadow-sm">
