@@ -1917,7 +1917,7 @@ const Index = () => {
               <div className="grid gap-4 md:grid-cols-3">
                 {selectedTaskTab.steps.map((step) => {
                   const isProfileLink = step.title === "理解业务" || step.title === "资产沉淀" || step.title === "企业知识画像" || step.title === "团队经验技巧";
-                  const isPromptFill = step.title === "解答问题";
+                  const isPromptFill = step.title === "外贸问题解答";
                   const stepAny = step as { soon?: boolean };
                   return (
                     <article
