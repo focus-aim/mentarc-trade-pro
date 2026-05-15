@@ -209,7 +209,7 @@ Dear Sirs, do you have 5kW hybrid inverter with UL1741? Need 300 units first, pr
         prompt: "",
       },
       {
-        title: "资产沉淀",
+        title: "经验资产沉淀",
         desc: "归档团队经验、案例与素材资产",
         prompt: "",
       },
@@ -437,7 +437,7 @@ const StepPreview = ({ title }: { title: string }) => {
           </div>
         </div>
       );
-    case "资产沉淀":
+    case "经验资产沉淀":
       return (
         <div className={cn(baseWrap, "bg-gradient-to-br from-primary/5 to-secondary/10 p-3")}>
           <div className="space-y-1.5">
@@ -1916,7 +1916,7 @@ const Index = () => {
               </p>
               <div className="grid gap-4 md:grid-cols-3">
                 {selectedTaskTab.steps.map((step) => {
-                  const isProfileLink = step.title === "企业知识库" || step.title === "资产沉淀" || step.title === "企业知识画像" || step.title === "团队经验技巧";
+                  const isProfileLink = step.title === "企业知识库" || step.title === "经验资产沉淀" || step.title === "企业知识画像" || step.title === "团队经验技巧";
                   const isPromptFill = step.title === "外贸问题解答";
                   const stepAny = step as { soon?: boolean };
                   return (
