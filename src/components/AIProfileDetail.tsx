@@ -257,6 +257,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
   const [activeTab, setActiveTab] = useState<TabKey>("company");
   const [company, setCompany] = useState<CompanyForm>(initialCompanyForm);
   const [companyEditing, setCompanyEditing] = useState(false);
+  const [fieldEditing, setFieldEditing] = useState(false);
   const [draft, setDraft] = useState<CompanyForm>(initialCompanyForm);
   const [docName, setDocName] = useState<string>("产品手册-2024.pdf");
   const [draftDocName, setDraftDocName] = useState<string>(docName);
@@ -279,6 +280,18 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
     setCompanyEditing(true);
   };
   const cancelEditCompany = () => setCompanyEditing(false);
+  const startFieldEdit = () => {
+    setDraft(company);
+    setFieldEditing(true);
+  };
+  const cancelFieldEdit = () => {
+    setDraft(company);
+    setFieldEditing(false);
+  };
+  const submitFieldEdit = () => {
+    setCompany(draft);
+    setFieldEditing(false);
+  };
   const saveCompany = () => {
     setCompany(draft);
     setDocName(draftDocName);
@@ -296,6 +309,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
       });
     }, 120);
   };
+
 
   const toggleFocus = (chip: string) => {
     const selected = draft.businessFocus.split(/[、,,\s]+/).filter(Boolean);
@@ -378,14 +392,39 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                       <Loader2 className="h-3 w-3 animate-spin" />
                       正在重新训练,请稍候
                     </span>
+                  ) : fieldEditing ? (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={cancelFieldEdit}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
+                      >
+                        取消
+                      </button>
+                      <button
+                        onClick={submitFieldEdit}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
+                      >
+                        <Check className="h-3.5 w-3.5" />
+                        提交
+                      </button>
+                    </div>
                   ) : (
-                    <button
-                      onClick={startEditCompany}
-                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
-                    >
-                      <PenLine className="h-3.5 w-3.5" />
-                      重新训练
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={startEditCompany}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                      >
+                        <Sparkles className="h-3.5 w-3.5" />
+                        重新训练
+                      </button>
+                      <button
+                        onClick={startFieldEdit}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
+                      >
+                        <PenLine className="h-3.5 w-3.5" />
+                        编辑
+                      </button>
+                    </div>
                   )
                 ) : (
                   <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
@@ -393,6 +432,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   </span>
                 )
               }
+
             />
 
             {!companyEditing && (
@@ -402,7 +442,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   title="企业档案"
                   desc="公司基础信息与目标市场"
                   badge="已识别 5 项"
-                  editing={false}
+                  editing={fieldEditing}
                   items={[
                     { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }) },
                     { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }) },
@@ -417,7 +457,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   title="产品知识"
                   desc="主营产品的关键词、卖点与典型案例"
                   badge="已识别 3 项"
-                  editing={false}
+                  editing={fieldEditing}
                   items={[
                     { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
                     { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
