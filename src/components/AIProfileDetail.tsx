@@ -457,7 +457,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   title="产品知识"
                   desc="主营产品的关键词、卖点与典型案例"
                   badge="已识别 3 项"
-                  editing={false}
+                  editing={fieldEditing}
                   items={[
                     { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
                     { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
