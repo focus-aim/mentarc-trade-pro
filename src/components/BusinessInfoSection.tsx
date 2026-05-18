@@ -38,13 +38,13 @@ const BusinessInfoSection = () => {
           {hasIncomplete ? (
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-500/10 text-amber-600 border border-amber-500/20 group-hover:bg-primary/10 group-hover:text-primary group-hover:border-primary/20 transition-colors">
               <span className="group-hover:hidden">待完善</span>
-              <span className="hidden group-hover:inline">去编辑</span>
+               <span className="hidden group-hover:inline">重新训练</span>
               <Pencil className="w-3 h-3 hidden group-hover:block" />
             </span>
           ) : (
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
               <Pencil className="w-3 h-3" />
-              编辑
+              重新训练
             </span>
           )}
         </div>
@@ -81,7 +81,7 @@ const BusinessInfoSection = () => {
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>编辑公司基本信息</DialogTitle>
+            <DialogTitle>重新训练公司基本信息</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-2">
             <div>
