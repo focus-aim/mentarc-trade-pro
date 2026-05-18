@@ -1866,30 +1866,6 @@ const Index = () => {
                     >
                       <Paperclip className="h-4 w-4 text-muted-foreground" />
                     </button>
-                    <div className="hidden sm:flex items-center gap-1.5">
-                      {TASK_TABS.map((tab) => (
-                        <button
-                          key={tab.label}
-                          onClick={() => setActiveTaskTab(tab.label)}
-                          className={cn(
-                            "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-                            activeTaskTab === tab.label
-                              ? "border-border bg-card text-foreground shadow-sm"
-                              : "border-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                          )}
-                        >
-                          <span className="h-5 w-5 overflow-hidden rounded-full border border-primary/15 bg-accent shadow-sm">
-                            <img
-                              src={tab.avatar}
-                              alt={tab.expert}
-                              className="h-full w-full object-cover object-top"
-                              loading="lazy"
-                            />
-                          </span>
-                          {tab.label}
-                        </button>
-                      ))}
-                    </div>
                   </div>
                   <button
                     onClick={() => {
@@ -1904,6 +1880,30 @@ const Index = () => {
                     <Send className="h-4 w-4" />
                   </button>
                 </div>
+              </div>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-base font-semibold text-muted-foreground">
+                {TASK_TABS.map((tab) => (
+                  <button
+                    key={tab.label}
+                    onClick={() => setActiveTaskTab(tab.label)}
+                    className={cn(
+                      "inline-flex items-center gap-3 rounded-full border px-5 py-2.5 transition-colors",
+                      activeTaskTab === tab.label
+                        ? "border-border bg-card text-foreground shadow-sm"
+                        : "border-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                    )}
+                  >
+                    <span className="h-8 w-8 overflow-hidden rounded-full border border-primary/15 bg-accent shadow-sm">
+                      <img
+                        src={tab.avatar}
+                        alt={tab.expert}
+                        className="h-full w-full object-cover object-top"
+                        loading="lazy"
+                      />
+                    </span>
+                    {tab.label}
+                  </button>
+                ))}
               </div>
             </div>
 
