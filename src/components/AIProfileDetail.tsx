@@ -442,7 +442,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   title="企业档案"
                   desc="公司基础信息与目标市场"
                   badge="已识别 5 项"
-                  editing={false}
+                  editing={fieldEditing}
                   items={[
                     { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }) },
                     { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }) },
