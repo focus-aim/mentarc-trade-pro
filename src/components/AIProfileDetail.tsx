@@ -966,7 +966,7 @@ const KnowledgeCard = ({
             <input
               value={it.draft}
               onChange={(e) => it.onChange(e.target.value)}
-              className="min-w-0 flex-1 bg-transparent text-foreground/90 focus:outline-none border-b border-border/40 focus:border-primary/50 pb-0.5 transition-colors"
+              className="min-w-0 flex-1 bg-transparent text-foreground/90 focus:outline-none border-0 pb-0.5"
             />
           ) : (
             <span className="min-w-0 flex-1 text-foreground/85 break-words">{it.value || <span className="text-muted-foreground/60">未填写</span>}</span>
