@@ -392,23 +392,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                       <Loader2 className="h-3 w-3 animate-spin" />
                       正在重新训练,请稍候
                     </span>
-                  ) : fieldEditing ? (
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={cancelFieldEdit}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
-                      >
-                        取消
-                      </button>
-                      <button
-                        onClick={submitFieldEdit}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
-                      >
-                        <Check className="h-3.5 w-3.5" />
-                        提交
-                      </button>
-                    </div>
-                  ) : (
+                  ) : fieldEditing ? null : (
                     <div className="flex items-center gap-2">
                       <button
                         onClick={startEditCompany}
@@ -464,7 +448,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                     { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
                   ]}
                 />
-                {docName && (
+                {!fieldEditing && docName && (
                   <div className="rounded-2xl border border-border/60 bg-card/70 px-4 py-3.5 backdrop-blur-sm">
                     <div className="mb-2.5 flex items-center justify-between">
                       <div>
@@ -496,6 +480,25 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                         下载
                       </a>
                     </div>
+                  </div>
+                )}
+
+                {fieldEditing && (
+                  <div className="flex items-center gap-2 pt-2">
+                    <button
+                      onClick={submitFieldEdit}
+                      className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
+                    >
+                      <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                      <Check className="h-4 w-4" />
+                      提交
+                    </button>
+                    <button
+                      onClick={cancelFieldEdit}
+                      className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-background/70 px-5 py-3 text-sm font-medium text-foreground hover:bg-accent transition-colors"
+                    >
+                      取消
+                    </button>
                   </div>
                 )}
               </div>
