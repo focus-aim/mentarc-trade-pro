@@ -1845,11 +1845,6 @@ const Index = () => {
               style={{ animationDelay: "180ms" }}
             >
               <div className="rounded-2xl border border-border/70 bg-card/85 backdrop-blur-sm shadow-lg shadow-primary/8 p-3.5">
-                <div className="mb-2 flex items-center gap-2 px-1">
-                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                    {selectedTaskTab.label}
-                  </span>
-                </div>
                 <textarea
                   key={inputKey}
                   value={prefillValue}
@@ -1866,6 +1861,9 @@ const Index = () => {
                     >
                       <Paperclip className="h-4 w-4 text-muted-foreground" />
                     </button>
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                      {selectedTaskTab.label}
+                    </span>
                   </div>
                   <button
                     onClick={() => {
