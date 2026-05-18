@@ -392,23 +392,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                       <Loader2 className="h-3 w-3 animate-spin" />
                       正在重新训练,请稍候
                     </span>
-                  ) : fieldEditing ? (
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={cancelFieldEdit}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
-                      >
-                        取消
-                      </button>
-                      <button
-                        onClick={submitFieldEdit}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
-                      >
-                        <Check className="h-3.5 w-3.5" />
-                        提交
-                      </button>
-                    </div>
-                  ) : (
+                  ) : fieldEditing ? null : (
                     <div className="flex items-center gap-2">
                       <button
                         onClick={startEditCompany}
