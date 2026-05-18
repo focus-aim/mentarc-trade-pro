@@ -386,159 +386,105 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
               title="企业知识库"
               sub="沉淀企业知识,让 AI 真正懂你,并在每次生成中持续应用"
               actions={
-                retraining ? (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
-                    <Loader2 className="h-3 w-3 animate-spin" />
-                    正在重新训练,请稍候
-                  </span>
-                ) : fieldEditing || companyEditing ? (
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={fieldEditing ? cancelFieldEdit : cancelEditCompany}
-                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
-                    >
-                      取消
-                    </button>
-                    <button
-                      onClick={fieldEditing ? submitFieldEdit : saveCompany}
-                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
-                    >
-                      {fieldEditing ? (
-                        <>
-                          <Check className="h-3.5 w-3.5" />
-                          保存修改
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="h-3.5 w-3.5" />
-                          开始训练
-                        </>
-                      )}
-                    </button>
-                  </div>
+                !companyEditing ? (
+                  retraining ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                      正在重新训练,请稍候
+                    </span>
+                  ) : fieldEditing ? (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={cancelFieldEdit}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-accent transition-colors"
+                      >
+                        取消
+                      </button>
+                      <button
+                        onClick={submitFieldEdit}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
+                      >
+                        <Check className="h-3.5 w-3.5" />
+                        提交
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={startEditCompany}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                      >
+                        <Sparkles className="h-3.5 w-3.5" />
+                        重新训练
+                      </button>
+                      <button
+                        onClick={startFieldEdit}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
+                      >
+                        <PenLine className="h-3.5 w-3.5" />
+                        编辑
+                      </button>
+                    </div>
+                  )
                 ) : (
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={startEditCompany}
-                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                    >
-                      <Sparkles className="h-3.5 w-3.5" />
-                      重新训练
-                    </button>
-                    <button
-                      onClick={startFieldEdit}
-                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
-                    >
-                      <PenLine className="h-3.5 w-3.5" />
-                      编辑
-                    </button>
-                  </div>
+                  <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+                    重新训练中
+                  </span>
                 )
               }
+
             />
 
-            {/* 模式横幅 */}
-            {(fieldEditing || companyEditing) && (
-              <div
-                className={cn(
-                  "mt-4 flex items-start gap-3 rounded-2xl border px-4 py-3 backdrop-blur-sm",
-                  fieldEditing
-                    ? "border-primary/20 bg-primary/5"
-                    : "border-secondary/30 bg-secondary/10",
-                )}
-              >
-                <div
-                  className={cn(
-                    "flex h-8 w-8 shrink-0 items-center justify-center rounded-xl",
-                    fieldEditing ? "bg-primary/10 text-primary" : "bg-secondary/20 text-secondary",
-                  )}
-                >
-                  {fieldEditing ? <PenLine className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[13px] font-bold text-foreground">
-                    {fieldEditing ? "编辑模式" : "重新训练模式"}
-                  </div>
-                  <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">
-                    {fieldEditing
-                      ? "直接修改下方字段,保存后立即生效,AI 在下次生成时使用新内容。"
-                      : "更新企业资料与产品文档,提交后 AI 会基于最新素材重新构建画像。"}
-                  </p>
-                </div>
-              </div>
-            )}
+            {!companyEditing && (
+              <div className="mt-4 space-y-4">
+                <KnowledgeCard
+                  icon={Building2}
+                  title="企业档案"
+                  desc="公司基础信息与目标市场"
+                  badge="已识别 5 项"
+                  editing={fieldEditing}
+                  items={[
+                    { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }) },
+                    { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }) },
+                    { label: "业务关注点", value: company.businessFocus, draft: draft.businessFocus, onChange: (v) => setDraft({ ...draft, businessFocus: v }) },
+                    { label: "公司网址", value: company.website, draft: draft.website, onChange: (v) => setDraft({ ...draft, website: v }) },
+                    { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }) },
+                  ]}
+                />
 
-            <div className="mt-4 space-y-4">
-              <KnowledgeCard
-                icon={Building2}
-                title="企业档案"
-                desc="公司基础信息与目标市场"
-                badge="已识别 5 项"
-                editing={fieldEditing || companyEditing}
-                items={[
-                  { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }) },
-                  { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }) },
-                  { label: "业务关注点", value: company.businessFocus, draft: draft.businessFocus, onChange: (v) => setDraft({ ...draft, businessFocus: v }) },
-                  { label: "公司网址", value: company.website, draft: draft.website, onChange: (v) => setDraft({ ...draft, website: v }) },
-                  { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }) },
-                ]}
-              />
-
-              <KnowledgeCard
-                icon={Tags}
-                title="产品知识"
-                desc="主营产品的关键词、卖点与典型案例"
-                badge="已识别 3 项"
-                editing={fieldEditing || companyEditing}
-                items={[
-                  { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
-                  { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
-                  { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
-                ]}
-              />
-
-              {/* 产品资料 */}
-              <div className="rounded-2xl border border-border/60 bg-card/70 px-4 py-3.5 backdrop-blur-sm">
-                <div className="mb-2.5 flex items-center justify-between">
-                  <div>
-                    <h4 className="text-[13px] font-bold text-foreground">产品资料</h4>
-                    <p className="mt-0.5 text-[11px] text-muted-foreground">
-                      {companyEditing ? "重新训练时可替换产品文档" : "已上传的产品文档,支持下载查看"}
-                    </p>
-                  </div>
-                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10.5px] font-semibold text-primary">
-                    共 {(companyEditing ? draftDocName : docName) ? 1 : 0} 份
-                  </span>
-                </div>
-
-                {(companyEditing ? draftDocName : docName) ? (
-                  <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/60 px-3 py-2.5 transition-colors hover:bg-background">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <FileText className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-[13px] font-medium text-foreground">
-                        {companyEditing ? draftDocName : docName}
+                <KnowledgeCard
+                  icon={Tags}
+                  title="产品知识"
+                  desc="主营产品的关键词、卖点与典型案例"
+                  badge="已识别 3 项"
+                  editing={fieldEditing}
+                  items={[
+                    { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
+                    { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
+                    { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
+                  ]}
+                />
+                {docName && (
+                  <div className="rounded-2xl border border-border/60 bg-card/70 px-4 py-3.5 backdrop-blur-sm">
+                    <div className="mb-2.5 flex items-center justify-between">
+                      <div>
+                        <h4 className="text-[13px] font-bold text-foreground">产品资料</h4>
+                        <p className="mt-0.5 text-[11px] text-muted-foreground">已上传的产品文档,支持下载查看</p>
                       </div>
-                      <div className="text-[11px] text-muted-foreground">
-                        {(companyEditing ? draftDocName : docName).split(".").pop()?.toUpperCase()} · 已同步至 AI 知识库
-                      </div>
+                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10.5px] font-semibold text-primary">
+                        共 1 份
+                      </span>
                     </div>
-                    {companyEditing ? (
-                      <label className="inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-full border border-border bg-background/70 px-2.5 py-1 text-[11.5px] font-medium text-foreground hover:bg-accent transition-colors">
-                        <FileUp className="h-3.5 w-3.5" />
-                        替换
-                        <input
-                          type="file"
-                          accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
-                          className="hidden"
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (file) setDraftDocName(file.name);
-                          }}
-                        />
-                      </label>
-                    ) : (
+                    <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/60 px-3 py-2.5 transition-colors hover:bg-background">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <FileText className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-[13px] font-medium text-foreground">{docName}</div>
+                        <div className="text-[11px] text-muted-foreground">
+                          {docName.split(".").pop()?.toUpperCase()} · 已同步至 AI 知识库
+                        </div>
+                      </div>
                       <a
                         href="#"
                         download={docName}
@@ -549,15 +495,95 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                         <Download className="h-3.5 w-3.5" />
                         下载
                       </a>
-                    )}
+                    </div>
                   </div>
-                ) : (
-                  <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-dashed border-border/60 bg-background/40 px-3 py-3 transition-colors hover:border-primary/40 hover:bg-primary/5">
-                    <span className="text-[12px] text-muted-foreground">尚未上传产品文档</span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 text-[11.5px] font-medium text-primary">
-                      <FileUp className="h-3.5 w-3.5" />
-                      上传
-                    </span>
+                )}
+              </div>
+            )}
+
+            {companyEditing && (
+              <div className="mt-4 relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-primary/5 p-6 shadow-xl shadow-primary/5 backdrop-blur-md sm:p-8">
+                <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+                <div aria-hidden className="pointer-events-none absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-secondary/15 blur-3xl" />
+
+                <div className="relative">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    更新企业知识库
+                  </span>
+                  <h2 className="mt-3 text-xl font-bold leading-snug tracking-tight text-foreground">
+                    重新训练
+                  </h2>
+                  <p className="mt-1.5 text-[13px] text-muted-foreground">
+                    修改完成后保存,AI 会基于最新素材重新构建画像。
+                  </p>
+                </div>
+
+                <div className="relative mt-6 space-y-3">
+                  {/* 主营产品 */}
+                  <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
+                    <div className="text-xs font-medium text-muted-foreground">主营产品</div>
+                    <input
+                      value={draft.mainProducts}
+                      onChange={(e) => setDraft({ ...draft, mainProducts: e.target.value })}
+                      placeholder="说说你卖什么,比如 不锈钢保温杯"
+                      className="w-full bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/60 placeholder:font-normal focus:outline-none"
+                    />
+                  </div>
+
+                  {/* 业务关注点 chips */}
+                  <div className="group rounded-2xl border border-border/50 bg-background/70 px-4 py-3 transition-all duration-200">
+                    <div className="text-xs font-medium text-muted-foreground">业务关注点</div>
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
+                      {FOCUS_OPTIONS.map((focus) => {
+                        const selected = draft.businessFocus.split(/[、,,\s]+/).filter(Boolean);
+                        const active = selected.includes(focus);
+                        return (
+                          <button
+                            key={focus}
+                            type="button"
+                            onClick={() => toggleFocus(focus)}
+                            className={cn(
+                              "rounded-full border px-2.5 py-1 text-xs font-medium transition-all",
+                              active
+                                ? "border-primary/40 bg-primary/10 text-primary"
+                                : "border-border bg-background/60 text-muted-foreground hover:border-primary/30 hover:text-foreground",
+                            )}
+                          >
+                            {active && <span className="mr-0.5">✓</span>}
+                            {focus}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 企业官网 */}
+                  <div className="group rounded-2xl border border-border/40 bg-background/50 px-4 py-3 transition-all duration-200 focus-within:border-primary/50 focus-within:bg-background focus-within:shadow-md focus-within:shadow-primary/10">
+                    <div className="text-xs font-medium text-muted-foreground">企业官网</div>
+                    <input
+                      value={draft.website}
+                      onChange={(e) => setDraft({ ...draft, website: e.target.value })}
+                      placeholder="贴上网址,AI 自动抓取分析"
+                      className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+                    />
+                  </div>
+
+                  {/* 产品资料 */}
+                  <label className="group relative flex min-h-[140px] cursor-pointer flex-col gap-3 rounded-2xl border border-dashed border-border/60 bg-background/40 px-5 py-5 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5">
+                    <div className="min-w-0">
+                      <div className="text-xs font-medium text-muted-foreground">产品资料</div>
+                      <div className="truncate text-sm text-foreground/80">
+                        {draftDocName || "拖拽文件到此,或点击下方按钮上传"}
+                      </div>
+                    </div>
+                    <div className="mt-auto flex items-center justify-between gap-3">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                        <FileUp className="h-3.5 w-3.5" />
+                        上传文档
+                      </span>
+                      <span className="text-xs text-muted-foreground/80">支持 PDF / Word / Excel / PPT</span>
+                    </div>
                     <input
                       type="file"
                       accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
@@ -568,12 +594,29 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                       }}
                     />
                   </label>
-                )}
+                </div>
+
+                <div className="relative mt-6 flex items-center gap-2">
+                  <button
+                    onClick={saveCompany}
+                    className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
+                  >
+                    <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                    <Sparkles className="h-4 w-4" />
+                    重新训练
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                  <button
+                    onClick={cancelEditCompany}
+                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-background/70 px-5 py-3 text-sm font-medium text-foreground hover:bg-accent transition-colors"
+                  >
+                    取消
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </section>
         )}
-
 
         {/* Module 2: 团队经验 */}
         {activeTab === "preference" && (
