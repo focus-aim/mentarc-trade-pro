@@ -988,8 +988,8 @@ const Index = () => {
               <section className="mt-7 opacity-0 animate-fade-up" style={{ animationDelay: "140ms" }}>
                 <div className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/70 p-1 backdrop-blur-sm">
                   {([
-                    { key: "inquiry", label: "询盘跟进", count: INQUIRY_BUYERS.length },
-                    { key: "product", label: "产品生成", count: GENERATED_PRODUCTS.length },
+                    { key: "inquiry", label: "买家档案", count: INQUIRY_BUYERS.length },
+                    { key: "product", label: "产品素材", count: GENERATED_PRODUCTS.length },
                   ] as const).map((tab) => {
                     const isActive =
                       (tab.key === "inquiry" && activeResultTab !== "product") ||
