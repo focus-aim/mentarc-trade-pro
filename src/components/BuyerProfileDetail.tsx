@@ -1,5 +1,7 @@
-import { ArrowLeft, UserRound, ListChecks, Brain, AlertTriangle, Star, Search, Compass, Mail, MessageCircle, CheckCircle2, Clock, Sparkles, Archive } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, UserRound, ListChecks, Brain, AlertTriangle, Star, Search, Compass, Mail, MessageCircle, CheckCircle2, Clock, Sparkles, Archive, ChevronRight } from "lucide-react";
 import { BuyerBackgroundReport } from "./InquiryResultMessage";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 
 // ============================================================
 // Local helpers (mirroring InquiryResultMessage's compact style)
@@ -268,6 +270,8 @@ interface BuyerProfileDetailProps {
 
 const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
   const data = BUYER_DATA[buyerId];
+  const [openKey, setOpenKey] = useState<string | null>(null);
+
   if (!data) {
     return (
       <main className="ambient-bg flex-1 h-screen overflow-y-auto bg-background">
@@ -286,6 +290,7 @@ const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
       key: "background",
       label: "买家背调",
       desc: "深度背景调查结果归档",
+      tag: "1 份报告",
       icon: Search,
       gradient: "from-primary/15 via-primary/8 to-transparent",
       iconBg: "bg-primary/15 text-primary",
@@ -295,6 +300,7 @@ const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
       key: "inquiry",
       label: "分析询盘",
       desc: "由业务专家自动生成的询盘洞察",
+      tag: "AI 洞察",
       icon: ListChecks,
       gradient: "from-emerald-500/15 via-emerald-500/8 to-transparent",
       iconBg: "bg-emerald-500/15 text-emerald-600",
@@ -303,7 +309,8 @@ const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
     {
       key: "strategy",
       label: "策略咨询",
-      desc: `${data.followUps.length} 条沟通策略与跟进记录`,
+      desc: "沟通策略与跟进记录",
+      tag: `${data.followUps.length} 条记录`,
       icon: Compass,
       gradient: "from-amber-500/15 via-amber-500/8 to-transparent",
       iconBg: "bg-amber-500/15 text-amber-600",
@@ -311,10 +318,11 @@ const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
     },
   ];
 
+  const active = taskCards.find((c) => c.key === openKey);
+
   return (
     <main className="ambient-bg relative flex-1 h-screen overflow-y-auto scrollbar-thin bg-background">
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 pb-10 pt-8 sm:px-6 lg:px-8">
-        {/* Back + header */}
         <button onClick={onBack} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
           <ArrowLeft className="w-3.5 h-3.5" /> 返回任务成果
         </button>
@@ -338,38 +346,62 @@ const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
           </div>
         </section>
 
-        {/* 历史任务成果 - 卡片 */}
-        <div className="mt-6 mb-2 flex items-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: "120ms" }}>
+        <div className="mt-6 mb-3 flex items-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: "120ms" }}>
           <Archive className="w-3.5 h-3.5 text-muted-foreground" />
           <h2 className="text-sm font-bold text-foreground">历史任务成果</h2>
           <span className="text-[11px] text-muted-foreground">{taskCards.length} 类沉淀结果</span>
         </div>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {taskCards.map((card, i) => {
             const Icon = card.icon;
             return (
-              <section
+              <button
                 key={card.key}
-                className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/85 backdrop-blur-sm shadow-card opacity-0 animate-fade-up"
+                onClick={() => setOpenKey(card.key)}
+                className="group relative overflow-hidden text-left rounded-2xl border border-border/60 bg-card/85 backdrop-blur-sm shadow-card p-4 opacity-0 animate-fade-up transition-all hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5"
                 style={{ animationDelay: `${180 + i * 80}ms` }}
               >
-                <span aria-hidden className={`pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gradient-to-br ${card.gradient} blur-2xl`} />
-                <header className="relative flex items-center gap-2.5 border-b border-border/50 px-4 py-3 sm:px-5">
-                  <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${card.iconBg}`}>
+                <span aria-hidden className={`pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-gradient-to-br ${card.gradient} blur-2xl`} />
+                <div className="relative flex items-start gap-3">
+                  <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${card.iconBg}`}>
                     <Icon className="w-4 h-4" />
                   </div>
-                  <div className="min-w-0">
-                    <h3 className="text-[14px] font-semibold text-foreground leading-tight">{card.label}</h3>
-                    <p className="text-[11.5px] text-muted-foreground mt-0.5">{card.desc}</p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="text-[14px] font-semibold text-foreground leading-tight">{card.label}</h3>
+                      <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/60 transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                    </div>
+                    <p className="text-[11.5px] text-muted-foreground mt-1 leading-snug">{card.desc}</p>
+                    <span className="mt-2 inline-flex items-center rounded-md border border-border/70 bg-background/60 px-1.5 py-0.5 text-[10.5px] text-muted-foreground">
+                      {card.tag}
+                    </span>
                   </div>
-                </header>
-                <div className="relative px-4 py-4 sm:px-5">{card.content}</div>
-              </section>
+                </div>
+              </button>
             );
           })}
         </div>
       </div>
+
+      <Dialog open={openKey !== null} onOpenChange={(o) => !o && setOpenKey(null)}>
+        <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto scrollbar-thin">
+          {active && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2 text-base">
+                  <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${active.iconBg}`}>
+                    <active.icon className="w-3.5 h-3.5" />
+                  </span>
+                  {active.label}
+                </DialogTitle>
+                <DialogDescription className="text-[12px]">{active.desc}</DialogDescription>
+              </DialogHeader>
+              <div className="mt-2">{active.content}</div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </main>
   );
 };
