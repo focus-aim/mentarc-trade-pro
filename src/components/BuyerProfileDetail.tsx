@@ -1,5 +1,7 @@
-import { ArrowLeft, UserRound, ListChecks, Brain, AlertTriangle, Star, Search, Compass, Mail, MessageCircle, CheckCircle2, Clock, Sparkles, Archive } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, UserRound, ListChecks, Brain, AlertTriangle, Star, Search, Compass, Mail, MessageCircle, CheckCircle2, Clock, Sparkles, Archive, ChevronRight } from "lucide-react";
 import { BuyerBackgroundReport } from "./InquiryResultMessage";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 
 // ============================================================
 // Local helpers (mirroring InquiryResultMessage's compact style)
