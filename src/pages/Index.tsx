@@ -767,6 +767,8 @@ const Index = () => {
   const [activeResultTab, setActiveResultTab] = useState<"all" | ResultCategory>("all");
   const [activeBuyerId, setActiveBuyerId] = useState<string | null>(null);
   const [expandedBuyerId, setExpandedBuyerId] = useState<string | null>(null);
+  const [bgReportBuyerId, setBgReportBuyerId] = useState<string | null>(null);
+
   const [partnerConfigured, setPartnerConfigured] = useState(initialPartnerConfigured);
   // Initialization training flow: idle | form | training | result
   const [trainingStage, setTrainingStage] = useState<"idle" | "form" | "training" | "result">("idle");
