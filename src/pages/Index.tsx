@@ -598,7 +598,140 @@ const boardNews = [
   },
 ];
 
-const Index = () => {
+type InquiryBuyer = {
+  id: string;
+  company: string;
+  products: string;
+  contact: string;
+  region: string;
+  stage: string;
+  stageTone: "primary" | "amber" | "emerald" | "muted";
+  analyses: { title: string; date: string }[];
+};
+
+const INQUIRY_BUYERS: InquiryBuyer[] = [
+  {
+    id: "b1",
+    company: "德国大型连锁健身房采购部 FitLine GmbH",
+    products: "商用动感单车 / 智能跑步机",
+    contact: "Markus Schneider · 采购总监",
+    region: "德国 慕尼黑",
+    stage: "深度跟进",
+    stageTone: "primary",
+    analyses: [
+      { title: "慕尼黑展会名片清洗-0326", date: "03/26" },
+      { title: "德国采购意向跟进-0402", date: "04/02" },
+      { title: "决策链梳理 & 预算确认-0418", date: "04/18" },
+    ],
+  },
+  {
+    id: "b2",
+    company: "美国本土居家运动 DTC 品牌 HomeFit Co.",
+    products: "迷你椭圆机 / 可折叠走步机",
+    contact: "Olivia Park · 品类经理",
+    region: "美国 洛杉矶",
+    stage: "已建档",
+    stageTone: "emerald",
+    analyses: [
+      { title: "北美市场竞对背调-0328", date: "03/28" },
+      { title: "DTC 品牌私域获客拆解-0405", date: "04/05" },
+      { title: "美西采购窗口期分析-0410", date: "04/10" },
+    ],
+  },
+  {
+    id: "b3",
+    company: "中东商用健身房连锁 Desert Gym",
+    products: "整店成套器械 / 售后配件",
+    contact: "Khalid Al-Mansoori · 创始人",
+    region: "阿联酋 迪拜",
+    stage: "待报价",
+    stageTone: "amber",
+    analyses: [{ title: "迪拜健身展线索整理-0331", date: "03/31" }],
+  },
+  {
+    id: "b4",
+    company: "TechSol US Renewable Distribution",
+    products: "5kW 混合逆变器（UL1741）",
+    contact: "John Carter · Procurement Lead",
+    region: "美国 德州",
+    stage: "首次询盘",
+    stageTone: "primary",
+    analyses: [
+      { title: "保温啤酒杯阶梯报价询盘分析", date: "04/22" },
+      { title: "买家 TechSol US 背调", date: "04/24" },
+    ],
+  },
+];
+
+type GeneratedProduct = {
+  id: string;
+  name: string;
+  category: string;
+  updatedAt: string;
+  cover?: string;
+  assets: { label: string; type: "detail" | "image" | "video" | "copy" }[];
+};
+
+const GENERATED_PRODUCTS: GeneratedProduct[] = [
+  {
+    id: "gp1",
+    name: "1000W Fat Tire 电助力车",
+    category: "户外出行",
+    updatedAt: "04/20",
+    assets: [
+      { label: "亚马逊 A+ 详情页", type: "detail" },
+      { label: "主图 5 张", type: "image" },
+      { label: "卖点文案 EN/ES", type: "copy" },
+    ],
+  },
+  {
+    id: "gp2",
+    name: "智能动感单车（居家版）",
+    category: "居家健身",
+    updatedAt: "04/16",
+    assets: [
+      { label: "独立站详情页", type: "detail" },
+      { label: "场景图 6 张", type: "image" },
+      { label: "15s 短视频脚本", type: "video" },
+    ],
+  },
+  {
+    id: "gp3",
+    name: "双层保温啤酒杯",
+    category: "户外露营",
+    updatedAt: "04/12",
+    assets: [
+      { label: "Listing 标题+五点", type: "copy" },
+      { label: "主图 4 张", type: "image" },
+    ],
+  },
+  {
+    id: "gp4",
+    name: "可折叠迷你走步机",
+    category: "居家健身",
+    updatedAt: "04/08",
+    assets: [
+      { label: "TikTok 短视频脚本", type: "video" },
+      { label: "营销卖点文案", type: "copy" },
+    ],
+  },
+];
+
+const INQUIRY_STAGE_STYLES: Record<InquiryBuyer["stageTone"], string> = {
+  primary: "border-primary/25 bg-primary/10 text-primary",
+  amber: "border-accent-amber/30 bg-accent-amber/15 text-accent-amber",
+  emerald: "border-success/30 bg-success/15 text-success",
+  muted: "border-border bg-muted text-muted-foreground",
+};
+
+const ASSET_TYPE_STYLES: Record<GeneratedProduct["assets"][number]["type"], string> = {
+  detail: "border-primary/25 bg-primary/10 text-primary",
+  image: "border-secondary/40 bg-secondary/20 text-foreground/80",
+  video: "border-accent-amber/30 bg-accent-amber/15 text-accent-amber",
+  copy: "border-success/30 bg-success/15 text-success",
+};
+
+
   // Persisted training/partner state — new visitors see the launch page;
   // once trained, the configured state is restored on subsequent visits.
   const initialPartnerConfigured = (() => {
