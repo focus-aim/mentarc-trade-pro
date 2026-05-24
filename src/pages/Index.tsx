@@ -31,6 +31,11 @@ import {
   Archive,
   TrendingUp,
   UserRound,
+  FileSearch,
+  Mail,
+  MapPin,
+  Boxes,
+
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
