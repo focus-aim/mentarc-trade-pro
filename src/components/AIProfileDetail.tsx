@@ -280,18 +280,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
     setCompanyEditing(true);
   };
   const cancelEditCompany = () => setCompanyEditing(false);
-  const startFieldEdit = () => {
-    setDraft(company);
-    setFieldEditing(true);
-  };
-  const cancelFieldEdit = () => {
-    setDraft(company);
-    setFieldEditing(false);
-  };
-  const submitFieldEdit = () => {
-    setCompany(draft);
-    setFieldEditing(false);
-  };
+
   const saveCompany = () => {
     setCompany(draft);
     setDocName(draftDocName);
