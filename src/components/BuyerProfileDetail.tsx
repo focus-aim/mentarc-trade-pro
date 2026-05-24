@@ -281,6 +281,36 @@ const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
     );
   }
 
+  const taskCards = [
+    {
+      key: "background",
+      label: "买家背调",
+      desc: "深度背景调查结果归档",
+      icon: Search,
+      gradient: "from-primary/15 via-primary/8 to-transparent",
+      iconBg: "bg-primary/15 text-primary",
+      content: <BuyerBackgroundReport />,
+    },
+    {
+      key: "inquiry",
+      label: "分析询盘",
+      desc: "由业务专家自动生成的询盘洞察",
+      icon: ListChecks,
+      gradient: "from-emerald-500/15 via-emerald-500/8 to-transparent",
+      iconBg: "bg-emerald-500/15 text-emerald-600",
+      content: <InquiryOverview data={data} />,
+    },
+    {
+      key: "strategy",
+      label: "策略咨询",
+      desc: `${data.followUps.length} 条沟通策略与跟进记录`,
+      icon: Compass,
+      gradient: "from-amber-500/15 via-amber-500/8 to-transparent",
+      iconBg: "bg-amber-500/15 text-amber-600",
+      content: <FollowUpArchive items={data.followUps} />,
+    },
+  ];
+
   return (
     <main className="ambient-bg relative flex-1 h-screen overflow-y-auto scrollbar-thin bg-background">
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 pb-10 pt-8 sm:px-6 lg:px-8">
@@ -308,41 +338,37 @@ const BuyerProfileDetail = ({ buyerId, onBack }: BuyerProfileDetailProps) => {
           </div>
         </section>
 
-        {/* 1. Inquiry overview */}
-        <section className="mt-6 opacity-0 animate-fade-up" style={{ animationDelay: "140ms" }}>
-          <div className="mb-3 flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <ListChecks className="w-3.5 h-3.5" />
-            </div>
-            <h2 className="text-sm font-bold text-foreground">当前买家的询盘概览</h2>
-            <span className="text-[11px] text-muted-foreground">由业务专家自动生成</span>
-          </div>
-          <InquiryOverview data={data} />
-        </section>
+        {/* 历史任务成果 - 卡片 */}
+        <div className="mt-6 mb-2 flex items-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: "120ms" }}>
+          <Archive className="w-3.5 h-3.5 text-muted-foreground" />
+          <h2 className="text-sm font-bold text-foreground">历史任务成果</h2>
+          <span className="text-[11px] text-muted-foreground">{taskCards.length} 类沉淀结果</span>
+        </div>
 
-        {/* 2. Background report */}
-        <section className="mt-7 opacity-0 animate-fade-up" style={{ animationDelay: "220ms" }}>
-          <div className="mb-3 flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <Search className="w-3.5 h-3.5" />
-            </div>
-            <h2 className="text-sm font-bold text-foreground">买家背调报告</h2>
-            <span className="text-[11px] text-muted-foreground">深度背调结果归档</span>
-          </div>
-          <BuyerBackgroundReport />
-        </section>
-
-        {/* 3. Follow-up archive */}
-        <section className="mt-7 mb-2 opacity-0 animate-fade-up" style={{ animationDelay: "300ms" }}>
-          <div className="mb-3 flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <Archive className="w-3.5 h-3.5" />
-            </div>
-            <h2 className="text-sm font-bold text-foreground">跟进策略归档</h2>
-            <span className="text-[11px] text-muted-foreground">{data.followUps.length} 条沟通记录</span>
-          </div>
-          <FollowUpArchive items={data.followUps} />
-        </section>
+        <div className="space-y-4">
+          {taskCards.map((card, i) => {
+            const Icon = card.icon;
+            return (
+              <section
+                key={card.key}
+                className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/85 backdrop-blur-sm shadow-card opacity-0 animate-fade-up"
+                style={{ animationDelay: `${180 + i * 80}ms` }}
+              >
+                <span aria-hidden className={`pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gradient-to-br ${card.gradient} blur-2xl`} />
+                <header className="relative flex items-center gap-2.5 border-b border-border/50 px-4 py-3 sm:px-5">
+                  <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${card.iconBg}`}>
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-[14px] font-semibold text-foreground leading-tight">{card.label}</h3>
+                    <p className="text-[11.5px] text-muted-foreground mt-0.5">{card.desc}</p>
+                  </div>
+                </header>
+                <div className="relative px-4 py-4 sm:px-5">{card.content}</div>
+              </section>
+            );
+          })}
+        </div>
       </div>
     </main>
   );
