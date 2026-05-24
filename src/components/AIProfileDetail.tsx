@@ -381,24 +381,16 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                       <Loader2 className="h-3 w-3 animate-spin" />
                       正在重新训练,请稍候
                     </span>
-                  ) : fieldEditing ? null : (
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={startEditCompany}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                      >
-                        <Sparkles className="h-3.5 w-3.5" />
-                        重新训练
-                      </button>
-                      <button
-                        onClick={startFieldEdit}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary/90 transition-colors"
-                      >
-                        <PenLine className="h-3.5 w-3.5" />
-                        编辑
-                      </button>
-                    </div>
+                  ) : (
+                    <button
+                      onClick={startEditCompany}
+                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                    >
+                      <Sparkles className="h-3.5 w-3.5" />
+                      重新训练
+                    </button>
                   )
+
                 ) : (
                   <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
                     重新训练中
