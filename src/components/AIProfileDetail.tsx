@@ -418,8 +418,8 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                     { label: "业务关注点", value: company.businessFocus, draft: company.businessFocus, onChange: (v) => setCompany({ ...company, businessFocus: v }) },
                     { label: "公司网址", value: company.website, draft: company.website, onChange: (v) => setCompany({ ...company, website: v }) },
                     { label: "目标市场", value: company.targetMarket, draft: company.targetMarket, onChange: (v) => setCompany({ ...company, targetMarket: v }) },
-                    { label: "产能与规模", value: company.capacityScale, draft: company.capacityScale, onChange: (v) => setCompany({ ...company, capacityScale: v }) },
-                    { label: "信任与背书", value: company.trustEndorsement, draft: company.trustEndorsement, onChange: (v) => setCompany({ ...company, trustEndorsement: v }) },
+                    { label: "实力背书", value: company.capacityScale, draft: company.capacityScale, onChange: (v) => setCompany({ ...company, capacityScale: v }) },
+                    { label: "服务能力", value: company.trustEndorsement, draft: company.trustEndorsement, onChange: (v) => setCompany({ ...company, trustEndorsement: v }) },
                     { label: "公司简介", value: company.companyProfile, draft: company.companyProfile, onChange: (v) => setCompany({ ...company, companyProfile: v }) },
                   ]}
                 />
