@@ -257,7 +257,7 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
   const [activeTab, setActiveTab] = useState<TabKey>("company");
   const [company, setCompany] = useState<CompanyForm>(initialCompanyForm);
   const [companyEditing, setCompanyEditing] = useState(false);
-  const [fieldEditing, setFieldEditing] = useState(false);
+  
   const [draft, setDraft] = useState<CompanyForm>(initialCompanyForm);
   const [docName, setDocName] = useState<string>("产品手册-2024.pdf");
   const [draftDocName, setDraftDocName] = useState<string>(docName);
