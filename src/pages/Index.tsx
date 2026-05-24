@@ -51,7 +51,7 @@ import ChatInput, { ChatAttachment } from "@/components/ChatInput";
 import ChatDetail from "@/components/ChatDetail";
 import AIProfileDetail from "@/components/AIProfileDetail";
 import TeamManagementDialog from "@/components/TeamManagementDialog";
-import InquiryResultMessage from "@/components/InquiryResultMessage";
+import InquiryResultMessage, { BuyerBackgroundReport } from "@/components/InquiryResultMessage";
 import BuyerProfileDetail from "@/components/BuyerProfileDetail";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
