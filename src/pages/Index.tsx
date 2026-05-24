@@ -731,7 +731,7 @@ const ASSET_TYPE_STYLES: Record<GeneratedProduct["assets"][number]["type"], stri
   copy: "border-success/30 bg-success/15 text-success",
 };
 
-
+const Index = () => {
   // Persisted training/partner state — new visitors see the launch page;
   // once trained, the configured state is restored on subsequent visits.
   const initialPartnerConfigured = (() => {
