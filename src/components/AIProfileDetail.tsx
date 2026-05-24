@@ -929,11 +929,13 @@ const KnowledgeCard = ({
             <input
               value={it.draft}
               onChange={(e) => it.onChange(e.target.value)}
-              className="min-w-0 flex-1 bg-transparent text-foreground/90 focus:outline-none border-0 pb-0.5"
+              placeholder="点击键入"
+              className="min-w-0 flex-1 rounded-md border border-transparent bg-transparent px-1.5 py-0.5 text-foreground/90 transition-colors hover:border-border/60 hover:bg-background/60 focus:border-primary/40 focus:bg-background focus:outline-none focus:ring-1 focus:ring-primary/20 placeholder:text-muted-foreground/50"
             />
           ) : (
             <span className="min-w-0 flex-1 text-foreground/85 break-words">{it.value || <span className="text-muted-foreground/60">未填写</span>}</span>
           )}
+
         </li>
       ))}
     </ul>
