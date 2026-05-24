@@ -153,40 +153,117 @@ const ReplyTemplateBlock = () => {
 // ============================================================
 const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }: InquiryResultMessageProps) => {
   return (
-    <div className="space-y-5">
-      {/* AI 专家指点 — header + avatar bubble + integrated key points */}
-      <section className="rounded-2xl border border-border bg-card p-4 space-y-3">
-        <h3 className="font-semibold text-foreground text-[14px]">AI 专家指点</h3>
+    <div className="space-y-3.5">
+      {/* 业务专家指点 */}
+      <section className="rounded-2xl border border-primary/15 bg-primary/[0.04] p-4">
+        <div className="flex items-center gap-1.5 mb-2.5">
+          <Lightbulb className="w-4 h-4 text-primary" />
+          <h3 className="font-semibold text-foreground text-[14px]">业务专家指点</h3>
+        </div>
         <div className="flex gap-3 items-start">
           {expertAvatar && (
-            <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 border border-border/60">
+            <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-border/60">
               <img src={expertAvatar} alt="业务专家" className="w-full h-full object-cover object-top" />
             </div>
           )}
-          <div className="flex-1 rounded-xl bg-muted/40 px-4 py-3">
-            <p className="text-foreground/85 text-base leading-[1.7]">
-              这是一个成熟礼品买家，表达很直接，核心诉求就是快、准、可视化。建议首封邮件先回应型号和数量，再把交期、图片、可选配套和下一步确认点一次说清。
-            </p>
+          <p className="flex-1 text-foreground/85 text-base leading-[1.7]">
+            典型的北美中型渠道商跨行试水。对产品底层工艺不熟，但对<span className="text-primary font-medium">包装、物流和最终利润</span>要求极高。不要被他杂乱的定制需求带偏，<span className="text-primary font-medium">用成熟的电商现成方案去框住他</span>。
+          </p>
+        </div>
+      </section>
+
+      {/* 买家画像 + 需求摘要 */}
+      <div className="grid grid-cols-2 gap-3">
+        <section className="rounded-2xl border border-border bg-card p-4">
+          <div className="flex items-center gap-1.5 mb-3">
+            <UserRound className="w-4 h-4 text-muted-foreground" />
+            <h3 className="font-semibold text-foreground text-[14px]">买家画像</h3>
+            <button
+              onClick={onBackgroundCheck}
+              className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.06] px-2.5 py-1 text-[11.5px] font-medium text-primary hover:bg-primary/10 transition-colors active:scale-[0.97]"
+            >
+              <Compass className="w-3 h-3" />
+              深度背调
+            </button>
+          </div>
+          <div className="space-y-1.5">
+            <KV label="公司" value="GreenLife Home LLC." />
+            <KV label="类型" value="亚马逊卖家 / 区域分销商" />
+            <KV label="联系人" value="John Doe（Sourcing Manager）" />
+            <KV label="地区" value="北美 - 美国（USA）" />
+            <div className="flex items-center gap-1.5 text-[12px] pt-0.5">
+              <span className="text-muted-foreground shrink-0">阶段</span>
+              <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-2 py-0.5 text-[11px] font-medium text-primary">
+                寻源比价期 · 初期
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-border bg-card p-4">
+          <div className="flex items-center gap-1.5 mb-3">
+            <ListChecks className="w-4 h-4 text-muted-foreground" />
+            <h3 className="font-semibold text-foreground text-[14px]">需求摘要</h3>
+          </div>
+          <div className="space-y-1.5">
+            <KV label="产品" value="智能感应垃圾桶（电池 / 插电双模）" />
+            <KV label="数量" value="1,000 units（初定首单量）" />
+            <KV label="交期" value="极紧 · 10 月中旬到仓" />
+            <KV label="关注" value="包装跌落测试标准、是否支持 FBA 贴标" />
+            <div className="flex items-center gap-1.5 text-[12px] pt-0.5">
+              <span className="text-muted-foreground shrink-0">匹配</span>
+              <span className="inline-flex items-center rounded-md border border-emerald-500/25 bg-emerald-500/[0.08] px-2 py-0.5 text-[11px] font-medium text-emerald-600">
+                与您主营产品高度相近
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* AI 关键判断 */}
+      <section className="rounded-2xl border border-border bg-card p-4">
+        <div className="flex items-center gap-1.5 mb-3">
+          <Brain className="w-4 h-4 text-primary" />
+          <h3 className="font-semibold text-foreground text-[14px]">AI 关键判断</h3>
+        </div>
+        <div className="grid grid-cols-3 gap-2.5 mb-4">
+          <div className="rounded-xl border border-primary/20 bg-primary/[0.04] px-3 py-2.5">
+            <p className="text-[11.5px] text-muted-foreground mb-1">买家意向</p>
+            <p className="text-[14px] font-semibold text-primary">高（High Intent）</p>
+          </div>
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.05] px-3 py-2.5">
+            <p className="text-[11.5px] text-muted-foreground mb-1">询盘真实性</p>
+            <p className="text-[14px] font-semibold text-emerald-600">可靠 · 企业域名</p>
+          </div>
+          <div className="rounded-xl border border-orange-400/25 bg-orange-400/[0.06] px-3 py-2.5">
+            <p className="text-[11.5px] text-muted-foreground mb-1">交易风险</p>
+            <p className="text-[14px] font-semibold text-orange-500">中 · 交期极紧</p>
           </div>
         </div>
-        <div className="space-y-1.5 pt-1">
-          <InlineKV label="买家背景：" value="新加坡礼品分销商，成立 20+ 年，主营赠品杯壶，小型但成熟。" />
-          <InlineKV label="跟进阶段：" value="需求沟通阶段（前期已收到两次该买家询价邮件）" />
-          <InlineKV label="产品匹配度：" value="高（产品、规格、数量、联系方式齐全，可直接报价）" />
+        <div className="space-y-1.5">
+          <InlineKV label="客户动机研判：" value={'客户为电商卖家跨行采购，核心痛点并非电机参数，而是 "降低跨境物流破损率" 及 "准时赶上旺季大促"。'} />
+          <InlineKV label="行业动态提示：" value={'北美市场近期对 "智能垃圾桶" 的搜索不仅看重感应，"异味控制 (Odor Control)" 正成为拉升 C 端客单价的新红利点。'} />
+          <InlineKV label="资质合规排雷：" value="涉及带电及插电产品，出口美国务必在首封邮件确认对方是否需要 UL 认证或 FCC 认证，避免到港清关受阻。" />
         </div>
       </section>
 
-      {/* AI 风险判断 — white card */}
-      <section className="rounded-2xl border border-border bg-background p-4 space-y-2">
-        <h3 className="font-semibold text-foreground text-[14px] mb-1">AI 风险判断</h3>
-        <InlineKV label="询盘真实性：" value="警惕！这是一封典型的钓鱼邮件。客户没有明确提及任何具体产品名称，通篇只用 'your items' 代替，且急于引导你点击查看附件或链接（很可能是木马）。" />
-        <InlineKV label="订单交易风险：" value="该询盘采购婴儿玩具，与您的主营产品方向完全不符。" />
-        <InlineKV label="其他必要提醒：" value="补充一条其他注意事项，如：产品匹配度、交期风险等。" />
+      {/* 跟进建议 */}
+      <section className="rounded-2xl border border-border bg-card p-4">
+        <div className="flex items-center gap-1.5 mb-2.5">
+          <TrendingUp className="w-4 h-4 text-primary" />
+          <h3 className="font-semibold text-foreground text-[14px]">跟进建议</h3>
+        </div>
+        <ul className="space-y-1.5">
+          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+            <span>忽略其不成熟的定制需求，直接主推已过 ISTA-6A 跌落测试的电商专供款，解决其包装安全痛点。</span>
+          </li>
+          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+            <span>明确告知距离黑五极限发船日仅剩 3 周，必须在本周内敲定订单，利用交期焦虑反向逼单。</span>
+          </li>
+        </ul>
       </section>
-
-      {/* 询盘回复模板 */}
-      <ReplyTemplateBlock />
-
     </div>
   );
 };
