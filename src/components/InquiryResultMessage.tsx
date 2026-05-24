@@ -240,11 +240,20 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
             <p className="text-[14px] font-semibold text-orange-500">中 · 交期极紧</p>
           </div>
         </div>
-        <div className="space-y-1.5">
-          <InlineKV label="客户动机研判：" value={'客户为电商卖家跨行采购，核心痛点并非电机参数，而是 "降低跨境物流破损率" 及 "准时赶上旺季大促"。'} />
-          <InlineKV label="行业动态提示：" value={'北美市场近期对 "智能垃圾桶" 的搜索不仅看重感应，"异味控制 (Odor Control)" 正成为拉升 C 端客单价的新红利点。'} />
-          <InlineKV label="资质合规排雷：" value="涉及带电及插电产品，出口美国务必在首封邮件确认对方是否需要 UL 认证或 FCC 认证，避免到港清关受阻。" />
-        </div>
+        <ul className="space-y-1.5">
+          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+            <span><span className="font-semibold text-foreground">客户动机研判：</span>客户为电商卖家跨行采购，核心痛点并非电机参数，而是 "降低跨境物流破损率" 及 "准时赶上旺季大促"。</span>
+          </li>
+          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+            <span><span className="font-semibold text-foreground">行业动态提示：</span>北美市场近期对 "智能垃圾桶" 的搜索不仅看重感应，"异味控制 (Odor Control)" 正成为拉升 C 端客单价的新红利点。</span>
+          </li>
+          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+            <span><span className="font-semibold text-foreground">资质合规排雷：</span>涉及带电及插电产品，出口美国务必在首封邮件确认对方是否需要 UL 认证或 FCC 认证，避免到港清关受阻。</span>
+          </li>
+        </ul>
       </section>
 
       {/* 跟进建议 */}
