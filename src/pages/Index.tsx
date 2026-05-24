@@ -31,6 +31,11 @@ import {
   Archive,
   TrendingUp,
   UserRound,
+  FileSearch,
+  Mail,
+  MapPin,
+  Boxes,
+
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -46,7 +51,7 @@ import ChatInput, { ChatAttachment } from "@/components/ChatInput";
 import ChatDetail from "@/components/ChatDetail";
 import AIProfileDetail from "@/components/AIProfileDetail";
 import TeamManagementDialog from "@/components/TeamManagementDialog";
-import InquiryResultMessage from "@/components/InquiryResultMessage";
+import InquiryResultMessage, { BuyerBackgroundReport } from "@/components/InquiryResultMessage";
 import BuyerProfileDetail from "@/components/BuyerProfileDetail";
 import { cn } from "@/lib/utils";
 import operationAvatar from "@/assets/expert-operation.jpg";
@@ -762,6 +767,8 @@ const Index = () => {
   const [activeResultTab, setActiveResultTab] = useState<"all" | ResultCategory>("all");
   const [activeBuyerId, setActiveBuyerId] = useState<string | null>(null);
   const [expandedBuyerId, setExpandedBuyerId] = useState<string | null>(null);
+  const [bgReportBuyerId, setBgReportBuyerId] = useState<string | null>(null);
+
   const [partnerConfigured, setPartnerConfigured] = useState(initialPartnerConfigured);
   // Initialization training flow: idle | form | training | result
   const [trainingStage, setTrainingStage] = useState<"idle" | "form" | "training" | "result">("idle");
@@ -1040,58 +1047,70 @@ const Index = () => {
                           aria-hidden
                           className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-aurora opacity-10 blur-2xl transition-opacity group-hover:opacity-25"
                         />
-                        <div className="relative flex items-start gap-3 px-4 py-3 sm:px-5 sm:py-3.5">
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <p className="text-[15px] font-semibold leading-snug text-foreground">
+                        <div className="relative px-4 py-3 sm:px-5 sm:py-3.5">
+                          <div className="flex items-start justify-between gap-3">
+                            <button
+                              onClick={() => setActiveBuyerId(buyer.id)}
+                              className="group/title flex min-w-0 flex-1 items-center gap-2 text-left"
+                            >
+                              <p className="truncate text-[15px] font-semibold leading-snug text-foreground transition-colors group-hover/title:text-primary">
                                 {buyer.company}
                               </p>
                               <span
                                 className={cn(
-                                  "inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] font-semibold",
+                                  "shrink-0 inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] font-semibold",
                                   INQUIRY_STAGE_STYLES[buyer.stageTone],
                                 )}
                               >
                                 {buyer.stage}
                               </span>
-                            </div>
-                            <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-muted-foreground">
-                              <span className="text-foreground/75">{buyer.products}</span>
-                              <span className="text-border">·</span>
-                              <span>{buyer.contact}</span>
-                              <span className="text-border">·</span>
-                              <span>{buyer.region}</span>
+                            </button>
+
+                            <div className="shrink-0 flex items-center gap-1.5">
+                              <button
+                                onClick={() => setBgReportBuyerId(buyer.id)}
+                                className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-[12px] font-semibold text-primary transition-all hover:bg-primary/15"
+                              >
+                                <FileSearch className="h-3.5 w-3.5" />
+                                背调结果
+                              </button>
+                              <button
+                                onClick={() => setExpandedBuyerId(isExpanded ? null : buyer.id)}
+                                className={cn(
+                                  "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
+                                  isExpanded
+                                    ? "border-primary/30 bg-primary/10 text-primary"
+                                    : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
+                                )}
+                                aria-expanded={isExpanded}
+                              >
+                                历史任务
+                                <ChevronDown
+                                  className={cn(
+                                    "h-3.5 w-3.5 transition-transform duration-200",
+                                    isExpanded && "rotate-180",
+                                  )}
+                                />
+                              </button>
                             </div>
                           </div>
 
-                          <div className="shrink-0 flex flex-col items-end gap-1.5">
-                            <button
-                              onClick={() => setActiveBuyerId(buyer.id)}
-                              className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-[12px] font-semibold text-primary transition-all hover:bg-primary/15"
-                            >
-                              <UserRound className="h-3.5 w-3.5" />
-                              买家详情
-                            </button>
-                            <button
-                              onClick={() => setExpandedBuyerId(isExpanded ? null : buyer.id)}
-                              className={cn(
-                                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
-                                isExpanded
-                                  ? "border-primary/30 bg-primary/10 text-primary"
-                                  : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
-                              )}
-                              aria-expanded={isExpanded}
-                            >
-                              历史分析结果
-                              <ChevronDown
-                                className={cn(
-                                  "h-3.5 w-3.5 transition-transform duration-200",
-                                  isExpanded && "rotate-180",
-                                )}
-                              />
-                            </button>
+                          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12.5px] text-muted-foreground">
+                            <span className="inline-flex items-center gap-1.5">
+                              <Boxes className="h-3.5 w-3.5 text-primary/70" />
+                              <span className="text-foreground/80">{buyer.products}</span>
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                              <UserRound className="h-3.5 w-3.5 text-muted-foreground/70" />
+                              {buyer.contact}
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                              <MapPin className="h-3.5 w-3.5 text-muted-foreground/70" />
+                              {buyer.region}
+                            </span>
                           </div>
                         </div>
+
 
                         {/* Collapsible analyses */}
                         {isExpanded && (
@@ -2192,7 +2211,26 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
+      <Dialog open={bgReportBuyerId !== null} onOpenChange={(o) => !o && setBgReportBuyerId(null)}>
+        <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
+          <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
+            <DialogTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
+              <FileSearch className="h-4 w-4 text-primary" />
+              背调结果
+              {bgReportBuyerId && (
+                <span className="text-[12.5px] font-normal text-muted-foreground">
+                  · {INQUIRY_BUYERS.find((b) => b.id === bgReportBuyerId)?.company}
+                </span>
+              )}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-y-auto px-6 py-5">
+            <BuyerBackgroundReport />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
+
   );
 };
 
