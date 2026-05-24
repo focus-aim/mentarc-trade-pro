@@ -45,17 +45,19 @@ import businessAvatar from "@/assets/expert-business.jpg";
 import trainingAvatar from "@/assets/expert-training.jpg";
 
 interface CompanyForm {
-  // 企业档案
+  // 企业知识
   companyName: string;
   mainProducts: string;
   businessFocus: string;
   website: string;
   targetMarket: string;
+  capacityScale: string;
+  trustEndorsement: string;
+  companyProfile: string;
   // 产品知识
-  productKeywords: string;
   productSelling: string;
-  productCases: string;
-  // 业务规则
+  moqLeadtime: string;
+  // 业务规则（保留以兼容其他模块引用）
   sampleRule: string;
   quoteRule: string;
   paymentRule: string;
