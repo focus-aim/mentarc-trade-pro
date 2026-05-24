@@ -153,66 +153,66 @@ const ReplyTemplateBlock = () => {
 // ============================================================
 const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }: InquiryResultMessageProps) => {
   return (
-    <div className="space-y-3.5">
+    <div className="space-y-2.5">
       {/* 业务专家指点 */}
-      <section className="rounded-2xl border border-primary/15 bg-primary/[0.04] p-4">
-        <div className="flex items-center gap-1.5 mb-2.5">
-          <Lightbulb className="w-4 h-4 text-primary" />
-          <h3 className="font-semibold text-foreground text-[14px]">业务专家指点</h3>
+      <section className="rounded-2xl border border-primary/15 bg-primary/[0.04] p-3.5">
+        <div className="flex items-center gap-1.5 mb-2">
+          <Lightbulb className="w-3.5 h-3.5 text-primary" />
+          <h3 className="font-semibold text-foreground text-[13.5px]">业务专家指点</h3>
         </div>
-        <div className="flex gap-3 items-start">
+        <div className="flex gap-2.5 items-start">
           {expertAvatar && (
-            <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-border/60">
+            <div className="w-7 h-7 rounded-full overflow-hidden shrink-0 border border-border/60">
               <img src={expertAvatar} alt="业务专家" className="w-full h-full object-cover object-top" />
             </div>
           )}
-          <p className="flex-1 text-foreground/85 text-base leading-[1.7]">
+          <p className="flex-1 text-foreground/85 text-[13.5px] leading-[1.65]">
             典型的北美中型渠道商跨行试水。对产品底层工艺不熟，但对<span className="text-primary font-medium">包装、物流和最终利润</span>要求极高。不要被他杂乱的定制需求带偏，<span className="text-primary font-medium">用成熟的电商现成方案去框住他</span>。
           </p>
         </div>
       </section>
 
       {/* 买家画像 + 需求摘要 */}
-      <div className="grid grid-cols-2 gap-3">
-        <section className="rounded-2xl border border-border bg-card p-4">
-          <div className="flex items-center gap-1.5 mb-3">
-            <UserRound className="w-4 h-4 text-muted-foreground" />
-            <h3 className="font-semibold text-foreground text-[14px]">买家画像</h3>
+      <div className="grid grid-cols-2 gap-2.5">
+        <section className="rounded-2xl border border-border bg-card p-3.5">
+          <div className="flex items-center gap-1.5 mb-2">
+            <UserRound className="w-3.5 h-3.5 text-muted-foreground" />
+            <h3 className="font-semibold text-foreground text-[13.5px]">买家画像</h3>
             <button
               onClick={onBackgroundCheck}
-              className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.06] px-2.5 py-1 text-[11.5px] font-medium text-primary hover:bg-primary/10 transition-colors active:scale-[0.97]"
+              className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.06] px-2 py-0.5 text-[11.5px] font-medium text-primary hover:bg-primary/10 transition-colors active:scale-[0.97]"
             >
               <Compass className="w-3 h-3" />
               深度背调
             </button>
           </div>
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <KV label="公司" value="GreenLife Home LLC." />
             <KV label="类型" value="亚马逊卖家 / 区域分销商" />
             <KV label="联系人" value="John Doe（Sourcing Manager）" />
             <KV label="地区" value="北美 - 美国（USA）" />
-            <div className="flex items-center gap-1.5 text-[12px] pt-0.5">
+            <div className="flex items-center gap-1.5 text-[12.5px] pt-0.5">
               <span className="text-muted-foreground shrink-0">阶段</span>
-              <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-2 py-0.5 text-[11px] font-medium text-primary">
+              <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-1.5 py-0.5 text-[11px] font-medium text-primary">
                 寻源比价期 · 初期
               </span>
             </div>
           </div>
         </section>
 
-        <section className="rounded-2xl border border-border bg-card p-4">
-          <div className="flex items-center gap-1.5 mb-3">
-            <ListChecks className="w-4 h-4 text-muted-foreground" />
-            <h3 className="font-semibold text-foreground text-[14px]">需求摘要</h3>
+        <section className="rounded-2xl border border-border bg-card p-3.5">
+          <div className="flex items-center gap-1.5 mb-2">
+            <ListChecks className="w-3.5 h-3.5 text-muted-foreground" />
+            <h3 className="font-semibold text-foreground text-[13.5px]">需求摘要</h3>
           </div>
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <KV label="产品" value="智能感应垃圾桶（电池 / 插电双模）" />
             <KV label="数量" value="1,000 units（初定首单量）" />
             <KV label="交期" value="极紧 · 10 月中旬到仓" />
-            <KV label="关注" value="包装跌落测试标准、是否支持 FBA 贴标" />
-            <div className="flex items-center gap-1.5 text-[12px] pt-0.5">
+            <KV label="关注" value="包装跌落测试、是否支持 FBA 贴标" />
+            <div className="flex items-center gap-1.5 text-[12.5px] pt-0.5">
               <span className="text-muted-foreground shrink-0">匹配</span>
-              <span className="inline-flex items-center rounded-md border border-emerald-500/25 bg-emerald-500/[0.08] px-2 py-0.5 text-[11px] font-medium text-emerald-600">
+              <span className="inline-flex items-center rounded-md border border-emerald-500/25 bg-emerald-500/[0.08] px-1.5 py-0.5 text-[11px] font-medium text-emerald-600">
                 与您主营产品高度相近
               </span>
             </div>
@@ -221,54 +221,54 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
       </div>
 
       {/* AI 关键判断 */}
-      <section className="rounded-2xl border border-border bg-card p-4">
-        <div className="flex items-center gap-1.5 mb-3">
-          <Brain className="w-4 h-4 text-primary" />
-          <h3 className="font-semibold text-foreground text-[14px]">AI 关键判断</h3>
+      <section className="rounded-2xl border border-border bg-card p-3.5">
+        <div className="flex items-center gap-1.5 mb-2">
+          <Brain className="w-3.5 h-3.5 text-primary" />
+          <h3 className="font-semibold text-foreground text-[13.5px]">AI 关键判断</h3>
         </div>
-        <div className="grid grid-cols-3 gap-2.5 mb-4">
-          <div className="rounded-xl border border-primary/20 bg-primary/[0.04] px-3 py-2.5">
-            <p className="text-[11.5px] text-muted-foreground mb-1">买家意向</p>
-            <p className="text-[14px] font-semibold text-primary">高（High Intent）</p>
+        <div className="grid grid-cols-3 gap-2 mb-2.5">
+          <div className="rounded-lg border border-primary/20 bg-primary/[0.04] px-2.5 py-2">
+            <p className="text-[11.5px] text-muted-foreground mb-0.5">买家意向</p>
+            <p className="text-[13px] font-semibold text-primary">高（High Intent）</p>
           </div>
-          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.05] px-3 py-2.5">
-            <p className="text-[11.5px] text-muted-foreground mb-1">询盘真实性</p>
-            <p className="text-[14px] font-semibold text-emerald-600">可靠 · 企业域名</p>
+          <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/[0.05] px-2.5 py-2">
+            <p className="text-[11.5px] text-muted-foreground mb-0.5">询盘真实性</p>
+            <p className="text-[13px] font-semibold text-emerald-600">可靠 · 企业域名</p>
           </div>
-          <div className="rounded-xl border border-orange-400/25 bg-orange-400/[0.06] px-3 py-2.5">
-            <p className="text-[11.5px] text-muted-foreground mb-1">交易风险</p>
-            <p className="text-[14px] font-semibold text-orange-500">中 · 交期极紧</p>
+          <div className="rounded-lg border border-orange-400/25 bg-orange-400/[0.06] px-2.5 py-2">
+            <p className="text-[11.5px] text-muted-foreground mb-0.5">交易风险</p>
+            <p className="text-[13px] font-semibold text-orange-500">中 · 交期极紧</p>
           </div>
         </div>
-        <ul className="space-y-1.5">
-          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+        <ul className="space-y-1">
+          <li className="flex gap-2 text-[13.5px] leading-[1.65] text-foreground/85">
+            <span className="mt-[7px] h-1 w-1 rounded-full bg-primary shrink-0" />
             <span><span className="font-semibold text-foreground">客户动机研判：</span>客户为电商卖家跨行采购，核心痛点并非电机参数，而是 "降低跨境物流破损率" 及 "准时赶上旺季大促"。</span>
           </li>
-          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+          <li className="flex gap-2 text-[13.5px] leading-[1.65] text-foreground/85">
+            <span className="mt-[7px] h-1 w-1 rounded-full bg-primary shrink-0" />
             <span><span className="font-semibold text-foreground">行业动态提示：</span>北美市场近期对 "智能垃圾桶" 的搜索不仅看重感应，"异味控制 (Odor Control)" 正成为拉升 C 端客单价的新红利点。</span>
           </li>
-          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+          <li className="flex gap-2 text-[13.5px] leading-[1.65] text-foreground/85">
+            <span className="mt-[7px] h-1 w-1 rounded-full bg-primary shrink-0" />
             <span><span className="font-semibold text-foreground">资质合规排雷：</span>涉及带电及插电产品，出口美国务必在首封邮件确认对方是否需要 UL 认证或 FCC 认证，避免到港清关受阻。</span>
           </li>
         </ul>
       </section>
 
       {/* 跟进建议 */}
-      <section className="rounded-2xl border border-border bg-card p-4">
-        <div className="flex items-center gap-1.5 mb-2.5">
-          <TrendingUp className="w-4 h-4 text-primary" />
-          <h3 className="font-semibold text-foreground text-[14px]">跟进建议</h3>
+      <section className="rounded-2xl border border-border bg-card p-3.5">
+        <div className="flex items-center gap-1.5 mb-2">
+          <TrendingUp className="w-3.5 h-3.5 text-primary" />
+          <h3 className="font-semibold text-foreground text-[13.5px]">跟进建议</h3>
         </div>
-        <ul className="space-y-1.5">
-          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+        <ul className="space-y-1">
+          <li className="flex gap-2 text-[13.5px] leading-[1.65] text-foreground/85">
+            <span className="mt-[7px] h-1 w-1 rounded-full bg-primary shrink-0" />
             <span>忽略其不成熟的定制需求，直接主推已过 ISTA-6A 跌落测试的电商专供款，解决其包装安全痛点。</span>
           </li>
-          <li className="flex gap-2 text-base leading-[1.7] text-foreground/85">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+          <li className="flex gap-2 text-[13.5px] leading-[1.65] text-foreground/85">
+            <span className="mt-[7px] h-1 w-1 rounded-full bg-primary shrink-0" />
             <span>明确告知距离黑五极限发船日仅剩 3 周，必须在本周内敲定订单，利用交期焦虑反向逼单。</span>
           </li>
         </ul>
