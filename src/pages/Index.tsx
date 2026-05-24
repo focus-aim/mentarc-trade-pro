@@ -1039,65 +1039,50 @@ const Index = () => {
                           aria-hidden
                           className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-aurora opacity-10 blur-2xl transition-opacity group-hover:opacity-25"
                         />
-                        <div className="relative flex flex-col gap-3 px-5 py-4 md:flex-row md:items-center md:gap-5">
-                          {/* Company */}
-                          <div className="min-w-0 flex-1 md:max-w-[28%]">
-                            <p className="text-[15px] font-semibold leading-snug text-foreground">
-                              {buyer.company}
-                            </p>
-                            <p className="mt-1 text-[11.5px] text-muted-foreground">
-                              {buyer.analyses.length} 条历史分析
-                            </p>
-                          </div>
-
-                          {/* Meta grid */}
-                          <div className="grid flex-1 grid-cols-2 gap-x-4 gap-y-2 md:grid-cols-4">
-                            <div>
-                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">采购产品</p>
-                              <p className="mt-0.5 text-[12.5px] text-foreground/85 leading-snug">{buyer.products}</p>
-                            </div>
-                            <div>
-                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">联系人</p>
-                              <p className="mt-0.5 text-[12.5px] text-foreground/85 leading-snug">{buyer.contact}</p>
-                            </div>
-                            <div>
-                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">地区</p>
-                              <p className="mt-0.5 text-[12.5px] text-foreground/85 leading-snug">{buyer.region}</p>
-                            </div>
-                            <div>
-                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">联系阶段</p>
+                        <div className="relative flex items-start gap-3 px-4 py-3 sm:px-5 sm:py-3.5">
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <p className="text-[15px] font-semibold leading-snug text-foreground">
+                                {buyer.company}
+                              </p>
                               <span
                                 className={cn(
-                                  "mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold",
+                                  "inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] font-semibold",
                                   INQUIRY_STAGE_STYLES[buyer.stageTone],
                                 )}
                               >
                                 {buyer.stage}
                               </span>
                             </div>
+                            <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-muted-foreground">
+                              <span className="text-foreground/75">{buyer.products}</span>
+                              <span className="text-border">·</span>
+                              <span>{buyer.contact}</span>
+                              <span className="text-border">·</span>
+                              <span>{buyer.region}</span>
+                              <span className="text-border">·</span>
+                              <span>{buyer.analyses.length} 条历史分析</span>
+                            </div>
                           </div>
 
-                          {/* Action */}
-                          <div className="shrink-0">
-                            <button
-                              onClick={() => setExpandedBuyerId(isExpanded ? null : buyer.id)}
+                          <button
+                            onClick={() => setExpandedBuyerId(isExpanded ? null : buyer.id)}
+                            className={cn(
+                              "shrink-0 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
+                              isExpanded
+                                ? "border-primary/30 bg-primary/10 text-primary"
+                                : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
+                            )}
+                            aria-expanded={isExpanded}
+                          >
+                            历史分析结果
+                            <ChevronDown
                               className={cn(
-                                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
-                                isExpanded
-                                  ? "border-primary/30 bg-primary/10 text-primary"
-                                  : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
+                                "h-3.5 w-3.5 transition-transform duration-200",
+                                isExpanded && "rotate-180",
                               )}
-                              aria-expanded={isExpanded}
-                            >
-                              历史分析结果
-                              <ChevronDown
-                                className={cn(
-                                  "h-3.5 w-3.5 transition-transform duration-200",
-                                  isExpanded && "rotate-180",
-                                )}
-                              />
-                            </button>
-                          </div>
+                            />
+                          </button>
                         </div>
 
                         {/* Collapsible analyses */}
