@@ -67,7 +67,7 @@ const SectionCard = ({
 );
 
 const KV = ({ label, value }: { label: string; value: React.ReactNode }) => (
-  <div className="flex items-start gap-1.5 text-[12px] leading-[1.55]">
+  <div className="flex items-start gap-1.5 text-[12.5px] leading-[1.6]">
     <span className="text-muted-foreground shrink-0">{label}</span>
     <span className="text-foreground/85 flex-1">{value}</span>
   </div>
