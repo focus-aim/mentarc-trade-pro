@@ -1024,107 +1024,108 @@ const Index = () => {
 
               {activeResultTab !== "product" ? (
                 <section
-                  className="mt-5 overflow-hidden rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm shadow-sm opacity-0 animate-fade-up"
+                  className="mt-5 space-y-3 opacity-0 animate-fade-up"
                   style={{ animationDelay: "220ms" }}
                 >
-                  {/* Desktop table */}
-                  <div className="hidden md:block">
-                    <div className="grid grid-cols-[2.2fr_1.4fr_1.4fr_1fr_0.9fr_2.2fr] gap-3 border-b border-border/60 bg-muted/40 px-5 py-3 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      <div>买家公司</div>
-                      <div>采购产品</div>
-                      <div>联系人</div>
-                      <div>地区</div>
-                      <div>联系阶段</div>
-                      <div>历史分析结果</div>
-                    </div>
-                    <ul className="divide-y divide-border/50">
-                      {INQUIRY_BUYERS.map((buyer) => (
-                        <li
-                          key={buyer.id}
-                          className="grid grid-cols-[2.2fr_1.4fr_1.4fr_1fr_0.9fr_2.2fr] items-start gap-3 px-5 py-4 transition-colors hover:bg-accent/40"
-                        >
-                          <div>
-                            <p className="text-sm font-semibold text-foreground leading-snug">{buyer.company}</p>
-                            <p className="mt-1 text-[11px] text-muted-foreground">
+                  {INQUIRY_BUYERS.map((buyer, idx) => {
+                    const isExpanded = expandedBuyerId === buyer.id;
+                    return (
+                      <div
+                        key={buyer.id}
+                        className="hover-glow group relative overflow-hidden rounded-2xl border border-border/60 bg-card/85 backdrop-blur-sm shadow-card transition-all hover:border-primary/40 opacity-0 animate-fade-up"
+                        style={{ animationDelay: `${260 + idx * 50}ms` }}
+                      >
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-aurora opacity-10 blur-2xl transition-opacity group-hover:opacity-25"
+                        />
+                        <div className="relative flex flex-col gap-3 px-5 py-4 md:flex-row md:items-center md:gap-5">
+                          {/* Company */}
+                          <div className="min-w-0 flex-1 md:max-w-[28%]">
+                            <p className="text-[15px] font-semibold leading-snug text-foreground">
+                              {buyer.company}
+                            </p>
+                            <p className="mt-1 text-[11.5px] text-muted-foreground">
                               {buyer.analyses.length} 条历史分析
                             </p>
                           </div>
-                          <div className="text-[12.5px] text-foreground/85 leading-snug">{buyer.products}</div>
-                          <div className="text-[12.5px] text-foreground/85 leading-snug">{buyer.contact}</div>
-                          <div className="text-[12.5px] text-foreground/85 leading-snug">{buyer.region}</div>
-                          <div>
-                            <span
-                              className={cn(
-                                "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold",
-                                INQUIRY_STAGE_STYLES[buyer.stageTone],
-                              )}
-                            >
-                              {buyer.stage}
-                            </span>
-                          </div>
-                          <ul className="space-y-1">
-                            {buyer.analyses.map((a, i) => (
-                              <li key={i}>
-                                <button
-                                  onClick={() => setActiveBuyerId(buyer.id)}
-                                  className="group inline-flex items-start gap-1.5 text-left text-[12.5px] leading-snug text-primary hover:text-primary/80"
-                                  title="查看分析结果"
-                                >
-                                  <span className="mt-1 inline-flex h-1 w-1 shrink-0 rounded-full bg-primary/70" />
-                                  <span className="underline-offset-2 group-hover:underline">{a.title}</span>
-                                  <span className="ml-1 shrink-0 text-[10.5px] text-muted-foreground">{a.date}</span>
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
 
-                  {/* Mobile cards */}
-                  <div className="md:hidden divide-y divide-border/50">
-                    {INQUIRY_BUYERS.map((buyer) => (
-                      <div key={buyer.id} className="px-4 py-4">
-                        <div className="flex items-start justify-between gap-2">
-                          <p className="text-sm font-semibold text-foreground leading-snug">{buyer.company}</p>
-                          <span
-                            className={cn(
-                              "shrink-0 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold",
-                              INQUIRY_STAGE_STYLES[buyer.stageTone],
-                            )}
-                          >
-                            {buyer.stage}
-                          </span>
+                          {/* Meta grid */}
+                          <div className="grid flex-1 grid-cols-2 gap-x-4 gap-y-2 md:grid-cols-4">
+                            <div>
+                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">采购产品</p>
+                              <p className="mt-0.5 text-[12.5px] text-foreground/85 leading-snug">{buyer.products}</p>
+                            </div>
+                            <div>
+                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">联系人</p>
+                              <p className="mt-0.5 text-[12.5px] text-foreground/85 leading-snug">{buyer.contact}</p>
+                            </div>
+                            <div>
+                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">地区</p>
+                              <p className="mt-0.5 text-[12.5px] text-foreground/85 leading-snug">{buyer.region}</p>
+                            </div>
+                            <div>
+                              <p className="text-[10.5px] font-medium uppercase tracking-wide text-muted-foreground">联系阶段</p>
+                              <span
+                                className={cn(
+                                  "mt-1 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold",
+                                  INQUIRY_STAGE_STYLES[buyer.stageTone],
+                                )}
+                              >
+                                {buyer.stage}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Action */}
+                          <div className="shrink-0">
+                            <button
+                              onClick={() => setExpandedBuyerId(isExpanded ? null : buyer.id)}
+                              className={cn(
+                                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
+                                isExpanded
+                                  ? "border-primary/30 bg-primary/10 text-primary"
+                                  : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
+                              )}
+                              aria-expanded={isExpanded}
+                            >
+                              历史分析结果
+                              <ChevronDown
+                                className={cn(
+                                  "h-3.5 w-3.5 transition-transform duration-200",
+                                  isExpanded && "rotate-180",
+                                )}
+                              />
+                            </button>
+                          </div>
                         </div>
-                        <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[12px]">
-                          <div className="text-muted-foreground">采购产品</div>
-                          <div className="text-foreground/85">{buyer.products}</div>
-                          <div className="text-muted-foreground">联系人</div>
-                          <div className="text-foreground/85">{buyer.contact}</div>
-                          <div className="text-muted-foreground">地区</div>
-                          <div className="text-foreground/85">{buyer.region}</div>
-                        </div>
-                        <div className="mt-2.5 border-t border-border/50 pt-2">
-                          <p className="text-[11px] font-medium text-muted-foreground">历史分析结果</p>
-                          <ul className="mt-1 space-y-1">
-                            {buyer.analyses.map((a, i) => (
-                              <li key={i}>
-                                <button
-                                  onClick={() => setActiveBuyerId(buyer.id)}
-                                  className="inline-flex items-start gap-1.5 text-left text-[12.5px] leading-snug text-primary hover:text-primary/80"
-                                >
-                                  <span className="mt-1 inline-flex h-1 w-1 shrink-0 rounded-full bg-primary/70" />
-                                  <span className="underline-offset-2 hover:underline">{a.title}</span>
-                                  <span className="ml-1 shrink-0 text-[10.5px] text-muted-foreground">{a.date}</span>
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+
+                        {/* Collapsible analyses */}
+                        {isExpanded && (
+                          <div className="relative border-t border-border/60 bg-muted/30 px-5 py-3 animate-fade-in">
+                            <ul className="space-y-1.5">
+                              {buyer.analyses.map((a, i) => (
+                                <li key={i}>
+                                  <button
+                                    onClick={() => setActiveBuyerId(buyer.id)}
+                                    className="group/item flex w-full items-center justify-between gap-3 rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-card/80"
+                                  >
+                                    <span className="flex min-w-0 items-center gap-2">
+                                      <span className="inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+                                      <span className="truncate text-[13px] text-foreground/85 group-hover/item:text-primary">
+                                        {a.title}
+                                      </span>
+                                    </span>
+                                    <span className="shrink-0 text-[11px] text-muted-foreground">{a.date}</span>
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </section>
               ) : (
                 <section className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 opacity-0 animate-fade-up" style={{ animationDelay: "220ms" }}>
