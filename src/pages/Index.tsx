@@ -1060,29 +1060,36 @@ const Index = () => {
                               <span>{buyer.contact}</span>
                               <span className="text-border">·</span>
                               <span>{buyer.region}</span>
-                              <span className="text-border">·</span>
-                              <span>{buyer.analyses.length} 条历史分析</span>
                             </div>
                           </div>
 
-                          <button
-                            onClick={() => setExpandedBuyerId(isExpanded ? null : buyer.id)}
-                            className={cn(
-                              "shrink-0 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
-                              isExpanded
-                                ? "border-primary/30 bg-primary/10 text-primary"
-                                : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
-                            )}
-                            aria-expanded={isExpanded}
-                          >
-                            历史分析结果
-                            <ChevronDown
+                          <div className="shrink-0 flex flex-col items-end gap-1.5">
+                            <button
+                              onClick={() => setActiveBuyerId(buyer.id)}
+                              className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-[12px] font-semibold text-primary transition-all hover:bg-primary/15"
+                            >
+                              <UserRound className="h-3.5 w-3.5" />
+                              买家详情
+                            </button>
+                            <button
+                              onClick={() => setExpandedBuyerId(isExpanded ? null : buyer.id)}
                               className={cn(
-                                "h-3.5 w-3.5 transition-transform duration-200",
-                                isExpanded && "rotate-180",
+                                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
+                                isExpanded
+                                  ? "border-primary/30 bg-primary/10 text-primary"
+                                  : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
                               )}
-                            />
-                          </button>
+                              aria-expanded={isExpanded}
+                            >
+                              历史分析结果
+                              <ChevronDown
+                                className={cn(
+                                  "h-3.5 w-3.5 transition-transform duration-200",
+                                  isExpanded && "rotate-180",
+                                )}
+                              />
+                            </button>
+                          </div>
                         </div>
 
                         {/* Collapsible analyses */}
