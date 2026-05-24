@@ -598,6 +598,139 @@ const boardNews = [
   },
 ];
 
+type InquiryBuyer = {
+  id: string;
+  company: string;
+  products: string;
+  contact: string;
+  region: string;
+  stage: string;
+  stageTone: "primary" | "amber" | "emerald" | "muted";
+  analyses: { title: string; date: string }[];
+};
+
+const INQUIRY_BUYERS: InquiryBuyer[] = [
+  {
+    id: "b1",
+    company: "德国大型连锁健身房采购部 FitLine GmbH",
+    products: "商用动感单车 / 智能跑步机",
+    contact: "Markus Schneider · 采购总监",
+    region: "德国 慕尼黑",
+    stage: "深度跟进",
+    stageTone: "primary",
+    analyses: [
+      { title: "慕尼黑展会名片清洗-0326", date: "03/26" },
+      { title: "德国采购意向跟进-0402", date: "04/02" },
+      { title: "决策链梳理 & 预算确认-0418", date: "04/18" },
+    ],
+  },
+  {
+    id: "b2",
+    company: "美国本土居家运动 DTC 品牌 HomeFit Co.",
+    products: "迷你椭圆机 / 可折叠走步机",
+    contact: "Olivia Park · 品类经理",
+    region: "美国 洛杉矶",
+    stage: "已建档",
+    stageTone: "emerald",
+    analyses: [
+      { title: "北美市场竞对背调-0328", date: "03/28" },
+      { title: "DTC 品牌私域获客拆解-0405", date: "04/05" },
+      { title: "美西采购窗口期分析-0410", date: "04/10" },
+    ],
+  },
+  {
+    id: "b3",
+    company: "中东商用健身房连锁 Desert Gym",
+    products: "整店成套器械 / 售后配件",
+    contact: "Khalid Al-Mansoori · 创始人",
+    region: "阿联酋 迪拜",
+    stage: "待报价",
+    stageTone: "amber",
+    analyses: [{ title: "迪拜健身展线索整理-0331", date: "03/31" }],
+  },
+  {
+    id: "b4",
+    company: "TechSol US Renewable Distribution",
+    products: "5kW 混合逆变器（UL1741）",
+    contact: "John Carter · Procurement Lead",
+    region: "美国 德州",
+    stage: "首次询盘",
+    stageTone: "primary",
+    analyses: [
+      { title: "保温啤酒杯阶梯报价询盘分析", date: "04/22" },
+      { title: "买家 TechSol US 背调", date: "04/24" },
+    ],
+  },
+];
+
+type GeneratedProduct = {
+  id: string;
+  name: string;
+  category: string;
+  updatedAt: string;
+  cover?: string;
+  assets: { label: string; type: "detail" | "image" | "video" | "copy" }[];
+};
+
+const GENERATED_PRODUCTS: GeneratedProduct[] = [
+  {
+    id: "gp1",
+    name: "1000W Fat Tire 电助力车",
+    category: "户外出行",
+    updatedAt: "04/20",
+    assets: [
+      { label: "亚马逊 A+ 详情页", type: "detail" },
+      { label: "主图 5 张", type: "image" },
+      { label: "卖点文案 EN/ES", type: "copy" },
+    ],
+  },
+  {
+    id: "gp2",
+    name: "智能动感单车（居家版）",
+    category: "居家健身",
+    updatedAt: "04/16",
+    assets: [
+      { label: "独立站详情页", type: "detail" },
+      { label: "场景图 6 张", type: "image" },
+      { label: "15s 短视频脚本", type: "video" },
+    ],
+  },
+  {
+    id: "gp3",
+    name: "双层保温啤酒杯",
+    category: "户外露营",
+    updatedAt: "04/12",
+    assets: [
+      { label: "Listing 标题+五点", type: "copy" },
+      { label: "主图 4 张", type: "image" },
+    ],
+  },
+  {
+    id: "gp4",
+    name: "可折叠迷你走步机",
+    category: "居家健身",
+    updatedAt: "04/08",
+    assets: [
+      { label: "TikTok 短视频脚本", type: "video" },
+      { label: "营销卖点文案", type: "copy" },
+    ],
+  },
+];
+
+const INQUIRY_STAGE_STYLES: Record<InquiryBuyer["stageTone"], string> = {
+  primary: "border-primary/25 bg-primary/10 text-primary",
+  amber: "border-accent-amber/30 bg-accent-amber/15 text-accent-amber",
+  emerald: "border-success/30 bg-success/15 text-success",
+  muted: "border-border bg-muted text-muted-foreground",
+};
+
+const ASSET_TYPE_STYLES: Record<GeneratedProduct["assets"][number]["type"], string> = {
+  detail: "border-primary/25 bg-primary/10 text-primary",
+  image: "border-secondary/40 bg-secondary/20 text-foreground/80",
+  video: "border-accent-amber/30 bg-accent-amber/15 text-accent-amber",
+  copy: "border-success/30 bg-success/15 text-success",
+};
+
 const Index = () => {
   // Persisted training/partner state — new visitors see the launch page;
   // once trained, the configured state is restored on subsequent visits.
@@ -851,160 +984,187 @@ const Index = () => {
                 </p>
               </section>
 
-              <section
-                className="mt-7 overflow-hidden rounded-2xl border border-border/60 bg-card/70 backdrop-blur-sm shadow-sm opacity-0 animate-fade-up"
-                style={{ animationDelay: "140ms" }}
-              >
-                <div className="relative flex flex-col gap-3 border-b border-border/50 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <TrendingUp className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <h2 className="text-sm font-semibold text-foreground">本周工作汇总</h2>
-                      <p className="text-[11px] text-muted-foreground">{weeklySummary.range}　·　AI 自动统计</p>
-                    </div>
-                  </div>
-                  <span className="inline-flex w-fit items-center gap-1 rounded-full border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
-                    <Sparkles className="h-3 w-3" />
-                    周报已生成
-                  </span>
+              <section className="mt-7 opacity-0 animate-fade-up" style={{ animationDelay: "140ms" }}>
+                <div className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/70 p-1 backdrop-blur-sm">
+                  {([
+                    { key: "inquiry", label: "询盘跟进", count: INQUIRY_BUYERS.length },
+                    { key: "product", label: "产品生成", count: GENERATED_PRODUCTS.length },
+                  ] as const).map((tab) => {
+                    const isActive =
+                      (tab.key === "inquiry" && activeResultTab !== "product") ||
+                      (tab.key === "product" && activeResultTab === "product");
+                    return (
+                      <button
+                        key={tab.key}
+                        onClick={() => setActiveResultTab(tab.key === "product" ? "product" : "buyer")}
+                        className={cn(
+                          "inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold transition-all",
+                          isActive
+                            ? "bg-gradient-primary text-primary-foreground shadow-glow"
+                            : "text-muted-foreground hover:text-foreground hover:bg-accent/60",
+                        )}
+                      >
+                        <span>{tab.label}</span>
+                        <span
+                          className={cn(
+                            "rounded-full px-1.5 py-0.5 text-[10px] font-bold",
+                            isActive
+                              ? "bg-primary-foreground/20 text-primary-foreground"
+                              : "bg-muted text-muted-foreground",
+                          )}
+                        >
+                          {tab.count}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
+              </section>
 
-                <div className="grid gap-px bg-border/40 sm:grid-cols-3">
-                  {weeklySummary.metrics.map((metric) => (
-                    <div key={metric.label} className="bg-card/60 px-5 py-3">
-                      <div className="flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground">
-                        <metric.icon className="h-3 w-3" />
-                        {metric.label}
+              {activeResultTab !== "product" ? (
+                <section
+                  className="mt-5 overflow-hidden rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm shadow-sm opacity-0 animate-fade-up"
+                  style={{ animationDelay: "220ms" }}
+                >
+                  {/* Desktop table */}
+                  <div className="hidden md:block">
+                    <div className="grid grid-cols-[2.2fr_1.4fr_1.4fr_1fr_0.9fr_2.2fr] gap-3 border-b border-border/60 bg-muted/40 px-5 py-3 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      <div>买家公司</div>
+                      <div>采购产品</div>
+                      <div>联系人</div>
+                      <div>地区</div>
+                      <div>联系阶段</div>
+                      <div>历史分析结果</div>
+                    </div>
+                    <ul className="divide-y divide-border/50">
+                      {INQUIRY_BUYERS.map((buyer) => (
+                        <li
+                          key={buyer.id}
+                          className="grid grid-cols-[2.2fr_1.4fr_1.4fr_1fr_0.9fr_2.2fr] items-start gap-3 px-5 py-4 transition-colors hover:bg-accent/40"
+                        >
+                          <div>
+                            <p className="text-sm font-semibold text-foreground leading-snug">{buyer.company}</p>
+                            <p className="mt-1 text-[11px] text-muted-foreground">
+                              {buyer.analyses.length} 条历史分析
+                            </p>
+                          </div>
+                          <div className="text-[12.5px] text-foreground/85 leading-snug">{buyer.products}</div>
+                          <div className="text-[12.5px] text-foreground/85 leading-snug">{buyer.contact}</div>
+                          <div className="text-[12.5px] text-foreground/85 leading-snug">{buyer.region}</div>
+                          <div>
+                            <span
+                              className={cn(
+                                "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold",
+                                INQUIRY_STAGE_STYLES[buyer.stageTone],
+                              )}
+                            >
+                              {buyer.stage}
+                            </span>
+                          </div>
+                          <ul className="space-y-1">
+                            {buyer.analyses.map((a, i) => (
+                              <li key={i}>
+                                <button
+                                  onClick={() => setActiveBuyerId(buyer.id)}
+                                  className="group inline-flex items-start gap-1.5 text-left text-[12.5px] leading-snug text-primary hover:text-primary/80"
+                                  title="查看分析结果"
+                                >
+                                  <span className="mt-1 inline-flex h-1 w-1 shrink-0 rounded-full bg-primary/70" />
+                                  <span className="underline-offset-2 group-hover:underline">{a.title}</span>
+                                  <span className="ml-1 shrink-0 text-[10.5px] text-muted-foreground">{a.date}</span>
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Mobile cards */}
+                  <div className="md:hidden divide-y divide-border/50">
+                    {INQUIRY_BUYERS.map((buyer) => (
+                      <div key={buyer.id} className="px-4 py-4">
+                        <div className="flex items-start justify-between gap-2">
+                          <p className="text-sm font-semibold text-foreground leading-snug">{buyer.company}</p>
+                          <span
+                            className={cn(
+                              "shrink-0 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold",
+                              INQUIRY_STAGE_STYLES[buyer.stageTone],
+                            )}
+                          >
+                            {buyer.stage}
+                          </span>
+                        </div>
+                        <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[12px]">
+                          <div className="text-muted-foreground">采购产品</div>
+                          <div className="text-foreground/85">{buyer.products}</div>
+                          <div className="text-muted-foreground">联系人</div>
+                          <div className="text-foreground/85">{buyer.contact}</div>
+                          <div className="text-muted-foreground">地区</div>
+                          <div className="text-foreground/85">{buyer.region}</div>
+                        </div>
+                        <div className="mt-2.5 border-t border-border/50 pt-2">
+                          <p className="text-[11px] font-medium text-muted-foreground">历史分析结果</p>
+                          <ul className="mt-1 space-y-1">
+                            {buyer.analyses.map((a, i) => (
+                              <li key={i}>
+                                <button
+                                  onClick={() => setActiveBuyerId(buyer.id)}
+                                  className="inline-flex items-start gap-1.5 text-left text-[12.5px] leading-snug text-primary hover:text-primary/80"
+                                >
+                                  <span className="mt-1 inline-flex h-1 w-1 shrink-0 rounded-full bg-primary/70" />
+                                  <span className="underline-offset-2 hover:underline">{a.title}</span>
+                                  <span className="ml-1 shrink-0 text-[10.5px] text-muted-foreground">{a.date}</span>
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
-                      <div className="mt-1 flex items-baseline gap-2">
-                        <span className="text-xl font-bold text-foreground">{metric.value}</span>
-                        <span className="text-[11px] font-semibold text-success">{metric.delta}</span>
+                    ))}
+                  </div>
+                </section>
+              ) : (
+                <section className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 opacity-0 animate-fade-up" style={{ animationDelay: "220ms" }}>
+                  {GENERATED_PRODUCTS.map((product, idx) => (
+                    <div
+                      key={product.id}
+                      className="hover-glow group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/95 p-4 backdrop-blur-sm shadow-card transition-all hover:border-primary/40 hover:shadow-glow opacity-0 animate-fade-up"
+                      style={{ animationDelay: `${260 + idx * 50}ms` }}
+                    >
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-aurora opacity-15 blur-2xl transition-opacity group-hover:opacity-35"
+                      />
+                      <div className="relative mb-2 flex items-center justify-between gap-2">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                          <Image className="h-3 w-3" />
+                          {product.category}
+                        </span>
+                        <span className="text-[10.5px] text-muted-foreground">更新 {product.updatedAt}</span>
+                      </div>
+                      <p className="relative text-sm font-bold leading-snug text-foreground">{product.name}</p>
+                      <div className="relative mt-3 border-t border-border/50 pt-2.5">
+                        <p className="text-[10.5px] font-medium text-muted-foreground">已生成成果</p>
+                        <div className="mt-1.5 flex flex-wrap gap-1.5">
+                          {product.assets.map((asset, i) => (
+                            <span
+                              key={i}
+                              className={cn(
+                                "inline-flex items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium",
+                                ASSET_TYPE_STYLES[asset.type],
+                              )}
+                            >
+                              {asset.label}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   ))}
-                </div>
-
-                <div className="px-5 py-3">
-                  <ul className="space-y-1.5">
-                    {weeklySummary.highlights.map((line, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground">
-                        <span className="mt-1.5 inline-flex h-1 w-1 shrink-0 rounded-full bg-primary/60" />
-                        <span>{line}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </section>
-
-              <section className="mt-8 opacity-0 animate-fade-up" style={{ animationDelay: "200ms" }}>
-                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <h2 className="text-lg font-bold text-foreground">任务成果归档</h2>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      业务沉淀的核心资产，可一键溯源到原对话继续推进。
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1.5 rounded-full border border-border/60 bg-card/70 p-1 backdrop-blur-sm">
-                    {RESULT_TABS.map((tab) => {
-                      const count =
-                        tab.key === "all"
-                          ? resultItems.length
-                          : resultItems.filter((i) => i.category === tab.key).length;
-                      const isActive = activeResultTab === tab.key;
-                      return (
-                        <button
-                          key={tab.key}
-                          onClick={() => setActiveResultTab(tab.key)}
-                          className={cn(
-                            "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-all",
-                            isActive
-                              ? "bg-gradient-primary text-primary-foreground shadow-glow"
-                              : "text-muted-foreground hover:text-foreground hover:bg-accent/60",
-                          )}
-                        >
-                          <span>{tab.label}</span>
-                          <span
-                            className={cn(
-                              "rounded-full px-1.5 py-0.5 text-[10px] font-bold",
-                              isActive
-                                ? "bg-primary-foreground/20 text-primary-foreground"
-                                : "bg-muted text-muted-foreground",
-                            )}
-                          >
-                            {count}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {resultItems
-                    .filter((item) => activeResultTab === "all" || item.category === activeResultTab)
-                    .map((item, idx) => {
-                      const meta = RESULT_CATEGORY_META[item.category];
-                      const Icon = meta.icon;
-                      const multiSession = item.sessions.length > 1;
-                      return (
-                        <button
-                          key={item.id}
-                          onClick={() => item.category === "buyer" && setActiveBuyerId(item.id)}
-                          className="hover-glow group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/95 p-4 text-left backdrop-blur-sm shadow-card transition-all hover:border-primary/40 hover:shadow-glow opacity-0 animate-fade-up"
-                          style={{ animationDelay: `${260 + idx * 50}ms` }}
-                        >
-                          <span
-                            aria-hidden
-                            className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-aurora opacity-15 blur-2xl transition-opacity group-hover:opacity-35"
-                          />
-
-                          <div className="relative mb-3 flex items-center justify-between gap-2">
-                            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-semibold text-primary">
-                              <Icon className="h-3 w-3" />
-                              {meta.label}
-                            </span>
-                            <span className="rounded-md border border-border bg-card px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
-                              {item.status}
-                            </span>
-                          </div>
-
-                          <p className="relative text-sm font-bold leading-snug text-foreground">{item.name}</p>
-
-                          {item.meta ? (
-                            <p className="relative mt-1.5 text-[11px] text-muted-foreground">{item.meta}</p>
-                          ) : null}
-
-                          <div className="relative mt-3 border-t border-border/50 pt-2.5">
-                            <div className="flex items-center justify-between gap-2 text-[10px] font-medium text-muted-foreground">
-                              <span className="inline-flex items-center gap-1">
-                                <MessageCircle className="h-3 w-3" />
-                                关联会话
-                              </span>
-                              {multiSession ? (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-accent-amber/15 px-1.5 py-0.5 text-[10px] font-bold text-accent-amber">
-                                  {item.sessions.length} 条会话
-                                </span>
-                              ) : null}
-                            </div>
-                            <ul className="mt-1.5 space-y-1">
-                              {item.sessions.map((s, i) => (
-                                <li
-                                  key={i}
-                                  className="flex items-start gap-1.5 text-[11px] leading-snug text-foreground/80"
-                                >
-                                  <span className="mt-1 inline-flex h-1 w-1 shrink-0 rounded-full bg-primary/70" />
-                                  <span className="truncate">{s}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </button>
-                      );
-                    })}
-                </div>
-              </section>
+                </section>
+              )}
             </div>
           </main>
         )

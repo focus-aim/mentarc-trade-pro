@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MessageSquarePlus, PanelLeft, Archive, LogOut, SlidersHorizontal, Store, MessageSquare } from "lucide-react";
+import { MessageSquarePlus, PanelLeft, Archive, LogOut, SlidersHorizontal, Store, MessageSquare, FolderArchive } from "lucide-react";
 import { cn } from "@/lib/utils";
 import mentarcIcon from "@/assets/mentarc-icon.png";
 
@@ -18,6 +18,7 @@ interface AppSidebarProps {
 
 const navItems = [
   { icon: MessageSquarePlus, label: "发起任务", key: "new" },
+  { icon: FolderArchive, label: "任务成果", key: "results" },
 ];
 
 const RECENT_CONVERSATIONS = [
