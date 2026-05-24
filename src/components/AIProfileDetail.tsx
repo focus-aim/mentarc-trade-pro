@@ -694,49 +694,6 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                 )}
               </div>
 
-              {/* 专家实战经验 — 平台预置 */}
-              <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card via-card to-primary/[0.04] shadow-sm transition-all hover:shadow-md">
-                <div aria-hidden className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/8 blur-3xl" />
-                <header className="relative flex items-center justify-between gap-3 border-b border-border/40 px-4 py-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <ShieldCheck className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <h3 className="text-[13.5px] font-bold text-foreground">专家实战经验</h3>
-                        <span className="inline-flex items-center gap-0.5 rounded-full bg-success/10 px-1.5 py-0.5 text-[10px] font-semibold text-success">
-                          <Check className="h-2.5 w-2.5" />
-                          已加载
-                        </span>
-                      </div>
-                      <p className="mt-0.5 text-[10.5px] text-muted-foreground">平台预置 · 持续更新</p>
-                    </div>
-                  </div>
-                </header>
-
-                <div className="relative flex-1 divide-y divide-border/30 px-4 py-1">
-                  {expertExperienceGroups.map((g) => (
-                    <div key={g.key} className="py-3">
-                      <div className="flex items-baseline justify-between gap-2">
-                        <h4 className="text-[12.5px] font-bold text-foreground">{g.title}</h4>
-                        <span className="text-[10.5px] text-muted-foreground/70">{g.desc}</span>
-                      </div>
-                      <ul className="mt-2 space-y-1.5">
-                        {g.items.map((it) => (
-                          <li
-                            key={it}
-                            className="flex items-start gap-2 text-[12px] leading-relaxed text-foreground/85"
-                          >
-                            <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-primary/50" />
-                            <span>{it}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
 
             {/* 详情弹窗 */}
