@@ -407,13 +407,13 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   title="企业档案"
                   desc="公司基础信息与目标市场"
                   badge="已识别 5 项"
-                  editing={fieldEditing}
+                  editing
                   items={[
-                    { label: "公司名称", value: company.companyName, draft: draft.companyName, onChange: (v) => setDraft({ ...draft, companyName: v }) },
-                    { label: "主营产品", value: company.mainProducts, draft: draft.mainProducts, onChange: (v) => setDraft({ ...draft, mainProducts: v }) },
-                    { label: "业务关注点", value: company.businessFocus, draft: draft.businessFocus, onChange: (v) => setDraft({ ...draft, businessFocus: v }) },
-                    { label: "公司网址", value: company.website, draft: draft.website, onChange: (v) => setDraft({ ...draft, website: v }) },
-                    { label: "目标市场", value: company.targetMarket, draft: draft.targetMarket, onChange: (v) => setDraft({ ...draft, targetMarket: v }) },
+                    { label: "公司名称", value: company.companyName, draft: company.companyName, onChange: (v) => setCompany({ ...company, companyName: v }) },
+                    { label: "主营产品", value: company.mainProducts, draft: company.mainProducts, onChange: (v) => setCompany({ ...company, mainProducts: v }) },
+                    { label: "业务关注点", value: company.businessFocus, draft: company.businessFocus, onChange: (v) => setCompany({ ...company, businessFocus: v }) },
+                    { label: "公司网址", value: company.website, draft: company.website, onChange: (v) => setCompany({ ...company, website: v }) },
+                    { label: "目标市场", value: company.targetMarket, draft: company.targetMarket, onChange: (v) => setCompany({ ...company, targetMarket: v }) },
                   ]}
                 />
 
@@ -422,14 +422,14 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                   title="产品知识"
                   desc="主营产品的关键词、卖点与典型案例"
                   badge="已识别 3 项"
-                  editing={fieldEditing}
+                  editing
                   items={[
-                    { label: "主营产品关键词", value: company.productKeywords, draft: draft.productKeywords, onChange: (v) => setDraft({ ...draft, productKeywords: v }) },
-                    { label: "产品卖点", value: company.productSelling, draft: draft.productSelling, onChange: (v) => setDraft({ ...draft, productSelling: v }) },
-                    { label: "产品案例", value: company.productCases, draft: draft.productCases, onChange: (v) => setDraft({ ...draft, productCases: v }) },
+                    { label: "主营产品关键词", value: company.productKeywords, draft: company.productKeywords, onChange: (v) => setCompany({ ...company, productKeywords: v }) },
+                    { label: "产品卖点", value: company.productSelling, draft: company.productSelling, onChange: (v) => setCompany({ ...company, productSelling: v }) },
+                    { label: "产品案例", value: company.productCases, draft: company.productCases, onChange: (v) => setCompany({ ...company, productCases: v }) },
                   ]}
                 />
-                {!fieldEditing && docName && (
+                {docName && (
                   <div className="rounded-2xl border border-border/60 bg-card/70 px-4 py-3.5 backdrop-blur-sm">
                     <div className="mb-2.5 flex items-center justify-between">
                       <div>
@@ -463,27 +463,9 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                     </div>
                   </div>
                 )}
-
-                {fieldEditing && (
-                  <div className="flex items-center gap-2 pt-2">
-                    <button
-                      onClick={submitFieldEdit}
-                      className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-[hsl(217,100%,58%)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.005] active:scale-[0.99]"
-                    >
-                      <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                      <Check className="h-4 w-4" />
-                      提交
-                    </button>
-                    <button
-                      onClick={cancelFieldEdit}
-                      className="inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-background/70 px-5 py-3 text-sm font-medium text-foreground hover:bg-accent transition-colors"
-                    >
-                      取消
-                    </button>
-                  </div>
-                )}
               </div>
             )}
+
 
             {companyEditing && (
               <div className="mt-4 relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-card/85 via-card/75 to-primary/5 p-6 shadow-xl shadow-primary/5 backdrop-blur-md sm:p-8">
