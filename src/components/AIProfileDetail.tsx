@@ -45,17 +45,19 @@ import businessAvatar from "@/assets/expert-business.jpg";
 import trainingAvatar from "@/assets/expert-training.jpg";
 
 interface CompanyForm {
-  // 企业档案
+  // 企业知识
   companyName: string;
   mainProducts: string;
   businessFocus: string;
   website: string;
   targetMarket: string;
+  capacityScale: string;
+  trustEndorsement: string;
+  companyProfile: string;
   // 产品知识
-  productKeywords: string;
   productSelling: string;
-  productCases: string;
-  // 业务规则
+  moqLeadtime: string;
+  // 业务规则（保留以兼容其他模块引用）
   sampleRule: string;
   quoteRule: string;
   paymentRule: string;
@@ -93,9 +95,11 @@ const initialCompanyForm: CompanyForm = {
   businessFocus: "高客单 DTC 品牌、定制 Logo、长周期复购订单",
   website: "https://www.example-trade.com",
   targetMarket: "欧洲、北美、澳洲；DTC 品牌、垂直进口商",
-  productKeywords: "保温杯、真空杯、运动水壶、礼品杯",
+  capacityScale: "自有工厂 12,000㎡，注塑+焊接+喷涂全链；月产能 50 万 pcs，员工 280 人",
+  trustEndorsement: "BSCI / SEDEX 工厂审核；FDA、LFGB、CE 认证；服务 Stanley、Contigo 等品牌",
+  companyProfile: "成立于 2008 年，专注真空保温器皿研发与出口，累计服务全球 60+ 国家客户。",
   productSelling: "12h 长效保温、316 食品级内胆、防漏静音盖、可定制 Logo",
-  productCases: "德国 DTC 5,000 pcs 首单 / 美亚卖家 2×40HQ 复购",
+  moqLeadtime: "标准款 MOQ 1,000 pcs，交期 25 天；定制款 MOQ 3,000 pcs，交期 35–45 天",
   sampleRule: "免费样品 1–2 pcs，运费到付；定制样收 80–150 USD，可在大货中冲抵",
   quoteRule: "默认 FOB 宁波；MOQ 1,000 pcs；标准 / 定制 / 品牌三档报价",
   paymentRule: "T/T 30% 定金 + 70% 见提单副本；老客户支持 OA 30 天",
@@ -404,9 +408,9 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
               <div className="mt-4 space-y-4">
                 <KnowledgeCard
                   icon={Building2}
-                  title="企业档案"
-                  desc="公司基础信息与目标市场"
-                  badge="已识别 5 项"
+                  title="企业知识"
+                  desc="公司基础信息、目标市场与背书"
+                  badge="已识别 8 项"
                   editing
                   items={[
                     { label: "公司名称", value: company.companyName, draft: company.companyName, onChange: (v) => setCompany({ ...company, companyName: v }) },
@@ -414,19 +418,22 @@ const AIProfileDetail = ({ onTrySimilar }: AIProfileDetailProps = {}) => {
                     { label: "业务关注点", value: company.businessFocus, draft: company.businessFocus, onChange: (v) => setCompany({ ...company, businessFocus: v }) },
                     { label: "公司网址", value: company.website, draft: company.website, onChange: (v) => setCompany({ ...company, website: v }) },
                     { label: "目标市场", value: company.targetMarket, draft: company.targetMarket, onChange: (v) => setCompany({ ...company, targetMarket: v }) },
+                    { label: "产能与规模", value: company.capacityScale, draft: company.capacityScale, onChange: (v) => setCompany({ ...company, capacityScale: v }) },
+                    { label: "信任与背书", value: company.trustEndorsement, draft: company.trustEndorsement, onChange: (v) => setCompany({ ...company, trustEndorsement: v }) },
+                    { label: "公司简介", value: company.companyProfile, draft: company.companyProfile, onChange: (v) => setCompany({ ...company, companyProfile: v }) },
                   ]}
                 />
 
                 <KnowledgeCard
                   icon={Tags}
                   title="产品知识"
-                  desc="主营产品的关键词、卖点与典型案例"
+                  desc="主营产品的卖点与交付条件"
                   badge="已识别 3 项"
                   editing
                   items={[
-                    { label: "主营产品关键词", value: company.productKeywords, draft: company.productKeywords, onChange: (v) => setCompany({ ...company, productKeywords: v }) },
+                    { label: "主营产品", value: company.mainProducts, draft: company.mainProducts, onChange: (v) => setCompany({ ...company, mainProducts: v }) },
                     { label: "产品卖点", value: company.productSelling, draft: company.productSelling, onChange: (v) => setCompany({ ...company, productSelling: v }) },
-                    { label: "产品案例", value: company.productCases, draft: company.productCases, onChange: (v) => setCompany({ ...company, productCases: v }) },
+                    { label: "起订量与交期", value: company.moqLeadtime, draft: company.moqLeadtime, onChange: (v) => setCompany({ ...company, moqLeadtime: v }) },
                   ]}
                 />
                 {docName && (
