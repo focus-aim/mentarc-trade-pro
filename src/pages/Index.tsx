@@ -2372,9 +2372,6 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
-        </DialogContent>
-      </Dialog>
       <Dialog open={bgReportBuyerId !== null} onOpenChange={(o) => !o && setBgReportBuyerId(null)}>
         <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
@@ -2391,6 +2388,25 @@ const Index = () => {
           <div className="flex-1 overflow-y-auto px-6 py-5">
             <BuyerBackgroundReport />
           </div>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={lightboxImage !== null} onOpenChange={(o) => !o && setLightboxImage(null)}>
+        <DialogContent className="max-w-5xl border-none bg-transparent p-0 shadow-none">
+          {lightboxImage && (
+            <div className="relative">
+              <img src={lightboxImage} alt="预览" className="max-h-[85vh] w-full rounded-2xl object-contain" />
+              <a
+                href={lightboxImage}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-[12px] font-semibold text-foreground shadow-card backdrop-blur-sm hover:text-primary"
+              >
+                <Download className="h-3.5 w-3.5" />
+                下载
+              </a>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>
