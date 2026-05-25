@@ -2317,6 +2317,9 @@ const Index = () => {
               width={192}
               height={192}
             />
+          </div>
+        </DialogContent>
+      </Dialog>
       <Dialog open={imageGalleryProductId !== null} onOpenChange={(o) => !o && setImageGalleryProductId(null)}>
         <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
