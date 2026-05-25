@@ -35,6 +35,7 @@ import {
   Mail,
   MapPin,
   Boxes,
+  Download,
 
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -669,11 +670,17 @@ const INQUIRY_BUYERS: InquiryBuyer[] = [
   },
 ];
 
+type ImageGroup = {
+  createdAt: string;
+  type: "产品套图" | "详情海报";
+  images: string[];
+};
+
 type GeneratedProduct = {
   id: string;
   name: string;
   specs: string;
-  images: string[];
+  imageGroups: ImageGroup[];
   tasks: { title: string; date: string }[];
 };
 
@@ -682,12 +689,27 @@ const GENERATED_PRODUCTS: GeneratedProduct[] = [
     id: "gp1",
     name: "1000W Fat Tire 电助力车",
     specs: "1000W 电机 · 48V 14Ah 电池 · 续航 60km · 载重 150kg · CE/EN15194 认证",
-    images: [
-      "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=400&h=400&fit=crop",
+    imageGroups: [
+      {
+        createdAt: "2024/04/20 14:32",
+        type: "产品套图",
+        images: [
+          "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=600&h=600&fit=crop",
+        ],
+      },
+      {
+        createdAt: "2024/04/18 10:05",
+        type: "详情海报",
+        images: [
+          "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1591741535018-d042766c62eb?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1605705077310-d72d56b2b3eb?w=600&h=600&fit=crop",
+        ],
+      },
     ],
     tasks: [
       { title: "亚马逊 A+ 详情页生成", date: "04/20" },
@@ -699,11 +721,27 @@ const GENERATED_PRODUCTS: GeneratedProduct[] = [
     id: "gp2",
     name: "智能动感单车（居家版）",
     specs: "磁控阻力 32 档 · 静音皮带传动 · 蓝牙连接 App · 承重 130kg · 折叠收纳",
-    images: [
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop",
+    imageGroups: [
+      {
+        createdAt: "2024/04/16 16:48",
+        type: "产品套图",
+        images: [
+          "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop",
+        ],
+      },
+      {
+        createdAt: "2024/04/12 09:20",
+        type: "详情海报",
+        images: [
+          "https://images.unsplash.com/photo-1591741535018-d042766c62eb?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1605296867424-35fc25c9212a?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=600&h=600&fit=crop",
+        ],
+      },
     ],
     tasks: [
       { title: "独立站详情页生成", date: "04/16" },
@@ -715,11 +753,17 @@ const GENERATED_PRODUCTS: GeneratedProduct[] = [
     id: "gp3",
     name: "双层保温啤酒杯",
     specs: "40oz 304 不锈钢 · 真空双层 · 保冷 24h / 保温 12h · 防漏滑盖 · BPA free",
-    images: [
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1570831739435-6601aa3fa4fb?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400&h=400&fit=crop",
+    imageGroups: [
+      {
+        createdAt: "2024/04/12 11:15",
+        type: "产品套图",
+        images: [
+          "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1570831739435-6601aa3fa4fb?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=600&h=600&fit=crop",
+        ],
+      },
     ],
     tasks: [
       { title: "Listing 标题 + 五点描述", date: "04/12" },
@@ -730,10 +774,17 @@ const GENERATED_PRODUCTS: GeneratedProduct[] = [
     id: "gp4",
     name: "可折叠迷你走步机",
     specs: "1.0–6.0km/h · 承重 120kg · 静音电机 · 遥控操作 · 折叠厚度 12.5cm",
-    images: [
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop",
-      "https://images.unsplash.com/photo-1434596922112-19c563067271?w=400&h=400&fit=crop",
+    imageGroups: [
+      {
+        createdAt: "2024/04/08 15:42",
+        type: "产品套图",
+        images: [
+          "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1434596922112-19c563067271?w=600&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=600&h=600&fit=crop",
+        ],
+      },
     ],
     tasks: [
       { title: "TikTok 短视频脚本", date: "04/08" },
@@ -783,6 +834,7 @@ const Index = () => {
   const [bgReportBuyerId, setBgReportBuyerId] = useState<string | null>(null);
   const [expandedProductId, setExpandedProductId] = useState<string | null>(null);
   const [imageGalleryProductId, setImageGalleryProductId] = useState<string | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   const [partnerConfigured, setPartnerConfigured] = useState(initialPartnerConfigured);
   // Initialization training flow: idle | form | training | result
@@ -2267,6 +2319,9 @@ const Index = () => {
               width={192}
               height={192}
             />
+          </div>
+        </DialogContent>
+      </Dialog>
       <Dialog open={imageGalleryProductId !== null} onOpenChange={(o) => !o && setImageGalleryProductId(null)}>
         <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
@@ -2280,20 +2335,46 @@ const Index = () => {
               )}
             </DialogTitle>
           </DialogHeader>
-          <div className="flex-1 overflow-y-auto px-6 py-5">
-            {imageGalleryProductId && (
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.images.map((src, i) => (
-                  <div key={i} className="aspect-square overflow-hidden rounded-xl border border-border/70 bg-muted/30">
-                    <img src={src} alt={`图片素材 ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
+          <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
+            {imageGalleryProductId &&
+              GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.imageGroups.map((group, gi) => (
+                <div key={gi} className="space-y-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
+                      {group.type}
+                    </span>
+                    <span className="text-[12px] text-muted-foreground">生成时间：{group.createdAt}</span>
                   </div>
-                ))}
-              </div>
-            )}
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    {group.images.map((src, i) => (
+                      <div
+                        key={i}
+                        className="group relative aspect-square overflow-hidden rounded-xl border border-border/70 bg-muted/30"
+                      >
+                        <img
+                          src={src}
+                          alt={`${group.type} ${i + 1}`}
+                          className="h-full w-full cursor-zoom-in object-cover transition-transform group-hover:scale-105"
+                          loading="lazy"
+                          onClick={() => setLightboxImage(src)}
+                        />
+                        <a
+                          href={src}
+                          download={`${group.type}-${group.createdAt.replace(/[/: ]/g, "-")}-${i + 1}.jpg`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="absolute right-1.5 top-1.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-background/85 text-foreground/80 opacity-0 shadow-card backdrop-blur-sm transition-opacity hover:text-primary group-hover:opacity-100"
+                          title="下载"
+                        >
+                          <Download className="h-3.5 w-3.5" />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
           </div>
-        </DialogContent>
-      </Dialog>
-    </div>
         </DialogContent>
       </Dialog>
       <Dialog open={bgReportBuyerId !== null} onOpenChange={(o) => !o && setBgReportBuyerId(null)}>
@@ -2312,6 +2393,25 @@ const Index = () => {
           <div className="flex-1 overflow-y-auto px-6 py-5">
             <BuyerBackgroundReport />
           </div>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={lightboxImage !== null} onOpenChange={(o) => !o && setLightboxImage(null)}>
+        <DialogContent className="max-w-5xl border-none bg-transparent p-0 shadow-none">
+          {lightboxImage && (
+            <div className="relative">
+              <img src={lightboxImage} alt="预览" className="max-h-[85vh] w-full rounded-2xl object-contain" />
+              <a
+                href={lightboxImage}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-[12px] font-semibold text-foreground shadow-card backdrop-blur-sm hover:text-primary"
+              >
+                <Download className="h-3.5 w-3.5" />
+                下载
+              </a>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>
