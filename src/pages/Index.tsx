@@ -672,53 +672,72 @@ const INQUIRY_BUYERS: InquiryBuyer[] = [
 type GeneratedProduct = {
   id: string;
   name: string;
-  category: string;
-  updatedAt: string;
-  cover?: string;
-  assets: { label: string; type: "detail" | "image" | "video" | "copy" }[];
+  specs: string;
+  images: string[];
+  tasks: { title: string; date: string }[];
 };
 
 const GENERATED_PRODUCTS: GeneratedProduct[] = [
   {
     id: "gp1",
     name: "1000W Fat Tire 电助力车",
-    category: "户外出行",
-    updatedAt: "04/20",
-    assets: [
-      { label: "亚马逊 A+ 详情页", type: "detail" },
-      { label: "主图 5 张", type: "image" },
-      { label: "卖点文案 EN/ES", type: "copy" },
+    specs: "1000W 电机 · 48V 14Ah 电池 · 续航 60km · 载重 150kg · CE/EN15194 认证",
+    images: [
+      "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "亚马逊 A+ 详情页生成", date: "04/20" },
+      { title: "主图 5 张生成", date: "04/18" },
+      { title: "卖点文案 EN/ES 翻译", date: "04/15" },
     ],
   },
   {
     id: "gp2",
     name: "智能动感单车（居家版）",
-    category: "居家健身",
-    updatedAt: "04/16",
-    assets: [
-      { label: "独立站详情页", type: "detail" },
-      { label: "场景图 6 张", type: "image" },
-      { label: "15s 短视频脚本", type: "video" },
+    specs: "磁控阻力 32 档 · 静音皮带传动 · 蓝牙连接 App · 承重 130kg · 折叠收纳",
+    images: [
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "独立站详情页生成", date: "04/16" },
+      { title: "场景图 6 张生成", date: "04/12" },
+      { title: "15s 短视频脚本", date: "04/10" },
     ],
   },
   {
     id: "gp3",
     name: "双层保温啤酒杯",
-    category: "户外露营",
-    updatedAt: "04/12",
-    assets: [
-      { label: "Listing 标题+五点", type: "copy" },
-      { label: "主图 4 张", type: "image" },
+    specs: "40oz 304 不锈钢 · 真空双层 · 保冷 24h / 保温 12h · 防漏滑盖 · BPA free",
+    images: [
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1570831739435-6601aa3fa4fb?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "Listing 标题 + 五点描述", date: "04/12" },
+      { title: "主图 4 张生成", date: "04/09" },
     ],
   },
   {
     id: "gp4",
     name: "可折叠迷你走步机",
-    category: "居家健身",
-    updatedAt: "04/08",
-    assets: [
-      { label: "TikTok 短视频脚本", type: "video" },
-      { label: "营销卖点文案", type: "copy" },
+    specs: "1.0–6.0km/h · 承重 120kg · 静音电机 · 遥控操作 · 折叠厚度 12.5cm",
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1434596922112-19c563067271?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "TikTok 短视频脚本", date: "04/08" },
+      { title: "营销卖点文案", date: "04/05" },
     ],
   },
 ];
