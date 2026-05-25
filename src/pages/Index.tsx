@@ -2273,7 +2273,33 @@ const Index = () => {
               width={192}
               height={192}
             />
+      <Dialog open={imageGalleryProductId !== null} onOpenChange={(o) => !o && setImageGalleryProductId(null)}>
+        <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
+          <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
+            <DialogTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
+              <Image className="h-4 w-4 text-primary" />
+              图片素材
+              {imageGalleryProductId && (
+                <span className="text-[12.5px] font-normal text-muted-foreground">
+                  · {GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.name}
+                </span>
+              )}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-y-auto px-6 py-5">
+            {imageGalleryProductId && (
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.images.map((src, i) => (
+                  <div key={i} className="aspect-square overflow-hidden rounded-xl border border-border/70 bg-muted/30">
+                    <img src={src} alt={`图片素材 ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
+        </DialogContent>
+      </Dialog>
+    </div>
         </DialogContent>
       </Dialog>
       <Dialog open={bgReportBuyerId !== null} onOpenChange={(o) => !o && setBgReportBuyerId(null)}>
