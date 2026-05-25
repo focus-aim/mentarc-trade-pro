@@ -35,6 +35,7 @@ import {
   Mail,
   MapPin,
   Boxes,
+  Download,
 
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
