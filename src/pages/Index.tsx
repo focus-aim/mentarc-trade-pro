@@ -1048,11 +1048,7 @@ const Index = () => {
           <main className="ambient-bg relative flex-1 h-screen overflow-y-auto scrollbar-thin bg-background">
             <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-10 pt-10 sm:px-6 lg:px-8">
               <section className="opacity-0 animate-fade-up" style={{ animationDelay: "60ms" }}>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-1 text-[11px] font-medium text-primary">
-                  <Sparkles className="h-3 w-3" />
-                  AI 自动归档
-                </span>
-                <h1 className="mt-3 text-2xl font-bold tracking-tight">
+                <h1 className="text-2xl font-bold tracking-tight">
                   <span className="text-aurora">任务成果</span>
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
