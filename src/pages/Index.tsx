@@ -851,9 +851,11 @@ const Index = () => {
         pixelRatio: 2,
         cacheBust: true,
       });
-      const img = new Image();
+      const img = document.createElement("img");
       img.src = dataUrl;
-      await new Promise((res) => (img.onload = res));
+      await new Promise<void>((res) => {
+        img.onload = () => res();
+      });
       const pdf = new jsPDF({ orientation: "p", unit: "pt", format: "a4" });
       const pageW = pdf.internal.pageSize.getWidth();
       const pageH = pdf.internal.pageSize.getHeight();
