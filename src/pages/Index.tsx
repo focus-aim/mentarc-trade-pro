@@ -2420,18 +2420,30 @@ const Index = () => {
       <Dialog open={bgReportBuyerId !== null} onOpenChange={(o) => !o && setBgReportBuyerId(null)}>
         <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
-            <DialogTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
-              <FileSearch className="h-4 w-4 text-primary" />
-              背调结果
-              {bgReportBuyerId && (
-                <span className="text-[12.5px] font-normal text-muted-foreground">
-                  · {INQUIRY_BUYERS.find((b) => b.id === bgReportBuyerId)?.company}
-                </span>
-              )}
-            </DialogTitle>
+            <div className="flex items-center justify-between gap-3 pr-8">
+              <DialogTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
+                <FileSearch className="h-4 w-4 text-primary" />
+                背调结果
+                {bgReportBuyerId && (
+                  <span className="text-[12.5px] font-normal text-muted-foreground">
+                    · {INQUIRY_BUYERS.find((b) => b.id === bgReportBuyerId)?.company}
+                  </span>
+                )}
+              </DialogTitle>
+              <button
+                onClick={handleDownloadBgReport}
+                disabled={bgReportDownloading}
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/70 bg-card/80 px-3 py-1.5 text-[12px] font-semibold text-foreground/85 transition-all hover:border-primary/40 hover:bg-primary/[0.06] hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <Download className="h-3.5 w-3.5" />
+                {bgReportDownloading ? "生成中…" : "下载报告"}
+              </button>
+            </div>
           </DialogHeader>
           <div className="flex-1 overflow-y-auto px-6 py-5">
-            <BuyerBackgroundReport />
+            <div ref={bgReportRef} className="bg-background">
+              <BuyerBackgroundReport />
+            </div>
           </div>
         </DialogContent>
       </Dialog>
