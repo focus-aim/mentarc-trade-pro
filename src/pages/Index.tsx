@@ -2330,16 +2330,45 @@ const Index = () => {
               )}
             </DialogTitle>
           </DialogHeader>
-          <div className="flex-1 overflow-y-auto px-6 py-5">
-            {imageGalleryProductId && (
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.images.map((src, i) => (
-                  <div key={i} className="aspect-square overflow-hidden rounded-xl border border-border/70 bg-muted/30">
-                    <img src={src} alt={`图片素材 ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
+          <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
+            {imageGalleryProductId &&
+              GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.imageGroups.map((group, gi) => (
+                <div key={gi} className="space-y-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
+                      {group.type}
+                    </span>
+                    <span className="text-[12px] text-muted-foreground">生成时间：{group.createdAt}</span>
                   </div>
-                ))}
-              </div>
-            )}
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    {group.images.map((src, i) => (
+                      <div
+                        key={i}
+                        className="group relative aspect-square overflow-hidden rounded-xl border border-border/70 bg-muted/30"
+                      >
+                        <img
+                          src={src}
+                          alt={`${group.type} ${i + 1}`}
+                          className="h-full w-full cursor-zoom-in object-cover transition-transform group-hover:scale-105"
+                          loading="lazy"
+                          onClick={() => setLightboxImage(src)}
+                        />
+                        <a
+                          href={src}
+                          download={`${group.type}-${group.createdAt.replace(/[/: ]/g, "-")}-${i + 1}.jpg`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="absolute right-1.5 top-1.5 inline-flex h-7 w-7 items-center justify-center rounded-full bg-background/85 text-foreground/80 opacity-0 shadow-card backdrop-blur-sm transition-opacity hover:text-primary group-hover:opacity-100"
+                          title="下载"
+                        >
+                          <Download className="h-3.5 w-3.5" />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
           </div>
         </DialogContent>
       </Dialog>
