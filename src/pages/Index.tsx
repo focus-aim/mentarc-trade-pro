@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import {
   Briefcase,
   MessageCircle,
@@ -835,6 +835,50 @@ const Index = () => {
   const [expandedProductId, setExpandedProductId] = useState<string | null>(null);
   const [imageGalleryProductId, setImageGalleryProductId] = useState<string | null>(null);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const bgReportRef = useRef<HTMLDivElement>(null);
+  const [bgReportDownloading, setBgReportDownloading] = useState(false);
+
+  const handleDownloadBgReport = async () => {
+    if (!bgReportRef.current || bgReportDownloading) return;
+    setBgReportDownloading(true);
+    try {
+      const [{ toPng }, { default: jsPDF }] = await Promise.all([
+        import("html-to-image"),
+        import("jspdf"),
+      ]);
+      const dataUrl = await toPng(bgReportRef.current, {
+        backgroundColor: "#ffffff",
+        pixelRatio: 2,
+        cacheBust: true,
+      });
+      const img = document.createElement("img");
+      img.src = dataUrl;
+      await new Promise<void>((res) => {
+        img.onload = () => res();
+      });
+      const pdf = new jsPDF({ orientation: "p", unit: "pt", format: "a4" });
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const imgW = pageW;
+      const imgH = (img.height * imgW) / img.width;
+      let remaining = imgH;
+      let position = 0;
+      while (remaining > 0) {
+        pdf.addImage(dataUrl, "PNG", 0, position, imgW, imgH);
+        remaining -= pageH;
+        if (remaining > 0) {
+          position -= pageH;
+          pdf.addPage();
+        }
+      }
+      const company = INQUIRY_BUYERS.find((b) => b.id === bgReportBuyerId)?.company || "buyer";
+      pdf.save(`背调报告_${company}_${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setBgReportDownloading(false);
+    }
+  };
 
   const [partnerConfigured, setPartnerConfigured] = useState(initialPartnerConfigured);
   // Initialization training flow: idle | form | training | result
@@ -2376,18 +2420,30 @@ const Index = () => {
       <Dialog open={bgReportBuyerId !== null} onOpenChange={(o) => !o && setBgReportBuyerId(null)}>
         <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
-            <DialogTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
-              <FileSearch className="h-4 w-4 text-primary" />
-              背调结果
-              {bgReportBuyerId && (
-                <span className="text-[12.5px] font-normal text-muted-foreground">
-                  · {INQUIRY_BUYERS.find((b) => b.id === bgReportBuyerId)?.company}
-                </span>
-              )}
-            </DialogTitle>
+            <div className="flex items-center justify-between gap-3 pr-8">
+              <DialogTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
+                <FileSearch className="h-4 w-4 text-primary" />
+                背调结果
+                {bgReportBuyerId && (
+                  <span className="text-[12.5px] font-normal text-muted-foreground">
+                    · {INQUIRY_BUYERS.find((b) => b.id === bgReportBuyerId)?.company}
+                  </span>
+                )}
+              </DialogTitle>
+              <button
+                onClick={handleDownloadBgReport}
+                disabled={bgReportDownloading}
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border/70 bg-card/80 px-3 py-1.5 text-[12px] font-semibold text-foreground/85 transition-all hover:border-primary/40 hover:bg-primary/[0.06] hover:text-primary disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <Download className="h-3.5 w-3.5" />
+                {bgReportDownloading ? "生成中…" : "下载报告"}
+              </button>
+            </div>
           </DialogHeader>
           <div className="flex-1 overflow-y-auto px-6 py-5">
-            <BuyerBackgroundReport />
+            <div ref={bgReportRef} className="bg-background">
+              <BuyerBackgroundReport />
+            </div>
           </div>
         </DialogContent>
       </Dialog>
