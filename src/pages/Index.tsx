@@ -749,12 +749,6 @@ const INQUIRY_STAGE_STYLES: Record<InquiryBuyer["stageTone"], string> = {
   muted: "border-border bg-muted text-muted-foreground",
 };
 
-const ASSET_TYPE_STYLES: Record<string, string> = {
-  detail: "border-primary/25 bg-primary/10 text-primary",
-  image: "border-secondary/40 bg-secondary/20 text-foreground/80",
-  video: "border-accent-amber/30 bg-accent-amber/15 text-accent-amber",
-  copy: "border-success/30 bg-success/15 text-success",
-};
 
 const Index = () => {
   // Persisted training/partner state — new visitors see the launch page;
