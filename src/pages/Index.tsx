@@ -791,7 +791,6 @@ const GENERATED_PRODUCTS: GeneratedProduct[] = [
     ],
   },
 ];
-];
 
 const INQUIRY_STAGE_STYLES: Record<InquiryBuyer["stageTone"], string> = {
   primary: "border-primary/25 bg-primary/10 text-primary",
