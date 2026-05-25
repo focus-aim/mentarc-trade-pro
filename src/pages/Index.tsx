@@ -1161,43 +1161,87 @@ const Index = () => {
                   })}
                 </section>
               ) : (
-                <section className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 opacity-0 animate-fade-up" style={{ animationDelay: "220ms" }}>
-                  {GENERATED_PRODUCTS.map((product, idx) => (
-                    <div
-                      key={product.id}
-                      className="hover-glow group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/95 p-4 backdrop-blur-sm shadow-card transition-all hover:border-primary/40 hover:shadow-glow opacity-0 animate-fade-up"
-                      style={{ animationDelay: `${260 + idx * 50}ms` }}
-                    >
-                      <span
-                        aria-hidden
-                        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-aurora opacity-15 blur-2xl transition-opacity group-hover:opacity-35"
-                      />
-                      <div className="relative mb-2 flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-semibold text-primary">
-                          <Image className="h-3 w-3" />
-                          {product.category}
-                        </span>
-                        <span className="text-[10.5px] text-muted-foreground">更新 {product.updatedAt}</span>
-                      </div>
-                      <p className="relative text-sm font-bold leading-snug text-foreground">{product.name}</p>
-                      <div className="relative mt-3 border-t border-border/50 pt-2.5">
-                        <p className="text-[10.5px] font-medium text-muted-foreground">已生成成果</p>
-                        <div className="mt-1.5 flex flex-wrap gap-1.5">
-                          {product.assets.map((asset, i) => (
-                            <span
-                              key={i}
-                              className={cn(
-                                "inline-flex items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium",
-                                ASSET_TYPE_STYLES[asset.type],
-                              )}
-                            >
-                              {asset.label}
-                            </span>
-                          ))}
+                <section
+                  className="mt-5 space-y-3 opacity-0 animate-fade-up"
+                  style={{ animationDelay: "220ms" }}
+                >
+                  {GENERATED_PRODUCTS.map((product, idx) => {
+                    const isExpanded = expandedProductId === product.id;
+                    return (
+                      <div
+                        key={product.id}
+                        className="hover-glow group relative overflow-hidden rounded-2xl border border-border/60 bg-card/85 backdrop-blur-sm shadow-card transition-all hover:border-primary/40 opacity-0 animate-fade-up"
+                        style={{ animationDelay: `${260 + idx * 50}ms` }}
+                      >
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-aurora opacity-10 blur-2xl transition-opacity group-hover:opacity-25"
+                        />
+                        <div className="relative px-4 py-3 sm:px-5 sm:py-3.5">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex min-w-0 flex-1 items-center gap-2">
+                              <p className="truncate text-[15px] font-semibold leading-snug text-foreground">
+                                {product.name}
+                              </p>
+                            </div>
+
+                            <div className="shrink-0 flex items-center gap-1.5">
+                              <button
+                                onClick={() => setImageGalleryProductId(product.id)}
+                                className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-[12px] font-semibold text-primary transition-all hover:bg-primary/15"
+                              >
+                                <Image className="h-3.5 w-3.5" />
+                                图片素材
+                              </button>
+                              <button
+                                onClick={() => setExpandedProductId(isExpanded ? null : product.id)}
+                                className={cn(
+                                  "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
+                                  isExpanded
+                                    ? "border-primary/30 bg-primary/10 text-primary"
+                                    : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
+                                )}
+                                aria-expanded={isExpanded}
+                              >
+                                历史任务
+                                <ChevronDown
+                                  className={cn(
+                                    "h-3.5 w-3.5 transition-transform duration-200",
+                                    isExpanded && "rotate-180",
+                                  )}
+                                />
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="mt-2 flex items-center gap-1.5 text-[12.5px] text-muted-foreground">
+                            <Boxes className="h-3.5 w-3.5 shrink-0 text-primary/70" />
+                            <span className="truncate text-foreground/80">{product.specs}</span>
+                          </div>
                         </div>
+
+                        {isExpanded && (
+                          <div className="relative border-t border-border/60 bg-muted/30 px-5 py-3 animate-fade-in">
+                            <ul className="space-y-1.5">
+                              {product.tasks.map((t, i) => (
+                                <li key={i}>
+                                  <div className="flex w-full items-center justify-between gap-3 rounded-lg px-2 py-1.5 text-left">
+                                    <span className="flex min-w-0 items-center gap-2">
+                                      <span className="inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+                                      <span className="truncate text-[13px] text-foreground/85">
+                                        {t.title}
+                                      </span>
+                                    </span>
+                                    <span className="shrink-0 text-[11px] text-muted-foreground">{t.date}</span>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </section>
               )}
             </div>
