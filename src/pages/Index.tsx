@@ -835,6 +835,48 @@ const Index = () => {
   const [expandedProductId, setExpandedProductId] = useState<string | null>(null);
   const [imageGalleryProductId, setImageGalleryProductId] = useState<string | null>(null);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const bgReportRef = useRef<HTMLDivElement>(null);
+  const [bgReportDownloading, setBgReportDownloading] = useState(false);
+
+  const handleDownloadBgReport = async () => {
+    if (!bgReportRef.current || bgReportDownloading) return;
+    setBgReportDownloading(true);
+    try {
+      const [{ toPng }, { default: jsPDF }] = await Promise.all([
+        import("html-to-image"),
+        import("jspdf"),
+      ]);
+      const dataUrl = await toPng(bgReportRef.current, {
+        backgroundColor: "#ffffff",
+        pixelRatio: 2,
+        cacheBust: true,
+      });
+      const img = new Image();
+      img.src = dataUrl;
+      await new Promise((res) => (img.onload = res));
+      const pdf = new jsPDF({ orientation: "p", unit: "pt", format: "a4" });
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const imgW = pageW;
+      const imgH = (img.height * imgW) / img.width;
+      let remaining = imgH;
+      let position = 0;
+      while (remaining > 0) {
+        pdf.addImage(dataUrl, "PNG", 0, position, imgW, imgH);
+        remaining -= pageH;
+        if (remaining > 0) {
+          position -= pageH;
+          pdf.addPage();
+        }
+      }
+      const company = INQUIRY_BUYERS.find((b) => b.id === bgReportBuyerId)?.company || "buyer";
+      pdf.save(`背调报告_${company}_${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setBgReportDownloading(false);
+    }
+  };
 
   const [partnerConfigured, setPartnerConfigured] = useState(initialPartnerConfigured);
   // Initialization training flow: idle | form | training | result
