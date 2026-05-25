@@ -672,53 +672,72 @@ const INQUIRY_BUYERS: InquiryBuyer[] = [
 type GeneratedProduct = {
   id: string;
   name: string;
-  category: string;
-  updatedAt: string;
-  cover?: string;
-  assets: { label: string; type: "detail" | "image" | "video" | "copy" }[];
+  specs: string;
+  images: string[];
+  tasks: { title: string; date: string }[];
 };
 
 const GENERATED_PRODUCTS: GeneratedProduct[] = [
   {
     id: "gp1",
     name: "1000W Fat Tire 电助力车",
-    category: "户外出行",
-    updatedAt: "04/20",
-    assets: [
-      { label: "亚马逊 A+ 详情页", type: "detail" },
-      { label: "主图 5 张", type: "image" },
-      { label: "卖点文案 EN/ES", type: "copy" },
+    specs: "1000W 电机 · 48V 14Ah 电池 · 续航 60km · 载重 150kg · CE/EN15194 认证",
+    images: [
+      "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "亚马逊 A+ 详情页生成", date: "04/20" },
+      { title: "主图 5 张生成", date: "04/18" },
+      { title: "卖点文案 EN/ES 翻译", date: "04/15" },
     ],
   },
   {
     id: "gp2",
     name: "智能动感单车（居家版）",
-    category: "居家健身",
-    updatedAt: "04/16",
-    assets: [
-      { label: "独立站详情页", type: "detail" },
-      { label: "场景图 6 张", type: "image" },
-      { label: "15s 短视频脚本", type: "video" },
+    specs: "磁控阻力 32 档 · 静音皮带传动 · 蓝牙连接 App · 承重 130kg · 折叠收纳",
+    images: [
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "独立站详情页生成", date: "04/16" },
+      { title: "场景图 6 张生成", date: "04/12" },
+      { title: "15s 短视频脚本", date: "04/10" },
     ],
   },
   {
     id: "gp3",
     name: "双层保温啤酒杯",
-    category: "户外露营",
-    updatedAt: "04/12",
-    assets: [
-      { label: "Listing 标题+五点", type: "copy" },
-      { label: "主图 4 张", type: "image" },
+    specs: "40oz 304 不锈钢 · 真空双层 · 保冷 24h / 保温 12h · 防漏滑盖 · BPA free",
+    images: [
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1570831739435-6601aa3fa4fb?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "Listing 标题 + 五点描述", date: "04/12" },
+      { title: "主图 4 张生成", date: "04/09" },
     ],
   },
   {
     id: "gp4",
     name: "可折叠迷你走步机",
-    category: "居家健身",
-    updatedAt: "04/08",
-    assets: [
-      { label: "TikTok 短视频脚本", type: "video" },
-      { label: "营销卖点文案", type: "copy" },
+    specs: "1.0–6.0km/h · 承重 120kg · 静音电机 · 遥控操作 · 折叠厚度 12.5cm",
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1434596922112-19c563067271?w=400&h=400&fit=crop",
+    ],
+    tasks: [
+      { title: "TikTok 短视频脚本", date: "04/08" },
+      { title: "营销卖点文案", date: "04/05" },
     ],
   },
 ];
@@ -730,12 +749,6 @@ const INQUIRY_STAGE_STYLES: Record<InquiryBuyer["stageTone"], string> = {
   muted: "border-border bg-muted text-muted-foreground",
 };
 
-const ASSET_TYPE_STYLES: Record<GeneratedProduct["assets"][number]["type"], string> = {
-  detail: "border-primary/25 bg-primary/10 text-primary",
-  image: "border-secondary/40 bg-secondary/20 text-foreground/80",
-  video: "border-accent-amber/30 bg-accent-amber/15 text-accent-amber",
-  copy: "border-success/30 bg-success/15 text-success",
-};
 
 const Index = () => {
   // Persisted training/partner state — new visitors see the launch page;
@@ -768,6 +781,8 @@ const Index = () => {
   const [activeBuyerId, setActiveBuyerId] = useState<string | null>(null);
   const [expandedBuyerId, setExpandedBuyerId] = useState<string | null>(null);
   const [bgReportBuyerId, setBgReportBuyerId] = useState<string | null>(null);
+  const [expandedProductId, setExpandedProductId] = useState<string | null>(null);
+  const [imageGalleryProductId, setImageGalleryProductId] = useState<string | null>(null);
 
   const [partnerConfigured, setPartnerConfigured] = useState(initialPartnerConfigured);
   // Initialization training flow: idle | form | training | result
@@ -1140,43 +1155,87 @@ const Index = () => {
                   })}
                 </section>
               ) : (
-                <section className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 opacity-0 animate-fade-up" style={{ animationDelay: "220ms" }}>
-                  {GENERATED_PRODUCTS.map((product, idx) => (
-                    <div
-                      key={product.id}
-                      className="hover-glow group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/95 p-4 backdrop-blur-sm shadow-card transition-all hover:border-primary/40 hover:shadow-glow opacity-0 animate-fade-up"
-                      style={{ animationDelay: `${260 + idx * 50}ms` }}
-                    >
-                      <span
-                        aria-hidden
-                        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-aurora opacity-15 blur-2xl transition-opacity group-hover:opacity-35"
-                      />
-                      <div className="relative mb-2 flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 py-0.5 text-[10px] font-semibold text-primary">
-                          <Image className="h-3 w-3" />
-                          {product.category}
-                        </span>
-                        <span className="text-[10.5px] text-muted-foreground">更新 {product.updatedAt}</span>
-                      </div>
-                      <p className="relative text-sm font-bold leading-snug text-foreground">{product.name}</p>
-                      <div className="relative mt-3 border-t border-border/50 pt-2.5">
-                        <p className="text-[10.5px] font-medium text-muted-foreground">已生成成果</p>
-                        <div className="mt-1.5 flex flex-wrap gap-1.5">
-                          {product.assets.map((asset, i) => (
-                            <span
-                              key={i}
-                              className={cn(
-                                "inline-flex items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium",
-                                ASSET_TYPE_STYLES[asset.type],
-                              )}
-                            >
-                              {asset.label}
-                            </span>
-                          ))}
+                <section
+                  className="mt-5 space-y-3 opacity-0 animate-fade-up"
+                  style={{ animationDelay: "220ms" }}
+                >
+                  {GENERATED_PRODUCTS.map((product, idx) => {
+                    const isExpanded = expandedProductId === product.id;
+                    return (
+                      <div
+                        key={product.id}
+                        className="hover-glow group relative overflow-hidden rounded-2xl border border-border/60 bg-card/85 backdrop-blur-sm shadow-card transition-all hover:border-primary/40 opacity-0 animate-fade-up"
+                        style={{ animationDelay: `${260 + idx * 50}ms` }}
+                      >
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-aurora opacity-10 blur-2xl transition-opacity group-hover:opacity-25"
+                        />
+                        <div className="relative px-4 py-3 sm:px-5 sm:py-3.5">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex min-w-0 flex-1 items-center gap-2">
+                              <p className="truncate text-[15px] font-semibold leading-snug text-foreground">
+                                {product.name}
+                              </p>
+                            </div>
+
+                            <div className="shrink-0 flex items-center gap-1.5">
+                              <button
+                                onClick={() => setImageGalleryProductId(product.id)}
+                                className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-[12px] font-semibold text-primary transition-all hover:bg-primary/15"
+                              >
+                                <Image className="h-3.5 w-3.5" />
+                                图片素材
+                              </button>
+                              <button
+                                onClick={() => setExpandedProductId(isExpanded ? null : product.id)}
+                                className={cn(
+                                  "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-all",
+                                  isExpanded
+                                    ? "border-primary/30 bg-primary/10 text-primary"
+                                    : "border-border/70 bg-card/70 text-foreground/80 hover:border-primary/30 hover:text-primary",
+                                )}
+                                aria-expanded={isExpanded}
+                              >
+                                历史任务
+                                <ChevronDown
+                                  className={cn(
+                                    "h-3.5 w-3.5 transition-transform duration-200",
+                                    isExpanded && "rotate-180",
+                                  )}
+                                />
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="mt-2 flex items-center gap-1.5 text-[12.5px] text-muted-foreground">
+                            <Boxes className="h-3.5 w-3.5 shrink-0 text-primary/70" />
+                            <span className="truncate text-foreground/80">{product.specs}</span>
+                          </div>
                         </div>
+
+                        {isExpanded && (
+                          <div className="relative border-t border-border/60 bg-muted/30 px-5 py-3 animate-fade-in">
+                            <ul className="space-y-1.5">
+                              {product.tasks.map((t, i) => (
+                                <li key={i}>
+                                  <div className="flex w-full items-center justify-between gap-3 rounded-lg px-2 py-1.5 text-left">
+                                    <span className="flex min-w-0 items-center gap-2">
+                                      <span className="inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+                                      <span className="truncate text-[13px] text-foreground/85">
+                                        {t.title}
+                                      </span>
+                                    </span>
+                                    <span className="shrink-0 text-[11px] text-muted-foreground">{t.date}</span>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </section>
               )}
             </div>
@@ -2208,7 +2267,33 @@ const Index = () => {
               width={192}
               height={192}
             />
+      <Dialog open={imageGalleryProductId !== null} onOpenChange={(o) => !o && setImageGalleryProductId(null)}>
+        <DialogContent className="flex max-h-[86vh] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0">
+          <DialogHeader className="shrink-0 border-b border-border/70 bg-card/95 px-6 py-4 text-left backdrop-blur-md">
+            <DialogTitle className="flex items-center gap-2 text-base font-semibold text-foreground">
+              <Image className="h-4 w-4 text-primary" />
+              图片素材
+              {imageGalleryProductId && (
+                <span className="text-[12.5px] font-normal text-muted-foreground">
+                  · {GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.name}
+                </span>
+              )}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-y-auto px-6 py-5">
+            {imageGalleryProductId && (
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {GENERATED_PRODUCTS.find((p) => p.id === imageGalleryProductId)?.images.map((src, i) => (
+                  <div key={i} className="aspect-square overflow-hidden rounded-xl border border-border/70 bg-muted/30">
+                    <img src={src} alt={`图片素材 ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
+        </DialogContent>
+      </Dialog>
+    </div>
         </DialogContent>
       </Dialog>
       <Dialog open={bgReportBuyerId !== null} onOpenChange={(o) => !o && setBgReportBuyerId(null)}>
