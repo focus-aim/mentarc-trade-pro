@@ -26,26 +26,26 @@ const Landing = () => {
     <div className="min-h-screen bg-white text-[hsl(220,20%,14%)] overflow-x-hidden">
       {/* Nav */}
       <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-[hsl(220,15%,94%)]">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center">
+          <div className="flex items-center shrink-0">
             <img src={mentarcLogoFull} alt="Mentarc 贸探" className="h-12 object-contain" />
           </div>
-          <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center gap-6 text-sm text-[hsl(220,10%,35%)]">
-              <button
-                onClick={() => navigate("/updates")}
-                className="hover:text-[hsl(217,100%,50%)] transition-colors"
-              >
-                产品动态
-              </button>
-              <button
-                onClick={() => navigate("/about")}
-                className="hover:text-[hsl(217,100%,50%)] transition-colors"
-              >
-                关于我们
-              </button>
-            </nav>
-            <span className="px-5 py-2.5 rounded-full text-sm font-medium text-[hsl(217,100%,50%)] bg-[hsl(217,100%,96%)] border border-[hsl(217,100%,90%)]">
+          <div className="hidden md:flex items-center gap-1 ml-10 text-sm text-[hsl(220,10%,35%)]">
+            <button
+              onClick={() => navigate("/updates")}
+              className="px-3 py-1.5 rounded-full hover:text-[hsl(217,100%,50%)] hover:bg-[hsl(220,15%,96%)] transition-colors"
+            >
+              产品动态
+            </button>
+            <button
+              onClick={() => navigate("/about")}
+              className="px-3 py-1.5 rounded-full hover:text-[hsl(217,100%,50%)] hover:bg-[hsl(220,15%,96%)] transition-colors"
+            >
+              关于我们
+            </button>
+          </div>
+          <div className="ml-auto flex items-center gap-2">
+            <span className="hidden sm:inline-flex px-5 py-2.5 rounded-full text-sm font-medium text-[hsl(217,100%,50%)] bg-[hsl(217,100%,96%)] border border-[hsl(217,100%,90%)]">
               新用户免费体验全部功能
             </span>
             <button
@@ -57,6 +57,7 @@ const Landing = () => {
           </div>
         </div>
       </nav>
+
 
       {/* Hero */}
       <section className="relative pt-28 pb-24 overflow-hidden">
