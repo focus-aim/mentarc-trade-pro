@@ -101,9 +101,7 @@ const About = () => {
                     >
                       <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[hsl(217,100%,50%)] shrink-0" />
                       <span>
-                        {p.align === undefined && p.strong && p.text.startsWith("，") ? null : null}
-                        {/* Render with strong emphasis */}
-                        {p.strong && !p.text.startsWith("，") && !p.text.startsWith(" ") ? (
+                        {p.strong && p.text && !p.text.startsWith("，") ? (
                           <>
                             {p.text}
                             <strong className="font-semibold text-[hsl(220,20%,14%)]">
