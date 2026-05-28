@@ -51,42 +51,40 @@ const About = () => {
       <SiteNav />
 
       {/* Hero */}
-      <section className="relative pt-24 pb-28 md:pt-32 md:pb-36 overflow-hidden">
+      <section className="relative pt-16 pb-16 md:pt-20 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(217,60%,97%)] via-white to-[hsl(174,50%,98%)]" />
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-[hsl(217,100%,50%)]/10 blur-[120px]" />
-        <div className="absolute top-1/3 -right-40 w-[460px] h-[460px] rounded-full bg-[hsl(174,100%,62%)]/15 blur-3xl" />
-        <div className="absolute bottom-0 -left-40 w-[460px] h-[460px] rounded-full bg-[hsl(217,100%,60%)]/10 blur-3xl" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[420px] rounded-full bg-[hsl(217,100%,50%)]/10 blur-[110px]" />
+        <div className="absolute top-1/3 -right-32 w-[360px] h-[360px] rounded-full bg-[hsl(174,100%,62%)]/15 blur-3xl" />
+        <div className="absolute bottom-0 -left-32 w-[360px] h-[360px] rounded-full bg-[hsl(217,100%,60%)]/10 blur-3xl" />
         {/* subtle grid */}
         <div
-          className="absolute inset-0 opacity-[0.35]"
+          className="absolute inset-0 opacity-[0.3]"
           style={{
             backgroundImage:
               "linear-gradient(hsl(217,30%,90%) 1px, transparent 1px), linear-gradient(90deg, hsl(217,30%,90%) 1px, transparent 1px)",
             backgroundSize: "56px 56px",
             maskImage:
-              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+              "radial-gradient(ellipse at center, black 25%, transparent 70%)",
           }}
         />
 
-        <div className="relative max-w-6xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[hsl(217,100%,50%)]/15 bg-white/70 backdrop-blur-sm shadow-sm mb-8">
+        <div className="relative max-w-5xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[hsl(217,100%,50%)]/15 bg-white/70 backdrop-blur-sm shadow-sm mb-6">
             <Building2 className="w-3.5 h-3.5 text-[hsl(217,100%,45%)]" />
             <span className="text-xs font-medium text-[hsl(217,100%,45%)] tracking-wide">
               关于贸探
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.15]">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.2]">
             专为
             <span className="bg-gradient-to-r from-[hsl(217,100%,50%)] to-[hsl(174,100%,42%)] bg-clip-text text-transparent">
               订单转化
             </span>
-            打造
-            <br className="hidden md:block" />
-            的外贸 AI
+            打造的外贸 AI
           </h1>
 
-          <p className="mt-8 text-lg md:text-xl text-[hsl(220,15%,30%)] leading-[1.9] max-w-3xl mx-auto font-medium">
+          <p className="mt-6 text-base md:text-lg text-[hsl(220,15%,30%)] leading-[1.85] max-w-3xl mx-auto">
             贸探（<span className="text-[hsl(217,100%,45%)]">Mentarc.cn</span>）依托焦点科技
             <span className="text-[hsl(220,20%,14%)] font-semibold"> 30 年外贸实战经验</span>，
             聚焦
