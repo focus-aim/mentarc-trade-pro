@@ -18,6 +18,7 @@ import UploadPromptMessage from "./UploadPromptMessage";
 import DetailTypeSelector from "./DetailTypeSelector";
 import DetailImageResult from "./DetailImageResult";
 import InquiryResultMessage, { ChatQuote, InquiryFollowUpResult, BuyerBackgroundReport } from "./InquiryResultMessage";
+import MessageFeedback from "./MessageFeedback";
 import InquiryStrategyPrompt, { InquiryStrategyChoice } from "./InquiryStrategyPrompt";
 import KeywordGuidancePrompt, { KeywordGuidanceChoice } from "./KeywordGuidancePrompt";
 import InquiryDetailSection from "./InquiryDetailSection";
@@ -944,6 +945,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 return (
                   <div key={i} className="w-full">
                     {built.node}
+                    <MessageFeedback />
                   </div>
                 );
               }
@@ -993,6 +995,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                   ) : msg.type === "plain-text" ? (
                     <div className="prose prose-sm max-w-none text-foreground text-base leading-relaxed prose-headings:text-foreground prose-headings:font-semibold prose-h2:text-[18px] prose-h2:mt-4 prose-h2:mb-2 prose-h2:first:mt-0 prose-h3:text-[15px] prose-h3:mt-3 prose-h3:mb-1.5 prose-p:my-1.5 prose-p:text-base prose-strong:text-foreground prose-strong:font-semibold prose-ul:my-1.5 prose-ul:pl-5 prose-li:my-0.5 prose-li:text-base prose-li:marker:text-muted-foreground">
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                      <MessageFeedback />
                     </div>
 
                   ) : (
