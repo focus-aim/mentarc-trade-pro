@@ -81,7 +81,7 @@ export default function MessageFeedback() {
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-xl">
           <DialogHeader>
             <DialogTitle className="text-base">反馈问题</DialogTitle>
           </DialogHeader>
