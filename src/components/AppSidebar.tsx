@@ -81,10 +81,15 @@ const AppSidebar = ({ onNewTask, onBoardClick, onPartnerClick, onResultsClick, o
   return (
     <aside className="w-[284px] shrink-0 border-r border-border/70 bg-sidebar-background/95 backdrop-blur-sm flex flex-col h-screen transition-all duration-300">
       {/* Logo + collapse */}
-      <div className="px-5 pt-5 flex items-center gap-2 text-foreground">
+      <button
+        type="button"
+        onClick={() => navigate("/")}
+        className="px-5 pt-5 flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity focus-visible:outline-none"
+        aria-label="返回贸探首页"
+      >
         <img src={mentarcIcon} alt="贸探" className="h-7 w-7 rounded-lg" />
         <span className="text-xl font-bold">贸探</span>
-      </div>
+      </button>
 
       <div
         role="button"
