@@ -93,31 +93,43 @@ const Updates = () => {
       </section>
 
       <section className="max-w-4xl mx-auto px-6 pb-24">
-        <ol className="relative border-l border-[hsl(220,15%,90%)] ml-3">
-          {RELEASES.map((r) => (
-            <li key={r.version} className="mb-8 ml-6">
-              <span className="absolute -left-[7px] mt-2 w-3.5 h-3.5 rounded-full bg-white border-2 border-[hsl(217,100%,50%)] shadow-sm" />
-              <div className="bg-white/80 backdrop-blur-sm border border-[hsl(220,15%,92%)] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span className={`px-2 py-0.5 rounded-full text-[11px] border ${tagStyle[r.tag]}`}>
-                    {r.tag}
-                  </span>
-                  <span className="text-xs text-[hsl(220,10%,50%)]">{r.date}</span>
-                </div>
-                <h2 className="text-lg font-semibold mb-3">{r.title}</h2>
-                <ul className="space-y-1.5 text-sm text-[hsl(220,10%,35%)]">
-                  {r.highlights.map((h, i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="mt-1.5 w-1 h-1 rounded-full bg-[hsl(217,100%,50%)] shrink-0" />
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ol>
+        {Object.entries(
+          RELEASES.reduce<Record<string, typeof RELEASES>>((acc, r) => {
+            const year = r.date.slice(0, 4);
+            (acc[year] ||= []).push(r);
+            return acc;
+          }, {}),
+        ).map(([year, items]) => (
+          <div key={year} className="mb-10">
+            <h2 className="text-2xl font-bold mb-6 text-[hsl(220,20%,14%)]">{year}</h2>
+            <ol className="relative border-l border-[hsl(220,15%,90%)] ml-3">
+              {items.map((r) => (
+                <li key={r.version} className="mb-8 ml-6">
+                  <span className="absolute -left-[7px] mt-2 w-3.5 h-3.5 rounded-full bg-white border-2 border-[hsl(217,100%,50%)] shadow-sm" />
+                  <div className="bg-white/80 backdrop-blur-sm border border-[hsl(220,15%,92%)] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <span className={`px-2 py-0.5 rounded-full text-[11px] border ${tagStyle[r.tag]}`}>
+                        {r.tag}
+                      </span>
+                      <span className="text-xs text-[hsl(220,10%,50%)]">{r.date.slice(5)}</span>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-3">{r.title}</h3>
+                    <ul className="space-y-1.5 text-sm text-[hsl(220,10%,35%)]">
+                      {r.highlights.map((h, i) => (
+                        <li key={i} className="flex gap-2">
+                          <span className="mt-1.5 w-1 h-1 rounded-full bg-[hsl(217,100%,50%)] shrink-0" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
       </section>
+
     </div>
   );
 };
