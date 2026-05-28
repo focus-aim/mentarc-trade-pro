@@ -1,22 +1,33 @@
 import SiteNav from "@/components/SiteNav";
-import { Building2, Target, Sparkles, Users, Mail } from "lucide-react";
+import { Building2, BookOpen, Sparkles, Zap, Mail, Check } from "lucide-react";
 import wechatQr from "@/assets/wechat-service-qr.png";
 
-const VALUES = [
+const FEATURES = [
   {
-    icon: Target,
-    title: "专业可信",
-    desc: "由资深外贸从业者与 AI 专家共同打磨，结果可落地、可复用。",
+    icon: BookOpen,
+    title: "30年外贸经验沉淀",
+    points: [
+      "30年积累海量独家外贸课程、资料与实战经验",
+      "AI 萃取精华生成知识库，对话即可直接调用",
+    ],
   },
   {
     icon: Sparkles,
-    title: "持续进化",
-    desc: "每周迭代，每个反馈都被认真对待，让 AI 更懂中国外贸人。",
+    title: "先进 AI 技术助力订单转化",
+    points: [
+      "订单全流程专业指导，给到可执行的跟进建议",
+      "接入时下先进大模型 + 图片和视频生成技术",
+      "一键制作 / 优化产品详情，提高竞争力",
+      "持续的长记忆助力企业沉淀 AI 数字资产",
+    ],
   },
   {
-    icon: Users,
-    title: "用户为先",
-    desc: "服务从小微到大型外贸团队，让每位业务都拥有 AI 专家团队。",
+    icon: Zap,
+    title: "使用 0 门槛，点开即用",
+    points: [
+      "封装多项外贸常见任务 Skill，开箱即用",
+      "持续学习和更新，打破信息壁垒",
+    ],
   },
 ];
 
@@ -32,27 +43,36 @@ const About = () => {
             <Building2 className="w-3.5 h-3.5 text-[hsl(217,100%,45%)]" />
             <span className="text-xs font-medium text-[hsl(217,100%,45%)]">关于我们</span>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight">让每位外贸人，都拥有自己的 AI 专家团队</h1>
-          <p className="mt-4 text-[hsl(220,10%,42%)] leading-relaxed">
-            贸探（Mentarc）是面向中国外贸行业的 AI
-            专家协作平台。我们将业务、运营、培训三类外贸核心能力沉淀为可对话的 AI
-            专家，帮助外贸人在客户分析、产品优化、市场判断等场景中，更快做出更专业的决策。
+          <h1 className="text-4xl font-bold tracking-tight">提升外贸订单转化的专业 AI 工具</h1>
+          <p className="mt-4 text-[hsl(220,10%,42%)] leading-relaxed text-base">
+            贸探 Mentarc 是焦点科技于 2026 年推出的一款专注提升外贸订单转化的 AI
+            工具，将 30 年外贸行业积淀与前沿 AI 能力结合，让每一位外贸人都能更高效地拿下订单。
           </p>
         </div>
       </section>
 
       <section className="max-w-4xl mx-auto px-6 pb-12">
         <div className="grid md:grid-cols-3 gap-4">
-          {VALUES.map((v) => (
+          {FEATURES.map((f) => (
             <div
-              key={v.title}
-              className="bg-white/80 backdrop-blur-sm border border-[hsl(220,15%,92%)] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow"
+              key={f.title}
+              className="bg-white/80 backdrop-blur-sm border border-[hsl(220,15%,92%)] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col"
             >
               <div className="w-10 h-10 rounded-xl bg-[hsl(217,100%,96%)] text-[hsl(217,100%,45%)] flex items-center justify-center mb-3">
-                <v.icon className="w-5 h-5" />
+                <f.icon className="w-5 h-5" />
               </div>
-              <div className="text-base font-semibold mb-1.5">{v.title}</div>
-              <div className="text-sm text-[hsl(220,10%,42%)] leading-relaxed">{v.desc}</div>
+              <div className="text-base font-semibold mb-3">{f.title}</div>
+              <ul className="space-y-2">
+                {f.points.map((p) => (
+                  <li
+                    key={p}
+                    className="flex items-start gap-2 text-sm text-[hsl(220,10%,42%)] leading-relaxed"
+                  >
+                    <Check className="w-3.5 h-3.5 mt-1 shrink-0 text-[hsl(217,100%,45%)]" />
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
