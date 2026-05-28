@@ -76,17 +76,17 @@ const About = () => {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.2]">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.2] lg:text-8xl">
             专为
             <span className="bg-gradient-to-r from-[hsl(217,100%,50%)] to-[hsl(174,100%,42%)] bg-clip-text text-transparent">
               订单转化
             </span>
-            打造的外贸 AI
+            打造的外贸 AI工具
           </h1>
 
           <div className="mt-6 text-base md:text-lg text-[hsl(220,15%,30%)] leading-[1.85] max-w-3xl mx-auto space-y-2">
             <p>
-              贸探<span className="text-[hsl(217,100%,45%)] font-semibold">Mentarc</span>是焦点科技推出的外贸AI工具，专注提升订单转化效率。
+              贸探是焦点科技推出的外贸AI工具，专注提升订单转化效率。
             </p>
             <p>
               基于
