@@ -72,7 +72,7 @@ const About = () => {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[hsl(217,100%,50%)]/15 bg-white/70 backdrop-blur-sm shadow-sm mb-8">
             <Building2 className="w-3.5 h-3.5 text-[hsl(217,100%,45%)]" />
             <span className="text-xs font-medium text-[hsl(217,100%,45%)] tracking-wide">
-              About Mentarc · 关于贸探
+              关于贸探
             </span>
           </div>
 
