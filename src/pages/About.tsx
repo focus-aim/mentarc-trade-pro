@@ -51,27 +51,65 @@ const About = () => {
       <SiteNav />
 
       {/* Hero */}
-      <section className="relative pt-16 pb-14 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(217,60%,97%)] via-white to-[hsl(174,50%,97%)]" />
-        <div className="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full bg-[hsl(217,100%,50%)]/10 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 w-[420px] h-[420px] rounded-full bg-[hsl(174,100%,62%)]/10 blur-3xl" />
-        <div className="relative max-w-5xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[hsl(217,100%,50%)]/15 bg-[hsl(217,100%,50%)]/5 mb-5">
+      <section className="relative pt-24 pb-28 md:pt-32 md:pb-36 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(217,60%,97%)] via-white to-[hsl(174,50%,98%)]" />
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-[hsl(217,100%,50%)]/10 blur-[120px]" />
+        <div className="absolute top-1/3 -right-40 w-[460px] h-[460px] rounded-full bg-[hsl(174,100%,62%)]/15 blur-3xl" />
+        <div className="absolute bottom-0 -left-40 w-[460px] h-[460px] rounded-full bg-[hsl(217,100%,60%)]/10 blur-3xl" />
+        {/* subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "linear-gradient(hsl(217,30%,90%) 1px, transparent 1px), linear-gradient(90deg, hsl(217,30%,90%) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            maskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          }}
+        />
+
+        <div className="relative max-w-6xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[hsl(217,100%,50%)]/15 bg-white/70 backdrop-blur-sm shadow-sm mb-8">
             <Building2 className="w-3.5 h-3.5 text-[hsl(217,100%,45%)]" />
-            <span className="text-xs font-medium text-[hsl(217,100%,45%)]">关于我们</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            提升外贸订单转化的
-            <span className="bg-gradient-to-r from-[hsl(217,100%,50%)] to-[hsl(174,100%,42%)] bg-clip-text text-transparent">
-              专业 AI 工具
+            <span className="text-xs font-medium text-[hsl(217,100%,45%)] tracking-wide">
+              About Mentarc · 关于贸探
             </span>
+          </div>
+
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.15]">
+            专为
+            <span className="bg-gradient-to-r from-[hsl(217,100%,50%)] to-[hsl(174,100%,42%)] bg-clip-text text-transparent">
+              订单转化
+            </span>
+            打造
+            <br className="hidden md:block" />
+            的外贸 AI
           </h1>
-          <p className="mt-5 text-[hsl(220,10%,42%)] leading-relaxed text-base max-w-2xl mx-auto">
-            贸探 Mentarc 是焦点科技于 2026 年推出的一款专注提升外贸订单转化的 AI 工具，
-            将 30 年外贸行业积淀与前沿 AI 能力结合，让每一位外贸人都能更高效地拿下订单。
+
+          <p className="mt-8 text-lg md:text-xl text-[hsl(220,15%,30%)] leading-[1.9] max-w-3xl mx-auto font-medium">
+            贸探（<span className="text-[hsl(217,100%,45%)]">Mentarc.cn</span>）依托焦点科技
+            <span className="text-[hsl(220,20%,14%)] font-semibold"> 30 年外贸实战经验</span>，
+            聚焦
+            <span className="text-[hsl(220,20%,14%)] font-semibold">「跟单成交、产品转化、业务沉淀」</span>
+            三大核心板块。
           </p>
+
+          <div className="mt-10 grid md:grid-cols-2 gap-4 max-w-4xl mx-auto text-left">
+            <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl px-6 py-5 shadow-[0_4px_20px_-8px_hsl(217,100%,50%,0.15)]">
+              <p className="text-[15px] leading-relaxed text-[hsl(220,15%,25%)]">
+                结合海量外贸资料与实战经验，为外贸企业提供
+                <span className="font-semibold text-[hsl(220,20%,14%)]">订单全流程指导</span>。
+              </p>
+            </div>
+            <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl px-6 py-5 shadow-[0_4px_20px_-8px_hsl(174,100%,42%,0.15)]">
+              <p className="text-[15px] leading-relaxed text-[hsl(220,15%,25%)]">
+                凭借持续的<span className="font-semibold text-[hsl(220,20%,14%)]">长记忆能力</span>，沉淀 AI 数字资产，让订单转化更高效、企业经验可传承。
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
 
       {/* Feature pills */}
       <section className="max-w-5xl mx-auto px-6 pb-16 space-y-6">
