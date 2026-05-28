@@ -944,6 +944,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 return (
                   <div key={i} className="w-full">
                     {built.node}
+                    <MessageFeedback />
                   </div>
                 );
               }
