@@ -102,7 +102,7 @@ const About = () => {
 
 
       {/* Feature sections */}
-      <section className="relative max-w-6xl mx-auto px-6 pb-20">
+      <section className="relative max-w-6xl mx-auto px-6 pt-12 md:pt-20 pb-20">
         {/* connecting vertical line */}
         <div
           aria-hidden
