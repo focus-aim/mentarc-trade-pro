@@ -81,13 +81,13 @@ export default function MessageFeedback() {
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-xl">
+        <DialogContent className="max-w-xl p-5 gap-3">
           <DialogHeader>
             <DialogTitle className="text-base">反馈问题</DialogTitle>
           </DialogHeader>
-          <div className="space-y-4 pt-1">
+          <div className="space-y-3">
             <div>
-              <p className="text-[13px] text-muted-foreground mb-2">请选择理由帮助我们做得更好</p>
+              <p className="text-sm text-muted-foreground mb-2">请选择理由帮助我们做得更好</p>
               <div className="flex flex-nowrap gap-2">
                 {REASON_TAGS.map((tag) => {
                   const active = selectedTags.includes(tag);
@@ -96,7 +96,7 @@ export default function MessageFeedback() {
                       key={tag}
                       onClick={() => toggleTag(tag)}
                       className={cn(
-                        "px-3 py-1.5 rounded-full text-[12px] border transition-colors whitespace-nowrap",
+                        "px-3 py-1.5 rounded-full text-sm border transition-colors whitespace-nowrap",
                         active
                           ? "bg-primary text-primary-foreground border-primary"
                           : "bg-background text-foreground border-border hover:border-primary/50"
@@ -109,16 +109,16 @@ export default function MessageFeedback() {
               </div>
             </div>
             <div>
-              <p className="text-[13px] text-muted-foreground mb-2">补充说明（选填）</p>
+              <p className="text-sm text-muted-foreground mb-2">补充说明（选填）</p>
               <Textarea
                 value={detail}
                 onChange={(e) => setDetail(e.target.value)}
                 placeholder="请详细描述遇到的问题，便于我们优化"
-                className="min-h-[90px] text-[13px]"
+                className="min-h-[72px] text-sm"
               />
             </div>
           </div>
-          <DialogFooter>
+          <DialogFooter className="mt-1">
             <Button onClick={handleSubmit}>提交反馈</Button>
           </DialogFooter>
         </DialogContent>
