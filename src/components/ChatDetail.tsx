@@ -18,6 +18,7 @@ import UploadPromptMessage from "./UploadPromptMessage";
 import DetailTypeSelector from "./DetailTypeSelector";
 import DetailImageResult from "./DetailImageResult";
 import InquiryResultMessage, { ChatQuote, InquiryFollowUpResult, BuyerBackgroundReport } from "./InquiryResultMessage";
+import MessageFeedback from "./MessageFeedback";
 import InquiryStrategyPrompt, { InquiryStrategyChoice } from "./InquiryStrategyPrompt";
 import KeywordGuidancePrompt, { KeywordGuidanceChoice } from "./KeywordGuidancePrompt";
 import InquiryDetailSection from "./InquiryDetailSection";
