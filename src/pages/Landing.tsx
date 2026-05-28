@@ -30,7 +30,21 @@ const Landing = () => {
           <div className="flex items-center">
             <img src={mentarcLogoFull} alt="Mentarc 贸探" className="h-12 object-contain" />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-6 text-sm text-[hsl(220,10%,35%)]">
+              <button
+                onClick={() => navigate("/updates")}
+                className="hover:text-[hsl(217,100%,50%)] transition-colors"
+              >
+                产品动态
+              </button>
+              <button
+                onClick={() => navigate("/about")}
+                className="hover:text-[hsl(217,100%,50%)] transition-colors"
+              >
+                关于我们
+              </button>
+            </nav>
             <span className="px-5 py-2.5 rounded-full text-sm font-medium text-[hsl(217,100%,50%)] bg-[hsl(217,100%,96%)] border border-[hsl(217,100%,90%)]">
               新用户免费体验全部功能
             </span>
