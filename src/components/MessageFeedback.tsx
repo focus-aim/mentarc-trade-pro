@@ -119,9 +119,6 @@ export default function MessageFeedback() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDialogOpen(false)}>
-              取消
-            </Button>
             <Button onClick={handleSubmit}>提交反馈</Button>
           </DialogFooter>
         </DialogContent>
