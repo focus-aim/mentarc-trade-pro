@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "./pages/Landing.tsx";
 import Index from "./pages/Index.tsx";
 import Trial from "./pages/Trial.tsx";
+import Updates from "./pages/Updates.tsx";
+import About from "./pages/About.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import AdminHome from "./pages/admin/AdminHome.tsx";
 import PointsRecharge from "./pages/admin/PointsRecharge.tsx";
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/app" element={<Index />} />
           <Route path="/trial" element={<Trial />} />
+          <Route path="/updates" element={<Updates />} />
+          <Route path="/about" element={<About />} />
           {/* Admin */}
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/admin/points/query" element={<Placeholder title="贸力值查询" />} />
