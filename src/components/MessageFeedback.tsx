@@ -81,14 +81,14 @@ export default function MessageFeedback() {
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-xl">
           <DialogHeader>
             <DialogTitle className="text-base">反馈问题</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-1">
             <div>
-              <p className="text-[13px] text-muted-foreground mb-2">请选择问题原因（可多选）</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-[13px] text-muted-foreground mb-2">请选择理由帮助我们做得更好</p>
+              <div className="flex flex-nowrap gap-2">
                 {REASON_TAGS.map((tag) => {
                   const active = selectedTags.includes(tag);
                   return (
@@ -96,7 +96,7 @@ export default function MessageFeedback() {
                       key={tag}
                       onClick={() => toggleTag(tag)}
                       className={cn(
-                        "px-3 py-1.5 rounded-full text-[12px] border transition-colors",
+                        "px-3 py-1.5 rounded-full text-[12px] border transition-colors whitespace-nowrap",
                         active
                           ? "bg-primary text-primary-foreground border-primary"
                           : "bg-background text-foreground border-border hover:border-primary/50"
