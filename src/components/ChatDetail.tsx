@@ -939,20 +939,28 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                 msg.type === "keyword-result" ||
                 msg.type === "market-result" ||
                 msg.type === "trend-result";
+              const isMindflow = msg.type && /mindflow$/.test(msg.type);
+              const nextMsg = messages[i + 1];
+              const isTurnEnd =
+                msg.role === "assistant" &&
+                !isMindflow &&
+                (!nextMsg || nextMsg.role === "user");
+              const feedbackNode = isTurnEnd ? <MessageFeedback /> : null;
+
               if (isResult) {
                 const built = buildResultFor(msg);
                 if (!built) return null;
                 return (
                   <div key={i} className="w-full">
                     {built.node}
-                    <MessageFeedback />
+                    {feedbackNode}
                   </div>
                 );
               }
               return (
               <div key={i} className={`flex gap-2.5 ${msg.role === "user" ? "ml-auto max-w-[78%] flex-row-reverse" : "w-full"}`}>
                 <div
-                  className={`text-[15px] leading-relaxed ${
+                  className={`text-[15px] leading-relaxed w-full ${
                     msg.role === "user"
                       ? "bg-primary text-primary-foreground px-4 py-2.5 rounded-2xl rounded-tr-md whitespace-pre-line"
                       : "text-foreground pt-1"
@@ -995,7 +1003,6 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                   ) : msg.type === "plain-text" ? (
                     <div className="prose prose-sm max-w-none text-foreground text-base leading-relaxed prose-headings:text-foreground prose-headings:font-semibold prose-h2:text-[18px] prose-h2:mt-4 prose-h2:mb-2 prose-h2:first:mt-0 prose-h3:text-[15px] prose-h3:mt-3 prose-h3:mb-1.5 prose-p:my-1.5 prose-p:text-base prose-strong:text-foreground prose-strong:font-semibold prose-ul:my-1.5 prose-ul:pl-5 prose-li:my-0.5 prose-li:text-base prose-li:marker:text-muted-foreground">
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
-                      <MessageFeedback />
                     </div>
 
                   ) : (
@@ -1018,6 +1025,7 @@ const ChatDetail = ({ moduleTitle, onBack, initialUserMessage }: ChatDetailProps
                       )}
                     </div>
                   )}
+                  {feedbackNode}
                 </div>
               </div>
               );
