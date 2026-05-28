@@ -18,10 +18,10 @@ const SiteNav = () => {
         <button onClick={() => navigate("/")} className="flex items-center shrink-0">
           <img src={mentarcLogoFull} alt="Mentarc 贸探" className="h-12 object-contain" />
         </button>
-        <div className="hidden md:flex items-center gap-2 ml-12 text-sm">
+        <div className="hidden md:flex items-center gap-1 ml-10 text-sm">
           <button
             onClick={() => navigate("/updates")}
-            className={`px-4 py-1.5 rounded-full ${linkCls("/updates")} ${
+            className={`px-3 py-1.5 rounded-full ${linkCls("/updates")} ${
               pathname === "/updates" ? "bg-[hsl(217,100%,96%)]" : "hover:bg-[hsl(220,15%,96%)]"
             }`}
           >
@@ -29,7 +29,7 @@ const SiteNav = () => {
           </button>
           <button
             onClick={() => navigate("/about")}
-            className={`px-4 py-1.5 rounded-full ${linkCls("/about")} ${
+            className={`px-3 py-1.5 rounded-full ${linkCls("/about")} ${
               pathname === "/about" ? "bg-[hsl(217,100%,96%)]" : "hover:bg-[hsl(220,15%,96%)]"
             }`}
           >
