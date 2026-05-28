@@ -76,7 +76,7 @@ const About = () => {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.2] lg:text-7xl">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.2] lg:text-6xl">
             专为
             <span className="bg-gradient-to-r from-[hsl(217,100%,50%)] to-[hsl(174,100%,42%)] bg-clip-text text-transparent">
               订单转化
