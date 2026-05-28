@@ -96,7 +96,7 @@ export default function MessageFeedback() {
                       key={tag}
                       onClick={() => toggleTag(tag)}
                       className={cn(
-                        "px-3 py-1.5 rounded-full text-[12px] border transition-colors",
+                        "px-3 py-1.5 rounded-full text-[12px] border transition-colors whitespace-nowrap",
                         active
                           ? "bg-primary text-primary-foreground border-primary"
                           : "bg-background text-foreground border-border hover:border-primary/50"
