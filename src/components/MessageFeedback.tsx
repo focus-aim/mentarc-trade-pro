@@ -87,8 +87,8 @@ export default function MessageFeedback() {
           </DialogHeader>
           <div className="space-y-4 pt-1">
             <div>
-              <p className="text-[13px] text-muted-foreground mb-2">请选择问题原因（可多选）</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-[13px] text-muted-foreground mb-2">请选择理由帮助我们做得更好</p>
+              <div className="flex flex-nowrap gap-2">
                 {REASON_TAGS.map((tag) => {
                   const active = selectedTags.includes(tag);
                   return (
