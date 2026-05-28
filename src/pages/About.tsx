@@ -101,73 +101,93 @@ const About = () => {
       </section>
 
 
-      {/* Feature pills */}
-      <section className="max-w-5xl mx-auto px-6 pb-16 space-y-6">
-        {SECTIONS.map((s, i) => (
-          <article
-            key={s.title}
-            className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[hsl(217,100%,97%)] via-white to-[hsl(174,60%,97%)] border border-white shadow-[0_8px_40px_-12px_hsl(217,100%,50%,0.15)] backdrop-blur-sm"
-          >
-            <div
-              className={`flex flex-col ${
-                s.align === "left" ? "md:flex-row" : "md:flex-row-reverse"
-              } items-center gap-6 md:gap-10 p-6 md:p-10`}
+      {/* Feature sections */}
+      <section className="relative max-w-6xl mx-auto px-6 pb-20">
+        {/* connecting vertical line */}
+        <div
+          aria-hidden
+          className="absolute left-1/2 -translate-x-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-[hsl(217,100%,50%)]/25 to-transparent hidden md:block"
+        />
+
+        <div className="space-y-16 md:space-y-24">
+          {SECTIONS.map((s, i) => (
+            <article
+              key={s.title}
+              className="relative group"
             >
-              {/* Text side */}
-              <div className="flex-1 w-full">
-                <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-gradient-to-r from-[hsl(217,100%,50%)] to-[hsl(217,100%,60%)] text-white text-lg font-semibold shadow-[0_6px_20px_-6px_hsl(217,100%,50%,0.5)] mb-5">
-                  <span className="opacity-70 mr-2 text-sm font-mono">
-                    0{i + 1}
-                  </span>
-                  {s.title}
-                </div>
-                <ul className="space-y-3">
-                  {s.points.map((p, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-2.5 text-[15px] leading-relaxed text-[hsl(220,15%,25%)]"
-                    >
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[hsl(217,100%,50%)] shrink-0" />
-                      <span>
-                        {p.strong && p.text && !p.text.startsWith("，") ? (
-                          <>
-                            {p.text}
-                            <strong className="font-semibold text-[hsl(220,20%,14%)]">
-                              {p.strong}
-                            </strong>
-                          </>
-                        ) : p.strong ? (
-                          <>
-                            <strong className="font-semibold text-[hsl(220,20%,14%)]">
-                              {p.strong}
-                            </strong>
-                            {p.text}
-                          </>
-                        ) : (
-                          p.text
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              {/* step node on the connecting line */}
+              <div
+                aria-hidden
+                className="hidden md:flex absolute left-1/2 -translate-x-1/2 -top-3 z-10 w-10 h-10 rounded-full bg-white border border-[hsl(217,100%,50%)]/20 shadow-[0_4px_16px_-4px_hsl(217,100%,50%,0.35)] items-center justify-center"
+              >
+                <span className="text-xs font-mono font-semibold text-[hsl(217,100%,45%)]">
+                  0{i + 1}
+                </span>
               </div>
 
-              {/* Image side */}
-              <div className="shrink-0 w-full md:w-[300px]">
-                <div className="relative aspect-square rounded-3xl overflow-hidden bg-white/60 border border-white shadow-inner">
-                  <img
-                    src={s.image}
-                    alt={s.title}
-                    loading="lazy"
-                    width={1024}
-                    height={1024}
-                    className="w-full h-full object-cover"
-                  />
+              <div
+                className={`flex flex-col ${
+                  s.align === "left" ? "md:flex-row" : "md:flex-row-reverse"
+                } items-center gap-8 md:gap-14`}
+              >
+                {/* Image side */}
+                <div className="shrink-0 w-full md:w-[340px]">
+                  <div className="relative aspect-square rounded-[28px] overflow-hidden bg-gradient-to-br from-[hsl(217,100%,96%)] to-[hsl(174,60%,95%)] border border-white shadow-[0_20px_60px_-20px_hsl(217,100%,50%,0.35)]">
+                    <img
+                      src={s.image}
+                      alt={s.title}
+                      loading="lazy"
+                      width={1024}
+                      height={1024}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                </div>
+
+                {/* Text side */}
+                <div className="flex-1 w-full">
+                  <div className="flex items-center gap-3 mb-5 md:hidden">
+                    <span className="text-sm font-mono font-semibold text-[hsl(217,100%,45%)] px-2.5 py-0.5 rounded-full bg-[hsl(217,100%,96%)] border border-[hsl(217,100%,50%)]/15">
+                      0{i + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-5 leading-tight">
+                    {s.title}
+                  </h3>
+                  <ul className="space-y-3.5">
+                    {s.points.map((p, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-3 text-[15px] leading-relaxed text-[hsl(220,15%,28%)]"
+                      >
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[hsl(217,100%,50%)] to-[hsl(174,100%,42%)] shrink-0" />
+                        <span>
+                          {p.strong && p.text && !p.text.startsWith("，") ? (
+                            <>
+                              {p.text}
+                              <strong className="font-semibold text-[hsl(220,20%,14%)]">
+                                {p.strong}
+                              </strong>
+                            </>
+                          ) : p.strong ? (
+                            <>
+                              <strong className="font-semibold text-[hsl(220,20%,14%)]">
+                                {p.strong}
+                              </strong>
+                              {p.text}
+                            </>
+                          ) : (
+                            p.text
+                          )}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </section>
 
       {/* Contact */}
