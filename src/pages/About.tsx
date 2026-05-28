@@ -84,13 +84,18 @@ const About = () => {
             打造的外贸 AI
           </h1>
 
-          <p className="mt-6 text-base md:text-lg text-[hsl(220,15%,30%)] leading-[1.85] max-w-3xl mx-auto">
-            贸探（<span className="text-[hsl(217,100%,45%)]">Mentarc.cn</span>）依托焦点科技
-            <span className="text-[hsl(220,20%,14%)] font-semibold"> 30 年外贸实战经验</span>，
-            聚焦
-            <span className="text-[hsl(220,20%,14%)] font-semibold">「跟单成交、产品转化、业务沉淀」</span>
-            三大核心板块。
-          </p>
+          <div className="mt-6 text-base md:text-lg text-[hsl(220,15%,30%)] leading-[1.85] max-w-3xl mx-auto space-y-2">
+            <p>
+              贸探<span className="text-[hsl(217,100%,45%)] font-semibold">Mentarc</span>是焦点科技推出的外贸AI工具，专注提升订单转化效率。
+            </p>
+            <p>
+              基于
+              <span className="text-[hsl(220,20%,14%)] font-semibold"> 30 年外贸实战经验</span>，
+              聚焦
+              <span className="text-[hsl(220,20%,14%)] font-semibold">「跟单成交、产品转化、业务沉淀」</span>
+              三大核心板块。
+            </p>
+          </div>
 
         </div>
       </section>
