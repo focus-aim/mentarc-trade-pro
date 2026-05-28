@@ -99,10 +99,10 @@ const Updates = () => {
               <span className="absolute -left-[7px] mt-2 w-3.5 h-3.5 rounded-full bg-white border-2 border-[hsl(217,100%,50%)] shadow-sm" />
               <div className="bg-white/80 backdrop-blur-sm border border-[hsl(220,15%,92%)] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span className="text-xs text-[hsl(220,10%,50%)]">{r.date}</span>
                   <span className={`px-2 py-0.5 rounded-full text-[11px] border ${tagStyle[r.tag]}`}>
                     {r.tag}
                   </span>
+                  <span className="text-xs text-[hsl(220,10%,50%)]">{r.date}</span>
                 </div>
                 <h2 className="text-lg font-semibold mb-3">{r.title}</h2>
                 <ul className="space-y-1.5 text-sm text-[hsl(220,10%,35%)]">
