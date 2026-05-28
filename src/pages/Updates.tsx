@@ -85,7 +85,7 @@ const Updates = () => {
           </div>
           <h1 className="text-4xl font-bold tracking-tight">版本更新历程</h1>
           <p className="mt-3 text-[hsl(220,10%,42%)]">
-            记录贸探每一次迭代，让每位外贸人都能用上更聪明的 AI 专家。
+            记录贸探每一次进化，让每位外贸人都能用上更聪明的 AI 专家。
           </p>
         </div>
       </section>
