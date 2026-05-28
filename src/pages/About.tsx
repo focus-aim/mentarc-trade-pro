@@ -94,19 +94,6 @@ const About = () => {
             三大核心板块。
           </p>
 
-          <div className="mt-10 grid md:grid-cols-2 gap-4 max-w-4xl mx-auto text-left">
-            <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl px-6 py-5 shadow-[0_4px_20px_-8px_hsl(217,100%,50%,0.15)]">
-              <p className="text-[15px] leading-relaxed text-[hsl(220,15%,25%)]">
-                结合海量外贸资料与实战经验，为外贸企业提供
-                <span className="font-semibold text-[hsl(220,20%,14%)]">订单全流程指导</span>。
-              </p>
-            </div>
-            <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl px-6 py-5 shadow-[0_4px_20px_-8px_hsl(174,100%,42%,0.15)]">
-              <p className="text-[15px] leading-relaxed text-[hsl(220,15%,25%)]">
-                凭借持续的<span className="font-semibold text-[hsl(220,20%,14%)]">长记忆能力</span>，沉淀 AI 数字资产，让订单转化更高效、企业经验可传承。
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
