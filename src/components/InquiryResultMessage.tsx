@@ -81,6 +81,54 @@ const InlineKV = ({ label, value }: { label: string; value: React.ReactNode }) =
 );
 
 // ============================================================
+// 买家画像内容 — 自动适配数据完整度（全空 vs 有数据）
+// ============================================================
+interface BuyerProfileContentProps {
+  company?: string;
+  type?: string;
+  contact?: string;
+  region?: string;
+  stage: string;
+}
+
+const BuyerProfileContent = ({ company, type, contact, region, stage }: BuyerProfileContentProps) => {
+  const hasBasicInfo = company || type || contact || region;
+
+  if (!hasBasicInfo) {
+    /* 稀疏态：仅阶段有值，突出显示 */
+    return (
+      <div className="flex flex-col items-center justify-center py-3 gap-2.5">
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-primary/10 blur-md" />
+          <span className="relative inline-flex items-center rounded-full border border-primary/25 bg-primary/[0.08] px-3 py-1 text-[12px] font-semibold text-primary shadow-sm shadow-primary/5">
+            {stage}
+          </span>
+        </div>
+        <p className="text-[11.5px] text-muted-foreground text-center leading-relaxed max-w-[200px]">
+          买家公开信息有限，建议发起深度背调完善画像
+        </p>
+      </div>
+    );
+  }
+
+  /* 完整态：正常 KV 列表 */
+  return (
+    <div className="space-y-1">
+      {company && <KV label="公司" value={company} />}
+      {type && <KV label="类型" value={type} />}
+      {contact && <KV label="联系人" value={contact} />}
+      {region && <KV label="地区" value={region} />}
+      <div className="flex items-center gap-1.5 text-[12.5px] pt-0.5">
+        <span className="text-muted-foreground shrink-0">阶段</span>
+        <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-1.5 py-0.5 text-[11px] font-medium text-primary">
+          {stage}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+// ============================================================
 // 询盘回复模板 — collapsible text block
 // ============================================================
 const REPLY_TEMPLATE = `Subject: Re: 5kW Hybrid Inverter (UL1741) — Cert, Lead Time & Sample Plan
@@ -186,18 +234,14 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
               深度背调
             </button>
           </div>
-          <div className="space-y-1">
-            <KV label="公司" value="GreenLife Home LLC." />
-            <KV label="类型" value="亚马逊卖家 / 区域分销商" />
-            <KV label="联系人" value="John Doe（Sourcing Manager）" />
-            <KV label="地区" value="北美 - 美国（USA）" />
-            <div className="flex items-center gap-1.5 text-[12.5px] pt-0.5">
-              <span className="text-muted-foreground shrink-0">阶段</span>
-              <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-1.5 py-0.5 text-[11px] font-medium text-primary">
-                寻源比价期 · 初期
-              </span>
-            </div>
-          </div>
+          {/* 买家画像内容 — 自动适配数据完整度 */}
+          <BuyerProfileContent
+            company=""
+            type=""
+            contact=""
+            region=""
+            stage="寻源比价期 · 初期"
+          />
         </section>
 
         <section className="rounded-2xl border border-border bg-card p-3.5">
