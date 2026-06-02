@@ -83,6 +83,26 @@ const InlineKV = ({ label, value }: { label: string; value: React.ReactNode }) =
 );
 
 // ============================================================
+// 买家画像 — 空状态（所有字段均为空）
+// ============================================================
+const BuyerProfileEmpty = ({ onBackgroundCheck }: { onBackgroundCheck?: () => void }) => (
+  <div className="flex flex-col items-center justify-center py-5 text-center">
+    <div className="w-10 h-10 rounded-full bg-muted/60 flex items-center justify-center mb-2.5">
+      <UserX className="w-5 h-5 text-muted-foreground/60" />
+    </div>
+    <p className="text-[13px] font-medium text-foreground/70">暂无买家画像信息</p>
+    <p className="text-[11.5px] text-muted-foreground mt-0.5">完成深度背调后将自动填充买家背景</p>
+    <button
+      onClick={onBackgroundCheck}
+      className="mt-2.5 inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1 text-[11.5px] font-medium text-primary hover:bg-primary/10 transition-colors active:scale-[0.97]"
+    >
+      <Search className="w-3 h-3" />
+      立即深度背调
+    </button>
+  </div>
+);
+
+// ============================================================
 // 询盘回复模板 — collapsible text block
 // ============================================================
 const REPLY_TEMPLATE = `Subject: Re: 5kW Hybrid Inverter (UL1741) — Cert, Lead Time & Sample Plan
