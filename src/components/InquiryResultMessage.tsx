@@ -20,6 +20,8 @@ import {
   Zap,
   Sparkles,
   ChevronDown,
+  Search,
+  UserX,
 } from "lucide-react";
 
 export interface ChatQuote {
@@ -28,12 +30,22 @@ export interface ChatQuote {
   fullContent: string;
 }
 
+export interface BuyerProfile {
+  company: string;
+  type: string;
+  contact: string;
+  region: string;
+  stage: string;
+}
+
 interface InquiryResultMessageProps {
   onAction?: (action: string) => void;
   onQuote?: (quote: ChatQuote) => void;
   onSendPrompt?: (text: string) => void;
   expertAvatar?: string;
   onBackgroundCheck?: () => void;
+  /** 买家画像数据；不传或字段全空则展示空状态 */
+  buyerProfile?: BuyerProfile | null;
 }
 
 // ============================================================
@@ -78,6 +90,26 @@ const InlineKV = ({ label, value }: { label: string; value: React.ReactNode }) =
     <span className="font-semibold text-foreground">{label}</span>
     {value}
   </p>
+);
+
+// ============================================================
+// 买家画像 — 空状态（所有字段均为空）
+// ============================================================
+const BuyerProfileEmpty = ({ onBackgroundCheck }: { onBackgroundCheck?: () => void }) => (
+  <div className="flex flex-col items-center justify-center py-5 text-center">
+    <div className="w-10 h-10 rounded-full bg-muted/60 flex items-center justify-center mb-2.5">
+      <UserX className="w-5 h-5 text-muted-foreground/60" />
+    </div>
+    <p className="text-[13px] font-medium text-foreground/70">暂无买家画像信息</p>
+    <p className="text-[11.5px] text-muted-foreground mt-0.5">完成深度背调后将自动填充买家背景</p>
+    <button
+      onClick={onBackgroundCheck}
+      className="mt-2.5 inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1 text-[11.5px] font-medium text-primary hover:bg-primary/10 transition-colors active:scale-[0.97]"
+    >
+      <Search className="w-3 h-3" />
+      立即深度背调
+    </button>
+  </div>
 );
 
 // ============================================================
@@ -151,7 +183,9 @@ const ReplyTemplateBlock = () => {
 // ============================================================
 // Main inquiry analysis report (compact, one-screen)
 // ============================================================
-const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }: InquiryResultMessageProps) => {
+const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt, buyerProfile }: InquiryResultMessageProps) => {
+  const hasBuyerData = buyerProfile && (buyerProfile.company || buyerProfile.type || buyerProfile.contact || buyerProfile.region || buyerProfile.stage);
+
   return (
     <div className="space-y-2.5">
       {/* 业务专家指点 */}
@@ -178,26 +212,32 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
           <div className="flex items-center gap-1.5 mb-2">
             <UserRound className="w-3.5 h-3.5 text-muted-foreground" />
             <h3 className="font-semibold text-foreground text-[13.5px]">买家画像</h3>
-            <button
-              onClick={onBackgroundCheck}
-              className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.06] px-2 py-0.5 text-[11.5px] font-medium text-primary hover:bg-primary/10 transition-colors active:scale-[0.97]"
-            >
-              <Compass className="w-3 h-3" />
-              深度背调
-            </button>
+            {!hasBuyerData && (
+              <button
+                onClick={onBackgroundCheck}
+                className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.06] px-2 py-0.5 text-[11.5px] font-medium text-primary hover:bg-primary/10 transition-colors active:scale-[0.97]"
+              >
+                <Compass className="w-3 h-3" />
+                深度背调
+              </button>
+            )}
           </div>
-          <div className="space-y-1">
-            <KV label="公司" value="GreenLife Home LLC." />
-            <KV label="类型" value="亚马逊卖家 / 区域分销商" />
-            <KV label="联系人" value="John Doe（Sourcing Manager）" />
-            <KV label="地区" value="北美 - 美国（USA）" />
-            <div className="flex items-center gap-1.5 text-[12.5px] pt-0.5">
-              <span className="text-muted-foreground shrink-0">阶段</span>
-              <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-1.5 py-0.5 text-[11px] font-medium text-primary">
-                寻源比价期 · 初期
-              </span>
+          {hasBuyerData ? (
+            <div className="space-y-1">
+              <KV label="公司" value={buyerProfile.company || "—"} />
+              <KV label="类型" value={buyerProfile.type || "—"} />
+              <KV label="联系人" value={buyerProfile.contact || "—"} />
+              <KV label="地区" value={buyerProfile.region || "—"} />
+              <div className="flex items-center gap-1.5 text-[12.5px] pt-0.5">
+                <span className="text-muted-foreground shrink-0">阶段</span>
+                <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-1.5 py-0.5 text-[11px] font-medium text-primary">
+                  {buyerProfile.stage || "—"}
+                </span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <BuyerProfileEmpty onBackgroundCheck={onBackgroundCheck} />
+          )}
         </section>
 
         <section className="rounded-2xl border border-border bg-card p-3.5">
