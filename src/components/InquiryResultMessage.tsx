@@ -20,6 +20,8 @@ import {
   Zap,
   Sparkles,
   ChevronDown,
+  Search,
+  UserX,
 } from "lucide-react";
 
 export interface ChatQuote {
