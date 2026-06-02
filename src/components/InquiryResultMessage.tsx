@@ -30,12 +30,22 @@ export interface ChatQuote {
   fullContent: string;
 }
 
+export interface BuyerProfile {
+  company: string;
+  type: string;
+  contact: string;
+  region: string;
+  stage: string;
+}
+
 interface InquiryResultMessageProps {
   onAction?: (action: string) => void;
   onQuote?: (quote: ChatQuote) => void;
   onSendPrompt?: (text: string) => void;
   expertAvatar?: string;
   onBackgroundCheck?: () => void;
+  /** 买家画像数据；不传或字段全空则展示空状态 */
+  buyerProfile?: BuyerProfile | null;
 }
 
 // ============================================================
