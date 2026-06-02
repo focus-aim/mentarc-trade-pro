@@ -186,18 +186,14 @@ const InquiryResultMessage = ({ expertAvatar, onBackgroundCheck, onSendPrompt }:
               深度背调
             </button>
           </div>
-          <div className="space-y-1">
-            <KV label="公司" value="GreenLife Home LLC." />
-            <KV label="类型" value="亚马逊卖家 / 区域分销商" />
-            <KV label="联系人" value="John Doe（Sourcing Manager）" />
-            <KV label="地区" value="北美 - 美国（USA）" />
-            <div className="flex items-center gap-1.5 text-[12.5px] pt-0.5">
-              <span className="text-muted-foreground shrink-0">阶段</span>
-              <span className="inline-flex items-center rounded-md border border-primary/20 bg-primary/[0.06] px-1.5 py-0.5 text-[11px] font-medium text-primary">
-                寻源比价期 · 初期
-              </span>
-            </div>
-          </div>
+          {/* 买家画像内容 — 自动适配数据完整度 */}
+          <BuyerProfileContent
+            company=""
+            type=""
+            contact=""
+            region=""
+            stage="寻源比价期 · 初期"
+          />
         </section>
 
         <section className="rounded-2xl border border-border bg-card p-3.5">
